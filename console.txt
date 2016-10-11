@@ -1,0 +1,159 @@
+Welcome to Burning Sand 2
+ERROR in file OiiiSource.bs2 in line 321: Group MassDestruction 18 iPlanetExplosion.bmp
+Spray cannot be set to 0. Using 1. This will only be shown once.
+ERROR in file OiiiSource.bs2 in line 1247: INTERACTI
+ERROR in file OiiiSource.bs2 in line 1287: ON BlackDwarfRays3 Shuttle BlackDwarfRays3 BlackFire 32768
+ERROR in file OiiiSource.bs2 in line 1328: INTERACTION Ir
+ERROR in file OiiiSource.bs2 in line 1363: regularRays2 Shuttle IrregularRays2 HydrogenFusion 32768
+ERROR in file OiiiSource.bs2 in line 1367: Fusion 32768
+ERROR in file OiiiSource.bs2 in line 1403: INTERACTI
+ERROR in file OiiiSource.bs2 in line 1441: ON BrownDwarfRays3 Shuttle BrownDwarfRays3 BrownFire 32768
+ERROR in file OiiiSource.bs2 in line 1896: ELEMENT None THERMO!!! Thermo
+Viscousity cannot be set to 0. Using 1.
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 2594: 0000000045DD2EE0455548A0555D8EE0555948C029D52EA00000000000000000000420000008100000066000000240000007E0000008100000124800001248000008100000066000010E708000F00F0000100800000C3000000C300001F00F8000100800000C3000000C300000F00F0001100880000FF0000000000000000000 255 255 255
+ERROR in file OiiiSource.bs2 in line 2597: 00000000795DD20049511A0049599600595112007DDDD2000000000000F01E00010821000207E08002881280018A5300000A50000004200000024000000FF00000F00F00210000841E0000780100008000F00F0000700E000F8001F07000000E08000010078001E0007C3E00000C300000F00F0001100880000FF00000000000 255 255 255
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 3575: 00000000795DD20049511A0049599600595112007DDDD2000000000000F01E00010821000207E08002881280018A5300000A50000004200000024000000FF00000F00F00210000841E0000780100008000F00F0000700E000F8001F07000000E08000010078001E0007C3E00000C300000F00F0001100880000FF00000000000 255 255 255
+ERROR in file OiiiSource.bs2 in line 3578: 00000000754A5D00256B5100255AD900254A5100274A5DC000000000000000000010000000EC000000C70000012480000210C00004093800040808000409550004080780080620F80804040C0804412408040000080406400C0D000007F800100000000000880080048260000000000800400000000404000000000000000000 255 255 255
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 4055: 0000000045DD2EE0455548A0555D8EE0555948C029D52EA00000000000000000000420000008100000066000000240000007E00000 
+ERROR in file OiiiSource.bs2 in line 4056: 08100000124800001248000008100000066000010E708000F00F0000100800000C3000000C300001F00F8000100800000C3000000C300000F00F0001100880000FF0000000000000000000 255 255 255
+ERROR in file OiiiSource.bs2 in line 4486: 150 160 40
+Viscousity cannot be set to 0. Using 1.
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 5137: 00000000754A5D00256B5100255AD900254A5100274A5DC000000000000000000010000000EC000000C70000012480000210C00004093800040808000409550004080780080620F80804040C0804412408040000080406400C0D000007F800100000000000880080048260000000000800400000000404000000000000000000 255 255 255
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 11561: YoungStar Clear WhiteFlareCannonStarter WhiteFlareCannonStarter 10
+ERROR in file OiiiSource.bs2 in line 11797: }
+ERROR in file OiiiSource.bs2 in line 11802: }
+ERROR in file OiiiSource.bs2 in line 12762: ELEMENT None FilthLord 105 105 0 1 1 1 1000 PutridFighter 50 HEX 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C025555460200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 250 250 0
+ERROR in file OiiiSource.bs2 in line 14470: Make these interactions real later
+ERROR in file OiiiSource.bs2 in line 14895: ELEMENT None FilthLord 105 105 0 1 1 1 1000 WarShipFighter 50 HEX 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C025555460200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 250 250 0
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 16003: ELEMENT Destruction WhiteHotEnergy 255 255 255 -1000 0 0 1 0 Negafication 0 ELEMENT Destruction NeoMassDestruction 25 255 25 0 1 1 1 1 NeoMassDestruction* 7 HEX 000060000018600040184012621C011B621411197014999D58849DB558808DA058C8EE0158C8B80FC88F98FF82DC81D880EC079C08AC3F304C807E306C03F0706E0780F87A1E80FC563E000C40F80001C1F83C0383F9FF870FFFFC071FFF000F3E7E000F7E4C000F7E0C00CFFC1E0CCFF05E1DFFC01E7F78800C7E00801FFC00 135 255 225
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 18198: Interacton HyperField Clear OmniBot OmniBot 1000
+ERROR in file OiiiSource.bs2 in line 18199: Interacton HyperField4 Clear Blaze OmniBot 1000
+ERROR in file OiiiSource.bs2 in line 18200: Interacton HyperField Blaze* OmniCrystalBuild 1000
+ERROR in file OiiiSource.bs2 in line 18201: Interacton OmniCrystal HyperField OmniCrystal OmniCrystal 1000
+ERROR in file OiiiSource.bs2 in line 18205: Interacton Blaze* OmniBot OmniGod OmniGod 1000
+ERROR in file OiiiSource.bs2 in line 18208: Interacton HyperField All OmniCrystal OmniCrystal 1000
+ERROR in file OiiiSource.bs2 in line 18209: Interacton HyperField4 Clear OmniCrystalBuild OmniCrystalBuild 100000
+ERROR in file OiiiSource.bs2 in line 18212: Interacton OmniLightning1 All NegaBurst NegaBurst 5100
+ERROR in file OiiiSource.bs2 in line 18213: Interacton OmniLightning2 All NegaBurst NegaBurst 5100
+ERROR in file OiiiSource.bs2 in line 18216: Interacton OmniLightning1 Blaze* NegaBurst NegaBurst 50100
+ERROR in file OiiiSource.bs2 in line 18217: Interacton OmniLightning2 Blaze* NegaBurst NegaBurst 10100
+ERROR in file OiiiSource.bs2 in line 18681:  500
+ERROR in file OiiiSource.bs2 in line 22112: ELEMENT None BrainPriest 105 105 0 1 1 1 1000 NerveFighter 50 HEX 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C025555460200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 250 250 0
+ERROR in file OiiiSource.bs2 in line 22320: //INTERACTION HyperBrain DenseBrain DenseBrain DenseBrain 402
+Viscousity cannot be set to 0. Using 1.
+Viscousity cannot be set to 0. Using 1.
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 24537: ELEMENT None (0.5 Volt)Battery 255 0 0 0 1 1 1 32768 (0.5 Volt)BatteryAcid 2 ELEMENT Technology HEX 000610200009186000108D801F1087001FC9070025E60885246030624430202566180700779E0880236708A020E388A018F9E720070FE03C2103A0F073A1F0202107E125001F0020043FC82001FC4028A3C0652000F02000083C3002080F92000803D838FF20E85408003C8208F11EA20910428A011000C40152903800E00010 100 105 100
+ERROR in file OiiiSource.bs2 in line 24817: Pulsar Fyronosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24818: Pulsar Nhoronosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24819: Pulsar GeniusLife Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24820: Pulsar Luminosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24821: Pulsar Hadonosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24822: Pulsar Thermosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24823: Pulsar Flairsphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24824: Pulsar Magnetosphere4  Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24826: PulsarTrail Fyronosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24827: PulsarTrail Nhoronosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24828: PulsarTrail GeniusLife Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24829: PulsarTrail Luminosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24830: PulsarTrail Hadonosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24831: PulsarTrail Thermosphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24832: PulsarTrail Flairsphere4 Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 24833: PulsarTrail Magnetosphere4  Dynamite Dynamite 100000
+ERROR in file OiiiSource.bs2 in line 26334: ON Relief(1) DRAW ELEMENT:CoolDown
+ERROR in file OiiiSource.bs2 in line 26336: REPLACEFILLEDCIRCLE X1 Y1 2000 0 ELEMENT:Clear
+ERROR in file OiiiSource.bs2 in line 28793: ON Relief(1) DRAW ELEMENT:CoolDown
+ERROR in file OiiiSource.bs2 in line 28795: REPLACEFILLEDCIRCLE X1 Y1 2000 0 ELEMENT:Clear
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+Found forbidden character "“" in object. Ignoring line.
+ERROR in file OiiiSource.bs2 in line 30977: Inter SolidifyMassDestruction All Clear Solidify 32768 Clear
+Viscousity cannot be set to 0. Using 1.
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 32575: //Interactions
+ERROR in file OiiiSource.bs2 in line 32735: ELEMENT None HorridBurn3 255 25 255 0 1 1 1 10000 HorridBurn4 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32736: ELEMENT None HorridBurn4 255 35 255 0 1 1 1 10000 HorridBurn5 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32737: ELEMENT None HorridBurn5 255 45 255 0 1 1 1 10000 HorridBurn6 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32738: ELEMENT None HorridBurn6 255 55 255 0 1 1 1 10000 HorridBurn7 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32739: ELEMENT None HorridBurn7 255 65 255 0 1 1 1 10000 HorridBurn8 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32740: ELEMENT None HorridBurn8 255 75 255 0 1 1 1 10000 HorridBurn9 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32741: ELEMENT None HorridBurn9 255 85 255 0 1 1 1 10000 HorridBurn10 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32742: ELEMENT None HorridBurn10 255 95 255 0 1 1 1 10000 HorridBurn11 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32743: ELEMENT None HorridBurn11 255 105 255 0 1 1 1 10000 HorridBurn12 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32744: ELEMENT None HorridBurn12 255 125 255 0 1 1 1 10000 HorridBurn13 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32745: ELEMENT None HorridBurn13 255 145 255 0 1 1 1 10000 HorridBurn14 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32746: ELEMENT None HorridBurn14 255 175 255 0 1 1 1 10000 HorridBurn15 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32747: ELEMENT None HorridBurn15 255 205 255 0 1 1 1 10000 HorridBurn16 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32748: ELEMENT None HorridBurn16 255 215 255 0 1 1 1 10000 HorridBurn17 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32749: ELEMENT None HorridBurn17 255 225 255 0 1 1 1 10000 HorridBurn18 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32750: ELEMENT None HorridBurn18 255 235 255 0 1 1 1 10000 HorridBurn19 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32751: ELEMENT None HorridBurn19 255 255 255 0 1 1 1 10000 HorridBurn20 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 32752: ELEMENT None HorridBurn20 255 255 255 0 1 1 1 10000 DarkStars 0 File Text hi
+ERROR in file OiiiSource.bs2 in line 33158: I// nteractionTrigger LargeOxigenSupply Iron LargeOxigenTankgen 32768
+ERROR in file OiiiSource.bs2 in line 33684: ELEMENT SubSpecies ZoniiTheMighty 220 0 220 0 1 1 1 9 Clear 1 HEX 000000000000000000000000000000000000000000C0180000E0180000B02800009864000084C200008282000081990000C0108001C000C001400040064000400E01C0C00A000040083E3E40050000400700C04003004043070040BEFD00C0E075080080CC8BF8CF048891490EE093397A380630C20FFC500200407002004030 0 213 123213 123
+ERROR in file OiiiSource.bs2 in line 34652:    1
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 37019:    MESSAGE SENDTEXT "*** Hade: This condemned world is subject to perpetual darkness. It's civilians are has dark as demons. They develop very quickly. They have issues building ships, but thier ships can multiply easily and dominate with speed. The planet also may start putting up stations ridiculusly fast in comparason to other planets. Sadly this world produces even more garbage than Earth"Nicknamed the world of luck by some" [[ Speed: ***** || Power: *** || Fleet: ***** || Efficiency: ** || Consistency: * || Firepower: *** || Planetary habitability: * || Success Rate: **** || ]]"
+ERROR in file OiiiSource.bs2 in line 37029:    MESSAGE SENDTEXT "*** Lumina: Perhaps the most glorious planet in the galaxy. Angelic beings thrive on this world happily. They are one of the more stable and successful planets. Although they often succumb to Global Warming"[[ Speed: *** || Power: *** || Fleet: **** || Efficiency: ***** || Consistency: ***** || Firepower: *** || Planetary habitability: ** || Success Rate: **** || ]]"
+ERROR in file OiiiSource.bs2 in line 37038:    MESSAGE SENDTEXT "*** Therma: By far the dullest world out there. Therma is a simple planet filled by gas and water. It develops at a normal rate. The ships are graced with big, thick lasers that can cause damage more violently"[[ Speed: *** || Power: *** || Fleet: **** || Efficiency: ***** || Consistency: ***** || Firepower: ***** || Planetary habitability: ***** || Success Rate: *** || ]]"
+ERROR in file OiiiSource.bs2 in line 37068:    MESSAGE SENDTEXT "*** Hyperion: The very essence of the Universe has rifted, and folded into a sphere. Within that sphere, beings composed out of light, darkness, and time itself are born. They travel around, looking throughout the Universe, looking for the meaning of their existence. They'll do anything to find it. They have horrendous power"[[ Speed: *** || Power: ******(!) || Fleet: * || Efficiency: ***** || Consistency: ***** || Firepower: ******(!) || Planetary habitability: ***** || Success Rate: Inevitable || ]]"
+ERROR in file OiiiSource.bs2 in line 37143:    MESSAGE SENDTEXT "*** Hade: This condemned world is subject to perpetual darkness. It's civilians are has dark as demons. They develop very quickly. They have issues building ships, but thier ships can multiply easily and dominate with speed. The planet also may start putting up stations ridiculusly fast in comparason to other planets. Sadly this world produces even more garbage than Earth"Nicknamed the world of luck by some" [[ Speed: ***** || Power: *** || Fleet: ***** || Efficiency: ** || Consistency: * || Firepower: *** || Planetary habitability: * || Success Rate: **** || ]]"
+ERROR in file OiiiSource.bs2 in line 37153:    MESSAGE SENDTEXT "*** Lumina: Perhaps the most glorious planet in the galaxy. Angelic beings thrive on this world happily. They are one of the more stable and successful planets. Although they often succumb to Global Warming"[[ Speed: *** || Power: *** || Fleet: **** || Efficiency: ***** || Consistency: ***** || Firepower: *** || Planetary habitability: ** || Success Rate: **** || ]]"
+ERROR in file OiiiSource.bs2 in line 37162:    MESSAGE SENDTEXT "*** Therma: By far the dullest world out there. Therma is a simple planet filled by gas and water. It develops at a normal rate. The ships are graced with big, thick lasers that can cause damage more violently"[[ Speed: *** || Power: *** || Fleet: **** || Efficiency: ***** || Consistency: ***** || Firepower: ***** || Planetary habitability: ***** || Success Rate: *** || ]]"
+ERROR in file OiiiSource.bs2 in line 37192:    MESSAGE SENDTEXT "*** Hyperion: The very essence of the Universe has rifted, and folded into a sphere. Within that sphere, beings composed out of light, darkness, and time itself are born. They travel around, looking throughout the Universe, looking for the meaning of their existence. They'll do anything to find it. They have horrendous power"[[ Speed: *** || Power: ******(!) || Fleet: * || Efficiency: ***** || Consistency: ***** || Firepower: ******(!) || Planetary habitability: ***** || Success Rate: Inevitable || ]]"
+ERROR in file OiiiSource.bs2 in line 37760:    MESSAGE SENDTEXT "*** You have selected the IrregularStar. A very odd star that lives outside the "main sequence" of star patterns...
+ERROR in file OiiiSource.bs2 in line 39857: } 
+Viscousity cannot be set to 0. Using 1.
+ERROR in file OiiiSource.bs2 in line 39939: SET elementjs2 ELEMENT: SharpFiredropd
+ERROR in file OiiiSource.bs2 in line 39980: SET elementjs3 ELEMENT: Neondropd
+ERROR in file OiiiSource.bs2 in line 40069: SET elementjs5 ELEMENT: Brightdropd
+ERROR in file OiiiSource.bs2 in line 40575: Cyella a cooler name. *
+ERROR in file OiiiSource.bs2 in line 41670: InteractionTrigger {
+ERROR in file OiiiSource.bs2 in line 41674: }
+ERROR in file OiiiSource.bs2 in line 41831: }
+ERROR in file OiiiSource.bs2 in line 41837: }
+ERROR in file OiiiSource.bs2 in line 41846: }
+ERROR in file OiiiSource.bs2 in line 42939: }
+Scanning Mod: Progress 10%
+Scanning Mod: Progress 20%
+Scanning Mod: Progress 30%
+Scanning Mod: Progress 40%
+Scanning Mod: Progress 50%
+Scanning Mod: Progress 60%
+Scanning Mod: Progress 70%
+Scanning Mod: Progress 80%
+Scanning Mod: Progress 90%
+No Errors detected. This Mod is Perfect.
+Planets should be at least size 40 (Very Small) to actually work
+Omni mod contains more interactions or elements than any other mod
+Over time debris and asteroids from explosion actually increases
+Supernovas may occur when suns explode
+Space thunder can take out whole planets
+This mod has hundreds of thousands of lines of code
+Small ships can now conquer planets!
+Explosions make up many of this game's interactions
+Did you know just I'm spaming you with Did you know stuff just to hide all the mistakes and errors that are displayed in my console?
+Enjoy Bombing Earth!
+You started you universe at...12:21:46

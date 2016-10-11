@@ -1,0 +1,1111 @@
+// TOP Menu
+
+TRIGGER menutop {
+	MENU TOP CLEAR
+	MENU TOP ADD TEXT "Mainmenu" FILE home.bmp {
+		IF (BUTTON == 1) quitsandbox
+		IF ((BUTTON == 2) || (BUTTON == 4)) {
+			INCLUDE warning.bs2
+			FILE DELETE warning.bs2
+			FILE OPEN warning.bs2
+			FILE CLOSE
+			INCLUDE http://siebn.de/addonlist.php?basismod=Default!
+		} 
+	}
+	MENU TOP ADD TEXT "Fullscreen" FILE resolution.bmp {
+		IF (BUTTON == 1) sandresolutionmenu
+		IF (BUTTON == 2) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Foreground Layer" TEXT "Foreground Layer" <>
+			MENU SUB ADD TEXT "Load File" TEXT "Load File" <LOAD FGLAYER FILEDIALOG>
+			MENU SUB ADD TEXT "Use Sandbox" TEXT "Use Sandbox" {
+				SAVE SAND tmpfglayer.bmp
+				LOAD FGLAYER tmpfglayer.bmp
+			}
+			MENU SUB ADD TEXT "Set Alpha" TEXT "Set Alpha" {
+				MENU SUB CLEAR
+				MENU SUB ADD TEXT "0%" TEXT "0%" <SET FGLAYERALPHA ((255 * 0) / 10)>
+				MENU SUB ADD TEXT "10%" TEXT "10%" <SET FGLAYERALPHA ((255 * 1) / 10)>
+				MENU SUB ADD TEXT "20%" TEXT "20%" <SET FGLAYERALPHA ((255 * 2) / 10)>
+				MENU SUB ADD TEXT "30%" TEXT "30%" <SET FGLAYERALPHA ((255 * 3) / 10)>
+				MENU SUB ADD TEXT "40%" TEXT "40%" <SET FGLAYERALPHA ((255 * 4) / 10)>
+				MENU SUB ADD TEXT "50%" TEXT "50%" <SET FGLAYERALPHA ((255 * 5) / 10)>
+				MENU SUB ADD TEXT "60%" TEXT "60%" <SET FGLAYERALPHA ((255 * 6) / 10)>
+				MENU SUB ADD TEXT "70%" TEXT "70%" <SET FGLAYERALPHA ((255 * 7) / 10)>
+				MENU SUB ADD TEXT "80%" TEXT "80%" <SET FGLAYERALPHA ((255 * 8) / 10)>
+				MENU SUB ADD TEXT "90%" TEXT "90%" <SET FGLAYERALPHA ((255 * 9) / 10)>
+				MENU SUB ADD TEXT "100%" TEXT "100%" <SET FGLAYERALPHA ((255 * 10) / 10)>
+				SUBMENU
+			}
+			MENU SUB ADD TEXT "Clear" TEXT "Clear" <LOAD FGLAYER "">
+			MENU SUB ADD TEXT "" SEPERATOR 30 <>
+			MENU SUB ADD TEXT "Background Layer" TEXT "Background Layer" <>
+			MENU SUB ADD TEXT "Load File" TEXT "Load File" <LOAD BGLAYER FILEDIALOG>
+			MENU SUB ADD TEXT "Use Sandbox" TEXT "Use Sandbox" {
+				SAVE SAND tmpbglayer.bmp
+				LOAD BGLAYER tmpbglayer.bmp
+			}
+			MENU SUB ADD TEXT "Clear" TEXT "Clear" <LOAD BGLAYER "">
+			SUBMENU
+		} 
+		IF (BUTTON == 4) fullscreenmenu
+	}
+	MENU TOP ADD TEXT "Config" FILE config.bmp {
+		IF (BUTTON == 1) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Solidlines" FILE solid.bmp <SET SOLIDDRAW (1 - SOLIDDRAW)>
+			MENU SUB ADD TEXT "Text of Icons" FILE icontext.bmp switchtexticons
+			MENU SUB ADD TEXT "Preview" FILE preview.bmp <SET SHOWPREVIEW (1 - SHOWPREVIEW)>
+			MENU SUB ADD TEXT "History" FILE h.bmp <SET save_history (1 - save_history)>
+			MENU SUB ADD TEXT "Physics" FILE p.bmp <SET PHYSICS (1 - PHYSICS)>
+			MENU SUB ADD TEXT "Gravity" FILE g.bmp switchgravity
+			MENU SUB ADD TEXT "Interactions" FILE i.bmp <SET INTERACTIONS (1 - INTERACTIONS)>
+			MENU SUB ADD TEXT "Death" FILE d.bmp <SET DEATH (1 - DEATH)>
+			SUBMENU
+		}
+		IF (BUTTON == 2) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Brushsize" TEXT "Brushsize" <SET wheelfunction 0>
+			MENU SUB ADD TEXT "Zoom" TEXT "Zoom" <SET wheelfunction 1>
+			MENU SUB ADD TEXT "History" TEXT "History" <SET wheelfunction 2>
+			SUBMENU
+		}
+		IF ((BUTTON == 4) && (PPC == 0)) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Paste Clipboard" TEXT "Paste Clipboard" <INCLUDE CLIPBOARD>
+			MENU SUB ADD TEXT "Load Configfile" TEXT "Load Configfile" <INCLUDE FILEDIALOG>
+			MENU SUB ADD TEXT "Paste BS1 Config" TEXT "Paste BS1 Config" loadBS1config
+			MENU SUB ADD TEXT "Load BS1 Configfile" TEXT "Load BS1 Configfile" loadBS1configfile
+			MENU SUB ADD TEXT "Load elements.bs2" TEXT "Load elements.bs2" reloadelementscfg
+			MENU SUB ADD TEXT "Edit elements.bs2" TEXT "Edit elements.bs2" <SYSTEM "start notepad elements.bs2">
+			MENU SUB ADD TEXT "Load basicelements.bs2" TEXT " Load basicelements.bs2 " reloadelementscfg2
+			MENU SUB ADD TEXT "Edit basicelements.bs2" TEXT " Edit basicelements.bs2 " <SYSTEM "start notepad basicelements.bs2">
+			SUBMENU
+		}
+	}
+	MENU TOP ADD TEXT "Sources" FILE sources.bmp {
+		IF (BUTTON == 1) {
+			SET sourcestmp 1
+			IF (sourceactive1 + sourceactive2 + sourceactive3 + sourceactive4 + sourceactive5 + sourceactive6 + sourceactive7 + sourceactive8 + sourceactive9) sourcesturnoff 
+			IF sourcestmp sourcesrestore 
+		}
+		IF (BUTTON == 2) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Size 1" FILE 1.bmp sourcessetallsizes 0
+			MENU SUB ADD TEXT "Size 2" FILE 2.bmp sourcessetallsizes 1
+			MENU SUB ADD TEXT "Size 3" FILE 3.bmp sourcessetallsizes 2
+			MENU SUB ADD TEXT "Size 4" FILE 4.bmp sourcessetallsizes 3
+			MENU SUB ADD TEXT "Size 5" FILE 5.bmp sourcessetallsizes 4
+			MENU SUB ADD TEXT "Size 6" FILE 6.bmp sourcessetallsizes 5
+			MENU SUB ADD TEXT "Size 7" FILE 7.bmp sourcessetallsizes 6
+			MENU SUB ADD TEXT "Size 8" FILE 8.bmp sourcessetallsizes 7
+			MENU SUB ADD TEXT "Size 9" FILE 9.bmp sourcessetallsizes 8
+			SUBMENU
+		}
+		IF (BUTTON == 4) {
+			MENU SUB CLEAR
+			MENU SUB ADDBORDER TEXT "SOURCE 1" ELEMENT sourceelement1 (255 * sourceactive1) (255 * sourceactive1) (255 * sourceactive1) sourceselect 1
+			MENU SUB ADDBORDER TEXT "SOURCE 2" ELEMENT sourceelement2 (255 * sourceactive2) (255 * sourceactive2) (255 * sourceactive2) sourceselect 2
+			MENU SUB ADDBORDER TEXT "SOURCE 3" ELEMENT sourceelement3 (255 * sourceactive3) (255 * sourceactive3) (255 * sourceactive3) sourceselect 3
+			MENU SUB ADDBORDER TEXT "SOURCE 4" ELEMENT sourceelement4 (255 * sourceactive4) (255 * sourceactive4) (255 * sourceactive4) sourceselect 4
+			MENU SUB ADDBORDER TEXT "SOURCE 5" ELEMENT sourceelement5 (255 * sourceactive5) (255 * sourceactive5) (255 * sourceactive5) sourceselect 5
+			MENU SUB ADDBORDER TEXT "SOURCE 6" ELEMENT sourceelement6 (255 * sourceactive6) (255 * sourceactive6) (255 * sourceactive6) sourceselect 6
+			MENU SUB ADDBORDER TEXT "SOURCE 7" ELEMENT sourceelement7 (255 * sourceactive7) (255 * sourceactive7) (255 * sourceactive7) sourceselect 7
+			MENU SUB ADDBORDER TEXT "SOURCE 8" ELEMENT sourceelement8 (255 * sourceactive8) (255 * sourceactive8) (255 * sourceactive8) sourceselect 8
+			MENU SUB ADDBORDER TEXT "SOURCE 9" ELEMENT sourceelement9 (255 * sourceactive9) (255 * sourceactive9) (255 * sourceactive9) sourceselect 9
+			SUBMENU
+		}
+	}
+	MENU TOP ADD TEXT "Reverse Gravity" FILE turn.bmp {
+		IF (BUTTON == 1) {
+			IF (REVERSE == 0) <SET REVERSE 1> ELSE <SET REVERSE 0>
+		}
+		IF (BUTTON == 2) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Wind 100% Left" TEXT "Wind 100% Left" <SET WIND 1000>
+			MENU SUB ADD TEXT "Wind 95% Left" TEXT "Wind 95% Left" <SET WIND 950>
+			MENU SUB ADD TEXT "Wind 90% Left" TEXT "Wind 90% Left" <SET WIND 900>
+			MENU SUB ADD TEXT "Wind 75% Left" TEXT "Wind 75% Left" <SET WIND 750>
+			MENU SUB ADD TEXT "Wind 50% Left" TEXT "Wind 50% Left" <SET WIND 500>
+			MENU SUB ADD TEXT "Wind 25% Left" TEXT "Wind 25% Left" <SET WIND 250>
+			MENU SUB ADD TEXT "Wind 10% Left" TEXT "Wind 10% Left" <SET WIND 100>
+			MENU SUB ADD TEXT "Wind 5% Left" TEXT "Wind 5% Left" <SET WIND 50>
+			MENU SUB ADD TEXT "No Wind" TEXT "No Wind" <SET WIND 0>
+			MENU SUB ADD TEXT "Wind 5% Right" TEXT "Wind 5% Right" <SET WIND -50>
+			MENU SUB ADD TEXT "Wind 10% Right" TEXT "Wind 10% Right" <SET WIND -100>
+			MENU SUB ADD TEXT "Wind 25% Right" TEXT "Wind 25% Right" <SET WIND -250>
+			MENU SUB ADD TEXT "Wind 50% Right" TEXT "Wind 50% Right" <SET WIND -500>
+			MENU SUB ADD TEXT "Wind 75% Right" TEXT "Wind 75% Right" <SET WIND -750>
+			MENU SUB ADD TEXT "Wind 90% Right" TEXT "Wind 90% Right" <SET WIND -900>
+			MENU SUB ADD TEXT "Wind 95% Right" TEXT "Wind 95% Right" <SET WIND -950>
+			MENU SUB ADD TEXT "Wind 100% Right" TEXT "Wind 100% Right" <SET WIND -1000>
+			SUBMENU
+		}
+		IF (BUTTON == 4) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "-600%" TEXT "-600%" setgravity 1 6000
+			MENU SUB ADD TEXT "-400%" TEXT "-400%" setgravity 1 4000
+			MENU SUB ADD TEXT "-300%" TEXT "-300%" setgravity 1 3000
+			MENU SUB ADD TEXT "-200%" TEXT "-200%" setgravity 1 2000
+			MENU SUB ADD TEXT "-150%" TEXT "-150%" setgravity 1 1500
+			MENU SUB ADD TEXT "-110%" TEXT "-110%" setgravity 1 1100
+			MENU SUB ADD TEXT "-100%" TEXT "-100%" setgravity 1 1000
+			MENU SUB ADD TEXT "-90%" TEXT "-90%" setgravity 1 900
+			MENU SUB ADD TEXT "-75%" TEXT "-75%" setgravity 1 750
+			MENU SUB ADD TEXT "-50%" TEXT "-50%" setgravity 1 500
+			MENU SUB ADD TEXT "-25%" TEXT "-25%" setgravity 1 250
+			MENU SUB ADD TEXT "0%" TEXT "0%" setgravity 0 0
+			MENU SUB ADD TEXT "25%" TEXT "25%" setgravity 0 250
+			MENU SUB ADD TEXT "50%" TEXT "50%" setgravity 0 500
+			MENU SUB ADD TEXT "75%" TEXT "75%" setgravity 0 750
+			MENU SUB ADD TEXT "90%" TEXT "90%" setgravity 0 900
+			MENU SUB ADD TEXT "100%" TEXT "100%" setgravity 0 1000
+			MENU SUB ADD TEXT "110%" TEXT "110%" setgravity 0 1100
+			MENU SUB ADD TEXT "150%" TEXT "150%" setgravity 0 1500
+			MENU SUB ADD TEXT "200%" TEXT "200%" setgravity 0 2000
+			MENU SUB ADD TEXT "300%" TEXT "300%" setgravity 0 3000
+			MENU SUB ADD TEXT "400%" TEXT "400%" setgravity 0 4000
+			MENU SUB ADD TEXT "600%" TEXT "600%" setgravity 0 6000
+			SUBMENU
+		}
+	}
+	IF ( BORDER == 0 ) <MENU TOP ADD TEXT "Border" FILE border0.bmp borderselector>
+	IF ( BORDER == 1 ) <MENU TOP ADD TEXT "Border" FILE border1.bmp borderselector>
+	IF ( BORDER == 2 ) <MENU TOP ADD TEXT "Border" FILE border2.bmp borderselector>
+	IF (SPEED == 0) <MENU TOP ADD TEXT "Speed" FILE pause.bmp speedmenu>
+	IF ((SPEED > 0) && (SPEED < 60) ) <MENU TOP ADD TEXT "Speed" FILE slow.bmp speedmenu>
+	IF (SPEED == 60) <MENU TOP ADD TEXT "Speed" FILE play.bmp speedmenu>
+	IF (SPEED > 60) <MENU TOP ADD TEXT "Speed" FILE fast.bmp speedmenu>
+	IF (SPEED == 0) <MENU TOP ADDDRAG TEXT "History" FILE history.bmp historybutton>
+	MENU TOP ADD TEXT "" SEPERATOR 0 <>
+	MENU TOP ADD TEXT "Clear Screen" FILE empty.bmp {
+		IF (BUTTON == 1) clearscreensandbox 0
+		IF (BUTTON == 2) clearscreensandbox ELEMENT1
+		IF (BUTTON == 4) {
+			MENU SUB CLEAR
+			MENU SUB ADD TEXT "Earth" ELEMENT ELEMENT:Earth clearscreensandbox ELEMENT:Earth
+			MENU SUB ADD TEXT "Sand" ELEMENT ELEMENT:Sand clearscreensandbox ELEMENT:Sand
+			MENU SUB ADD TEXT "Water" ELEMENT ELEMENT:Water clearscreensandbox ELEMENT:Water
+			MENU SUB ADD TEXT "Oil" ELEMENT ELEMENT:Oil clearscreensandbox ELEMENT:Oil
+			MENU SUB ADD TEXT "Salt" ELEMENT ELEMENT:Salt clearscreensandbox ELEMENT:Salt
+			MENU SUB ADD TEXT "Stone" ELEMENT ELEMENT:Stone clearscreensandbox ELEMENT:Stone
+			MENU SUB ADD TEXT "Replicator" ELEMENT ELEMENT:Replicator clearscreensandbox ELEMENT:Replicator
+			MENU SUB ADD TEXT "Gas" ELEMENT ELEMENT:Gas clearscreensandbox ELEMENT:Gas
+			MENU SUB ADD TEXT "GasII" ELEMENT ELEMENT:GasII clearscreensandbox ELEMENT:GasII
+			SUBMENU
+		}
+	}
+	IF (PPC == 0) {
+		MENU TOP ADD TEXT "Load Game" FILE load.bmp {
+			IF ((BUTTON == 1) && (WINDOWS == 1)) <LOAD SAND FILEDIALOG>
+			IF ((BUTTON == 1) && (WINDOWS == 0)) <LOAD SAND quicksave.png>
+			IF ((BUTTON == 2) || (BUTTON == 4)) {
+				INCLUDE warning.bs2
+				FILE DELETE warning.bs2
+				FILE OPEN warning.bs2
+				FILE CLOSE
+				INCLUDE http://siebn.de/savegamelist.php?mod=Default!
+			} 
+		}
+		MENU TOP ADD TEXT "Save Game" FILE save.bmp {
+			IF ((BUTTON == 1) && (WINDOWS == 1)) <SAVE SAND FILEDIALOG>
+			IF ((BUTTON == 1) && (WINDOWS == 0)) <SAVE SAND quicksave.png>
+			IF ( BUTTON == 2 ) savesubmenu2
+			IF ( BUTTON == 4 ) savesubmenu
+		}
+	}
+	IF (rotatetool == 0) <MENU TOP ADD TEXT "Rotate clockwise" FILE rotateright.bmp rotatemenu>
+	IF (rotatetool == 1) <MENU TOP ADD TEXT "Rotate anticlockwise" FILE rotateleft.bmp rotatemenu>
+	IF (rotatetool == 2) <MENU TOP ADD TEXT "Rotate 180°" FILE rotate.bmp rotatemenu>
+	IF (rotatetool == 3) <MENU TOP ADD TEXT "Point reflection" FILE pointreflection.bmp rotatemenu>
+	IF (rotatetool == 4) <MENU TOP ADD TEXT "Flip horizontally" FILE fliph.bmp rotatemenu>
+	IF (rotatetool == 5) <MENU TOP ADD TEXT "Flip vertically" FILE flipv.bmp rotatemenu>
+	MENU TOP ADD TEXT "Zoom" FILE zoom.bmp {
+		IF (BUTTON == 1) zoomtoggle
+		IF (BUTTON == 2) viewsubmenu
+		IF (BUTTON == 4) zoomsubmenu
+	}
+}
+
+TRIGGER setgravity {
+	SET REVERSE $0
+	SET GRAVITY $1
+}
+ 
+TRIGGER loadBS1config {
+	EXEC quitsandbox
+	EXEC clearall
+	INCLUDE CLIPBOARD
+	INCLUDE sandbox.bs2
+}
+
+TRIGGER loadBS1configfile {
+	EXEC quitsandbox
+	EXEC clearall
+	INCLUDE FILEDIALOG
+	INCLUDE sandbox.bs2
+}
+
+TRIGGER reloadelementscfg {
+	EXEC quitsandbox
+	EXEC clearall
+	INCLUDE elements.bs2
+	INCLUDE sandbox.bs2
+}
+
+TRIGGER reloadelementscfg2 {
+	EXEC quitsandbox
+	EXEC clearall
+	INCLUDE basicelements.bs2
+	INCLUDE sandbox.bs2
+}
+
+TRIGGER switchgravity {
+	IF GRAVITY <SET OLDGRAVITY GRAVITY>
+	IF GRAVITY <SET GRAVITY -1>
+	IF (GRAVITY == 0) <SET GRAVITY OLDGRAVITY>
+	IF (GRAVITY == -1) <SET GRAVITY 0>
+}
+
+TRIGGER switchtexticons {
+	SET texticons (1 - texticons)
+	MENU LEFT CLEAR
+	EXEC listgroups
+	EXEC listelements 2
+}
+
+TRIGGER sourcesturnoff {
+	SET sourcestmp 0
+	SET sourcelastactive1 sourceactive1
+	SET sourceactive1 0
+	SET sourcelastactive2 sourceactive2
+	SET sourceactive2 0
+	SET sourcelastactive3 sourceactive3
+	SET sourceactive3 0
+	SET sourcelastactive4 sourceactive4
+	SET sourceactive4 0
+	SET sourcelastactive5 sourceactive5
+	SET sourceactive5 0
+	SET sourcelastactive6 sourceactive6
+	SET sourceactive6 0
+	SET sourcelastactive7 sourceactive7
+	SET sourceactive7 0
+	SET sourcelastactive8 sourceactive8
+	SET sourceactive8 0
+	SET sourcelastactive9 sourceactive9
+	SET sourceactive9 0
+}
+
+TRIGGER sourcesrestore {
+	SET sourceactive1 sourcelastactive1
+	SET sourceactive2 sourcelastactive2
+	SET sourceactive3 sourcelastactive3
+	SET sourceactive4 sourcelastactive4
+	SET sourceactive5 sourcelastactive5
+	SET sourceactive6 sourcelastactive6
+	SET sourceactive7 sourcelastactive7
+	SET sourceactive8 sourcelastactive8
+	SET sourceactive9 sourcelastactive9
+}
+
+TRIGGER sourcessetallsizes {
+	SET sourcesize1 $0
+	SET sourcesize2 $0
+	SET sourcesize3 $0
+	SET sourcesize4 $0
+	SET sourcesize5 $0
+	SET sourcesize6 $0
+	SET sourcesize7 $0
+	SET sourcesize8 $0
+	SET sourcesize9 $0
+}
+
+TRIGGER sourceselect {
+	IF (BUTTON == 1) sourcetoggle
+	IF (BUTTON == 2) sourcessizesubmenu
+	IF (BUTTON == 4) sourceselectmenu
+}
+
+TRIGGER sourcetoggle {
+	IF ($0 == 1) <SET sourceactive1 (1 - sourceactive1)>
+	IF ($0 == 2) <SET sourceactive2 (1 - sourceactive2)>
+	IF ($0 == 3) <SET sourceactive3 (1 - sourceactive3)>
+	IF ($0 == 4) <SET sourceactive4 (1 - sourceactive4)>
+	IF ($0 == 5) <SET sourceactive5 (1 - sourceactive5)>
+	IF ($0 == 6) <SET sourceactive6 (1 - sourceactive6)>
+	IF ($0 == 7) <SET sourceactive7 (1 - sourceactive7)>
+	IF ($0 == 8) <SET sourceactive8 (1 - sourceactive8)>
+	IF ($0 == 9) <SET sourceactive9 (1 - sourceactive9)>
+}
+
+TRIGGER sourcessizesubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Size 1" FILE 1.bmp sourcessetsize $0 0
+	MENU SUB ADD TEXT "Size 2" FILE 2.bmp sourcessetsize $0 1
+	MENU SUB ADD TEXT "Size 3" FILE 3.bmp sourcessetsize $0 2
+	MENU SUB ADD TEXT "Size 4" FILE 4.bmp sourcessetsize $0 3
+	MENU SUB ADD TEXT "Size 5" FILE 5.bmp sourcessetsize $0 4
+	MENU SUB ADD TEXT "Size 6" FILE 6.bmp sourcessetsize $0 5
+	MENU SUB ADD TEXT "Size 7" FILE 7.bmp sourcessetsize $0 6
+	MENU SUB ADD TEXT "Size 8" FILE 8.bmp sourcessetsize $0 7
+	MENU SUB ADD TEXT "Size 9" FILE 9.bmp sourcessetsize $0 8
+	SUBMENU
+}
+
+TRIGGER sourcessetsize {
+	IF ($0 == 1) <SET sourcesize1 $1>
+	IF ($0 == 2) <SET sourcesize2 $1>
+	IF ($0 == 3) <SET sourcesize3 $1>
+	IF ($0 == 4) <SET sourcesize4 $1>
+	IF ($0 == 5) <SET sourcesize5 $1>
+	IF ($0 == 6) <SET sourcesize6 $1>
+	IF ($0 == 7) <SET sourcesize7 $1>
+	IF ($0 == 8) <SET sourcesize8 $1>
+	IF ($0 == 9) <SET sourcesize9 $1>
+}
+
+TRIGGER sourceselectmenu {
+	MENU SUB CLEAR
+	SET elementcount 0
+	WHILE (elementcount - COUNT:GROUP:Sources) {
+		SET elementcount (elementcount + 1)
+		MENU SUB ADD ELEMENT GROUP:Sources:elementcount ELEMENT GROUP:Sources:elementcount sourceselectelement $0 GROUP:Sources:elementcount
+	}
+	SUBMENU
+}
+
+TRIGGER sourceselectelement {
+	IF ($0 == 1) <SET sourceelement1 $1>
+	IF ($0 == 2) <SET sourceelement2 $1>
+	IF ($0 == 3) <SET sourceelement3 $1>
+	IF ($0 == 4) <SET sourceelement4 $1>
+	IF ($0 == 5) <SET sourceelement5 $1>
+	IF ($0 == 6) <SET sourceelement6 $1>
+	IF ($0 == 7) <SET sourceelement7 $1>
+	IF ($0 == 8) <SET sourceelement8 $1>
+	IF ($0 == 9) <SET sourceelement9 $1>
+}
+
+TRIGGER speedmenu {
+	IF ( BUTTON == 1 ) togglepause
+	IF ( BUTTON == 2 ) speedsubtextmenu
+	IF ( BUTTON == 4 ) speedsubmenu
+}
+
+TRIGGER setspeed {
+	SET SPEED $0
+	EXEC menutop
+}
+
+TRIGGER speedsubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Pause" FILE pause.bmp setspeed 0
+	MENU SUB ADD TEXT "Speed 1 - 59" FILE speed1.bmp setspeed1
+	MENU SUB ADD TEXT "Speed 60" FILE play.bmp setspeed 60
+	MENU SUB ADD TEXT "Speed 61 - Unlimited" FILE speed2.bmp setspeed2
+	MENU SUB ADD TEXT "Speed Unlimited" FILE fast.bmp setspeed 1000000
+	SUBMENU
+}
+
+TRIGGER speedsubtextmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "1" TEXT "1" setspeed 1
+	MENU SUB ADD TEXT "2" TEXT "2" setspeed 2
+	MENU SUB ADD TEXT "5" TEXT "5" setspeed 5
+	MENU SUB ADD TEXT "10" TEXT "10" setspeed 10
+	MENU SUB ADD TEXT "15" TEXT "15" setspeed 15
+	MENU SUB ADD TEXT "20" TEXT "20" setspeed 20
+	MENU SUB ADD TEXT "40" TEXT "40" setspeed 40
+	MENU SUB ADD TEXT "60" TEXT "60" setspeed 60
+	MENU SUB ADD TEXT "80" TEXT "80" setspeed 80
+	MENU SUB ADD TEXT "100" TEXT "100" setspeed 100
+	MENU SUB ADD TEXT "125" TEXT "120" setspeed 125
+	MENU SUB ADD TEXT "150" TEXT "150" setspeed 150
+	MENU SUB ADD TEXT "200" TEXT "200" setspeed 200
+	MENU SUB ADD TEXT "300" TEXT "300" setspeed 300
+	MENU SUB ADD TEXT "500" TEXT "500" setspeed 500
+	MENU SUB ADD TEXT "750" TEXT "750" setspeed 750
+	MENU SUB ADD TEXT "1000" TEXT "1000" setspeed 1000
+	MENU SUB ADD TEXT "1500" TEXT "1500" setspeed 1500
+	MENU SUB ADD TEXT "2000" TEXT "2000" setspeed 2000
+	MENU SUB ADD TEXT "3000" TEXT "3000" setspeed 3000
+	MENU SUB ADD TEXT "5000" TEXT "5000" setspeed 5000
+	MENU SUB ADD TEXT "999999" TEXT " 999999 " setspeed 999999
+	SUBMENU
+}
+
+ON setspeed1 EXEC setspeed Y
+ON setspeed2 EXEC setspeed (60 + (Y * Y))
+
+TRIGGER historybutton {
+	IF (BUTTON == 1) history_load (32 - (X * 1))
+	IF (BUTTON == 2) history_load (96 - (X * 3))
+	IF (BUTTON == 4) history_load (64 - (X * 2))
+}
+
+TRIGGER fullscreenmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Window" TEXT " Window " <SET FULLSCREEN 0>
+	MENU SUB ADD TEXT "Default" TEXT " Default " fullscreen 0 0
+	MENU SUB ADD TEXT "640x480" TEXT " 640x480 " fullscreen 640 480
+	MENU SUB ADD TEXT "800x600" TEXT " 800x600 " fullscreen 800 600
+	MENU SUB ADD TEXT "1024x768" TEXT " 1024x768 " fullscreen 1024 768
+	MENU SUB ADD TEXT "1280x800" TEXT " 1280x800 " fullscreen 1280 800
+	MENU SUB ADD TEXT "1280x1024" TEXT " 1280x1024 " fullscreen 1280 1024
+	MENU SUB ADD TEXT "1400x1050" TEXT " 1400x1050 " fullscreen 1400 1050
+	MENU SUB ADD TEXT "1600x1200" TEXT " 1600x1200 " fullscreen 1600 1200
+	SUBMENU
+}
+
+TRIGGER fullscreen {
+	SET FULLSCREEN 1
+	SET FULLSCREENX $0
+	SET FULLSCREENY $1
+}
+
+TRIGGER sandresolutionmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Width" FILE width.bmp widthmenu
+	MENU SUB ADD TEXT "Height" FILE height.bmp heightmenu
+	MENU SUB ADD TEXT "Square" FILE widthheight.bmp widthheightmenu
+	SUBMENU
+}
+
+TRIGGER widthheightmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Square: Auto" TEXT "Auto" setautowidthheight 1
+	MENU SUB ADD TEXT "Square: Auto" TEXT "Auto/2" setautowidthheight 2
+	MENU SUB ADD TEXT "Square: 40" FILE 40.bmp resizewidthheight 40
+	MENU SUB ADD TEXT "Square: 80" FILE 80.bmp resizewidthheight 80
+	MENU SUB ADD TEXT "Square: 160" FILE 160.bmp resizewidthheight 160
+	MENU SUB ADD TEXT "Square: 320" FILE 320.bmp resizewidthheight 320 
+	MENU SUB ADD TEXT "Square: 420" FILE 420.bmp resizewidthheight 420 
+	MENU SUB ADD TEXT "Square: 640" FILE 640.bmp resizewidthheight 640 
+	MENU SUB ADD TEXT "Square: 800" FILE 800.bmp resizewidthheight 800 
+	MENU SUB ADD TEXT "Square: 1024" FILE 1024.bmp resizewidthheight 1024 
+	MENU SUB ADD TEXT "Square: 1280" FILE 1280.bmp resizewidthheight 1280 
+	MENU SUB ADD TEXT "Square: 1600" FILE 1600.bmp resizewidthheight 1600 
+	MENU SUB ADD TEXT "Square: 2400" FILE 2400.bmp resizewidthheight 2400 
+	MENU SUB ADD TEXT "Square: 4000" FILE 4000.bmp resizewidthheight 4000 
+	SUBMENU
+}
+
+TRIGGER resizewidthheight {
+	RESIZE $0 $0
+	SET autowidth 0
+	SET autoheight 0
+}
+
+TRIGGER setautowidthheight {
+	SET autowidth $0
+	SET autoheight $0
+	EXEC WINDOWRESIZED
+}
+
+TRIGGER widthmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Width: Auto" TEXT "Auto" setautowidth 1
+	MENU SUB ADD TEXT "Width: Auto" TEXT "Auto/2" setautowidth 2
+	MENU SUB ADD TEXT "Width: 40" FILE 40.bmp resizewidth 40
+	MENU SUB ADD TEXT "Width: 80" FILE 80.bmp resizewidth 80
+	MENU SUB ADD TEXT "Width: 160" FILE 160.bmp resizewidth 160
+	MENU SUB ADD TEXT "Width: 320" FILE 320.bmp resizewidth 320 
+	MENU SUB ADD TEXT "Width: 420" FILE 420.bmp resizewidth 420 
+	MENU SUB ADD TEXT "Width: 640" FILE 640.bmp resizewidth 640 
+	MENU SUB ADD TEXT "Width: 800" FILE 800.bmp resizewidth 800 
+	MENU SUB ADD TEXT "Width: 1024" FILE 1024.bmp resizewidth 1024 
+	MENU SUB ADD TEXT "Width: 1280" FILE 1280.bmp resizewidth 1280 
+	MENU SUB ADD TEXT "Width: 1600" FILE 1600.bmp resizewidth 1600 
+	MENU SUB ADD TEXT "Width: 2400" FILE 2400.bmp resizewidth 2400 
+	MENU SUB ADD TEXT "Width: 4000" FILE 4000.bmp resizewidth 4000 
+	SUBMENU
+}
+
+TRIGGER resizewidth {
+	RESIZE $0 HEIGHT
+	SET autowidth 0
+	EXEC WINDOWRESIZED
+}
+
+TRIGGER setautowidth {
+	SET autowidth $0
+	EXEC WINDOWRESIZED
+}
+
+TRIGGER heightmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Width: Auto" TEXT "Auto" setautoheight 1
+	MENU SUB ADD TEXT "Width: Auto" TEXT "Auto/2" setautoheight 2
+	MENU SUB ADD TEXT "Height: 40" FILE 40.bmp resizeheight 40
+	MENU SUB ADD TEXT "Height: 80" FILE 80.bmp resizeheight 80
+	MENU SUB ADD TEXT "Height: 160" FILE 160.bmp resizeheight 160
+	MENU SUB ADD TEXT "Height: 320" FILE 320.bmp resizeheight 320 
+	MENU SUB ADD TEXT "Height: 420" FILE 420.bmp resizeheight 420 
+	MENU SUB ADD TEXT "Height: 640" FILE 640.bmp resizeheight 640 
+	MENU SUB ADD TEXT "Height: 800" FILE 800.bmp resizeheight 800 
+	MENU SUB ADD TEXT "Height: 1024" FILE 1024.bmp resizeheight 1024 
+	MENU SUB ADD TEXT "Height: 1280" FILE 1280.bmp resizeheight 1280 
+	MENU SUB ADD TEXT "Height: 1600" FILE 1600.bmp resizeheight 1600 
+	MENU SUB ADD TEXT "Height: 2400" FILE 2400.bmp resizeheight 2400 
+	MENU SUB ADD TEXT "Height: 4000" FILE 4000.bmp resizeheight 4000 
+	SUBMENU
+}
+
+TRIGGER resizeheight {
+	RESIZE WIDTH $0
+	SET autoheight 0
+}
+
+TRIGGER setautoheight {
+	SET autoheight $0
+	EXEC WINDOWRESIZED
+}
+
+TRIGGER borderselector {
+	IF ( BUTTON == 1 ) bordernext
+	IF (BUTTON == 2) {
+		MENU SUB CLEAR
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrordown.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrordownleft.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1>
+			ON postphysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1>
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrorleft.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1
+			ON postphysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrorupleft.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1
+			ON prephysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1>
+			ON postphysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1>
+			ON postphysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrorup.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1
+			ON prephysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1
+			ON postphysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1
+			ON postphysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrorupright.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1
+			ON prephysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1>
+			ON postphysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1>
+			ON postphysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrorright.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1
+			ON postphysicdirection DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1
+		}
+		MENU SUB ADD TEXT "Physicdirection down" FILE arrordownright.bmp {
+			REMOVETRIGGER prephysicdirection
+			REMOVETRIGGER postphysicdirection
+			ON prephysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 -1>
+			ON postphysicdirection IF (FRAME % 2) <DRAW DRAWELEMENT ROTATE 0 0 10000 10000 1>
+		}
+		SUBMENU
+	}
+	IF ( BUTTON == 4 ) bordermenu
+}
+
+TRIGGER bordermenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "No border" FILE border0.bmp setborder 0
+	MENU SUB ADD TEXT "Border" FILE border1.bmp setborder 1
+	MENU SUB ADD TEXT "Teleporting border" FILE border2.bmp setborder 2
+	SUBMENU
+}
+
+TRIGGER setborder {
+	SET BORDER $0
+	EXEC menutop
+}
+
+TRIGGER bordernext {
+	SET BORDER (BORDER + 1)
+	IF (BORDER > 2) <SET BORDER 0>
+	EXEC menutop
+}
+
+TRIGGER savesubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Savegame 1" FILE 1.bmp <SAVE SAND save1.png>
+	MENU SUB ADD TEXT "Savegame 2" FILE 2.bmp <SAVE SAND save2.png>
+	MENU SUB ADD TEXT "Savegame 3" FILE 3.bmp <SAVE SAND save3.png>
+	MENU SUB ADD TEXT "Savegame 4" FILE 4.bmp <SAVE SAND save4.png>
+	MENU SUB ADD TEXT "Savegame 5" FILE 5.bmp <SAVE SAND save5.png>
+	MENU SUB ADD TEXT "Savegame 6" FILE 6.bmp <SAVE SAND save6.png>
+	MENU SUB ADD TEXT "Savegame 7" FILE 7.bmp <SAVE SAND save7.png>
+	MENU SUB ADD TEXT "Savegame 8" FILE 8.bmp <SAVE SAND save8.png>
+	MENU SUB ADD TEXT "Savegame 9" FILE 9.bmp <SAVE SAND save9.png>
+	SUBMENU
+}
+
+TRIGGER savesubmenu2 {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Savegame 10" TEXT " 10 " <SAVE SAND save10.png>
+	MENU SUB ADD TEXT "Savegame 11" TEXT " 11 " <SAVE SAND save11.png>
+	MENU SUB ADD TEXT "Savegame 12" TEXT " 12 " <SAVE SAND save12.png>
+	MENU SUB ADD TEXT "Savegame 13" TEXT " 13 " <SAVE SAND save13.png>
+	MENU SUB ADD TEXT "Savegame 14" TEXT " 14 " <SAVE SAND save14.png>
+	MENU SUB ADD TEXT "Savegame 15" TEXT " 15 " <SAVE SAND save15.png>
+	MENU SUB ADD TEXT "Savegame 16" TEXT " 16 " <SAVE SAND save16.png>
+	MENU SUB ADD TEXT "Savegame 17" TEXT " 17 " <SAVE SAND save17.png>
+	MENU SUB ADD TEXT "Savegame 18" TEXT " 18 " <SAVE SAND save18.png>
+	MENU SUB ADD TEXT "Savegame 19" TEXT " 19 " <SAVE SAND save19.png>
+	MENU SUB ADD TEXT "Savegame 20" TEXT " 20 " <SAVE SAND save20.png>
+	MENU SUB ADD TEXT "Savegame 21" TEXT " 21 " <SAVE SAND save21.png>
+	MENU SUB ADD TEXT "Savegame 22" TEXT " 22 " <SAVE SAND save22.png>
+	MENU SUB ADD TEXT "Savegame 23" TEXT " 23 " <SAVE SAND save23.png>
+	MENU SUB ADD TEXT "Savegame 24" TEXT " 24 " <SAVE SAND save24.png>
+	MENU SUB ADD TEXT "Savegame 25" TEXT " 25 " <SAVE SAND save25.png>
+	MENU SUB ADD TEXT "Savegame 26" TEXT " 26 " <SAVE SAND save26.png>
+	MENU SUB ADD TEXT "Savegame 27" TEXT " 27 " <SAVE SAND save27.png>
+	MENU SUB ADD TEXT "Savegame 28" TEXT " 28 " <SAVE SAND save28.png>
+	MENU SUB ADD TEXT "Savegame 29" TEXT " 29 " <SAVE SAND save29.png>
+	MENU SUB ADD TEXT "Savegame 30" TEXT " 30 " <SAVE SAND save30.png>
+	MENU SUB ADD TEXT "Savegame 31" TEXT " 31 " <SAVE SAND save31.png>
+	MENU SUB ADD TEXT "Savegame 32" TEXT " 32 " <SAVE SAND save32.png>
+	SUBMENU
+}
+
+TRIGGER loadsubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Savegame 1" FILE 1.bmp <LOAD SAND save1.png>
+	MENU SUB ADD TEXT "Savegame 2" FILE 2.bmp <LOAD SAND save2.png>
+	MENU SUB ADD TEXT "Savegame 3" FILE 3.bmp <LOAD SAND save3.png>
+	MENU SUB ADD TEXT "Savegame 4" FILE 4.bmp <LOAD SAND save4.png>
+	MENU SUB ADD TEXT "Savegame 5" FILE 5.bmp <LOAD SAND save5.png>
+	MENU SUB ADD TEXT "Savegame 6" FILE 6.bmp <LOAD SAND save6.png>
+	MENU SUB ADD TEXT "Savegame 7" FILE 7.bmp <LOAD SAND save7.png>
+	MENU SUB ADD TEXT "Savegame 8" FILE 8.bmp <LOAD SAND save8.png>
+	MENU SUB ADD TEXT "Savegame 9" FILE 9.bmp <LOAD SAND save9.png>
+	SUBMENU
+}
+
+TRIGGER loadsubmenu2 {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Savegame 10" TEXT " 10 " <LOAD SAND save10.png>
+	MENU SUB ADD TEXT "Savegame 11" TEXT " 11 " <LOAD SAND save11.png>
+	MENU SUB ADD TEXT "Savegame 12" TEXT " 12 " <LOAD SAND save12.png>
+	MENU SUB ADD TEXT "Savegame 13" TEXT " 13 " <LOAD SAND save13.png>
+	MENU SUB ADD TEXT "Savegame 14" TEXT " 14 " <LOAD SAND save14.png>
+	MENU SUB ADD TEXT "Savegame 15" TEXT " 15 " <LOAD SAND save15.png>
+	MENU SUB ADD TEXT "Savegame 16" TEXT " 16 " <LOAD SAND save16.png>
+	MENU SUB ADD TEXT "Savegame 17" TEXT " 17 " <LOAD SAND save17.png>
+	MENU SUB ADD TEXT "Savegame 18" TEXT " 18 " <LOAD SAND save18.png>
+	MENU SUB ADD TEXT "Savegame 19" TEXT " 19 " <LOAD SAND save19.png>
+	MENU SUB ADD TEXT "Savegame 20" TEXT " 20 " <LOAD SAND save20.png>
+	MENU SUB ADD TEXT "Savegame 21" TEXT " 21 " <LOAD SAND save21.png>
+	MENU SUB ADD TEXT "Savegame 22" TEXT " 22 " <LOAD SAND save22.png>
+	MENU SUB ADD TEXT "Savegame 23" TEXT " 23 " <LOAD SAND save23.png>
+	MENU SUB ADD TEXT "Savegame 24" TEXT " 24 " <LOAD SAND save24.png>
+	MENU SUB ADD TEXT "Savegame 25" TEXT " 25 " <LOAD SAND save25.png>
+	MENU SUB ADD TEXT "Savegame 26" TEXT " 26 " <LOAD SAND save26.png>
+	MENU SUB ADD TEXT "Savegame 27" TEXT " 27 " <LOAD SAND save27.png>
+	MENU SUB ADD TEXT "Savegame 28" TEXT " 28 " <LOAD SAND save28.png>
+	MENU SUB ADD TEXT "Savegame 29" TEXT " 29 " <LOAD SAND save29.png>
+	MENU SUB ADD TEXT "Savegame 30" TEXT " 30 " <LOAD SAND save30.png>
+	MENU SUB ADD TEXT "Savegame 31" TEXT " 31 " <LOAD SAND save31.png>
+	MENU SUB ADD TEXT "Savegame 32" TEXT " 32 " <LOAD SAND save32.png>
+	SUBMENU
+}
+
+TRIGGER zoomtoggle {
+	IF (ZOOM != 1) <SET ZOOM 0>
+	IF (ZOOM == 1) <SET ZOOM 2>
+	IF (ZOOM == 0) <SET ZOOM 1>
+}
+
+TRIGGER zoomsubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Zoom: 1" FILE 1.bmp <SET ZOOM 1>
+	MENU SUB ADD TEXT "Zoom: 2" FILE 2.bmp <SET ZOOM 2>
+	MENU SUB ADD TEXT "Zoom: 3" FILE 3.bmp <SET ZOOM 3>
+	MENU SUB ADD TEXT "Zoom: 4" FILE 4.bmp <SET ZOOM 4>
+	MENU SUB ADD TEXT "Zoom: 5" FILE 5.bmp <SET ZOOM 5>
+	MENU SUB ADD TEXT "Zoom: 6" FILE 6.bmp <SET ZOOM 6>
+	MENU SUB ADD TEXT "Zoom: 7" FILE 7.bmp <SET ZOOM 7>
+	MENU SUB ADD TEXT "Zoom: 8" FILE 8.bmp <SET ZOOM 8>
+	MENU SUB ADD TEXT "Zoom: 9" FILE 9.bmp <SET ZOOM 9>
+	SUBMENU
+}
+
+TRIGGER viewsubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Element View" TEXT "Element View" setview 0 1 1 1 1 1 256
+	MENU SUB ADD TEXT "1x Fading View" TEXT "1x Fading View" setview 0 1 1 1 1 1 128
+	MENU SUB ADD TEXT "2x Fading View" TEXT "2x Fading View" setview 0 1 1 1 1 1 64
+	MENU SUB ADD TEXT "5x Fading View" TEXT "5x Fading View" setview 0 1 1 1 1 1 32
+	MENU SUB ADD TEXT "10x Fading View" TEXT "10x Fading View" setview 0 1 1 1 1 1 20
+	MENU SUB ADD TEXT "1x Blur View" TEXT "1x Blur View" setview 10 256 1 0 4 0 15
+	MENU SUB ADD TEXT "2x Blur View" TEXT "2x Blur View" setview 10 256 1 0 4 0 8
+	MENU SUB ADD TEXT "5x Blur View" TEXT "5x Blur View" setview 10 256 1 0 4 0 2
+	MENU SUB ADD TEXT "10x Blur View" TEXT "10x Blur View" setview 10 256 1 0 4 0 1
+	MENU SUB ADD TEXT "Weight View" TEXT "Weight View" setview 1 1250 350 7 4 1 256
+	MENU SUB ADD TEXT "Spray View" TEXT "Spray View" setview 2 10 1 1 4 2 256
+	MENU SUB ADD TEXT "Slide View" TEXT "Slide View" setview 3 10 1 1 4 2 256
+	MENU SUB ADD TEXT "Viscousity View" TEXT "Viscousity View" setview 4 10 1 1 4 2 256
+	MENU SUB ADD TEXT "Die View" TEXT "Die View" setview 5 1000 1 0 4 2 256
+	MENU SUB ADD TEXT "Red View" TEXT "Red View" setview 6 256 1 0 1 0 256
+	MENU SUB ADD TEXT "Green View" TEXT "Green View" setview 7 256 1 0 2 0 256
+	MENU SUB ADD TEXT "Blue View" TEXT "Blue View" setview 8 256 1 0 4 0 256
+	MENU SUB ADD TEXT "Heat View" TEXT "Heat View" setview -1 256 1 0 1 0 256
+	MENU SUB ADD TEXT "Random View" TEXT "Random View" setrandomview 0
+	MENU SUB ADD TEXT "Random2 View" TEXT "Random2 View" setrandomview 1 
+	MENU SUB ADD TEXT "Inverted View" TEXT "Inverted View" setinvertedview 
+	MENU SUB ADD TEXT "Strange View" TEXT "Strange View" setview 11 256 1 0 4 0 256
+	MENU SUB ADD TEXT "Psychic View" TEXT "Psychic View" setview 12 256 1 0 4 0 256
+	SUBMENU
+}
+
+TRIGGER setview {
+	SET VIEW $0
+	SET VIEWMAXPOS $1
+	SET VIEWMAXNEG $2
+	SET VIEWR (($3 & 1) * 255)
+	SET VIEWG (($3 & 2) * 255)
+	SET VIEWB (($3 & 4) * 255)
+	SET VIEWPOSR (($4 & 1) * 255)
+	SET VIEWPOSG (($4 & 2) * 255)
+	SET VIEWPOSB (($4 & 4) * 255)
+	SET VIEWNEGR (($5 & 1) * 255)
+	SET VIEWNEGG (($5 & 2) * 255)
+	SET VIEWNEGB (($5 & 4) * 255)
+	SET ALPHA2 $6
+	SET ALPHA1 $6
+	SET randomview 0
+}
+
+TRIGGER setrandomview {
+	SET VIEW -2
+	SET randomview ($0 == 1)
+	EXEC setrandomviewelements
+}
+TRIGGER setrandomviewelements {
+	SET elementcount 0
+	FOR elementcount FROM 0 TO (ELEMENT:COUNT - 1) DO <EXEC setcustomcolors2 elementcount (0 RAND 255) (0 RAND 255) (0 RAND 255)>
+	IF (randomview == 1) <TIMER 1 FRAMES setrandomviewelements>
+}
+
+TRIGGER setinvertedview {
+	SET VIEW -2
+	SET randomview 0
+	FOR elementcount FROM 0 TO (ELEMENT:COUNT - 1) DO <EXEC setcustomcolors2 elementcount (255 - ELEMENTR:elementcount) (255 - ELEMENTG:elementcount) (255 - ELEMENTB:elementcount)>
+}
+
+TRIGGER rotatemenu {
+	IF ( BUTTON == 1 ) rotatemenuexec rotatetool
+	IF ( BUTTON == 4 ) rotatesubmenu
+}
+
+TRIGGER rotatesubmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Rotate wlockwise" FILE rotateright.bmp rotatemenuexec 0
+	MENU SUB ADD TEXT "Rotate anticlockwise" FILE rotateleft.bmp rotatemenuexec 1
+	MENU SUB ADD TEXT "Rotate 180" FILE rotate.bmp rotatemenuexec 2
+	MENU SUB ADD TEXT "Point reflection" FILE pointreflection.bmp rotatemenuexec 3
+	MENU SUB ADD TEXT "Flip horizontally" FILE fliph.bmp rotatemenuexec 4
+	MENU SUB ADD TEXT "Flip vertically" FILE flipv.bmp rotatemenuexec 5
+	SUBMENU
+}
+
+TRIGGER rotatemenuexec {
+	IF ($0 == 0) <DRAW DRAWELEMENT ROTATE 0 0 (WIDTH + 2) (HEIGHT + 2) -1>
+	IF ($0 == 1) <DRAW DRAWELEMENT ROTATE 0 0 (WIDTH + 2) (HEIGHT + 2) 1>
+	IF ($0 == 2) <DRAW DRAWELEMENT ROTATE 0 0 (WIDTH + 2) (HEIGHT + 2) 2>
+	IF ($0 == 3) <DRAW DRAWELEMENT ROTATE 0 0 (WIDTH + 2) (HEIGHT + 2) 3>
+	IF ($0 == 4) <DRAW DRAWELEMENT ROTATE 0 0 (WIDTH + 2) (HEIGHT + 2) 4>
+	IF ($0 == 5) <DRAW DRAWELEMENT ROTATE 0 0 (WIDTH + 2) (HEIGHT + 2) 5>
+	SET rotatetool $0
+	EXEC menutop
+}
+
+// Bottom Menu
+TRIGGER menubottom {
+	MENU BOTTOM CLEAR
+	IF (squaredrawingtool == 0) <MENU BOTTOM ADD TEXT "Filled square" FILE square.bmp squaretools>
+	IF (squaredrawingtool == 1) <MENU BOTTOM ADD TEXT "Square" FILE square2.bmp squaretools>
+	IF (circledrawingtool == 0) <MENU BOTTOM ADD TEXT "Filled circle" FILE circle.bmp circletools>
+	IF (circledrawingtool == 1) <MENU BOTTOM ADD TEXT "Circle" FILE circle2.bmp circletools>
+	IF (circledrawingtool == 2) <MENU BOTTOM ADD TEXT "Double circle" FILE circle3.bmp circletools>
+	IF (circledrawingtool == 3) <MENU BOTTOM ADD TEXT "Multi circle" FILE circle4.bmp circletools>
+	IF (linedrawingtool == 0) <MENU BOTTOM ADD TEXT "Horizontal line" FILE horizontal.bmp linetools>
+	IF (linedrawingtool == 1) <MENU BOTTOM ADD TEXT "Vertical line" FILE vertical.bmp linetools>
+	IF (linedrawingtool == 2) <MENU BOTTOM ADD TEXT "Diagonal line" FILE angel45.bmp linetools>
+	IF (linedrawingtool == 3) <MENU BOTTOM ADD TEXT "Diagonal line" FILE angel135.bmp linetools>
+	IF (linedrawingtool == 4) <MENU BOTTOM ADD TEXT "Triangle Up" FILE triangleup.bmp linetools>
+	IF (linedrawingtool == 5) <MENU BOTTOM ADD TEXT "Triangle Down" FILE triangledown.bmp linetools>
+	IF (specialdrawingtool == 0) <MENU BOTTOM ADD TEXT "Fill" FILE fill.bmp specialtools>
+	IF (specialdrawingtool == 1) <MENU BOTTOM ADD TEXT "Replace" FILE replace.bmp specialtools>
+	IF (specialdrawingtool == 2) <MENU BOTTOM ADD TEXT "Copy Square" FILE copy.bmp specialtools>
+	IF (specialdrawingtool == 3) <MENU BOTTOM ADD TEXT "Hand Movetool" FILE hand.bmp specialtools>
+	IF (specialdrawingtool == 4) <MENU BOTTOM ADD TEXT "Hand Copytool" FILE handcopy.bmp specialtools>
+	IF (specialdrawingtool == 5) <MENU BOTTOM ADD TEXT "Stamptool" FILE stamp.bmp specialtools>
+	IF (specialdrawingtool == 6) <MENU BOTTOM ADD TEXT "Rotate clockwise" FILE rotateright.bmp specialtools>
+	IF (specialdrawingtool == 7) <MENU BOTTOM ADD TEXT "Rotate anticlockwise" FILE rotateleft.bmp specialtools>
+	IF (specialdrawingtool == 8) <MENU BOTTOM ADD TEXT "Rotate 180°" FILE rotate.bmp specialtools>
+	IF (specialdrawingtool == 9) <MENU BOTTOM ADD TEXT "Point Reflection°" FILE pointreflection.bmp specialtools>
+	IF (specialdrawingtool == 10) <MENU BOTTOM ADD TEXT "Flip horizontally°" FILE fliph.bmp specialtools>
+	IF (specialdrawingtool == 11) <MENU BOTTOM ADD TEXT "Flip vertically°" FILE flipv.bmp specialtools>
+	IF (specialdrawingtool == 12) <MENU BOTTOM ADD TEXT "Random Circle" FILE randomcircle.bmp specialtools>
+	MENU BOTTOM ADD TEXT "Write" FILE text.bmp usewrite
+	MENU BOTTOM ADD TEXT "" SEPERATOR 0 <>
+	IF (usesizeselector == 0) sizebuttons
+	IF (usesizeselector == 1) sizeselector
+}
+
+TRIGGER sizebuttons {
+	MENU BOTTOM ADD TEXT "Size: 1" FILE size1.bmp setsize 1 1
+	MENU BOTTOM ADD TEXT "Size: 4" FILE size2.bmp setsize 4 2
+	MENU BOTTOM ADD TEXT "Size: 8" FILE size3.bmp setsize 8 5
+	MENU BOTTOM ADD TEXT "Size: 15" FILE size4.bmp setsize 15 10
+	MENU BOTTOM ADD TEXT "Size: 40" FILE size5.bmp setsize 40 15
+	MENU BOTTOM ADD TEXT "Size: 65" FILE size6.bmp setsize 65 20
+	MENU BOTTOM ADD TEXT "Size: 120" FILE size7.bmp setsize 120 40 
+}
+
+TRIGGER sizeselector {
+	MENU BOTTOM ADDDRAG TEXT "Sizeselector" FILE size.bmp setsize X 0 1
+	MENU BOTTOM ADDDRAG TEXT "Sizeselector" SEPERATOR -156 setsize X 0 1
+	MENU BOTTOM ADDDRAG TEXT "Sizeselector" NUMBER ( BRUSHSIZE + 1 ) setsize 1 0 1
+}
+
+TRIGGER sizebuttonmenu {
+	SET sizebuttonmenustart $0
+	SET sizebuttonmenustep $1
+	IF (sizebuttonmenustep == 0) <SET sizebuttonmenustep 1>
+	IF ((sizebuttonmenustart - (sizebuttonmenustep * 9)) <= 0) <SET sizebuttonmenustart (sizebuttonmenustep * 9 + 1)> 
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 9)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 9)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 8)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 8)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 7)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 7)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 6)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 6)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 5)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 5)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 4)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 4)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 3)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 3)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 2)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 2)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 1)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 1)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart + (sizebuttonmenustep * 0)) setsize2 (sizebuttonmenustart + (sizebuttonmenustep * 0)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 1)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 1)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 2)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 2)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 3)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 3)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 4)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 4)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 5)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 5)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 6)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 6)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 7)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 7)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 8)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 8)) (sizebuttonmenustep / 2)
+	MENU SUB ADD TEXT "Set size" NUMBER (sizebuttonmenustart - (sizebuttonmenustep * 9)) setsize2 (sizebuttonmenustart - (sizebuttonmenustep * 9)) (sizebuttonmenustep / 2)
+	SUBMENU
+}
+
+TRIGGER setsize {
+	IF (BUTTON == 1) setsizeto $0
+	IF (BUTTON == 2) setsizeto $0
+	IF ((BUTTON == 2) && ($2 == 0)) sizebuttonmenu $0 $1
+	IF ((BUTTON == 2) && ($2 == 1)) sizebuttonmenu (X * X * 1000 / 48108) (X * X * 100 / 48108)
+	IF (BUTTON == 4) switchsizeselector
+}
+TRIGGER setsizeto {
+	SET BRUSHSIZE $0
+	IF (usesizeselector == 1) <SET BRUSHSIZE (X * X * 1000 / 48108)>
+	IF (BUTTON == 1) menubottom
+}
+TRIGGER setsize2 {
+	EXEC setsize
+	SET BRUSHSIZE ($0 - 1)
+}
+
+TRIGGER switchsizeselector {
+	IF (usesizeselector == 1) <SET usesizeselector 2> 
+	IF (usesizeselector == 0) <SET usesizeselector 1> 
+	IF (usesizeselector == 2) <SET usesizeselector 0>
+	EXEC menubottom
+}
+
+TRIGGER squaretools {
+	IF (BUTTON == 1) squaretoolsmenuselected squaredrawingtool
+	IF (BUTTON == 4) {
+		MENU SUB CLEAR
+		MENU SUB ADD TEXT "Filled Square" FILE square.bmp squaretoolsmenuselected 0
+		MENU SUB ADD TEXT "Square" FILE square2.bmp squaretoolsmenuselected 1
+		SUBMENU
+	}
+}
+TRIGGER squaretoolsmenuselected {
+	IF ($0 == 0) usefilledsquare
+	IF ($0 == 1) usesquare
+	SET squaredrawingtool $0
+	EXEC menubottom
+}
+
+TRIGGER circletools {
+	IF (BUTTON == 1) circletoolsmenuselected circledrawingtool
+	IF (BUTTON == 4) {
+		MENU SUB CLEAR
+		MENU SUB ADD TEXT "Filled circle" FILE circle.bmp circletoolsmenuselected 0
+		MENU SUB ADD TEXT "Circle" FILE circle2.bmp circletoolsmenuselected 1
+		MENU SUB ADD TEXT "Double circle" FILE circle3.bmp circletoolsmenuselected 2
+		MENU SUB ADD TEXT "Multi circle" FILE circle4.bmp circletoolsmenuselected 3
+		SUBMENU
+	}
+}
+TRIGGER circletoolsmenuselected {
+	IF ($0 == 0) usefilledcircle
+	IF ($0 == 1) usecircle
+	IF ($0 == 2) usedoublecircle
+	IF (($0 == 2) && (BUTTON == 4)) doublecirclemenu
+	IF (($0 == 2) && (BUTTON == 2)) doublecirclemenu2
+	IF ($0 == 3) usemulticircle
+	SET circledrawingtool $0
+	EXEC menubottom
+}
+
+TRIGGER doublecirclemenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "2 Circles" FILE 2.bmp <SET drawdoublecirclesteps 2>
+	MENU SUB ADD TEXT "3 Circles" FILE 3.bmp <SET drawdoublecirclesteps 3>
+	MENU SUB ADD TEXT "4 Circles" FILE 4.bmp <SET drawdoublecirclesteps 4>
+	MENU SUB ADD TEXT "5 Circles" FILE 5.bmp <SET drawdoublecirclesteps 5>
+	MENU SUB ADD TEXT "6 Circles" FILE 6.bmp <SET drawdoublecirclesteps 6>
+	MENU SUB ADD TEXT "7 Circles" FILE 7.bmp <SET drawdoublecirclesteps 7>
+	MENU SUB ADD TEXT "8 Circles" FILE 8.bmp <SET drawdoublecirclesteps 8>
+	MENU SUB ADD TEXT "9 Circles" FILE 9.bmp <SET drawdoublecirclesteps 9>
+	SUBMENU
+}
+
+TRIGGER doublecirclemenu2 {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "10 Circles" TEXT 10 <SET drawdoublecirclesteps 10>
+	MENU SUB ADD TEXT "12 Circles" TEXT 12 <SET drawdoublecirclesteps 12>
+	MENU SUB ADD TEXT "14 Circles" TEXT 14 <SET drawdoublecirclesteps 14>
+	MENU SUB ADD TEXT "16 Circles" TEXT 16 <SET drawdoublecirclesteps 16>
+	MENU SUB ADD TEXT "18 Circles" TEXT 18 <SET drawdoublecirclesteps 18>
+	MENU SUB ADD TEXT "20 Circles" TEXT 20 <SET drawdoublecirclesteps 20>
+	MENU SUB ADD TEXT "25 Circles" TEXT 25 <SET drawdoublecirclesteps 25>
+	MENU SUB ADD TEXT "30 Circles" TEXT 30 <SET drawdoublecirclesteps 30>
+	MENU SUB ADD TEXT "35 Circles" TEXT 35 <SET drawdoublecirclesteps 35>
+	MENU SUB ADD TEXT "40 Circles" TEXT 40 <SET drawdoublecirclesteps 40>
+	MENU SUB ADD TEXT "45 Circles" TEXT 45 <SET drawdoublecirclesteps 45>
+	MENU SUB ADD TEXT "50 Circles" TEXT 50 <SET drawdoublecirclesteps 50>
+	MENU SUB ADD TEXT "55 Circles" TEXT 55 <SET drawdoublecirclesteps 55>
+	MENU SUB ADD TEXT "60 Circles" TEXT 60 <SET drawdoublecirclesteps 60>
+	MENU SUB ADD TEXT "65 Circles" TEXT 65 <SET drawdoublecirclesteps 65>
+	MENU SUB ADD TEXT "70 Circles" TEXT 70 <SET drawdoublecirclesteps 70>
+	MENU SUB ADD TEXT "75 Circles" TEXT 75 <SET drawdoublecirclesteps 75>
+	MENU SUB ADD TEXT "80 Circles" TEXT 80 <SET drawdoublecirclesteps 80>
+	MENU SUB ADD TEXT "85 Circles" TEXT 85 <SET drawdoublecirclesteps 85>
+	MENU SUB ADD TEXT "90 Circles" TEXT 90 <SET drawdoublecirclesteps 90>
+	MENU SUB ADD TEXT "95 Circles" TEXT 95 <SET drawdoublecirclesteps 95>
+	MENU SUB ADD TEXT "100 Circles" TEXT 100 <SET drawdoublecirclesteps 100>
+	SUBMENU
+}
+
+TRIGGER linetools {
+	IF (BUTTON == 1) linetoolsmenuselected linedrawingtool
+	IF (BUTTON == 4) linetoolsmenu
+}
+TRIGGER linetoolsmenu {
+	MENU SUB CLEAR
+	MENU SUB ADD TEXT "Horizontal line" FILE horizontal.bmp linetoolsmenuselected 0
+	MENU SUB ADD TEXT "Vertical line" FILE vertical.bmp linetoolsmenuselected 1
+	MENU SUB ADD TEXT "Diagonal line" FILE angel45.bmp linetoolsmenuselected 2
+	MENU SUB ADD TEXT "Diagonal line" FILE angel135.bmp linetoolsmenuselected 3
+	MENU SUB ADD TEXT "Triangle Up" FILE triangleup.bmp linetoolsmenuselected 4
+	MENU SUB ADD TEXT "Triangle Down" FILE triangledown.bmp linetoolsmenuselected 5
+	SUBMENU
+}
+TRIGGER linetoolsmenuselected {
+	IF ($0 == 0) usehorizontal
+	IF ($0 == 1) usevertical
+	IF ($0 == 2) useangel45
+	IF ($0 == 3) useangel135
+	IF ($0 == 4) usetriangleup
+	IF ($0 == 5) usetriangledown
+	SET linedrawingtool $0
+	EXEC menubottom
+}
+
+TRIGGER specialtools {
+	IF (BUTTON == 1) specialtoolsmenuselected specialdrawingtool
+	IF (BUTTON == 4) {
+		MENU SUB CLEAR
+		MENU SUB ADD TEXT "Fill" FILE fill.bmp specialtoolsmenuselected 0
+		MENU SUB ADD TEXT "Replace" FILE replace.bmp specialtoolsmenuselected 1
+		MENU SUB ADD TEXT "Copy Square" FILE copy.bmp specialtoolsmenuselected 2
+		MENU SUB ADD TEXT "Hand Movetool" FILE hand.bmp specialtoolsmenuselected 3
+		MENU SUB ADD TEXT "Hand Copytool" FILE handcopy.bmp specialtoolsmenuselected 4
+		MENU SUB ADD TEXT "Stamptool" FILE stamp.bmp {
+			EXEC specialtoolsmenuselected 5
+			IF (BUTTON == 4) {
+				MENU SUB CLEAR
+				MENU SUB ADD TEXT "Stamp 1" FILE 1.bmp <SET stampid 1>
+				MENU SUB ADD TEXT "Stamp 2" FILE 2.bmp <SET stampid 2>
+				MENU SUB ADD TEXT "Stamp 3" FILE 3.bmp <SET stampid 3>
+				MENU SUB ADD TEXT "Stamp 4" FILE 4.bmp <SET stampid 4>
+				MENU SUB ADD TEXT "Stamp 5" FILE 5.bmp <SET stampid 5>
+				MENU SUB ADD TEXT "Stamp 6" FILE 6.bmp <SET stampid 6>
+				MENU SUB ADD TEXT "Stamp 7" FILE 7.bmp <SET stampid 7>
+				MENU SUB ADD TEXT "Stamp 8" FILE 8.bmp <SET stampid 8>
+				MENU SUB ADD TEXT "Stamp 9" FILE 9.bmp <SET stampid 9>
+				MENU SUB ADD TEXT "Stamp 0" FILE 0.bmp <SET stampid 0>
+				SUBMENU
+			}
+		}
+		MENU SUB ADD TEXT "Rotate clockwise" FILE rotateright.bmp specialtoolsmenuselected 6
+		MENU SUB ADD TEXT "Rotate anticlockwise" FILE rotateleft.bmp specialtoolsmenuselected 7
+		MENU SUB ADD TEXT "Rotate 180°" FILE rotate.bmp specialtoolsmenuselected 8
+		MENU SUB ADD TEXT "Point Reflection" FILE pointreflection.bmp specialtoolsmenuselected 9
+		MENU SUB ADD TEXT "Flip horizontally" FILE fliph.bmp specialtoolsmenuselected 10
+		MENU SUB ADD TEXT "Flip vertically" FILE flipv.bmp specialtoolsmenuselected 11
+		MENU SUB ADD TEXT "Random Circle" FILE randomcircle.bmp {
+			EXEC specialtoolsmenuselected 12
+			IF (BUTTON == 4) {
+				MENU SUB CLEAR
+				MENU SUB ADD TEXT "0.01%" FILE 1.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 1)>
+				MENU SUB ADD TEXT "0.05%" FILE 2.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 5)>
+				MENU SUB ADD TEXT "0.1%" FILE 3.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 10)>
+				MENU SUB ADD TEXT "0.2%" FILE 4.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 20)>
+				MENU SUB ADD TEXT "0.5%" FILE 5.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 50)>
+				MENU SUB ADD TEXT "1.0%" FILE 6.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 100)>
+				MENU SUB ADD TEXT "1.5%" FILE 7.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 150)>
+				MENU SUB ADD TEXT "2.0%" FILE 8.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 200)>
+				MENU SUB ADD TEXT "2.5%" FILE 9.bmp <SET RANDOMDRAWRATE (32512 / 10000 * 250)>
+				SUBMENU
+			}
+		}
+		SUBMENU
+	}
+}
+
+TRIGGER specialtoolsmenuselected {
+	IF ($0 == 0) usefill
+	IF ($0 == 1) usereplacefilledcircle
+	IF ($0 == 2) usecopysquare
+	IF ($0 == 3) usehandtool
+	IF ($0 == 4) usehandcopytool
+	IF ($0 == 5) usestamptool
+	IF ($0 == 6) userotateright
+	IF ($0 == 7) userotateleft
+	IF ($0 == 8) userotate
+	IF ($0 == 9) usepointreflection
+	IF ($0 == 10) usefliph
+	IF ($0 == 11) useflipv
+	IF ($0 == 12) userandomfilledcircle
+	SET specialdrawingtool $0
+	EXEC menubottom
+}

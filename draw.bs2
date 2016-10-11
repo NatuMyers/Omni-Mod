@@ -1,0 +1,251 @@
+ON DRAW IF (BUTTON == 1) <SET DRAWELEMENT ELEMENT1>
+ON DRAW IF (BUTTON == 2) <SET DRAWELEMENT ELEMENT2>
+ON DRAW IF (BUTTON == 4) <SET DRAWELEMENT ELEMENT4>
+ON DRAW IF ((CLICKED == 1) && (PREVIEW == 0)) back_save
+ON DRAG IF (BUTTON == 1) <SET DRAWELEMENT ELEMENT1>
+ON DRAG IF (BUTTON == 2) <SET DRAWELEMENT ELEMENT2>
+ON DRAG IF (BUTTON == 4) <SET DRAWELEMENT ELEMENT4>
+ON DRAG IF (DRAWELEMENT == 1) drag
+ON DRAW IF (DRAWELEMENT != 1) draw
+
+ON draw IF (CTRL) drawingline lastdrawx lastdrawy X Y
+ON draw IF (ALT) drawingrect lastdrawx lastdrawy X Y
+ON draw IF ((CTRL == 0) && (ALT == 0)) drawing
+ON draw IF ((PREVIEW == 0) && (RCTRL == 0)) {
+	SET lastdrawx X
+	SET lastdrawy Y
+}
+
+ON drawingline SET drawlinelength (SQRT ((($2 - $0) * ($2 - $0)) + (($3 - $1) * ($3 - $1))))
+ON drawingline FOR drawlinepos FROM 0 TO drawlinelength DO drawingline2
+ON drawingline2 SET X ($0 + ((($2 - $0) * drawlinepos) / drawlinelength))
+ON drawingline2 SET Y ($1 + ((($3 - $1) * drawlinepos) / drawlinelength))
+ON drawingline2 EXEC drawing
+ON drawingline SET X $2
+ON drawingline SET Y $3
+
+ON drawingrect EXEC drawingline $0 $1 $0 $3
+ON drawingrect EXEC drawingline $0 $1 $2 $1
+ON drawingrect EXEC drawingline $2 $1 $2 $3
+ON drawingrect EXEC drawingline $0 $3 $2 $3
+
+ON drag IF (CLICKED) startdrag
+ON drag IF (CLICKED != 1) draging
+
+ON startdrag SET dragfromx X 
+ON startdrag SET dragfromy Y  
+ON startdrag SET dragscollx SCROLLX 
+ON startdrag SET dragscolly SCROLLY 
+
+ON draging SCROLL (dragscollx + dragfromx - (X - SCROLLX + dragscollx) ) (dragscolly + dragfromy - (Y - SCROLLY + dragscolly) )
+
+ON REPLACEFILLEDRECT FOR tmp FROM 0 TO $5 DO <DRAW $0 REPLACELINE $2 ($3 + tmp) $4 0 $1>
+
+
+ON usefilledcircle REMOVETRIGGER drawing
+ON usefilledcircle SET drawtext 0
+ON usefilledcircle SET CURSOR 4
+ON usefilledcircle ON drawing EXEC drawfilledcircle
+ON drawfilledcircle DRAW DRAWELEMENT FILLEDCIRCLE X Y (BRUSHSIZE / 2)
+
+ON usecircle REMOVETRIGGER drawing
+ON usecircle SET drawtext 0
+ON usecircle SET CURSOR 4
+ON usecircle ON drawing EXEC drawcircle
+ON drawcircle DRAW DRAWELEMENT CIRCLE X Y (BRUSHSIZE / 2)
+
+ON userandomfilledcircle REMOVETRIGGER drawing
+ON userandomfilledcircle SET drawtext 0
+ON userandomfilledcircle SET CURSOR 4
+ON userandomfilledcircle ON drawing EXEC drawrandomfilledcircle
+ON drawrandomfilledcircle DRAW DRAWELEMENT RANDOMFILLEDCIRCLE X Y (BRUSHSIZE / 2) RANDOMDRAWRATE
+
+ON usedoublecircle REMOVETRIGGER drawing
+ON usedoublecircle SET drawtext 0
+ON usedoublecircle SET CURSOR 4
+ON usedoublecircle ON drawing EXEC drawdoublecircle
+ON drawdoublecircle SET drawdoublecirclestep 1
+ON drawdoublecircle WHILE (drawdoublecirclestep <= drawdoublecirclesteps) drawdoublecirclestep
+ON drawdoublecirclestep DRAW DRAWELEMENT CIRCLE X Y (BRUSHSIZE * drawdoublecirclestep / 2 / drawdoublecirclesteps)
+ON drawdoublecirclestep SET drawdoublecirclestep (drawdoublecirclestep + 1)
+
+ON usemulticircle REMOVETRIGGER drawing
+ON usemulticircle SET drawtext 0
+ON usemulticircle SET CURSOR 4
+ON usemulticircle ON drawing EXEC drawmulticircle
+ON MOUSEUP IF (drawmulticirclex) drawmulticircles (SQRT (((drawmulticirclex - X) * (drawmulticirclex - X)) + ((drawmulticircley - Y) * (drawmulticircley - Y))) )
+ON drawmulticircle IF ((PREVIEW == 1) && drawmulticirclex) drawmulticircles (SQRT (((drawmulticirclex - X) * (drawmulticirclex - X)) + ((drawmulticircley - Y) * (drawmulticircley - Y))) )
+ON drawmulticircle IF ((PREVIEW == 1) && (drawmulticirclex == 0)) <DRAW DRAWELEMENT POINT X Y 20>
+ON drawmulticircle IF ((PREVIEW == 1) && (drawmulticirclex == 0)) <DRAW DRAWELEMENT CIRCLE X Y (BRUSHSIZE / 2)>
+ON drawmulticircle IF ((PREVIEW == 0) && (CLICKED)) <SET drawmulticirclex X>
+ON drawmulticircle IF ((PREVIEW == 0) && (CLICKED)) <SET drawmulticircley Y>
+ON drawmulticircle IF ((PREVIEW == 0) && (CLICKED)) <SET drawmulticircleelement DRAWELEMENT>
+ON drawmulticircles SET drawmulticircleradius 0
+ON drawmulticircles WHILE (($0 > 0) && (drawmulticircleradius < (BRUSHSIZE / 2))) drawmulticirclestep $0
+ON drawmulticircles IF (PREVIEW == 0) <SET drawmulticirclex 0>
+ON drawmulticircles DRAW drawmulticircleelement CIRCLE drawmulticirclex drawmulticircley 0
+ON drawmulticirclestep DRAW drawmulticircleelement CIRCLE drawmulticirclex drawmulticircley drawmulticircleradius
+ON drawmulticirclestep SET drawmulticircleradius (drawmulticircleradius + $0)
+
+ON usefilledsquare REMOVETRIGGER drawing
+ON usefilledsquare SET drawtext 0
+ON usefilledsquare SET CURSOR 3
+ON usefilledsquare ON drawing EXEC drawfilledsquare
+ON drawfilledsquare DRAW DRAWELEMENT FILLEDRECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE
+
+ON usesquare REMOVETRIGGER drawing
+ON usesquare SET drawtext 0
+ON usesquare SET CURSOR 3
+ON usesquare ON drawing EXEC drawsquare
+ON drawsquare DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE
+
+ON usehorizontal REMOVETRIGGER drawing
+ON usehorizontal SET drawtext 0
+ON usehorizontal SET CURSOR 8
+ON usehorizontal ON drawing EXEC drawhorizontal
+ON drawhorizontal DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2)) Y BRUSHSIZE 0
+
+ON usevertical REMOVETRIGGER drawing
+ON usevertical SET drawtext 0
+ON usevertical SET CURSOR 9
+ON usevertical ON drawing EXEC drawvertical
+ON drawvertical DRAW DRAWELEMENT RECT X (Y - (BRUSHSIZE / 2)) 0 BRUSHSIZE
+
+ON useangel45 REMOVETRIGGER drawing
+ON useangel45 SET CURSOR 2
+ON useangel45 SET drawtext 0
+ON useangel45 ON drawing EXEC drawangel45
+ON drawangel45 DRAW DRAWELEMENT LINE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE
+
+ON useangel135 REMOVETRIGGER drawing
+ON useangel135 SET CURSOR 2
+ON useangel135 SET drawtext 0
+ON useangel135 ON drawing EXEC drawangel135
+ON drawangel135 DRAW DRAWELEMENT LINE (X - (BRUSHSIZE / 2)) (Y + (BRUSHSIZE / 2)) BRUSHSIZE (0 - BRUSHSIZE)
+
+ON usetriangleup REMOVETRIGGER drawing
+ON usetriangleup SET CURSOR 2
+ON usetriangleup SET drawtext 0
+ON usetriangleup ON drawing EXEC drawtriangleup
+ON drawtriangleup DRAW DRAWELEMENT LINE X Y (BRUSHSIZE / 2) (BRUSHSIZE / 2)
+ON drawtriangleup DRAW DRAWELEMENT LINE X Y (BRUSHSIZE / -2) (BRUSHSIZE / 2)
+
+ON usetriangledown REMOVETRIGGER drawing
+ON usetriangledown SET CURSOR 2
+ON usetriangledown SET drawtext 0
+ON usetriangledown ON drawing EXEC drawtriangledown
+ON drawtriangledown DRAW DRAWELEMENT LINE X Y (BRUSHSIZE / 2) (BRUSHSIZE / -2)
+ON drawtriangledown DRAW DRAWELEMENT LINE X Y (BRUSHSIZE / -2) (BRUSHSIZE / -2)
+
+ON usefill REMOVETRIGGER drawing
+ON usefill SET CURSOR 2
+ON usefill SET drawtext 0
+ON usefill ON drawing EXEC drawfill
+ON drawfill IF (CLICKED) <DRAW DRAWELEMENT FILL X Y>
+
+ON usereplacefilledcircle REMOVETRIGGER drawing
+ON usereplacefilledcircle SET drawtext 0
+ON usereplacefilledcircle SET CURSOR 2
+ON usereplacefilledcircle ON drawing EXEC drawreplacefilledcircle
+ON drawreplacefilledcircle IF (BUTTON == 1) <DRAW ELEMENT1 REPLACEFILLEDCIRCLE X Y (BRUSHSIZE / 2) 0 ELEMENT4>
+ON drawreplacefilledcircle IF (BUTTON == 4) <DRAW ELEMENT4 REPLACEFILLEDCIRCLE X Y (BRUSHSIZE / 2) 0 ELEMENT1>
+
+ON usecopysquare REMOVETRIGGER drawing
+ON usecopysquare SET drawtext 0
+ON usecopysquare SET CURSOR 2
+ON usecopysquare ON drawing EXEC drawcopysquare
+ON drawcopysquare IF ((PREVIEW == 0) && (BUTTON == 4)) <SET drawfilledsquarex X>
+ON drawcopysquare IF ((PREVIEW == 0) && (BUTTON == 4)) <SET drawfilledsquarey Y>
+ON drawcopysquare IF ((PREVIEW == 0) && (BUTTON == 4)) <SET drawfilledsquaredx 0>
+ON drawcopysquare IF ((PREVIEW == 0) && (BUTTON == 4)) <SET drawfilledsquaredy 0>
+ON drawcopysquare IF (((PREVIEW == 0) && (BUTTON != 4)) && (drawfilledsquaredy == 0) ) <SET drawfilledsquaredx (drawfilledsquarex - X)>
+ON drawcopysquare IF (((PREVIEW == 0) && (BUTTON != 4)) && (drawfilledsquaredy == 0) ) <SET drawfilledsquaredy (drawfilledsquarey - Y)>
+ON drawcopysquare IF ((PREVIEW == 0) && (BUTTON != 4)) <DRAW DRAWELEMENT COPYRECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE ((X + drawfilledsquaredx) - (BRUSHSIZE / 2)) ((Y + drawfilledsquaredy) - (BRUSHSIZE / 2))>
+ON drawcopysquare IF (((PREVIEW == 1) && (BUTTON != 4)) && (drawfilledsquaredy == 0)) <DRAW DRAWELEMENT COPYRECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE (drawfilledsquarex - (BRUSHSIZE / 2)) (drawfilledsquarey - (BRUSHSIZE / 2))>
+ON drawcopysquare IF (((PREVIEW == 1) && (BUTTON != 4)) && (drawfilledsquaredy != 0)) <DRAW DRAWELEMENT COPYRECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE ((X + drawfilledsquaredx) - (BRUSHSIZE / 2)) ((Y + drawfilledsquaredy) - (BRUSHSIZE / 2))>
+ON drawcopysquare IF (((PREVIEW == 1) && (BUTTON != 4)) && (drawfilledsquaredy != 0)) <DRAW DRAWELEMENT RECT (((X + drawfilledsquaredx) - (BRUSHSIZE / 2)) - 1) (((Y + drawfilledsquaredy) - (BRUSHSIZE / 2)) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+ON drawcopysquare IF (((PREVIEW == 1) && (BUTTON != 4)) && (drawfilledsquaredy == 0)) <DRAW DRAWELEMENT RECT ((drawfilledsquarex - (BRUSHSIZE / 2)) - 1) ((drawfilledsquarey - (BRUSHSIZE / 2)) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+ON drawcopysquare IF ((PREVIEW == 1) && (BUTTON != 4)) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+ON usehandtool REMOVETRIGGER drawing
+ON usehandtool SET drawtext 0
+ON usehandtool SET handcopytool 0
+ON usehandtool SET CURSOR 7
+ON usehandtool ON drawing EXEC drawhand
+ON drawhand IF ((CLICKED && (BUTTON == 1)) && (PREVIEW == 0)) <SET drawhandx X>
+ON drawhand IF ((CLICKED && (BUTTON == 1)) && (PREVIEW == 0)) <SET drawhandy Y>
+ON drawhand IF ((PREVIEW == 1) && drawhandx) <DRAW DRAWELEMENT COPYRECT ((drawhandx - (BRUSHSIZE / 2)) + 1) ((drawhandy - (BRUSHSIZE / 2)) + 1) BRUSHSIZE BRUSHSIZE ((X - (BRUSHSIZE / 2)) + 1) ((Y - (BRUSHSIZE / 2)) + 1)>
+ON drawhand IF ((PREVIEW == 1) && (drawhandx == 0)) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+ON MOUSEUP IF (drawhandx) drawhandmove
+ON drawhandmove DRAW DRAWELEMENT COPYSTAMP ((drawhandx - (BRUSHSIZE / 2)) + 1) ((drawhandy - (BRUSHSIZE / 2)) + 1) BRUSHSIZE BRUSHSIZE stampid
+ON drawhandmove IF (handcopytool == 0) <DRAW ELEMENT:Clear FILLEDRECT ((drawhandx - (BRUSHSIZE / 2)) + 1) ((drawhandy - (BRUSHSIZE / 2)) + 1) BRUSHSIZE BRUSHSIZE>  
+ON drawhandmove DRAW DRAWELEMENT PASTESTAMP ((X - (BRUSHSIZE / 2)) + 1) ((Y - (BRUSHSIZE / 2)) + 1) BRUSHSIZE BRUSHSIZE stampid
+ON drawhandmove SET drawhandx 0  
+ON drawhandmove SET drawhandy 0  
+
+ON usehandcopytool REMOVETRIGGER drawing
+ON usehandcopytool SET drawtext 0
+ON usehandcopytool SET handcopytool 1
+ON usehandcopytool SET CURSOR 7
+ON usehandcopytool ON drawing EXEC drawhand
+
+ON usestamptool REMOVETRIGGER drawing
+ON usestamptool SET drawtext 0
+ON usestamptool SET CURSOR 2
+ON usestamptool ON drawing EXEC drawstamp
+ON drawstamp IF ((PREVIEW == 1) && (drawhandx == 0)) <DRAW DRAWELEMENT RECT ((X - (BRUSHSIZE / 2)) - 1) ((Y - (BRUSHSIZE / 2)) - 1) (BRUSHSIZE + 2) (BRUSHSIZE + 2)>
+ON drawstamp IF ((PREVIEW == 1) || (BUTTON == 1)) <DRAW ELEMENT:Clear PASTESTAMP (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) (BRUSHSIZE + 1) (BRUSHSIZE + 1) stampid>
+ON drawstamp IF ((PREVIEW == 0) && (BUTTON == 4)) <DRAW DRAWELEMENT COPYSTAMP (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) (BRUSHSIZE + 1) (BRUSHSIZE + 1) stampid>
+
+ON userotateright REMOVETRIGGER drawing
+ON userotateright SET drawtext 0
+ON userotateright SET CURSOR 2
+ON userotateright ON drawing EXEC drawrotateright
+ON drawrotateright IF (CLICKED) <DRAW DRAWELEMENT ROTATE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE 1>
+ON drawrotateright IF (PREVIEW) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2) - 1) (Y - (BRUSHSIZE / 2) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+ON userotateleft REMOVETRIGGER drawing
+ON userotateleft SET drawtext 0
+ON userotateleft SET CURSOR 2
+ON userotateleft ON drawing EXEC drawrotateleft
+ON drawrotateleft IF (CLICKED) <DRAW DRAWELEMENT ROTATE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE -1>
+ON drawrotateleft IF (PREVIEW) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2) - 1) (Y - (BRUSHSIZE / 2) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+ON userotate REMOVETRIGGER drawing
+ON userotate SET drawtext 0
+ON userotate SET CURSOR 2
+ON userotate ON drawing EXEC drawrotate
+ON drawrotate IF (CLICKED) <DRAW DRAWELEMENT ROTATE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE 2>
+ON drawrotate IF (PREVIEW) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2) - 1) (Y - (BRUSHSIZE / 2) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+
+ON usefliph REMOVETRIGGER drawing
+ON usefliph SET drawtext 0
+ON usefliph SET CURSOR 2
+ON usefliph ON drawing EXEC drawfliph
+ON drawfliph IF (CLICKED) <DRAW DRAWELEMENT ROTATE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE 4>
+ON drawfliph IF (PREVIEW) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2) - 1) (Y - (BRUSHSIZE / 2) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+ON useflipv REMOVETRIGGER drawing
+ON useflipv SET drawtext 0
+ON useflipv SET CURSOR 2
+ON useflipv ON drawing EXEC drawflipv
+ON drawflipv IF (CLICKED) <DRAW DRAWELEMENT ROTATE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE 5>
+ON drawflipv IF (PREVIEW) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2) - 1) (Y - (BRUSHSIZE / 2) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+ON usepointreflection REMOVETRIGGER drawing
+ON usepointreflection SET drawtext 0
+ON usepointreflection SET CURSOR 2
+ON usepointreflection ON drawing EXEC drawpointreflection
+ON drawpointreflection IF (CLICKED) <DRAW DRAWELEMENT ROTATE (X - (BRUSHSIZE / 2)) (Y - (BRUSHSIZE / 2)) BRUSHSIZE BRUSHSIZE 3>
+ON drawpointreflection IF (PREVIEW) <DRAW DRAWELEMENT RECT (X - (BRUSHSIZE / 2) - 1) (Y - (BRUSHSIZE / 2) - 1) (BRUSHSIZE + 1) (BRUSHSIZE + 1)>
+
+ON usewrite REMOVETRIGGER drawing
+ON usewrite SET drawtext 1
+ON usewrite SET DRAWELEMENT ELEMENT1
+ON usewrite SET CURSOR 10
+ON usewrite ON drawing EXEC drawwrite
+ON drawwrite IF (PREVIEW == 0) <SET WRITEX X>
+ON drawwrite IF (PREVIEW == 0) <SET WRITEXSTART X>
+ON drawwrite IF (PREVIEW == 0) <SET WRITEY Y>
+ON drawwrite IF (PREVIEW == 0) <SET WRITEELEMENT DRAWELEMENT>

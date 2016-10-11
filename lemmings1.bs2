@@ -1,0 +1,21 @@
+EXEC clearall
+INCLUDE lemmings.bs2
+MENU TOP ADD TEXT "Restart Level" FILE restart.bmp <INCLUDE lemmings1.bs2>
+
+RESIZE 420 320
+DRAW ELEMENT:Earth FILLEDRECT 0 0 420 320
+DRAW ELEMENT:Clear FILLEDCIRCLE 100 250 60
+DRAW ELEMENT:Clear FILLEDCIRCLE 100 100 60
+
+
+SET stopcounter 10
+SET explosionscounter 10
+SET shovelcounter 10
+SET shovelleftcounter 10
+SET shovelrightcounter 10
+
+SET lemmingsneeded 1000
+
+ON lemmingsstart EXEC entry 100 60 4000
+ON lemmingsstart EXEC exit 100 280 50
+EXEC niceterrain 30

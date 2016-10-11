@@ -1,0 +1,489 @@
+INCLUDE explosions.bs2
+
+Group Clear 0 File erase.bmp
+Group Stones 100 File stonegroup.bmp
+Group Liquids 200 File liquidgroup.bmp
+Group Burning 300 File firegroup.bmp
+Group Nature 400 File lifegroup.bmp
+Group Gases 500 File gasgroup.bmp
+
+Element Clear Clear 0 0 0 1 1 1 1 0 Clear 0 File erase.bmp
+EXEC setcustomcolors1 ELEMENT:Clear 0 0 0
+
+Element Clear Void 30 30 30 0 1 1 1 0 Clear 0 File hole.bmp
+Interaction Void All Void Clear 50000 Clear
+EXEC setcustomcolors1 ELEMENT:Void 0 0 255
+
+Element Clear ??? 255 0 100 0 1 1 1 2600 ? 0 File question.bmp
+Interaction ??? Clear ??? ??? 8000
+InteractionTrigger ??? All ???Trigger 6000 ?
+SET element??? ELEMENT:???
+SET groupnature GROUP:Nature
+REMOVETRIGGER ???Trigger 
+ON ???Trigger IF (INTERACTION2 && ((INTERACTION2 != element???) && ((INTERACTION2 INGROUP groupnature) == 0))) <DRAW element FILLEDCIRCLE X2 Y2 0>
+EXEC setcustomcolors1 ELEMENT:??? 0 255 0
+
+Element None ? 251 0 0 0 1 1 1 140 Clear 0 File hole.bmp
+EXEC setcustomcolors1 ELEMENT:? 255 0 255
+
+Element Clear Replicator  250 250 250 800 1 1 1 0 Clear 0 File plus.bmp
+Interaction Replicator All All All 10000 Clear
+EXEC setcustomcolors1 ELEMENT:Replicator 255 255 255
+
+Element Clear Antimatter 255 202 202 800 1 1 1 140 Clear 0 File minus.bmp
+Interaction Antimatter Replicator Clear Clear 100000
+Interaction Antimatter All Clear Clear 10000 Clear
+EXEC setcustomcolors1 ELEMENT:Antimatter 0 0 0
+
+Element Clear Elevator 249 0 0 800 1 1 1 0 Clear 0 File up.bmp
+EXEC setcustomcolors1 ELEMENT:Elevator 255 255 255
+InteractionTrigger Elevator All elevate 10000 Elevator
+REMOVETRIGGER elevate
+ON elevate DRAW 0 SWAPPOINTS X1 Y1 X1 (Y1 + 1)
+
+
+
+Element Stones Earth 200 127 0 0 1 1 1 0 Clear 200 File earth.bmp
+EXEC setcustomcolors1 ELEMENT:Earth 20 0 0
+
+Element Stones Wall 80 0 0 0 1 1 1 0 Clear 300 File wall.bmp
+EXEC setcustomcolors1 ELEMENT:Wall 20 0 0
+
+Element Stones Sand 230 180 0 900 1 1 1 0 Clear 400 File sand.bmp
+Interaction Sand Cloud Clear Sand 300
+Interaction Sand Glue Sand Glue 100000
+EXEC setcustomcolors1 ELEMENT:Sand 30 0 0
+
+Element Stones Sandsource 229 179 0 0 1 1 1 0 Clear 500 File sandsource.bmp
+Interaction Sandsource Clear Sandsource Sand 1000
+EXEC setcustomcolors1 ELEMENT:Sandsource 30 0 0
+
+Element Stones Salt 202 202 202 750 1 4 1 0 Clear 600 File salt.bmp
+Interaction Salt Water Clear Saltwater 10000
+Interaction Salt WarmWater Clear WarmSaltwater 20000
+Interaction Salt HotWater Clear HotSaltwater 30000
+Interaction Salt Plant Clear Salt 500
+Interaction Salt Cloud Clear Salt 500
+Interaction Salt Ice Clear Salt 500
+Interaction Salt Glue Salt Glue 100000
+EXEC setcustomcolors1 ELEMENT:Salt 50 0 0
+
+Element Stones Saltsource 200 200 200 0 1 1 1 0 Clear 700 File saltsource.bmp
+Interaction Saltsource Clear Saltsource Salt 1000
+Interaction Saltsource Water Saltwater Clear 500
+Interaction Saltsource WarmWater WarmSaltwater Clear 500
+Interaction Saltsource HotWater HotSaltwater Clear 500
+EXEC setcustomcolors1 ELEMENT:Saltsource 50 0 0
+
+Element Stones Stone 100 100 100 1000 1 1 1 0 Clear 800 File stone.bmp
+Interaction Stone Glue Stone Glue 100000
+EXEC setcustomcolors1 ELEMENT:Stone 30 0 0
+
+Element Stones Crystal 254 254 254 0 100 1 1 0 Clear 1000 File crystal.bmp
+Interaction Crystal Clear Crystal(grown) Crystal 300
+Interaction Crystal Salt Crystal(grown) Crystal 3000
+Interaction Crystal Water Crystal(grown) Crystal 100
+Interaction Crystal WarmWater Crystal(grown) Crystal 600
+Interaction Crystal HotWater Crystal(grown) Crystal 1000
+EXEC setcustomcolors1 ELEMENT:Crystal 10 0 0
+
+Element None Crystal(grown) 240 240 240 0 100 1 1 0 Clear 1000 File crystal.bmp
+Interaction Crystal(grown) Crystal Crystal Crystal(grown) 1
+Interaction Crystal(grown) Salt Crystal Crystal 2
+Interaction Crystal(grown) Water Crystal Crystal 1
+Interaction Crystal(grown) WarmWater Crystal Crystal 5
+Interaction Crystal(grown) HotWater Crystal Crystal 20
+EXEC setcustomcolors1 ELEMENT:Crystal(grown) 0 0 0
+
+
+
+
+Element Liquids Water 0 0 255 700 100 20 1 0 Clear 0 File water.bmp
+Interaction Water Fire Steam Clear 10000
+Interaction Water Glue Water Glue 25000
+EXEC setcustomcolors1 ELEMENT:Water 50 0 0
+
+Element None WarmWater 20 20 255 600 100 20 1 0 Clear 0 File water.bmp
+Interaction WarmWater Fire Steam Clear 5000
+Interaction WarmWater Fire Steam Fire 5000
+Interaction WarmWater Glue WarmWater Glue 2000
+Interaction WarmWater Water Water WarmWater 5000
+Interaction WarmWater Clear Clear WarmWater 7500
+EXEC setcustomcolors1 ELEMENT:WarmWater 127 0 0
+
+Element None HotWater 40 40 255 500 100 20 1 0 Clear 0 File water.bmp
+Interaction HotWater Fire Steam Fire 10000
+Interaction HotWater Glue Water Glue 25000
+Interaction HotWater Clear Clear Steam 7500
+Interaction HotWater WarmWater WarmWater HotWater 5000
+Interaction HotWater Water WarmWater WarmWater 5000
+EXEC setcustomcolors1 ELEMENT:HotWater 180 0 0
+
+Element Liquids Saltwater 0 0 180 710 100 20 1 0 Clear 100 File water2.bmp
+Interaction Saltwater Fire WarmSaltwater Clear 10000
+Interaction Saltwater Glue Saltwater Glue 100000
+Interaction Saltwater Plant Clear Saltwater 500
+EXEC setcustomcolors1 ELEMENT:Saltwater 50 0 0
+
+Element None WarmSaltwater 1 0 180 610 100 20 1 0 Clear 100 File erase.bmp
+Interaction WarmSaltwater Fire HotSaltwater Clear 10000
+Interaction WarmSaltwater Glue Salt Glue 100000
+Interaction WarmSaltwater Plant Clear WarmSaltwater 1000
+Interaction WarmSaltwater Clear Clear WarmSaltwater 7500
+Interaction WarmSaltwater Saltwater Saltwater WarmSaltwater 5000
+EXEC setcustomcolors1 ELEMENT:WarmSaltwater 127 0 0
+
+Element None HotSaltwater 2 0 180 510 100 20 1 0 Clear 100 File erase.bmp
+Interaction HotSaltwater Clear Salt Steam 10000
+Interaction HotSaltwater Glue Salt Glue 100000
+Interaction HotSaltwater Plant Clear HotSaltwater 5000
+Interaction HotSaltwater WarmSaltwater WarmSaltwater HotSaltwater 5000
+Interaction HotSaltwater Saltwater WarmSaltwater WarmSaltwater 5000
+EXEC setcustomcolors1 ELEMENT:HotSaltwater 180 0 0
+
+Element Liquids Cloud 150 150 255 0 1 1 1 250 Clear 200 File cloud.bmp
+Interaction Cloud Clear Cloud Water 300
+EXEC setcustomcolors1 ELEMENT:Cloud 50 0 0
+
+Element Liquids Ice 128 128 255 0 1 1 1 0 Clear 300 File ice.bmp
+Interaction Ice Clear Water Clear 20
+Interaction Ice Fire Water Clear 20000
+Interaction Ice Water Ice Ice 200
+Interaction Ice WarmWater Water Water 200
+Interaction Ice HotWater Water WarmWater 200
+Interaction Ice Steam Water Water 500
+Interaction Ice Steam Water WarmWater 500
+EXEC setcustomcolors1 ELEMENT:Ice 0 0 100
+
+Element Liquids Fountain 0 0 254 0 1 1 1 0 Clear 400 File spring.bmp
+Interaction Fountain Clear Fountain Water 1000
+Interaction Fountain Salt Saltwater Saltwater 500
+Interaction Fountain Fire Fountain Steam 1000
+EXEC setcustomcolors1 ELEMENT:Fountain 50 0 0
+
+Element Liquids Oil 100 0 0 500 10 15 1 0 Clear 500 File oil.bmp
+Interaction Oil Fire Clear Fire 5000
+Interaction Oil Fire Gas(burning) Fire 15000
+Interaction Oil Fire Fire Fire 5000
+Interaction Oil Gas(burning) Gas(burning) Oil 1000
+Interaction Oil Glue Oil Glue 100000
+EXEC setcustomcolors1 ELEMENT:Oil 50 0 0 
+
+Element Liquids Oilsource 128 0 0 0 1 1 1 0 Clear 600 File oilsource.bmp
+Interaction Oilsource Clear Oilsource Oil 1000
+Interaction Oilsource Fire Oilsource Gas(burning) 1000
+EXEC setcustomcolors1 ELEMENT:Oilsource 50 0 0
+
+Element Liquids Glue 255 100 255 680 20 1 1 0 Clear 700 File glue.bmp
+Interaction Glue Earth Glue Earth 100000
+Interaction Glue Wall Glue Wall 100000
+InteractionTrigger Glue Fire TNTexplosion 50000
+Interaction Glue Oil Glue Oil 100000
+Interaction Glue Sand Glue Sand 100000
+Interaction Glue Salt Glue Salt 100000
+Interaction Glue Crystal(grown) Glue Crystal(grown) 100000
+Interaction Glue Crystal Glue Salt 100000
+Interaction Glue Seed Glue Seed 100000
+Interaction Glue Parasite Glue Parasite 100000
+EXEC setcustomcolors1 ELEMENT:Glue 50 0 0
+
+Element Liquids Acid 255 0 60 998 10 3 1 0 Clear 800 File acid.bmp
+Interaction Acid Water WarmWater WarmWater 200
+Interaction Acid WarmWater HotWater HotWater 200
+Interaction Acid HotWater Steam Steam 200
+Interaction Acid All Acid Clear 500 Wall
+EXEC setcustomcolors1 ELEMENT:Acid 50 0 0
+
+Element Liquids Extinguisher 201 201 201 1100 100 20 1 0 Clear 900 File extinguisher.bmp
+Interaction Extinguisher Fire Clear Extinguisher 10000
+Interaction Extinguisher Plant(burning) Clear Extinguisher 10000
+Interaction Extinguisher Wood(burning) Clear Extinguisher 10000
+Interaction Extinguisher Firework Clear Extinguisher 10000
+Interaction Extinguisher Comet Clear Extinguisher 10000
+Interaction Extinguisher Cera(burning) Clear Extinguisher 10000
+InteractionTrigger Extinguisher Glue TNTexplosion 10000
+EXEC setcustomcolors1 ELEMENT:Extinguisher 0 0 100
+
+Element Liquids Pipe 253 253 253 0 1 1 1 0 Clear 1000 File pipe.bmp
+InteractionTrigger Pipe All PipeTrigger 100000 Pipe
+REMOVETRIGGER PipeTrigger 
+SET elementwall ELEMENT:Wall
+SET elementwater ELEMENT:Water
+ON PipeTrigger SET NEXTINTERACTION (((INTERACTION2 == elementwall) || (INTERACTION2 == elementwater)) || (INTERACTION2 == 1))
+ON PipeTrigger IF (NEXTINTERACTION == 0) <DRAW ELEMENT:Wall POINT X2 Y2>
+Interaction Pipe Wall Water Wall 100000
+Interaction Pipe Water Water Water 100000
+EXEC setcustomcolors1 ELEMENT:Pipe 0 0 0
+
+
+
+Element Burning Fire 255 0 0 -400 1 1 1 10% Clear 100 File fire.bmp
+Interaction Fire Earth Fire Clear 1000
+Interaction Fire Sand Clear Sand 100000
+Interaction Fire Stone Clear Stone 100000
+Interaction Fire Salt Clear Salt 100000
+Interaction Fire Glue Fire Fire 10000
+EXEC setcustomcolors1 ELEMENT:Fire 200 0 0
+SET elementfire ELEMENT:Fire
+
+Element Burning Burner 250 0 0 0 1 1 1 0 Clear 200 File burner.bmp
+Interaction Burner Water Burner WarmWater 5000
+Interaction Burner WarmWater Burner HotWater 5000
+Interaction Burner Saltwater Burner WarmSaltwater 5000
+Interaction Burner WarmSaltwater Burner HotSaltwater 5000
+Interaction Burner Clear Burner Fire 5000
+Interaction Burner Plant Burner Plant(burning) 1800
+Interaction Burner Clear Burner Fire 1000
+Interaction Burner Wood Burner Wood(burning) 1000
+Interaction Burner Cera Burner Cera(burning) 1000
+Interaction Burner Oil Burner Gas(burning) 1000
+Interaction Burner Gas Burner Gas(burning) 1000
+Interaction Burner GasII Burner GasII(burning) 1000
+Interaction Burner Seed Burner Fire 1000
+Interaction Burner Parasite Burner Fire 1000
+Interaction Burner Extinguisher BurnerOff Extinguisher 1000
+EXEC setcustomcolors1 ELEMENT:Burner 215 0 0
+
+Element Burning BurnerOff 190 0 0 0 1 1 1 0 Clear 200 File burneroff.bmp
+Interaction BurnerOff Fire Burner Fire 1000
+EXEC setcustomcolors1 ELEMENT:BurnerOff 127 0 0
+
+Element Burning Firework 255 200 200 0 1000 1 1 0 Clear 300 File fireworks.bmp
+InteractionTrigger Firework Fire Fireworkexplosion 10000
+EXEC setcustomcolors1 ELEMENT:Firework 50 0 0
+
+Element Burning TNT 250 250 80 0 2 1 5 0 Clear 400 File dynamit.bmp
+InteractionTrigger TNT Fire <EXEC InteractionFill1 ELEMENT:TNT(Exploding)> 50000
+EXEC setcustomcolors1 ELEMENT:TNT 50 0 0
+
+ON InteractionFill1 DRAW $0 FILL X1 Y1 0
+
+Element None TNT(Exploding) 255 255 80 0 2 1 5 0 Clear 400 File dynamit.bmp
+InteractionTrigger TNT(Exploding) Clear TNTexplosion 1000
+EXEC setcustomcolors1 ELEMENT:TNT(Exploding) 230 0 0
+
+Element Burning Fuse 0x44 0x22 0 0 2 1 5 0 Clear 400 File fuse.bmp
+Interaction Fuse Fire Fuse(Burning) Fire 2000
+Interaction Fuse Fuse(Burning) Fuse(Burning) Fuse(Burning) 800
+EXEC setcustomcolors1 ELEMENT:Fuse 50 0 0
+
+Element None Fuse(Burning) 252 0 0 0 2 1 5 0 Clear 400 File dynamit.bmp
+InteractionTrigger Fuse(Burning) Clear FuseExplosion 1000
+Interaction Fuse(Burning) Clear Fire Fire 500
+EXEC setcustomcolors1 ELEMENT:Fuse(Burning) 255 0 0
+
+Element Burning GunPowder 0x44 0x44 0x44 600 2 1 5 0 Clear 400 File gunpowder.bmp
+InteractionTrigger GunPowder Fire GunPowderexplosion 2000
+EXEC setcustomcolors1 ELEMENT:GunPowder 50 0 0
+
+Element Burning Comet 255 255 0 998 1 1 1 0 Clear 900 File fire2.bmp
+Interaction Comet Clear Comet Fire 15000
+Interaction Comet Water Sand HotWater 1000
+Interaction Comet WarmWater Sand Steam 1000
+Interaction Comet HotWater Sand Steam 10000
+Interaction Comet Saltwater Comet HotSaltwater 50000
+Interaction Comet WarmSaltwater Comet HotSaltwater 50000
+Interaction Comet Plant Comet Plant(burning) 1800
+Interaction Comet Wood Comet Wood(burning) 1000
+Interaction Comet Cera Comet Cera(burning) 1000
+Interaction Comet Oil Comet Gas(burning) 1000
+Interaction Comet Gas Comet Gas(burning) 1000
+Interaction Comet GasII Comet GasII(burning) 1000
+Interaction Comet Glue Comet Fire 1000
+Interaction Comet Seed Comet Fire 1000
+Interaction Comet Parasite Comet Fire 1000
+EXEC setcustomcolors1 ELEMENT:Comet 255 0 0
+
+Element Burning Vulcano 240 50 0 0 1 1 1 0 Clear 900 File vulcano.bmp
+Interaction Vulcano Clear Vulcano Magma 600
+Interaction Vulcano Clear Vulcano Lava 600
+Interaction Vulcano Water Vulcano Steam 2000
+Interaction Vulcano WarmWater Vulcano Steam 2000
+Interaction Vulcano HotWater Vulcano Steam 2000
+Interaction Vulcano Saltwater Lava HotSaltwater 2000
+Interaction Vulcano WarmSaltwater Lava HotSaltwater 2000
+EXEC setcustomcolors1 ELEMENT:Vulcano 255 0 0
+
+Element Burning Lava 190 50 0 1000 100 1 1 0 Clear 1000 File lava.bmp
+Interaction Lava Water Stone HotWater 3000
+Interaction Lava WarmWater Stone Steam 3000
+Interaction Lava HotWater Stone Steam 30000
+Interaction Lava Saltwater Stone HotSaltwater 3000
+Interaction Lava WarmSaltwater Stone HotSaltwater 30000
+Interaction Lava Ice Stone Water 3000
+Interaction Lava Wood Lava Wood(burning) 2000
+Interaction Lava Plant Lava Plant(burning) 2000
+Interaction Lava Cera Lava Cera(burning) 2000
+Interaction Lava Oil Lava Gas(burning) 2000
+Interaction Lava Gas Lava Gas(burning) 2000
+Interaction Lava Glue Lava Fire 2000
+Interaction Lava Seed Lava Fire 2000
+Interaction Lava Parasite Lava Fire 2000
+EXEC setcustomcolors1 ELEMENT:Lava 255 0 0
+
+Element None Magma 220 50 0 -200 1 1 1 350 Lava 0 File erase.bmp
+Interaction Magma Wood Lava Wood(burning) 2000
+Interaction Magma Water Lava HotWater 3000
+Interaction Magma WarmWater Lava Steam 3000
+Interaction Magma HotWater Lava Steam 30000
+Interaction Magma Saltwater Lava HotSaltwater 3000
+Interaction Magma WarmSaltwater Lava HotSaltwater 30000
+Interaction Magma Plant Lava Plant(burning) 2000
+Interaction Magma Ice Lava WarmWater 2000
+Interaction Magma Cera Lava Cera(burning) 2000
+Interaction Magma Cera(liquid) Lava Cera(burning) 2000
+Interaction Magma Oil Lava Gas(burning) 2000
+Interaction Magma Gas Magma Gas(burning) 2000
+Interaction Magma GasII Magma GasII(burning) 2000
+Interaction Magma Glue Magma Fire 2000
+Interaction Magma Seed Magma Fire 2000
+Interaction Magma Parasite Magma Fire 2000
+EXEC setcustomcolors1 ELEMENT:Magma 255 0 0
+
+
+
+
+Element Nature Plant 0 255 0 0 1 1 1 0 Clear 600 File lifegroup.bmp
+Interaction Plant Water Plant Plant 2000
+Interaction Plant WarmWater Plant Plant 500
+Interaction Plant HotWater Clear Clear 2000
+Interaction Plant Steam Clear Clear 2000
+Interaction Plant Fire Plant(burning) Clear 6000
+Interaction Plant Wood Plant Plant 100
+EXEC setcustomcolors1 ELEMENT:Plant 50 0 0
+
+Element None Plant(burning) 199 0 0 0 1 1 1 468 Clear 0 File erase.bmp
+Interaction Plant(burning) Water Clear Steam 10000
+Interaction Plant(burning) WarmWater Clear Steam 10000
+Interaction Plant(burning) HotWater Clear Steam 10000
+Interaction Plant(burning) Saltwater Clear HotSaltwater 3000
+Interaction Plant(burning) WarmSaltwater Clear HotSaltwater 3000
+Interaction Plant(burning) Plant Plant(burning) Plant(burning) 2000
+Interaction Plant(burning) Clear Plant(burning) Fire 1200
+Interaction Plant(burning) Wood Plant(burning) Wood(burning) 1000
+Interaction Plant(burning) Cera Plant(burning) Cera(burning) 1000
+Interaction Plant(burning) Oil Plant(burning) Gas(burning) 1000
+Interaction Plant(burning) Gas Plant(burning) Gas(burning) 1000
+Interaction Plant(burning) GasII Plant(burning) GasII(burning) 1000
+Interaction Plant(burning) Parasite Plant(burning) Fire 1000
+EXEC setcustomcolors1 ELEMENT:Plant(burning) 180 0 0
+
+Element Nature Seed 0 180 0 20 1 1 10 0 Clear 600 File seed.bmp
+Interaction Seed Water Clear Plant 1
+Interaction Seed WarmWater Clear Plant 1
+Interaction Seed Fire GasII(burning) Fire 10000
+Interaction Seed Glue Seed Glue 100000
+Interaction Seed Salt Clear Salt 100
+Interaction Seed Saltwater Clear Saltwater 100
+Interaction Seed WarmSaltwater Clear WarmSaltwater 1000
+Interaction Seed Wood Plant Wood 500
+EXEC setcustomcolors1 ELEMENT:Seed 50 0 0
+
+Element Nature Wood 128 64 0 0 1 1 1 0 Clear 700 File tree.bmp
+Interaction Wood Fire Wood(burning) Clear 4000
+Interaction Wood Plant Wood Wood 100
+EXEC setcustomcolors1 ELEMENT:Wood 50 0 0
+
+Element None Wood(burning) 200 0 0 0 1 1 1 8 Clear 0 File erase.bmp
+Interaction Wood(burning) Water Clear Steam 10000
+Interaction Wood(burning) WarmWater Clear Steam 20000
+Interaction Wood(burning) HotWater Clear Steam 30000
+Interaction Wood(burning) Saltwater Clear HotSaltwater 30000
+Interaction Wood(burning) WarmSaltwater Clear HotSaltwater 30000
+Interaction Wood(burning) Wood Wood(burning) Wood(burning) 1000
+Interaction Wood(burning) Clear Wood(burning) Ash 80
+Interaction Wood(burning) Clear Wood(burning) Fire 20000
+Interaction Wood(burning) Clear Clear Clear 1500
+Interaction Wood(burning) Parasite Wood(burning) Fire 1500
+EXEC setcustomcolors1 ELEMENT:Wood(burning) 190 0 0
+
+Element None Ash 80 80 80 200 1 1 1 0 Clear 0 File erase.bmp
+Interaction Ash Glue Ash Glue 100000
+EXEC setcustomcolors1 ELEMENT:Ash 80 0 0
+
+Element Nature Cera 255 255 100 0 1 1 1 0 Clear 800 File wax.bmp
+Interaction Cera Fire Cera(burning) Clear 4000
+EXEC setcustomcolors1 ELEMENT:Cera 50 0 0
+
+Element None Cera(burning) 170 0 0 0 1 1 1 68 Clear 0 File erase.bmp
+Interaction Cera(burning) Water Clear Steam 10000
+Interaction Cera(burning) WarmWater Clear Steam 20000
+Interaction Cera(burning) HotWater Clear Steam 30000
+Interaction Cera(burning) Saltwater Clear HotSaltwater 10000
+Interaction Cera(burning) WarmSaltwater Clear HotSaltwater 10000
+Interaction Cera(burning) Cera Cera(burning) Cera(burning) 10
+Interaction Cera(burning) Clear Cera(burning) Fire 5000
+Interaction Cera(burning) Clear Cera(burning) Cera(liquid) 30
+EXEC setcustomcolors1 ELEMENT:Cera(burning) 190 0 0
+
+Element None Cera(liquid) 235 235 0 600 1 1 1 0 Clear 0 File erase.bmp
+Interaction Cera(liquid) Cera Cera Cera 10000
+Interaction Cera(liquid) Earth Cera Earth 20000
+EXEC setcustomcolors1 ELEMENT:Cera(liquid) 140 0 0
+
+Element Nature Parasite 200 100 0 50 1 1 1 0 Clear 800 File bug.bmp
+Interaction Parasite Plant Parasite Parasite 400
+Interaction Parasite Plant Clear Parasite 400
+Interaction Parasite Plant Parasite Plant 100000
+Interaction Parasite Seed Parasite Parasite 500
+Interaction Parasite Seed Clear Parasite 700
+Interaction Parasite Wood Parasite Parasite 200
+Interaction Parasite Wood Clear Parasite 300
+Interaction Parasite Wood Parasite Wood 100000
+Interaction Parasite Water Parasite Parasite 200
+Interaction Parasite Water Clear Parasite 300
+Interaction Parasite WarmWater Parasite Parasite 200
+Interaction Parasite WarmWater Clear Parasite 300
+Interaction Parasite HotWater Clear HotWater 500
+Interaction Parasite Fire Fire Fire 6000
+Interaction Parasite Ice Ice Ice 800
+Interaction Parasite Salt Clear Salt 30
+EXEC setcustomcolors1 ELEMENT:Parasite 50 0 0
+
+
+
+
+
+Element Gases Steam 80 80 255 -100 1 1 4 10 Water 100 File steam.bmp
+EXEC setcustomcolors1 ELEMENT:Steam 160 0 0
+
+Element Gases Gas 140 40 140 -50 2 1 5 0 Clear 100 File gas.bmp
+Interaction Gas Fire Gas(burning) Fire 10000
+EXEC setcustomcolors1 ELEMENT:Gas 30 0 0
+
+Element None Gas(burning) 255 49 49 50 1 1 1 21768 Clear 0 File erase.bmp
+Interaction Gas(burning) Clear Gas(burning) Fire 15000
+Interaction Gas(burning) Gas Gas(burning) Gas(burning) 50000
+EXEC setcustomcolors1 ELEMENT:Gas(burning) 230 0 0
+
+Element Gases Gassource 139 39 139 0 1 1 1 0 Clear 200 File gassource.bmp
+Interaction Gassource Clear Gassource Gas 500
+EXEC setcustomcolors1 ELEMENT:Gassource 20 0 0
+
+Element Gases GasII 140 240 180 -25 1 1 1 0 Clear 300 File gas2.bmp
+Interaction GasII Fire GasII(burning) Fire 100000
+EXEC setcustomcolors1 ELEMENT:GasII 80 0 0
+
+Element None GasII(burning) 255 50 50 -50 1 1 5 200 Clear 0 File erase.bmp
+Interaction GasII(burning) Clear GasII(burning) Fire 2000
+Interaction GasII(burning) GasII GasII(burning) GasII(burning) 2000
+EXEC setcustomcolors1 ELEMENT:GasII(burning) 210 0 0
+
+Element Gases GasIIsource 139 239 179 0 1 1 1 0 Clear 400 File gas2source.bmp
+Interaction GasIIsource Clear GasIIsource GasII 250
+EXEC setcustomcolors1 ELEMENT:GasIIsource 90 0 0
+
+GROUP Sources ADD Glue 100
+GROUP Sources ADD Sand 100
+GROUP Sources ADD Antimatter 100
+GROUP Sources ADD Water 100
+GROUP Sources ADD Lava 100
+GROUP Sources ADD Salt 100
+GROUP Sources ADD Replicator 100
+GROUP Sources ADD Oil 100
+GROUP Sources ADD Stone 100
+GROUP Sources ADD Extinguisher 100
+GROUP Sources ADD Acid 100
+GROUP Sources ADD Comet 100
+GROUP Sources ADD Seed 100
+GROUP Sources ADD Parasite 100

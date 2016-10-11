@@ -1,0 +1,2167 @@
+EXEC clearall
+INCLUDE sandbox.bs2 
+INCLUDE explosions.bs2 
+Set speed 10000 
+
+
+
+SET ELEMENTR:Clear 0
+SET ELEMENTG:Clear 0
+SET ELEMENTB:Clear 250
+
+
+
+
+
+Message Welcome to my old, not-so-successful Empire Wars mod! Place some creatures, and wait for them to develop, or you could wait for the creatures already on land to grow and fight. Enjoy!...Hopefully! -Altermax
+
+Element None Planet* 255 255 255 0 1 1 1 1000 Ocean 0 Text
+Element None Generate 200 200 245 0 1 1 1 31000 Planet* 0 Text pl 
+Interaction Generate Clear Generate Generate 31000
+Interaction Ocean Troposphere Ocean Ocean 31
+Element None Clear 255 250 255 1 1 1 1 10 Generate 0 File erase.bmp
+
+
+
+
+Group Clear 1 HEX 000000006554B9005556A3805555B1085554A01C6494B808000000003BA2EEE02AA28A803AAACEE022AA8C202394EAE000000000000004000000080020001004707FE008208000100120002002480040049200420524E08745491102E5520900455411000354220000D444080034881C00087008020001000700038002000100 255 255 0
+
+
+Group Life 1 HEX 00000000000000000000000000000000000000000000000038E38E3845145144451451444514514438E38E381041041038E38E3855555554104104101041041028A28A2828A28A280000000038E38E3845145144451451444514514438E38E381041041038E38E3855555554104104101041041028A28A2828A28A2800000000 255 255 255
+Interaction Planet* Land Volcanism Volcanism 41 
+Interaction Planet* Land Slope Slope 31
+Interaction OceanSparkle Land Slope Slope 31
+Interaction Continent* Land Trees* Trees* 31
+Interaction Continent* Land Desert* Desert* 11
+
+
+Element Clear Continent* 0 100 0 0 1 1 1 5500 Land 0 HEX 00000000000000047804001C400E800447743B744556AB547752AA54000003000000003C0000006701F800C002040180020401000207810002048180030480C300FF807F004A0012004E001200480012004800121048001250C80012FFFF6E7FFFFFFFFF000924A0FFDCB7F8FFDFEFFF32EF97DEDCCDB4CC3BDF77C63FC9007C 0 205 2
+Element None Land 50 250 50 0 1 1 1 0 Land 0 Text Clear
+
+Interaction Ocean Clear Ocean Ocean 1
+Interaction Land Ocean Continent* Continent* 1
+
+Interaction Continent* Ocean Continent* Continent* 4500
+InteractionTrigger Continent* Land <DRAW ELEMENT:Mountain REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2
+InteractionTrigger Continent* Land <DRAW ELEMENT:Volcanism REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 1
+InteractionTrigger Continent* Land <DRAW ELEMENT:Slope REPLACEFILLEDCIRCLE X2 Y2 1 0
+
+ELEMENT:Land> 3
+InteractionTrigger Continent* Land <DRAW ELEMENT:Hills REPLACEFILLEDCIRCLE X2 Y2 1 0
+
+ELEMENT:Land> 4
+InteractionTrigger Continent* Land <DRAW ELEMENT:Trees* REPLACEFILLEDCIRCLE X2 Y2 1 0
+
+ELEMENT:Land> 7
+InteractionTrigger Continent* Land <DRAW ELEMENT:Desert* REPLACEFILLEDCIRCLE X2 Y2 1 0
+
+
+// ELEMENT:Land> 200
+// InteractionTrigger Continent* Land <DRAW ELEMENT:HumanLife REPLACEFILLEDCIRCLE X1 Y1 1 0
+
+// ELEMENT:Land> 200
+// InteractionTrigger Continent* Land <DRAW ELEMENT:DemonicLife REPLACEFILLEDCIRCLE X1 Y1 1 0
+
+
+// ELEMENT:Land> 200
+// InteractionTrigger Continent* Land <DRAW ELEMENT:DragonLife REPLACEFILLEDCIRCLE X1 Y1 1 0
+
+
+
+
+
+
+
+
+Element None Troposphere 0 0 255 0 1 1 1 1000 Ocean 0 Text Hi
+Interaction Troposphere Ocean HumanLife HumanLife 1
+Interaction Troposphere Ocean DemonicLife HumanLife 1
+Interaction Troposphere Ocean DragonLife HumanLife 1
+
+
+
+Interaction Land Clear Ocean Ocean 10
+Interaction Ocean Clear Ocean Ocean 10
+
+
+Interaction Ocean Planet* Ocean Ocean 1000000
+
+Element Clear Ocean 0 0 255 0 1 1 1 1 Planet* 0 HEX
+000000007772480054456800546758005445480077754800000000000000000000000000000000000000000000
+0000000000000000000000000000000380700E0280500A1C43887111823046620C4188420841088210420881F
+03E07000000000000000000000000000000000000000000000000000000000000000000000000 0 0 255
+
+
+
+Interaction Planet* Clear Planet* Troposphere 32768
+
+
+Element None LandCliff1 80 47 0 0 1 1 1 0 Clear 0 Text Clear
+Element None LandCliff2 170 97 0 0 1 1 1 0 Clear 0 Text Clear
+Element None LandCliff* 110 57 0 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction Land Ocean Land LandCliff* 100
+Interaction LandCliff* Land Land Land 7000
+Interaction LandCliff* Ocean LandCliff1 LandCliff1 2000
+Interaction LandCliff1 Ocean LandCliff1 LandCliff2 2000
+Interaction LandCliff2 Troposphere LandCliff1 Troposphere 32768
+
+Element Clear Mountain 200 200 200 0 1 1 1 0 Clear 0 File sandsource.bmp
+Element None Slope 100 100 100 0 1 1 1 0 Clear 0 Text None
+Element None Hills 80 170 80 0 1 1 1 0 Clear 0 Text None
+
+Interaction Mountain Land Mountain Slope 100
+Interaction Mountain Land Mountain Mountain 10
+Interaction Slope Land Slope Hills 1000
+Interaction Slope Land Slope Slope 1000
+
+Element Clear Volcanism 255 0 0 0 1 1 1 0 Clear 0 File vulcano.bmp
+Element None Eruption 255 50 50 0 1 1 1 100 Caldera 0 Text None
+Element None Caldera 150 70 0 0 1 1 1 1 Mountain 0 Text None
+Element None Caldera2 100 100 100 0 1 1 1 1 Slope 0 Text None
+
+Interaction Volcanism Land Volcanism Mountain 1000
+Interaction Eruption Land Caldera Eruption 10000
+Interaction Eruption Mountain Caldera Eruption 10000
+Interaction Eruption Slope Caldera Eruption 10000
+Interaction Eruption Hills Caldera Eruption 10000
+Interaction Eruption Caldera Caldera Eruption 7000
+Interaction Eruption Volcanism Caldera Eruption 7000
+Interaction Caldera Land Caldera Caldera2 7000
+Interaction Caldera Ocean Caldera Caldera2 7000
+InteractionTrigger Volcanism Mountain Erupt1 1
+
+
+Interaction DestroyedLand Trees Trees Trees 30
+
+REMOVETRIGGER Erupt1
+ON Erupt1 TIMER 1000 FRAMES Erupt2
+
+REMOVETRIGGER Erupt2
+ON Erupt2 TIMER 1000 FRAMES Erupt3
+
+REMOVETRIGGER Erupt3
+ON Erupt3 Interaction Volcanism Mountain Volcanism Eruption 1
+
+Element None Trees* 0 150 0 0 1 1 1 0 Clear 0 File tree.bmp
+Element None Trees 30 170 30 0 1 1 1 10 Woods 0 Text None
+Element None Woods 30 220 30 0 1 1 1 100 Trees 0 Text None
+Element None ForestFire 230 0 0 0 1 1 1 90 Land 0 Text None
+
+Interaction Eruption Trees Eruption ForestFire 32768
+Interaction ForestFire Trees ForestFire ForestFire 400
+Interaction ForestFire Woods ForestFire ForestFire 400
+
+Interaction Woods Land Trees Woods 10
+
+InteractionTrigger Trees* Land <DRAW ELEMENT:Trees* REPLACEFILLEDCIRCLE X1 Y1 2 0 ELEMENT:Land> 4000
+InteractionTrigger Trees* All <DRAW ELEMENT:Trees REPLACEFILLEDCIRCLE X1 Y1 3 0 ELEMENT:Trees*> 1000
+
+Element Clear Desert* 230 180 0 0 1 1 1 0 Clear 0 File sand.bmp
+Element None Desert 230 180 0 0 1 1 1 10 Dune 0 Text None
+Element None Dune 150 100 0 0 1 1 1 100 Desert 0 Text None
+
+InteractionTrigger Desert* Land <DRAW ELEMENT:Desert* REPLACEFILLEDCIRCLE X1 Y1 1 0 ELEMENT:Land> 4000
+InteractionTrigger Desert* All <DRAW ELEMENT:Desert REPLACEFILLEDCIRCLE X1 Y1 2 0 ELEMENT:Desert*> 1000
+Interaction Desert Land Desert Desert 25
+Interaction Land Desert Land Land 28
+
+Element None Tundra* 200 200 255 0 1 1 1 0 Clear 0 File ice.bmp
+Element None Tundra 230 230 230 0 1 1 1 0 Clear 0 Text None
+
+InteractionTrigger Tundra* Ocean <DRAW ELEMENT:Tundra* REPLACEFILLEDCIRCLE X1 Y1 5 0 ELEMENT:Ocean> 6000
+InteractionTrigger Tundra* All <DRAW ELEMENT:Tundra REPLACEFILLEDCIRCLE X1 Y1 6 0 ELEMENT:Tundra*> 4000
+
+Interaction Tundra Troposphere Ocean Troposphere 37268
+
+Element None IceCliff1 200 200 255 0 1 1 1 0 Clear 0 Text None
+Element None IceCliff2 150 150 255 0 1 1 1 0 Ocean 0 Text None
+
+Interaction Tundra Ocean Tundra IceCliff1 1000
+Interaction IceCliff1 Ocean IceCliff1 IceCliff2 8000
+Interaction IceCliff1 Troposphere Ocean Troposphere 32768
+Interaction IceCliff2 Troposphere Ocean Troposphere 32768
+
+Element None Glacier 220 220 255 0 1 1 1 1 Iceberg 0 Text None
+Element None Iceberg 170 170 255 0 1 1 1 500 Ocean 0 Text None
+
+Interaction IceCliff2 Ocean Glacier Ocean 1
+Interaction Glacier Ocean Iceberg Glacier 20
+Interaction Glacier LandCliff1 Tundra* Tundra 32768
+
+
+
+
+
+
+
+Interaction Blast Land Continent* Continent* 5
+Interaction Blast LandCliff1 Continent* Continent* 5
+Interaction Blast LandCliff2 Continent* Continent* 5
+
+Interaction Explosion2 Blast SpaceDebris SpaceDebris 100
+
+
+
+Interaction Explosion2 Blast SpaceDebris SpaceDebris 100
+
+
+Interaction SpaceDebris Explosion SpaceDebris SpaceDebris 3276
+Interaction SpaceDebris SpaceDebris Rock Rock 100
+Interaction SpaceDebris SpaceDebris Clear SpaceDebris 10000
+Interaction SpaceDebris Clear Clear SpaceDebris 1000
+Interaction SpaceDebris Clear Rock Clear 10
+Interaction Rock Clear Clear Rock 10
+Interaction Rock Rock Moon Crater 1
+Interaction Rock Moon Moon Moon 10
+Interaction Shuttle Rock CoreBuild CoreBuild 1
+
+Interaction HumanLife Trees ForestFire ForestFire 11
+
+
+
+// Corpse
+
+Element None Corpse 255 255 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction Corpse Land Land Land 32768
+Interaction Corpse City Land Land 32768
+Interaction Corpse Ocean Ocean Ocean 32768
+Interaction Corpse Clear Clear Clear 32768
+Interaction Corpse Moon Moon Moon 32768
+Interaction Corpse Crater Crater Crater 32768
+Interaction Corpse Desert Desert Desert 32768
+Interaction Corpse Trees Trees Trees 32768
+Interaction Corpse Tundra Tundra Tundra 32768
+Interaction Corpse Onyx Onyx Onyx 32768
+
+// Trails
+// Make interactions and civilization building much easier
+Interaction LandTrail HumanLife HumanLife HumanLife 32
+Interaction LandTrail LandCliff HumanLife HumanLife 32
+
+
+Element None LandTrail 0 180 0 0 1 1 1 1000 Land 0 Text Clear
+Element None IceTrail 0 0 255 0 1 1 1 1000 Tundra 0 Text Clear
+Element None TreesTrail 0 255 0 0 1 1 1 100 Trees 0 Text Clear
+Element None CityTrail 200 200 200 0 1 1 1 3000 City 0 Text Clear
+Element None DowntownTrail 200 200 200 0 1 1 1 1000 District 0 Text Clear
+Element None DesertTrail 255 255 255 0 1 1 1 1000 Desert 0 Text Clear
+Element None MoonTrail 100 100 100 0 1 1 1 1000 Moon 0 Text Clear
+Element None DockTrail 100 100 100 0 1 1 1 1000 Docks 0 Text Clear
+Element None PortTrail 100 100 100 0 1 1 1 1000 Port 0 Text Clear
+Element None OceanTrail 60 60 60 0 1 1 1 800 Ocean 0 Text Clear
+
+Element Life HumanLife 255 0 255 0 1 1 1 5 Corpse 0 HEX 0000000000000000000000000000000000000000000000002400000024000000240000003C001000255B77702555554025D1753000000010000000600000000000000000000000000000000038E38E3845145144451451444514514438E38E381041041038E38E3855555554104104101041041028A28A2828A28A2800000000 255 212 199
+Element None Astronaut 0 255 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction HumanLife Land LandTrail HumanLife 5000
+Interaction HumanLife Tundra IceTrail HumanLife 2000
+Interaction HumanLife Trees TreesTrail HumanLife 300
+Interaction HumanLife City CityTrail HumanLife 5000
+Interaction HumanLife Desert DesertTrail HumanLife 5000
+Interaction HumanLife Desert Desert Desert 15
+Interaction HumanLife Docks CityTrail HumanLife 5000
+Interaction HumanLife Port DockTrail HumanLife 5000
+Interaction HumanLife District DowntownTrail HumanLife 5000
+Interaction HumanLife Downtown DowntownTrail HumanLife 5000
+
+Element None ShipLife 190 190 190 0 1 1 1 10 Corpse 0 HEX
+000000007574EEEE4554AA8A6274AECE4544AC8C7546EAEA0000000000618600005145000049248000492
+480005145000061860000514500005145000049248000492480004924800051450000514500006186007F41040
+0494104007EFFFFF82B9249203FFFFFC03EAAAF003FFFFE003FFFFC0063FFE000601F800000000000 255
+255 255
+
+Interaction HumanLife Ocean PortTrail ShipLife 2000
+Interaction ShipLife Port OceanTrail HumanLife 2000
+Interaction ShipLife Ocean OceanTrail ShipLife 5000
+
+Element None House 80 20 20 0 1 1 1 1 House2 0 HEX
+00000000240030002401A0003DD530002555A00025DCB00000018000000C0000001200000021180000409800
+008058000100380001003800020018000200180004000800040008000FFFFC000800040008000400080004000
+800040008000400081C04000814040008140400081404000FFFFC00000000000000000000000000 255 255 255
+Element None House2 80 20 20 0 1 1 1 0 Clear 0 Text House
+Element None Castle 190 190 190 0 1 1 1 10 Land 0 Text Clear
+Element None Village 100 50 50 0 1 1 1 1 City 0 Text Clear
+Element None Farm 150 77 0 0 1 1 1 0 Clear 0 Text Clear
+Element None City 190 190 190 0 1 1 1 1 City2 0 HEX 00000010777500104225001042220010422200FE77220082000000AA03F80082020800AA02480082024800AA
+020800820248CCAA0248CC820208CCAA0248CC820248CCAA021FFFE20210002A025000220253332A021333220210002A025000220253332A021333220210002A025000220253332A021333220210002A02500022 255 255 255
+
+
+Element None City2 180 180 180 0 1 1 1 1 Downtown 0 Text City
+Element None Suburbs 100 100 100 0 1 1 1 0 Clear 0 Text Clear
+Element None Downtown 50 50 50 0 1 1 1 10 City 0 Text Clear
+Element None District 60 40 40 0 1 1 1 10 City2 0 Text Clear
+Element None Docks 128 64 0 0 1 1 1 0 Clear 0 Text Clear
+Element None Port 250 250 250 0 1 1 1 1 Shuttle 0 Text Clear
+
+
+Interaction CityTrail City Land Land 5
+Interaction Launch Trees City Launch 5
+Interaction Launch Woods Launch Launch 30
+
+
+Interaction ShipLife LandCliff1 City City 30
+Interaction OceanTrail LandCliff1 City City 30
+Interaction ShipLife LandCliff2 City City 30
+Interaction OceanTrail LandCliff2 City City 30
+
+Interaction City LandCliff1 City City 30
+Interaction Castle LandCliff1 City City 30
+Interaction City LandCliff2 City City 30
+Interaction Castle LandCliff2 City City 30
+Interaction Castle House Castle City 30
+Interaction Port Ocean Port HumanLife 30
+Interaction City Ocean Port Ocean 7000
+Interaction City Castle City City 3
+Interaction City House City City 3
+Interaction City HumanLife City City 3
+Interaction HumanLife HumanLife City Suburbs 5
+Interaction HumanLife HumanLife House Castle 10
+Interaction House Land House Castle 100
+Interaction House2 Land House2 Castle 100
+Interaction House2 House House2 House2 10
+Interaction HumanLife Castle Castle HumanLife 1000
+Interaction HumanLife Castle House Castle 10
+Interaction HumanLife House House2 House 10
+Interaction HumanLife House2 Village Village 10
+Interaction Village Land Village Village 1
+Interaction Village Land Village Farm 100
+Interaction Village House2 Village Village 1000
+Interaction HumanLife Farm Farm HumanLife 1000
+Interaction HumanLife House House HumanLife 10
+Interaction HumanLife Village City City 1
+Interaction City Village City City 10
+Interaction City Land City Suburbs 100
+Interaction Suburbs Land Land HumanLife 1
+Interaction Suburbs Land Suburbs Farm 10
+Interaction House Castle House HumanLife 1
+Interaction House2 Castle House2 HumanLife 12
+Interaction Village Farm Village HumanLife 10
+Interaction City Suburbs City HumanLife 100
+Interaction City House City City 10
+Interaction City Castle City City 10
+Interaction City Farm City City 10
+Interaction City House City2 City2 10
+Interaction City Downtown HumanLife District 10
+Interaction Downtown City Downtown Downtown 20
+Interaction Downtown City Downtown District 30
+Interaction Downtown District Downtown Downtown 1
+Interaction District Downtown District Downtown 10
+Interaction Downtown Village Downtown City 1
+Interaction District LandCliff1 District Docks 100
+Interaction Downtown LandCliff1 District Docks 100
+Interaction Port LandCliff2 Port Port 1
+Interaction City Tress City City 100
+
+
+Element None NASA 255 255 255 0 1 1 1 0 Clear 0 Text Clear
+Element None Launch 255 255 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction Suburbs LandCliff1 NASA Launch 32768
+Interaction Launch LandCliff2 Launch Shuttle 1
+Interaction Launch Troposphere Launch Shuttle 1
+
+Element Earth Shuttle 200 200 200 0 1 1 1 1 Corpse 0 HEX
+000000006E4DB55C4AA925546EE9B75C28A9155068ADB55000000000000000000000000007C00000083800
+0008C600000921C000053C3000C5200E0024C003809A1C027C4623E344244102C44623E3449A1C027C24C0
+0380C5200E00053C30000921C00008C600000838000007C0000000000000000000000000000000000000 255
+
+255 255
+Element None ShuttleTrail 250 150 250 0 1 1 1 1000 Ocean 0 Text Clear
+Element None ShuttleTrail* 250 150 250 0 1 1 1 2000 HumanFighter 0 Text Clear
+Element None ShuttleT 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ShuttleS 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ShuttleM 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ShuttleM* 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction Shuttle Ocean ShuttleTrail Shuttle 20000
+Interaction Shuttle Clear ShuttleTrail* Shuttle 20000
+Interaction Shuttle Troposphere ShuttleTrail ShuttleT 32768
+Interaction ShuttleT Stratosphere Stratosphere ShuttleS 32768
+Interaction ShuttleS Mesosphere Mesosphere ShuttleM 32768
+Interaction ShuttleM Magnetosphere Magnetosphere ShuttleM* 32768
+Interaction ShuttleM* Clear Magnetosphere Shuttle 32768
+Interaction Shuttle Magnetosphere CoreBuild CoreBuild 10
+Interaction Shuttle Moon CoreBuild Corebuild 10
+Interaction Shuttle LandCliff2 OceanTrail Shuttle 6000
+Interaction Shuttle LandCliff1 LandCliff2 Shuttle 6000
+Interaction Shuttle Land LandTrail Shuttle 6000
+
+Element None StationCore 100 100 100 0 1 1 1 0 Troposphere 0 Text hi
+255
+Element None CoreBuild 75 75 75 0 1 1 1 5000 StationCore 1 Text CoreBuild
+Element None SpaceStation 250 250 250 0 1 1 1 0 Troposphere 11 Text SpaceStation
+Element None StationBuild 100 50 100 0 1 1 1 5000 SpaceStation 1 Text StationBuild
+Element None BuildSite 150 150 150 0 1 1 1 1 SpaceStation 10 Text BuildSite
+
+Interaction SpaceStation Clear SpaceStation DockBuild 1
+Interaction DockBuild Clear DockBuild DockBuild 4000
+Interaction SpaceDock Clear SpaceDock BuildSite 30
+Interaction BuildSite Clear Shuttle Clear 1
+
+
+
+
+
+Element None SpaceDock 200 200 200 0 1 1 1 10 SpaceCity 5 Text SpaceDock
+Element None DockBuild 150 150 150 0 1 1 1 6000 SpaceDock 1 Text DockBuild
+
+Interaction Shuttle Troposphere CoreBuild CoreBuild 32000
+Interaction CoreBuild Troposphere CoreBuild CoreBuild 5000
+Interaction CoreBuild Stratosphere CoreBuild CoreBuild 5000
+Interaction CoreBuild Mesosphere CoreBuild CoreBuild 5000
+
+Interaction StationBuild Clear StationBuild StationBuild 3500
+
+Interaction StationCore Clear StationCore StationBuild 100
+Interaction StationCore Troposphere StationCore CoreBuild 50
+Interaction StationCore Stratosphere StationCore CoreBuild 50
+Interaction StationCore Mesosphere StationCore CoreBuild 50
+Interaction SpaceStation Troposphere SpaceStation CoreBuild 3000
+Interaction SpaceStation Stratosphere SpaceStation CoreBuild 3000
+Interaction SpaceStation Mesosphere SpaceStation CoreBuild 3000
+
+
+
+Interaction SpaceDock SpaceStation SpaceDock SpaceDock 320
+Interaction SpaceStation SpaceDock SpaceStation SpaceStation 320
+
+Interaction SpaceDock BuildSite SpaceDock SpaceDock 320
+Interaction BuildSite SpaceDock BuildSite BuildSite 320
+
+Interaction Land HumanLife Land Land 32
+
+
+
+Element None OceanSparkle 0 150 250 0 1 1 1 3000 Ocean 1 Text DockBuild
+Interaction OceanSparkle Ocean Continent* Continent* 1
+
+
+Element None OceanCurrent 0 50 150 0 1 1 1 20000 OceanSparkle 0 Text Clear
+Interaction Ocean OceanCurrent Ocean Ocean 3200
+Interaction OceanCurrent Ocean OceanCurrent OceanCurrent 3300
+
+Interaction OceanSparkle Troposphere Continent* Troposhere 1
+
+
+
+
+Interaction Planet* Ocean OceanCurrent Planet* 10000
+
+Interaction Land OceanSparkle Land Land 10000
+
+
+InteractionTrigger Ocean OceanSparkle <DRAW ELEMENT:Continent REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2000
+InteractionTrigger Ocean OceanCurrent <DRAW ELEMENT:Continent REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2000
+
+
+Element None SpaceCity 250 250 250 0 1 1 1 10000 SpaceDock 5 Text SpaceDock
+Element None SpaceColony 150 150 150 0 1 1 1 100 SpaceCity 5 Text SpaceDock
+
+Interaction SpaceCity SpaceStation SpaceCity SpaceCity 320
+Interaction SpaceStation SpaceCity SpaceStation SpaceStation 320
+
+Interaction SpaceCity BuildSite SpaceCity SpaceCity 3
+Interaction BuildSite SpaceDock BuildSite BuildSite 3
+
+Interaction ShuttleTrail Clear HumanFighter HumanFighter 100
+Interaction Shuttle Clear Shuttle HumanFighter 100
+
+
+
+
+
+
+
+
+Element Earth HumanFighter 0 220 0 0 1 1 10 HumanFighter2 50 HEX
+
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F
+
+0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C02555546
+
+0200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 250 250
+
+0
+Element None HumanFighter2 255 255 255 0 1 1 1 70000 Clear 4 Text HumanFighter2
+
+
+
+
+Interaction HumanFighter Clear HumanFighter2 HumanFighter 4500
+Interaction HumanFighter Clear HumanFighter3 Clear 1
+Interaction HumanFighter2 Clear HumanFighter3 Clear 1
+Interaction HumanFighter Clear HumanFighter HumanFighter 4
+
+Interaction HumanFighter2 Clear Clear Clear 9000
+Interaction HumanFighter Clear Clear Clear 1000
+
+Interaction City Trees ForestFire 1000
+
+
+Element None HumanFighter3 255 255 255 0 1 1 1 1000 HumanFighter 50 Text Blah
+
+Interaction HumanFighter3 Clear HumanFighter3 EarthShot 10
+Interaction Shuttle Clear EarthShot EarthShot 60
+
+Interaction HumanFighter3 All HumanFighter3 HumanFighter3 60
+Interaction All HumanFighter3 All All 60
+
+Interaction HumanFighter3 Clear HumanFighter HumanFighter 400
+Interaction HumanFighter3 HumanFighter FilthLord 400
+
+
+Interaction HumanFighter Clear SpaceStation SpaceStation 1
+Interaction SpaceStation Clear Clear Clear 1
+
+
+Interaction HumanFighter Asteroid StationCore StationCore 100
+Interaction HumanFighter2 Asteroid StationCore StationCore 100
+Interaction Shuttle Asteroid StationCore StationCore 100
+Interaction ShuttleTrail* Asteroid StationCore StationCore 100
+
+
+Interaction HumanFighter3 Clear Shuttle Shuttle 1
+Interaction HumanLife Clear Shuttle Shuttle 1999
+
+
+
+
+
+Interaction HumanLife Trees ForestFire ForestFire 1
+
+// Human Master Ship
+
+Element None ShipCenter 255 255 255 0 1 1 1 0 ShipShield3 0 HEX 0000000045DD5DC06D4951405549D9C04549518045C95D40000000003AAE000022AA00003BAE00000AA800003AA80000000000000003C000000C300000300C0001FFFF803E00007C404422023E00007C01FFFF80000000000008200400000403002000840000001A008000040800000A16800005110000002C8000000A000000 150 255 150
+
+
+Element None HumanForceField 200 200 200 0 1 1 1 1000 Ocean 0 Text None
+
+Element None ShipShield3 250 220 250 0 1 1 1 10000 ShipShield2 0 Text None
+Element None ShipShield2 150 100 150 0 1 1 1 10000 ShipShield 0 Text None
+Element None ShipShield 220 200 220 0 1 1 1 10000 HumanForceField 0 Text None
+
+Interaction ShipCenter ShipShield3 ShipShield3 ShipCenter 12000
+Interaction ShipCenter ShipShield2 ShipShield2 ShipCenter 12000
+Interaction ShipCenter ShipShield ShipShield ShipCenter 12000
+Interaction ShipCenter HumanForceField HumanForceField ShipCenter 12000
+InteractionTrigger ShipCenter Ocean <DRAW ELEMENT:ShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger ShipCenter ShipShield2 <DRAW ELEMENT:ShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:ShipShield2> 10000
+InteractionTrigger ShipCenter ShipShield <DRAW ELEMENT:ShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:ShipShield> 10000
+InteractionTrigger ShipCenter HumanForceField <DRAW ELEMENT:ShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:HumanForceField> 10000
+InteractionTrigger ShipShield3 Ocean <DRAW ELEMENT:ShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger ShipShield3 ShipShield <DRAW ELEMENT:ShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:ShipShield> 10000
+InteractionTrigger ShipShield3 HumanForceField <DRAW ELEMENT:ShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:HumanForceField> 10000
+InteractionTrigger ShipShield2 Ocean <DRAW ELEMENT:ShipShield REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger ShipShield2 HumanForceField <DRAW ELEMENT:ShipShield REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:HumanForceField> 10000
+InteractionTrigger ShipShield Ocean <DRAW ELEMENT:HumanForceField REPLACEFILLEDCIRCLE X1 Y1 5 0 ELEMENT:Ocean> 20000
+
+Interaction ShipShield Ocean ShipShield HumanLife 20
+Interaction ShipShield Ocean ShipShield HumanLife 2
+
+
+Interaction ShipShield Ocean LandCliff1 HumanLife 100
+Interaction ShipShield Ocean LandCliff2 HumanLife 100
+
+
+// How it comes
+Interaction Shuttle Ocean ShipCenter ShipCenter 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// The Demonic Race
+Element None DemonicCorpse 255 255 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction DemonicCorpse Land Land Land 32768
+Interaction DemonicCorpse DarkTemple Land Land 32768
+Interaction DemonicCorpse Ocean Ocean Ocean 32768
+Interaction DemonicCorpse Clear Clear Clear 32768
+Interaction DemonicCorpse Moon Moon Moon 32768
+Interaction DemonicCorpse Crater Crater Crater 32768
+Interaction DemonicCorpse Desert Desert Desert 32768
+Interaction DemonicCorpse Trees Trees Trees 32768
+Interaction DemonicCorpse Tundra Tundra Tundra 32768
+Interaction DemonicCorpse HellOnyx HellOnyx HellOnyx 32768
+
+// Darknesses
+
+Interaction LandDarkness DemonicLife DemonicLife DemonicLife 32
+Interaction LandDarkness LandCliff DemonicLife DemonicLife 32
+
+
+Element None LandDarkness 10 150 10 0 1 1 1 1000 Land 0 Text Clear
+Element None IceDarkness 0 0 55 0 1 1 1 1000 Tundra 0 Text Clear
+Element None TreesDarkness 0 55 0 0 1 1 1 100 Trees 0 Text Clear
+Element None DarkTempleDarkness 0 0 0 0 1 1 1 3000 DarkTemple 0 Text Clear
+Element None HadesCentralDarkness 200 200 200 0 1 1 1 1000 HadianMass 0 Text Clear
+Element None DesertDarkness 255 0 255 0 1 1 1 1000 Desert 0 Text Clear
+Element None MoonDarkness 70 0 70 0 1 1 1 1000 Moon 0 Text Clear
+Element None BlastyShadowDarkness 70 0 70 0 1 1 1 1000 HellSender 0 Text Clear
+Element None HadesPortDarkness 70 0 70 0 1 1 1 1000 HadesPort 0 Text Clear
+Element None OceanDarkness 60 0 60 0 1 1 1 800 Ocean 0 Text Clear
+
+
+
+
+
+Element Life DemonicLife 1 1 1 0 1 1 1 5 DemonicCorpse 0 HEX 0000000000000000000000000000000000000000300000003800000025CF7738255554A0259154B83D117488000000380000000000000000000000000000000028A28A2828A28A2838E38E3838E38E3845145144451451444514514438E38E381041041038E38E3855555554104104101041041028A28A2828A28A2800000000 183 0 174
+Element None Hada 0 255 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction DemonicLife Land LandDarkness DemonicLife 5000
+Interaction DemonicLife Tundra IceDarkness DemonicLife 2000
+Interaction DemonicLife Trees TreesDarkness DemonicLife 300
+Interaction DemonicLife DarkTemple DarkTempleDarkness DemonicLife 5000
+Interaction DemonicLife Desert DesertDarkness DemonicLife 5000
+Interaction DemonicLife Desert Desert Desert 15
+Interaction DemonicLife HellSender DarkTempleDarkness DemonicLife 5000
+Interaction DemonicLife HadesPort BlastyShadowDarkness DemonicLife 5000
+Interaction DemonicLife HadianMass HadesCentralDarkness DemonicLife 5000
+Interaction DemonicLife HadesCentral HadesCentralDarkness DemonicLife 5000
+
+Element None HellShipLife 190 0 190 0 1 1 1 10 DemonicCorpse 0 HEX
+000000007574EEEE4554AA8A6274AECE4544AC8C7546EAEA0000000000618600005145000049248000492
+480005145000061860000514500005145000049248000492480004924800051450000514500006186007F41040
+0494104007EFFFFF82B9249203FFFFFC03EAAAF003FFFFE003FFFFC0063FFE000601F800000000000 255
+255 255
+
+Interaction DemonicLife Ocean HadesPortDarkness HellShipLife 2000
+Interaction HellShipLife HadesPort OceanDarkness DemonicLife 2000
+Interaction HellShipLife Ocean OceanDarkness HellShipLife 5000
+
+Element None DarkHadeShipField 80 20 20 0 1 1 1 1 DarkHadeShipField2 0 HEX
+00000000240030002401A0003DD530002555A00025DCB00000018000000C0000001200000021180000409800
+008058000100380001003800020018000200180004000800040008000FFFFC000800040008000400080004000
+800040008000400081C04000814040008140400081404000FFFFC00000000000000000000000000 255 255 255
+Element None DarkHadeShipField2 80 20 20 0 1 1 1 0 Clear 0 Text DarkHadeShipField
+Element None DarkPit 190 0 190 0 1 1 1 10 Land 0 Text Clear
+Element None DeathValley 70 10 70 0 1 1 1 1 DarkTemple 0 Text Clear
+Element None Nightmares 70 10 70 0 1 1 1 0 Clear 0 Text Clear
+Element None DarkTemple 70 10 70 0 1 1 1 1 DarkTemple2 0 HEX 00000010777500104225001042220010422200FE77220082000000AA03F80082020800AA02480082024800AA
+020800820248CCAA0248CC820208CCAA0248CC820248CCAA021FFFE20210002A025000220253332A021333220210002A025000220253332A021333220210002A025000220253332A021333220210002A02500022 255 255 255
+
+
+Element None DarkTemple2 180 0 180 0 1 1 1 1 HadesCentral 0 Text DarkTemple
+Element None Cursedurbs 70 0 70 0 1 1 1 0 Clear 0 Text Clear
+Element None HadesCentral 50 50 50 0 1 1 1 10 DarkTemple 0 Text Clear
+Element None HadianMass 60 40 40 0 1 1 1 10 DarkTemple2 0 Text Clear
+Element None HellSender 225 64 225 0 1 1 1 0 Clear 0 Text Clear
+Element None HadesPort 250 50 250 0 1 1 1 1 ArchDemon 0 Text Clear
+
+
+Interaction DarkTempleDarkness DarkTemple DarkTemple DarkTemple 5
+
+
+Interaction HellShipLife LandCliff1 DarkTemple DarkTemple 30
+Interaction OceanDarkness LandCliff1 DarkTemple DarkTemple 30
+Interaction HellShipLife LandCliff2 DarkTemple DarkTemple 30
+Interaction OceanDarkness LandCliff2 DarkTemple DarkTemple 30
+
+Interaction DarkTemple LandCliff1 DarkTemple DarkTemple 30
+Interaction DarkPit LandCliff1 DarkTemple DarkTemple 30
+Interaction DarkTemple LandCliff2 DarkTemple DarkTemple 30
+Interaction DarkPit LandCliff2 DarkTemple DarkTemple 30
+Interaction DarkPit DarkHadeShipField DarkPit DarkTemple 30
+Interaction HadesPort Ocean HadesPort DemonicLife 30
+Interaction DarkTemple Ocean HadesPort Ocean 7000
+Interaction DarkTemple DarkPit DarkTemple DarkTemple 3
+Interaction DarkTemple DarkHadeShipField DarkTemple DarkTemple 3
+Interaction DarkTemple DemonicLife DarkTemple DarkTemple 3
+Interaction DemonicLife DemonicLife DarkTemple Cursedurbs 5
+Interaction DemonicLife DemonicLife DarkHadeShipField DarkPit 10
+Interaction DarkHadeShipField Land DarkHadeShipField DarkPit 100
+Interaction DarkHadeShipField2 Land DarkHadeShipField2 DarkPit 100
+Interaction DarkHadeShipField2 DarkHadeShipField DarkHadeShipField2 DarkHadeShipField2 10
+Interaction DemonicLife DarkPit DarkPit DemonicLife 1000
+Interaction DemonicLife DarkPit DarkHadeShipField DarkPit 10
+Interaction DemonicLife DarkHadeShipField DarkHadeShipField2 DarkHadeShipField 10
+Interaction DemonicLife DarkHadeShipField2 DeathValley DeathValley 10
+Interaction DeathValley Land DeathValley DeathValley 1
+Interaction DeathValley Land DeathValley Nightmares 100
+Interaction DeathValley DarkHadeShipField2 DeathValley DeathValley 1000
+Interaction DemonicLife Nightmares Nightmares DemonicLife 1000
+Interaction DemonicLife DarkHadeShipField DarkHadeShipField DemonicLife 10
+Interaction DemonicLife DeathValley DarkTemple DarkTemple 1
+Interaction DarkTemple DeathValley DarkTemple DarkTemple 10
+Interaction DarkTemple Land DarkTemple Cursedurbs 100
+Interaction Cursedurbs Land Land DemonicLife 1
+Interaction Cursedurbs Land Cursedurbs Nightmares 10
+Interaction DarkHadeShipField DarkPit DarkHadeShipField DemonicLife 1
+Interaction DarkHadeShipField2 DarkPit DarkHadeShipField2 DemonicLife 12
+Interaction DeathValley Nightmares DeathValley DemonicLife 10
+Interaction DarkTemple Cursedurbs DarkTemple DemonicLife 100
+Interaction DarkTemple DarkHadeShipField DarkTemple DarkTemple 10
+Interaction DarkTemple DarkPit DarkTemple DarkTemple 10
+Interaction DarkTemple Nightmares DarkTemple DarkTemple 10
+Interaction DarkTemple DarkHadeShipField DarkTemple2 DarkTemple2 10
+Interaction DarkTemple HadesCentral DemonicLife HadianMass 10
+Interaction HadesCentral DarkTemple HadesCentral HadesCentral 20
+Interaction HadesCentral DarkTemple HadesCentral HadianMass 30
+Interaction HadesCentral HadianMass HadesCentral HadesCentral 1
+Interaction HadianMass HadesCentral HadianMass HadesCentral 10
+Interaction HadesCentral DeathValley HadesCentral DarkTemple 1
+Interaction HadianMass LandCliff1 HadianMass HellSender 100
+Interaction HadesCentral LandCliff1 HadianMass HellSender 100
+Interaction HadesPort LandCliff2 HadesPort HadesPort 1
+
+Element None NightmareLauncher 255 0 255 0 1 1 1 0 Clear 0 Text Clear
+Element None SpiritSender 255 0 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction Cursedurbs LandCliff1 NightmareLauncher SpiritSender 32768
+Interaction SpiritSender LandCliff2 SpiritSender ArchDemon 1
+Interaction SpiritSender Troposphere SpiritSender ArchDemon 1
+
+Element Earth ArchDemon 200 200 200 0 1 1 1 1 DemonicCorpse 0 HEX
+000000006E4DB55C4AA925546EE9B75C28A9155068ADB55000000000000000000000000007C00000083800
+0008C600000921C000053C3000C5200E0024C003809A1C027C4623E344244102C44623E3449A1C027C24C0
+0380C5200E00053C30000921C00008C600000838000007C0000000000000000000000000000000000000 255
+
+255 255
+Element None ArchDemonDarkness 1 1 2 0 1 1 1 1000 Ocean 0 Text Clear
+Element None ArchDemonDarkness* 1 1 2 0 1 1 1 2000 DemonicFighter 0 Text Clear
+Element None ArchDemonT 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ArchDemonS 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ArchDemonM 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ArchDemonM* 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction ArchDemon Ocean ArchDemonDarkness ArchDemon 20000
+Interaction ArchDemon Clear ArchDemonDarkness* ArchDemon 20000
+Interaction ArchDemon Troposphere ArchDemonDarkness ArchDemonT 32768
+Interaction ArchDemonT Stratosphere Stratosphere ArchDemonS 32768
+Interaction ArchDemonS Mesosphere Mesosphere ArchDemonM 32768
+Interaction ArchDemonM Magnetosphere Magnetosphere ArchDemonM* 32768
+Interaction ArchDemonM* Clear Magnetosphere ArchDemon 32768
+Interaction ArchDemon Magnetosphere CoreForm CoreForm 10
+Interaction ArchDemon Moon CoreForm CoreForm 10
+Interaction ArchDemon LandCliff2 OceanDarkness ArchDemon 6000
+Interaction ArchDemon LandCliff1 LandCliff2 ArchDemon 6000
+Interaction ArchDemon Land LandDarkness ArchDemon 6000
+
+Element None StationCore 70 0 70 0 1 1 1 0 Troposphere 0 Text hi
+255
+Element None CoreForm 75 75 75 0 1 1 1 5000 StationCore 1 Text CoreForm
+Element None DemonicJadedStation 250 250 250 0 1 1 1 0 Troposphere 11 Text DemonicJadedStation
+Element None StationForm 100 50 100 0 1 1 1 5000 DemonicJadedStation 1 Text StationForm
+Element None FormSite 150 150 150 0 1 1 1 1 DemonicJadedStation 10 Text FormSite
+
+Interaction DemonicJadedStation Clear DemonicJadedStation BlastyShadowForm 1
+Interaction BlastyShadowForm Clear BlastyShadowForm BlastyShadowForm 4000
+Interaction JadedBlastyShadow Clear JadedBlastyShadow FormSite 30
+Interaction FormSite Clear ArchDemon Clear 1
+
+
+
+
+
+Element None JadedBlastyShadow 200 200 200 0 1 1 1 10 JadedDarkTemple 5 Text JadedBlastyShadow
+Element None BlastyShadowForm 150 150 150 0 1 1 1 6000 JadedBlastyShadow 1 Text BlastyShadowForm
+
+Interaction ArchDemon Troposphere CoreForm CoreForm 32000
+Interaction CoreForm Troposphere CoreForm CoreForm 5000
+Interaction CoreForm Stratosphere CoreForm CoreForm 5000
+Interaction CoreForm Mesosphere CoreForm CoreForm 5000
+
+Interaction StationForm Clear StationForm StationForm 3500
+
+Interaction StationCore Clear StationCore StationForm 100
+Interaction StationCore Troposphere StationCore CoreForm 50
+Interaction StationCore Stratosphere StationCore CoreForm 50
+Interaction StationCore Mesosphere StationCore CoreForm 50
+Interaction DemonicJadedStation Troposphere DemonicJadedStation CoreForm 3000
+Interaction DemonicJadedStation Stratosphere DemonicJadedStation CoreForm 3000
+Interaction DemonicJadedStation Mesosphere DemonicJadedStation CoreForm 3000
+
+
+
+Interaction JadedBlastyShadow DemonicJadedStation JadedBlastyShadow JadedBlastyShadow 320
+Interaction DemonicJadedStation JadedBlastyShadow DemonicJadedStation DemonicJadedStation 320
+
+Interaction JadedBlastyShadow FormSite JadedBlastyShadow JadedBlastyShadow 320
+Interaction FormSite JadedBlastyShadow FormSite FormSite 320
+
+Interaction Land DemonicLife Land Land 32
+
+
+
+Element None OceanSparkle 0 150 250 0 1 1 1 3000 Ocean 1 Text BlastyShadowForm
+Interaction OceanSparkle Ocean Continent* Continent* 1
+
+
+Element None OceanCurrent 0 50 150 0 1 1 1 20000 OceanSparkle 0 Text Clear
+Interaction Ocean OceanCurrent Ocean Ocean 3200
+Interaction OceanCurrent Ocean OceanCurrent OceanCurrent 3300
+
+Interaction OceanSparkle Troposphere Continent* Troposhere 1
+
+
+
+
+Interaction Planet* Ocean OceanCurrent Planet* 10000
+
+Interaction Land OceanSparkle Land Land 10000
+
+
+InteractionTrigger Ocean OceanSparkle <DRAW ELEMENT:Continent REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2000
+InteractionTrigger Ocean OceanCurrent <DRAW ELEMENT:Continent REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2000
+
+
+Element None JadedDarkTemple 250 250 250 0 1 1 1 10000 JadedBlastyShadow 5 Text JadedBlastyShadow
+Element None JadedColony 150 150 150 0 1 1 1 100 JadedDarkTemple 5 Text JadedBlastyShadow
+
+Interaction JadedDarkTemple DemonicJadedStation JadedDarkTemple JadedDarkTemple 320
+Interaction DemonicJadedStation JadedDarkTemple DemonicJadedStation DemonicJadedStation 320
+
+Interaction JadedDarkTemple FormSite JadedDarkTemple JadedDarkTemple 3
+Interaction FormSite JadedBlastyShadow FormSite FormSite 3
+
+Interaction ArchDemonDarkness Clear DemonicFighter DemonicFighter 100
+Interaction ArchDemon Clear ArchDemon DemonicFighter 100
+
+
+
+
+
+
+
+
+Element Earth DemonicFighter 220 20 220 0 1 1 10 DemonicFighter2 50 Text Hi
+Element None DemonicFighter2 255 255 255 0 1 1 1 70000 Clear 4 Text DemonicFighter2
+
+
+
+
+Interaction DemonicFighter Clear DemonicFighter2 DemonicFighter 4500
+Interaction DemonicFighter Clear DemonicFighter3 Clear 1
+Interaction DemonicFighter2 Clear DemonicFighter3 Clear 1
+Interaction DemonicFighter Clear DemonicFighter DemonicFighter 4
+
+Interaction DemonicFighter2 Clear Clear Clear 9000
+Interaction DemonicFighter Clear Clear Clear 1000
+
+
+
+Element None DemonicFighter3 255 0 0 0 1 1 1 1000 DemonicFighter 50 HEX
+
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F
+
+0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C02555546
+
+0200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 250 250
+
+0
+
+Interaction DemonicFighter3 Clear DemonicFighter3 EarthShot 10
+Interaction ArchDemon Clear EarthShot EarthShot 60
+
+Interaction DemonicFighter3 All DemonicFighter3 DemonicFighter3 60
+Interaction All DemonicFighter3 All All 60
+
+Interaction DemonicFighter3 Clear DemonicFighter DemonicFighter 400
+Interaction DemonicFighter3 DemonicFighter FilthLord 400
+
+
+Interaction DemonicFighter Clear DemonicJadedStation DemonicJadedStation 1
+Interaction DemonicJadedStation Clear Clear Clear 1
+
+
+Interaction DemonicFighter Asteroid StationCore StationCore 100
+Interaction DemonicFighter2 Asteroid StationCore StationCore 100
+Interaction ArchDemon Asteroid StationCore StationCore 100
+Interaction ArchDemonDarkness* Asteroid StationCore StationCore 100
+
+
+Interaction DemonicFighter3 Clear ArchDemon ArchDemon 1
+Interaction DemonicLife Clear ArchDemon ArchDemon 1999
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Interaction DemonicLife Trees ForestFire ForestFire 1
+
+
+
+
+// Demon Master DarkShip
+
+Element None DarkShipCenter 20 0 25 0 1 1 1 0 DarkShipShield3 0 HEX 0000000045DD5DC06D4951405549D9C04549518045C95D40000000003AAE000022AA00003BAE00000AA800003AA80000000000000003C000000C300000300C0001FFFF803E00007C404422023E00007C01FFFF80000000000008200400000403002000840000001A008000040800000A16800005110000002C8000000A000000 150 255 150
+
+
+Element None DemonForceField 5 0 5 0 1 1 1 1000 Ocean 0 Text None
+
+Element None DarkShipShield3 20 20 20 0 1 1 1 10000 DarkShipShield2 0 Text None
+Element None DarkShipShield2 250 190 250 0 1 1 1 10000 DarkShipShield 0 Text None
+Element None DarkShipShield 250 0 250 0 1 1 1 10000 DemonForceField 0 Text None
+
+Interaction DarkShipCenter DarkShipShield3 DarkShipShield3 DarkShipCenter 12000
+Interaction DarkShipCenter DarkShipShield2 DarkShipShield2 DarkShipCenter 12000
+Interaction DarkShipCenter DarkShipShield DarkShipShield DarkShipCenter 12000
+Interaction DarkShipCenter DemonForceField DemonForceField DarkShipCenter 12000
+InteractionTrigger DarkShipCenter Ocean <DRAW ELEMENT:DarkShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger DarkShipCenter DarkShipShield2 <DRAW ELEMENT:DarkShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DarkShipShield2> 10000
+InteractionTrigger DarkShipCenter DarkShipShield <DRAW ELEMENT:DarkShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DarkShipShield> 10000
+InteractionTrigger DarkShipCenter DemonForceField <DRAW ELEMENT:DarkShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DemonForceField> 10000
+InteractionTrigger DarkShipShield3 Ocean <DRAW ELEMENT:DarkShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger DarkShipShield3 DarkShipShield <DRAW ELEMENT:DarkShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DarkShipShield> 10000
+InteractionTrigger DarkShipShield3 DemonForceField <DRAW ELEMENT:DarkShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DemonForceField> 10000
+InteractionTrigger DarkShipShield2 Ocean <DRAW ELEMENT:DarkShipShield REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger DarkShipShield2 DemonForceField <DRAW ELEMENT:DarkShipShield REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DemonForceField> 10000
+InteractionTrigger DarkShipShield Ocean <DRAW ELEMENT:DemonForceField REPLACEFILLEDCIRCLE X1 Y1 5 0 ELEMENT:Ocean> 20000
+
+Interaction DarkShipShield Ocean DarkShipShield DemonLife 20
+Interaction DarkShipShield Ocean DarkShipShield DemonLife 2
+
+
+Interaction DarkShipShield Ocean LandCliff1 DemonLife 100
+Interaction DarkShipShield Ocean LandCliff2 DemonLife 100
+
+
+
+// How it comes
+Interaction ArchDemon Ocean DarkShipCenter DarkShipCenter 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// The Dragon Race
+Element None DragonCorpse 255 255 255 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction DragonCorpse Land Land Land 32768
+Interaction DragonCorpse DragonCity Land Land 32768
+Interaction DragonCorpse Ocean Ocean Ocean 32768
+Interaction DragonCorpse Clear Clear Clear 32768
+Interaction DragonCorpse Moon Moon Moon 32768
+Interaction DragonCorpse Crater Crater Crater 32768
+Interaction DragonCorpse Desert Desert Desert 32768
+Interaction DragonCorpse Trees Trees Trees 32768
+Interaction DragonCorpse Tundra Tundra Tundra 32768
+Interaction DragonCorpse DragonOnyx DragonOnyx DragonOnyx 32768
+
+Interaction DragonLife Trees DragonLife ForestFire 32000
+
+Interaction LandFlame DragonLife DragonLife DragonLife 32
+Interaction LandFlame LandCliff DragonLife DragonLife 32
+
+
+Element None LandFlame 150 50 10 0 1 1 1 1000 Land 0 Text Clear
+Element None IceFlame 255 0 55 0 1 1 1 1000 Tundra 0 Text Clear
+Element None TreesFlame 160 55 0 0 1 1 1 100 Trees 0 Text Clear
+Element None DragonCityFlame 230 1 0 0 1 1 1 3000 DragonCity 0 Text Clear
+Element None WyvernAreaFlame 250 120 0 0 1 1 1 1000 OldDragonMass 0 Text Clear
+Element None DesertFlame 255 0 0 0 1 1 1 1000 Desert 0 Text Clear
+Element None MoonFlame 70 0 70 0 1 1 1 1000 Moon 0 Text Clear
+Element None BlastyDragonFlame 250 0 70 0 1 1 1 1000 DragonReleaser 0 Text Clear
+Element None WyvernPortFlame 70 0 70 0 1 1 1 1000 WyvernPort 0 Text Clear
+Element None OceanFlame 230 0 10 0 1 1 1 800 Ocean 0 Text Clear
+
+250 100 10
+250 200 10   250 160 10
+
+
+Element Life DragonLife 250 150 1 0 1 1 1 5 DragonCorpse 0 HEX 0000000000000000000000000000000000000000300000003800000025CDDDCE25555528251555263D1DDD220000400E000040000000C0000000000028A28A2828A28A2838E38E3838E38E3838E38E3845145144451451444514514438E38E381041041038E38E3855555554104104101041041028A28A2828A28A2800000000 255 0 0
+Element None SubDragon 250 150 1 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction DragonLife Land LandFlame DragonLife 5000
+Interaction DragonLife Tundra IceFlame DragonLife 2000
+Interaction DragonLife Trees TreesFlame DragonLife 300
+Interaction DragonLife DragonCity DragonCityFlame DragonLife 5000
+Interaction DragonLife Desert DesertFlame DragonLife 5000
+Interaction DragonLife Desert Desert Desert 15
+Interaction DragonLife DragonReleaser DragonCityFlame DragonLife 5000
+Interaction DragonLife WyvernPort BlastyDragonFlame DragonLife 5000
+Interaction DragonLife OldDragonMass WyvernAreaFlame DragonLife 5000
+Interaction DragonLife WyvernArea WyvernAreaFlame DragonLife 5000
+
+
+
+Element None DragonShipLife 200 200 0 0 1 1 1 10 DragonCorpse 0 HEX
+000000007574EEEE4554AA8A6274AECE4544AC8C7546EAEA0000000000618600005145000049248000492
+480005145000061860000514500005145000049248000492480004924800051450000514500006186007F41040
+0494104007EFFFFF82B9249203FFFFFC03EAAAF003FFFFE003FFFFC0063FFE000601F800000000000 255
+255 255
+
+Interaction DragonLife Ocean WyvernPortFlame DragonShipLife 2000
+Interaction DragonShipLife WyvernPort OceanFlame DragonLife 2000
+Interaction DragonShipLife Ocean OceanFlame DragonShipLife 5000
+
+Element None MagmaMasterShip 250 20 20 0 1 1 1 1 MagmaMasterShip2 0 HEX
+00000000240030002401A0003DD530002555A00025DCB00000018000000C0000001200000021180000409800
+008058000100380001003800020018000200180004000800040008000FFFFC000800040008000400080004000
+800040008000400081C04000814040008140400081404000FFFFC00000000000000000000000000 255 255 255
+Element None MagmaMasterShip2 180 20 20 0 1 1 1 0 Clear 0 Text MagmaMasterShip
+Element None MagmaPit 190 0 0 0 1 1 1 10 Land 0 Text Clear
+Element None DragonValley 170 10 70 0 1 1 1 1 DragonCity 0 Text Clear
+Element None LavaCave 170 10 0 0 1 1 1 0 Clear 0 Text Clear
+Element None DragonCity 140 0 0 0 1 1 1 1 DragonCity2 0 HEX 00000010777500104225001042220010422200FE77220082000000AA03F80082020800AA02480082024800AA
+020800820248CCAA0248CC820208CCAA0248CC820248CCAA021FFFE20210002A025000220253332A021333220210002A025000220253332A021333220210002A025000220253332A021333220210002A02500022 255 255 255
+
+
+Element None DragonCity2 180 0 0 0 1 1 1 1 WyvernArea 0 Text DragonCity
+Element None SubCitadel 200 70 0 0 1 1 1 0 Clear 0 Text Clear
+Element None WyvernArea 250 0 0 0 1 1 1 10 DragonCity 0 Text Clear
+Element None OldDragonMass 250 180 40 0 1 1 1 10 DragonCity2 0 Text Clear
+Element None DragonReleaser 225 64 65 0 1 1 1 0 Clear 0 Text Clear
+Element None WyvernPort 250 50 0 0 1 1 1 1 ArchDragon 0 Text Clear
+
+
+Interaction DragonCityFlame DragonCity DragonCity DragonCity 5
+
+
+Interaction DragonShipLife LandCliff1 DragonCity DragonCity 30
+Interaction OceanFlame LandCliff1 DragonCity DragonCity 30
+Interaction DragonShipLife LandCliff2 DragonCity DragonCity 30
+Interaction OceanFlame LandCliff2 DragonCity DragonCity 30
+
+Interaction DragonCity LandCliff1 DragonCity DragonCity 30
+Interaction MagmaPit LandCliff1 DragonCity DragonCity 30
+Interaction DragonCity LandCliff2 DragonCity DragonCity 30
+Interaction MagmaPit LandCliff2 DragonCity DragonCity 30
+Interaction MagmaPit MagmaMasterShip MagmaPit DragonCity 30
+Interaction WyvernPort Ocean WyvernPort DragonLife 30
+Interaction DragonCity Ocean WyvernPort Ocean 7000
+Interaction DragonCity MagmaPit DragonCity DragonCity 3
+Interaction DragonCity MagmaMasterShip DragonCity DragonCity 3
+Interaction DragonCity DragonLife DragonCity DragonCity 3
+Interaction DragonLife DragonLife DragonCity SubCitadel 5
+Interaction DragonLife DragonLife MagmaMasterShip MagmaPit 10
+Interaction MagmaMasterShip Land MagmaMasterShip MagmaPit 100
+Interaction MagmaMasterShip2 Land MagmaMasterShip2 MagmaPit 100
+Interaction MagmaMasterShip2 MagmaMasterShip MagmaMasterShip2 MagmaMasterShip2 10
+Interaction DragonLife MagmaPit MagmaPit DragonLife 1000
+Interaction DragonLife MagmaPit MagmaMasterShip MagmaPit 10
+Interaction DragonLife MagmaMasterShip MagmaMasterShip2 MagmaMasterShip 10
+Interaction DragonLife MagmaMasterShip2 DragonValley DragonValley 10
+Interaction DragonValley Land DragonValley DragonValley 1
+Interaction DragonValley Land DragonValley LavaCave 100
+Interaction DragonValley MagmaMasterShip2 DragonValley DragonValley 1000
+Interaction DragonLife LavaCave LavaCave DragonLife 1000
+Interaction DragonLife MagmaMasterShip MagmaMasterShip DragonLife 10
+Interaction DragonLife DragonValley DragonCity DragonCity 1
+Interaction DragonCity DragonValley DragonCity DragonCity 10
+Interaction DragonCity Land DragonCity SubCitadel 100
+Interaction SubCitadel Land Land DragonLife 1
+Interaction SubCitadel Land SubCitadel LavaCave 10
+Interaction MagmaMasterShip MagmaPit MagmaMasterShip DragonLife 1
+Interaction MagmaMasterShip2 MagmaPit MagmaMasterShip2 DragonLife 12
+Interaction DragonValley LavaCave DragonValley DragonLife 10
+Interaction DragonCity SubCitadel DragonCity DragonLife 100
+Interaction DragonCity MagmaMasterShip DragonCity DragonCity 10
+Interaction DragonCity MagmaPit DragonCity DragonCity 10
+Interaction DragonCity LavaCave DragonCity DragonCity 10
+Interaction DragonCity MagmaMasterShip DragonCity2 DragonCity2 10
+Interaction DragonCity WyvernArea DragonLife OldDragonMass 10
+Interaction WyvernArea DragonCity WyvernArea WyvernArea 20
+Interaction WyvernArea DragonCity WyvernArea OldDragonMass 30
+Interaction WyvernArea OldDragonMass WyvernArea WyvernArea 1
+Interaction OldDragonMass WyvernArea OldDragonMass WyvernArea 10
+Interaction WyvernArea DragonValley WyvernArea DragonCity 1
+Interaction OldDragonMass LandCliff1 OldDragonMass DragonReleaser 100
+Interaction WyvernArea LandCliff1 OldDragonMass DragonReleaser 100
+Interaction WyvernPort LandCliff2 WyvernPort WyvernPort 1
+
+Element None FuelBurnerLauncher 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None SpiritReleaser 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+
+Interaction SubCitadel LandCliff1 FuelBurnerLauncher SpiritReleaser 32768
+Interaction SpiritReleaser LandCliff2 SpiritReleaser ArchDragon 1
+Interaction SpiritReleaser Troposphere SpiritReleaser ArchDragon 1
+
+Element Earth ArchDragon 250 250 20 0 1 1 1 1 DragonCorpse 0 HEX
+000000006E4DB55C4AA925546EE9B75C28A9155068ADB55000000000000000000000000007C00000083800
+0008C600000921C000053C3000C5200E0024C003809A1C027C4623E344244102C44623E3449A1C027C24C0
+0380C5200E00053C30000921C00008C600000838000007C0000000000000000000000000000000000000 255 255 255
+Element None ArchDragonFlame 250 150 0 0 1 1 1 500 Ocean 0 Text Clear
+Element None ArchDragonFlame* 250 250 20 0 1 1 1 2000 DragonFighter 0 Text Clear
+Element None ArchDragonT 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ArchDragonS 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ArchDragonM 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+Element None ArchDragonM* 255 0 0 0 1 1 1 0 Clear 0 Text Clear
+
+
+
+Interaction ArchDragon Ocean ArchDragonFlame ArchDragon 20000
+Interaction ArchDragon Clear ArchDragonFlame* ArchDragon 20000
+Interaction ArchDragon Troposphere ArchDragonFlame ArchDragonT 32768
+Interaction ArchDragonT Stratosphere Stratosphere ArchDragonS 32768
+Interaction ArchDragonS Mesosphere Mesosphere ArchDragonM 32768
+Interaction ArchDragonM Magnetosphere Magnetosphere ArchDragonM* 32768
+Interaction ArchDragonM* Clear Magnetosphere ArchDragon 32768
+Interaction ArchDragon Magnetosphere PalaceForm PalaceForm 10
+Interaction ArchDragon Moon PalaceForm PalaceForm 10
+Interaction ArchDragon LandCliff2 OceanFlame ArchDragon 6000
+Interaction ArchDragon LandCliff1 LandCliff2 ArchDragon 6000
+Interaction ArchDragon Land LandFlame ArchDragon 6000
+
+Element None TrainingGroundsPalace 70 0 70 0 1 1 1 0 Troposphere 0 Text hi
+255
+Element None PalaceForm 75 75 75 0 1 1 1 5000 TrainingGroundsPalace 1 Text PalaceForm
+Element None DragonLavaTrainingGrounds 250 250 250 0 1 1 1 0 Troposphere 11 Text DragonLavaTrainingGrounds
+Element None TrainingGroundsForm 100 50 100 0 1 1 1 5000 DragonLavaTrainingGrounds 1 Text TrainingGroundsForm
+Element None FormTrainingGrounds 150 150 150 0 1 1 1 1 DragonLavaTrainingGrounds 10 Text FormTrainingGrounds
+
+Interaction DragonLavaTrainingGrounds Clear DragonLavaTrainingGrounds BlastyDragonForm 1
+Interaction BlastyDragonForm Clear BlastyDragonForm BlastyDragonForm 4000
+Interaction LavaBlastyDragon Clear LavaBlastyDragon FormTrainingGrounds 30
+Interaction FormTrainingGrounds Clear ArchDragon Clear 1
+
+
+
+
+
+Element None LavaBlastyDragon 200 100 0 0 1 1 1 10 HolyCitadel 5 Text LavaBlastyDragon
+Element None BlastyDragonForm 150 150 1 0 1 1 1 6000 LavaBlastyDragon 1 Text BlastyDragonForm
+
+Interaction ArchDragon Troposphere PalaceForm PalaceForm 32000
+Interaction PalaceForm Troposphere PalaceForm PalaceForm 5000
+Interaction PalaceForm Stratosphere PalaceForm PalaceForm 5000
+Interaction PalaceForm Mesosphere PalaceForm PalaceForm 5000
+
+Interaction TrainingGroundsForm Clear TrainingGroundsForm TrainingGroundsForm 3500
+
+Interaction TrainingGroundsPalace Clear TrainingGroundsPalace TrainingGroundsForm 100
+Interaction TrainingGroundsPalace Troposphere TrainingGroundsPalace PalaceForm 50
+Interaction TrainingGroundsPalace Stratosphere TrainingGroundsPalace PalaceForm 50
+Interaction TrainingGroundsPalace Mesosphere TrainingGroundsPalace PalaceForm 50
+Interaction DragonLavaTrainingGrounds Troposphere DragonLavaTrainingGrounds PalaceForm 3000
+Interaction DragonLavaTrainingGrounds Stratosphere DragonLavaTrainingGrounds PalaceForm 3000
+Interaction DragonLavaTrainingGrounds Mesosphere DragonLavaTrainingGrounds PalaceForm 3000
+
+
+
+Interaction LavaBlastyDragon DragonLavaTrainingGrounds LavaBlastyDragon LavaBlastyDragon 320
+Interaction DragonLavaTrainingGrounds LavaBlastyDragon DragonLavaTrainingGrounds DragonLavaTrainingGrounds 320
+
+Interaction LavaBlastyDragon FormTrainingGrounds LavaBlastyDragon LavaBlastyDragon 320
+Interaction FormTrainingGrounds LavaBlastyDragon FormTrainingGrounds FormTrainingGrounds 320
+
+Interaction Land DragonLife Land Land 32
+
+
+
+Interaction Planet* Ocean OceanCurrent Planet* 10000
+
+Interaction Land OceanSparkle Land Land 10000
+
+
+InteractionTrigger Ocean OceanSparkle <DRAW ELEMENT:Continent REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2000
+InteractionTrigger Ocean OceanCurrent <DRAW ELEMENT:Continent REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+ELEMENT:Land> 2000
+
+
+Element None HolyCitadel 250 250 250 0 1 1 1 10000 LavaBlastyDragon 5 Text LavaBlastyDragon
+Element None LavaColony 150 150 150 0 1 1 1 100 HolyCitadel 5 Text LavaBlastyDragon
+
+Interaction HolyCitadel DragonLavaTrainingGrounds HolyCitadel HolyCitadel 320
+Interaction DragonLavaTrainingGrounds HolyCitadel DragonLavaTrainingGrounds DragonLavaTrainingGrounds 320
+
+Interaction HolyCitadel FormTrainingGrounds HolyCitadel HolyCitadel 3
+Interaction FormTrainingGrounds LavaBlastyDragon FormTrainingGrounds FormTrainingGrounds 3
+
+Interaction ArchDragonFlame Clear DragonFighter DragonFighter 100
+Interaction ArchDragon Clear ArchDragon DragonFighter 100
+
+
+
+
+
+
+
+
+Element Earth DragonFighter 220 220 20 0 1 1 10 DragonFighter2 50 Text Hi
+Element None DragonFighter2 255 0 0 0 1 1 1 70000 Clear 4 Text DragonFighter2
+
+
+
+
+Interaction DragonFighter Clear DragonFighter2 DragonFighter 4500
+Interaction DragonFighter Clear DragonFighter3 Clear 1
+Interaction DragonFighter2 Clear DragonFighter3 Clear 1
+Interaction DragonFighter Clear DragonFighter DragonFighter 4
+
+Interaction DragonFighter2 Clear Clear Clear 9000
+Interaction DragonFighter Clear Clear Clear 1000
+
+
+
+Element None DragonFighter3 255 0 0 0 1 1 1 1000 DragonFighter 50 HEX
+
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F
+
+0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C02555546
+
+0200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 250 250
+
+0
+
+Interaction DragonFighter3 Clear DragonFighter3 EarthShot 10
+Interaction ArchDragon Clear EarthShot EarthShot 60
+
+Interaction DragonFighter3 All DragonFighter3 DragonFighter3 60
+Interaction All DragonFighter3 All All 60
+
+Interaction DragonFighter3 Clear DragonFighter DragonFighter 400
+Interaction DragonFighter3 DragonFighter FilthLord 400
+
+
+Interaction DragonFighter Clear DragonLavaTrainingGrounds DragonLavaTrainingGrounds 1
+Interaction DragonLavaTrainingGrounds Clear Clear Clear 1
+
+
+Interaction DragonFighter Asteroid TrainingGroundsPalace TrainingGroundsPalace 100
+Interaction DragonFighter2 Asteroid TrainingGroundsPalace TrainingGroundsPalace 100
+Interaction ArchDragon Asteroid TrainingGroundsPalace TrainingGroundsPalace 100
+Interaction ArchDragonFlame* Asteroid TrainingGroundsPalace TrainingGroundsPalace 100
+
+
+Interaction DragonFighter3 Clear ArchDragon ArchDragon 1
+Interaction DragonLife Clear ArchDragon ArchDragon 1999
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Interaction DragonLife Trees ForestFire ForestFire 1
+
+
+
+
+
+
+// Dragon Master DragonShip
+
+Element None DragonShipCenter 255 255 255 0 1 1 1 0 DragonShipShield3 0 HEX 0000000045DD5DC06D4951405549D9C04549518045C95D40000000003AAE000022AA00003BAE00000AA800003AA80000000000000003C000000C300000300C0001FFFF803E00007C404422023E00007C01FFFF80000000000008200400000403002000840000001A008000040800000A16800005110000002C8000000A000000 150 255 150
+
+
+Element None DragonForceField 250 200 0 0 1 1 1 1000 Ocean 0 Text None
+
+Element None DragonShipShield3 250 250 20 0 1 1 1 10000 DragonShipShield2 0 Text None
+Element None DragonShipShield2 250 0 0 0 1 1 1 10000 DragonShipShield 0 Text None
+Element None DragonShipShield 250 100 0 0 1 1 1 10000 DragonForceField 0 Text None
+
+Interaction DragonShipCenter DragonShipShield3 DragonShipShield3 DragonShipCenter 12000
+Interaction DragonShipCenter DragonShipShield2 DragonShipShield2 DragonShipCenter 12000
+Interaction DragonShipCenter DragonShipShield DragonShipShield DragonShipCenter 12000
+Interaction DragonShipCenter DragonForceField DragonForceField DragonShipCenter 12000
+InteractionTrigger DragonShipCenter Ocean <DRAW ELEMENT:DragonShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger DragonShipCenter DragonShipShield2 <DRAW ELEMENT:DragonShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DragonShipShield2> 10000
+InteractionTrigger DragonShipCenter DragonShipShield <DRAW ELEMENT:DragonShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DragonShipShield> 10000
+InteractionTrigger DragonShipCenter DragonForceField <DRAW ELEMENT:DragonShipShield3 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DragonForceField> 10000
+InteractionTrigger DragonShipShield3 Ocean <DRAW ELEMENT:DragonShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger DragonShipShield3 DragonShipShield <DRAW ELEMENT:DragonShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DragonShipShield> 10000
+InteractionTrigger DragonShipShield3 DragonForceField <DRAW ELEMENT:DragonShipShield2 REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DragonForceField> 10000
+InteractionTrigger DragonShipShield2 Ocean <DRAW ELEMENT:DragonShipShield REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:Ocean> 20000
+InteractionTrigger DragonShipShield2 DragonForceField <DRAW ELEMENT:DragonShipShield REPLACEFILLEDCIRCLE X1 Y1 4 0 ELEMENT:DragonForceField> 10000
+InteractionTrigger DragonShipShield Ocean <DRAW ELEMENT:DragonForceField REPLACEFILLEDCIRCLE X1 Y1 5 0 ELEMENT:Ocean> 20000
+
+Interaction DragonShipShield Ocean DragonShipShield DragonLife 20
+Interaction DragonShipShield Ocean DragonShipShield DragonLife 2
+
+
+Interaction DragonShipShield Ocean LandCliff1 DragonLife 100
+Interaction DragonShipShield Ocean LandCliff2 DragonLife 100
+
+
+// How it comes
+Interaction ArchDragon Ocean DragonShipCenter DragonShipCenter 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Other Important elements/interations
+
+
+Element None Explosion 255 255 255 0 0 0 1 0 Clear 10 Text Pluto
+
+
+InteractionTrigger Explosion All Blast 32768
+InteractionTrigger Explosion All Blast 32768
+REMOVETRIGGER Blast
+ON Blast DRAW ELEMENT:Blast FILLEDCIRCLE X1 Y1 10 
+
+
+
+
+Element None Aftermath 255 2 0 0 1 1 1 1000 Ocean 0 File Blast.BMP
+
+
+
+
+
+
+
+TRIGGER GunPowderexplosion {
+	DRAW 0 FILLEDCIRCLE X2 Y2 (3 RAND 5)
+	FOR dotexplosionraycount FROM 0 TO 2 DO GunPowderexplosionRay (X1 * 70) (Y1 * 70) ((0 - 100) RAND 100) ((0 - 100) RAND 100) (5 RAND 10) 
+}
+
+TRIGGER GunPowderexplosionRay {
+	DRAW elementAftermath POINT ($0 / 50) ($1 / 50)
+	IF ($4 > 0) <TIMER 1 FRAMES GunPowderexplosionRay ($0 - $3) ($1 - $2) ($2 - 1) $3 ($4 - 1)>
+
+
+
+
+
+Element Clear GunPowder 0x244 0x244 0x244 0 0 0 1 0 Clear 400 File gunpowder.bmp
+InteractionTrigger GunPowder Blast GunPowderexplosion 20
+InteractionTrigger Blast All GunPowderexplosion 6000
+EXEC setcustomcolors1 ELEMENT:GunPowder 50 0 0
+}
+
+
+
+
+
+Interaction Clear All Ocean Ocean 32
+Interaction Ocean Clear Ocean Ocean 320000
+
+
+
+
+
+
+
+// Element Clear Blast 255 255 0 0 1 1 1 1000 Blast2 0 File Blast.BMP
+// Element None Blast2 255 205 0 0 1 1 1 1000 Blast4 0 File Blast.BMP
+// Element None Blast4 255 105 0 0 1 1 1 1000 Blast5 0 File Blast.BMP
+// Element None Blast5 255 5 0 0 1 1 1 1000 Clear 0 File Blast.BMP
+
+
+Element None Blast 255 5 0 0 1 1 1 10000 Blast2 0 File Blast.BMP
+Element None Blast2 255 15 0 0 1 1 1 10000 Blast3 0 File Blast.BMP
+Element None Blast3 255 25 0 0 1 1 1 10000 Blast4 0 File Blast.BMP
+Element None Blast4 255 35 0 0 1 1 1 10000 Blast5 0 File Blast.BMP
+Element None Blast5 255 45 0 0 1 1 1 10000 Blast6 0 File Blast.BMP
+Element None Blast6 255 55 0 0 1 1 1 10000 Blast7 0 File Blast.BMP
+Element None Blast7 255 65 0 0 1 1 1 10000 Blast8 0 File Blast.BMP
+Element None Blast8 255 75 0 0 1 1 1 10000 Blast9 0 File Blast.BMP
+Element None Blast9 255 85 0 0 1 1 1 10000 Blast10 0 File Blast.BMP
+Element None Blast10 255 95 0 0 1 1 1 10000 Blast11 0 File Blast.BMP
+Element None Blast11 255 105 0 0 1 1 1 10000 Blast12 0 File Blast.BMP
+Element None Blast12 255 125 0 0 1 1 1 10000 Blast13 0 File Blast.BMP
+Element None Blast13 255 145 0 0 1 1 1 10000 Blast14 0 File Blast.BMP
+Element None Blast14 255 175 0 0 1 1 1 10000 Blast15 0 File Blast.BMP
+Element None Blast15 255 205 0 0 1 1 1 10000 Blast16 0 File Blast.BMP
+Element None Blast16 255 215 0 0 1 1 1 10000 Blast17 0 File Blast.BMP
+Element None Blast17 255 225 0 0 1 1 1 10000 Blast18 0 File Blast.BMP
+Element None Blast18 255 235 0 0 1 1 1 10000 Blast19 0 File Blast.BMP
+Element None Blast19 255 255 0 0 1 1 1 10000 Blast20 0 File Blast.BMP
+Element None Blast20 255 255 255 0 1 1 1 10000 Finisher 0 File Blast.BMP
+
+Element None Finisher 255 0 5 1 1 1 1 35 Clear 0 File erase.bmp
+Interaction Finisher All Ocean Ocean 32
+Interaction Ocean Finisher Ocean Ocean 32000
+
+
+
+Element Clear Dynamite 140 10 10 0 1 1 1 0 Blast 0 HEX 000060000018600040184012621C011B621411197014999D58849DB558808DA058C8EE0158C8B80FC88F98FF82DC81D880EC079C08AC3F304C807E306C03F0706E0780F87A1E80FC563E000C40F80001C1F83C0383F9FF870FFFFC071FFF000F3E7E000F7E4C000F7E0C00CFFC1E0CCFF05E1DFFC01E7F78800C7E00801FFC00 255 215 0
+
+
+Interaction Dynamite All Blast Blast 1000
+InteractionTrigger Dynamite Blast <DRAW ELEMENT:Blast REPLACEFILLEDCIRCLE X2 Y2 0 0
+
+
+
+
+
+
+TRIGGER Explosion3 {
+          IF ($1 != 0) <DRAW $1 REPLACEFILLEDCIRCLE $1 $2 ($4 - 1) 0 $0>
+          DRAW $0 CIRCLE $2 $3 $4
+          IF ($4 < $5) {
+          TIMER 1 FRAMES Explosion3 $0 $1 $2 $3 ($4 + 1) $5
+          }
+}
+
+
+
+
+
+TRIGGER Explosion4 {
+          IF ($1 != 0) <DRAW $1 REPLACEFILLEDCIRCLE $2 $3 ($4 - 1) 0 $0>
+          DRAW $0 CIRCLE $2 $3 $4
+          IF ($3 > $4) {
+          TIMER 1 FRAMES Explosion4 $0 $1 $2 $3 ($4 + 1) $5
+          }
+}
+
+
+
+
+
+
+Element None Blast 250 10 10 0 1 1 1 0 Clear 0 File Blast.BMP
+InteractionTrigger Dynamite Blast <EXEC Explosion3 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+
+
+
+
+
+Interaction Finisher Clear Finisher Finisher 150000 Ocean
+
+
+Interaction Armaggedon Finisher Dynamite Dynamite 1 Ocean
+
+
+Element None Armaggedon 250 230 0 0 1 1 1 Finisher 0 Text Expl
+
+
+Interaction Armaggedon All Armaggedon Armaggedon 150000 Ocean
+
+Interaction Armaggedon Ocean Dynamite Dynamite 1000
+
+Interaction Blast Armaggedon Blast20 Blast20 100000
+Interaction Blast20 Armaggedon Blast20 Blast20 100000
+Interaction Finisher Armaggedon Blast20 Blast20 100000
+
+
+Interaction Blast Trees ForestFire ForestFire 10000
+Interaction Blast2 Trees ForestFire ForestFire 10000
+Interaction Blast3 Trees ForestFire ForestFire 10000
+
+
+
+
+// Nuke
+
+Element Clear Nuke 140 10 10 0 1 1 1 0 Blast 0 Text Nuke
+
+
+Interaction Nuke All Blast Blast 1000
+InteractionTrigger Nuke Blast <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+
+
+
+
+
+
+
+
+
+
+
+
+// War
+
+// Human Race's attacks
+
+// On Demons
+Interaction HumanLife DemonLife Explosion Explosion 32768
+Interaction ShuttleTrail OceanDarkness Explosion Explosion 32768
+Interaction City DarkTemple Explosion Explosion 32
+Interaction City DarkTemple2 Dynamite Dynamite 777
+Interaction OceanTrail OceanDarkness Explosion Explosion 3
+Interaction ShipLife HellShipLife Dynamite Dynamite 500
+Interaction City2 DarkTemple Dynamite Dynamite 777
+Interaction City2 DarkTemple2 Dynamite Dynamite 777
+
+Interaction ShuttleTrail HadesPort Dynamite Dynamite 500
+Interaction ShuttleTrail DarkTemple Dynamite Dynamite 500
+
+
+// On Dragons
+Interaction HumanLife DragonLife Explosion Explosion 32768
+Interaction ShuttleTrail OceanFlame Explosion Explosion 32768
+Interaction City DragonCity Explosion Explosion 32
+Interaction City DragonCity2 Dynamite Dynamite 777
+Interaction OceanTrail OceanFlame Explosion Explosion 3
+Interaction ShipLife DragonShipLife Dynamite Dynamite 500
+Interaction City2 DragonCity Dynamite Dynamite 777
+Interaction City2 DragonCity2 Dynamite Dynamite 777
+
+Interaction ShuttleTrail WyvernPort Dynamite Dynamite 500
+Interaction ShuttleTrail DragonCity Dynamite Dynamite 500
+
+
+
+
+
+
+
+
+
+// Demonic attacks
+
+// On Humans
+Interaction DemonLife HumanLife Explosion Explosion 32768
+Interaction OceanDarkness ShuttleTrail Explosion Explosion 32768
+Interaction DarkTemple City Explosion Explosion 32
+Interaction DarkTemple2 City Dynamite Dynamite 777
+Interaction OceanDarkness OceanTrail Explosion Explosion 3
+Interaction HellShipLife ShipLife Dynamite Dynamite 500
+Interaction DarkTemple City2 Dynamite Dynamite 777
+Interaction DarkTemple2 City2 Dynamite Dynamite 777
+
+Interaction HadesPort ShuttleTrail  Dynamite Dynamite 500
+Interaction DarkTemple ShuttleTrail Dynamite Dynamite 500
+
+
+// On Dragons
+
+Interaction DemonLife DragonLife Explosion Explosion 32768
+Interaction ShuttleTrail OceanFlame Explosion Explosion 32768
+Interaction OceanDarkness DragonCity Explosion Explosion 32
+Interaction DarkTemple DragonCity2 Dynamite Dynamite 777
+Interaction DarkTemple2 OceanFlame Explosion Explosion 3
+Interaction OceanDarkness DragonShipLife Dynamite Dynamite 500
+Interaction HellShipLife DragonCity Dynamite Dynamite 777
+Interaction DarkTemple2 DragonCity2 Dynamite Dynamite 777
+
+Interaction HadesPort WyvernPort Dynamite Dynamite 500
+Interaction DarkTemple DragonCity Dynamite Dynamite 500
+
+
+// Dragon Attacks
+
+// On Humans
+
+Interaction DragonLife HumanLife Explosion Explosion 32768
+Interaction OceanFlame ShuttleTrail Explosion Explosion 32768
+Interaction DragonCity City Explosion Explosion 32
+Interaction DragonCity2 City Dynamite Dynamite 777
+Interaction OceanFlame OceanTrail Explosion Explosion 3
+Interaction DragonShipLife ShipLife Dynamite Dynamite 500
+Interaction DragonCity City2 Dynamite Dynamite 777
+Interaction DragonCity2 City2 Dynamite Dynamite 777
+
+Interaction WyvernPort ShuttleTrail Dynamite Dynamite 500
+Interaction DragonCity ShuttleTrail Dynamite Dynamite 500
+
+
+
+
+// On Demons
+
+Interaction DragonLife DemonLife Explosion Explosion 32768
+Interaction OceanFlame ShuttleTrail Explosion Explosion 32768
+Interaction DragonCity OceanDarkness Explosion Explosion 32
+Interaction DragonCity2 DarkTemple Dynamite Dynamite 777
+Interaction OceanFlame DarkTemple2 Explosion Explosion 3
+Interaction DragonShipLife OceanDarkness Dynamite Dynamite 500
+Interaction DragonCity HellShipLife Dynamite Dynamite 777
+Interaction DragonCity2 DarkTemple2 Dynamite Dynamite 777
+
+Interaction WyvernPort HadesPort Dynamite Dynamite 500
+Interaction DragonCity DarkTemple Dynamite Dynamite 500
+
+
+
+
+// Master Ship Warfare
+
+InteractionTrigger ShipShield DemonForceField <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+InteractionTrigger ShipShield DragonForceField <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+
+InteractionTrigger DemonForceField ShipShield <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+InteractionTrigger DemonForceField DragonForceField <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+
+InteractionTrigger DragonForceField DemonForceField <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+InteractionTrigger DragonForceField ShipShield <EXEC Explosion4 ELEMENT:Blast 0 X1 Y1 1 30> 50%
+
+
+
+Element None Explosion 255 255 255 0 0 0 1 0 Clear 10 Text Pluto
+
+
+InteractionTrigger Explosion All Fire 32768
+InteractionTrigger Explosion All Fire 32768
+REMOVETRIGGER Fire
+ON Fire DRAW ELEMENT:Fire FILLEDCIRCLE X1 Y1 10 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Natural Disasters
+
+// Hurricane
+
+Element Clear EyeOfTheStorm 120 120 120 0 1 1 1 0 Ocean 800 Text Wind
+Element None WindCurrent 160 160 160 0 1 1 1 288 DenseCloud 300 Text Suck 
+Interaction EyeOfTheStorm All EyeOfTheStorm EyeOfTheStorm 5
+
+// Element None WindCurrent 150 150 150 0 1 1 1 288 DenseCloud 300 Text Suck 
+// 50 20 90
+
+
+
+
+
+// Element Ocean HurricaneStorm 140 40 240 0 1 1 1 0.5% Ocean 0 File pointreflection.bmp
+Element Ocean HurricaneStorm 250 250 250 0 1 1 1 0.5% HurricaneStorm 0 File pointreflection.bmp
+InteractionTrigger HurricaneStorm All <DRAW 0 SWAPPOINTS X1 Y1 X2 Y2> 10000 CollapsingMatter
+
+
+
+Element Ocean DenseCloud 200 200 200 0 1 1 1 0.5% Ocean 0 File pointreflection.bmp
+InteractionTrigger DenseCloud All <DRAW 0 SWAPPOINTS X1 Y1 X2 Y2> 10000 CollapsingMatter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Element God2 Shield 30 30 100 0 1 1 1 0 Ocean 0 Text Shield
+Element God2 PDBuild 255 0 0 0 1 1 1 163 PlanetDormant 400 Text Bang 
+Element PlanetsB Continents 255 255 255 0 10 1 1 0 Ocean 0 Text Cont 
+Element God2 Moon 114 129 135 0 20 1 1 0 Ocean 100 Text Moon 
+Element None MoonCrater 255 255 255 0 20 1 1 0 Ocean 100 Text Crater 
+Element God2 MoonDarkside 0 0 0 0 1 1 1 0 Ocean 100 Text Dark 
+Element None LirplaneBGreenMen 0 255 0 0 1 1 1 0 Ocean 0 Text LGM 
+Element God2 Star 255 255 0 0 0 1 1 0 Ocean 0 Text Star 
+Element None StarRays 255 0 0 0 0 1 1 1161 Ocean 0 Text WatchOut 
+Element None RayTrailB 255 255 0 0 0 1 1 706 Ocean 0 Text What 
+Element God2 Collapse 255 255 255 800 0 1 1 1021 Ocean 0 Text Coll 
+Element God Titan 255 0 0 0 0 1 1 0 Ocean 0 Text Titan
+Element None CityA 250 250 250 0 0 1 1 30 GrassB 0 Text CityA
+Element None CityB 200 200 200 0 0 1 1 30 GrassB 0 Text B
+Element None CityC 150 150 150 0 0 1 1 30 GrassB 0 Text C
+Element None ModernPeople 0 0 100 0 0 1 1 20 GrassB 0 Text Modern
+Element None Airport 0 0 0 0 0 1 1 0 Ocean 0 Text Airport
+Element None AirplaneB 255 255 255 0 0 1 1 100 SeasB 0 Text AirplaneB
+Element None SpaceShurplaneB 0 100 255 0 0 1 1 75 Ocean 0 Text Space
+Element God2 AsteroidBelt 250 100 0 0 0 1 1 0 Ocean 0 Text Roids
+
+Element God HyperWaves 255 255 255 0 0 1 1 0 Ocean 0 Text HyperWaves
+Element None HyperWavesTrailB 0 30 255 0 0 1 1 500 Ocean 0 Text TrailBC
+Element God DeathWaveB 255 0 255 0 0 1 1 8000 OceanNovaB 0 Text NovaB
+Element None OceanNovaB 255 0 0 0 0 1 1 150 Ocean 0 Text NovaB2
+Element PlanetsB MarsB 255 0 0 0 0 1 1 0 Ocean 0 Text MarsB
+Element None MarsB2 230 100 0 0 0 1 1 0 Ocean 0 Text MarsB2
+Element None MarsBAtmosphereB 200 100 0 -40 0 1 1 3000 Ocean 0 Text Atmo
+
+
+Interaction MainlandB Ocean MainlandB GrassB 32768 
+Interaction MainlandB MainlandB MainlandB GrassB 1058 
+Interaction MainlandB MainlandB MainlandB SerplaneBment 165 
+Interaction MainlandB GrassB GrassB GrassB 32768 
+Interaction MainlandB MainlandB RiverBuild RiverBuild 5886 
+Interaction MainlandB SeasB SeasB SeasB 1474 
+Interaction MainlandB MainlandB TreesB TreesB 7626 
+Interaction MainlandB MainlandB OceanBuild OceanBuild 4646 
+Interaction CliffB GrassB CliffB DirtA 655
+Interaction CliffB WindCurrent WindCurrent CliffB 10000 
+Interaction SeasB SeasB SeasB FishB 4 
+Interaction SeasB IslandBs SeasB SeasB 32768 
+Interaction SeasB Ocean SeasB Edgeoftheworld 32768
+Interaction SeasB WindCurrent WindCurrent SeasB 10000 
+Interaction RagingFireB GrassB GrassB RagingFireB 9112 
+Interaction RagingFireB TreesBA RagingFireB RagingFireB 8001 
+Interaction RagingFireB GrassB GrassB GrassB 2003 
+Interaction RagingFireB Ocean Ocean Ocean 655 
+Interaction RagingFireB VillagerB RagingFireB RagingFireB 32768 
+Interaction RagingFireB WoodChopper RagingFireB RagingFireB 32768 
+Interaction RagingFireB Miner RagingFireB RagingFireB 32768 
+Interaction TreesB GrassB GrassB TreesB 115 
+Interaction TreesB GrassB TreesB TreesB 3819 
+Interaction TreesB GrassB TreesB TownCenterB 18 
+Interaction TreesB GrassB GrassB GoldMine 72 
+Interaction GrassB Ocean GrassB Edgeoftheworld 32768 
+Interaction GrassB WindCurrent WindCurrent GrassB 10000
+Interaction Edgeoftheworld Ocean Edgeoftheworld FallingSeasB 456 
+Interaction Edgeoftheworld Ocean Edgeoftheworld AtmosphereB 7260 
+Interaction Edgeoftheworld Continents Edgeoftheworld SeasB 20971 
+Interaction Edgeoftheworld WindCurrent WindCurrent Edgeoftheworld 10000
+Interaction FallingSeasB Ocean Ocean FallingSeasB 8791 
+Interaction FallingSeasB WindCurrent WindCurrent Ocean 10000
+Interaction FishB SeasB SeasB FishB 8791 
+Interaction FishB SeasB FishB Seaweed 41 
+Interaction Seaweed SeasB SeasB Seaweed 224 
+Interaction WaveB SeasB SeasB WaveB 551 
+Interaction AtmosphereB Ocean Ocean AtmosphereB 4646 
+Interaction AtmosphereB WindCurrent WindCurrent Ocean 10000
+Interaction IslandBs IslandBs SeasB SeasB 2401 
+Interaction IslandBs IslandBs IslandB IslandB 13235 
+Interaction IslandBs GrassB SerplaneBment SerplaneBment 32768 
+Interaction IslandBs Ocean GrassB GrassB 32768 
+Interaction IslandBs landBBuildA TreesB TreesB 1026 
+Interaction IslandBs SeasB IslandB IslandB 10454 
+Interaction IslandB GrassB GrassB GrassB 31250 
+Interaction IslandB SeasB IslandB IslandB 13728 
+Interaction IslandB IslandB IslandB TreesB 41 
+Interaction landBBuildA GrassB GrassB GrassB 20971 
+Interaction landBBuildA SeasB landBBuildA landBBuildB 2620 
+Interaction landBBuildB GrassB GrassB GrassB 9604 
+Interaction landBBuildB SeasB landBBuildB landBBuildC 4646 
+Interaction landBBuildC landBBuildB landBBuildC GrassB 7260 
+Interaction landBBuildC GrassB GrassB GrassB 17447 
+Interaction TreesBA TreesB TreesBA TreesBA 8398 
+Interaction TreesBA WindCurrent WindCurrent TreesBA 10000
+Interaction TownCenterB GrassB TownCenterB VillagerB 18 
+Interaction TownCenterB FortCenterB FortCenterB FortCenterB 2401 
+Interaction TownCenterB Moon TownCenterB LirplaneBGreenMen 165 
+Interaction TownCenterB WindCurrent WindCurrent TownCenterB 10000
+Interaction FortCenterB CityState CityState CityState 32768 
+Interaction FortCenterB GrassB FortCenterB VillagerB 41 
+Interaction FortCenterB GrassB FortCenterB VillagerBA 551 
+Interaction FortCenterB WindCurrent WindCurrent FortCenterB 10000
+Interaction CityState GrassB CityState VillagerB 4 
+Interaction CityState TownCenterB CityState CityState 32768 
+Interaction CityState WindCurrent WindCurrent CityState 10000
+Interaction VillagerB GrassB TrailB VillagerB 17298 
+Interaction VillagerB TreesBA GrassB WoodChopper 32768 
+Interaction VillagerB GoldMine Miner Miner 32768 
+Interaction VillagerB SeasB VillagerB DockB 4000 
+Interaction VillagerB Ocean Ocean Ocean 30
+Interaction WoodChopper GrassB TrailB WoodChopper 8791 
+Interaction WoodChopper TownCenterB VillagerB FortCenterB 32768
+Interaction WoodChopper Ocean Ocean Ocean 30 
+Interaction GoldMine MainlandB GoldMine GoldMine 14229 
+Interaction GoldMine WindCurrent WindCurrent GoldMine 10000
+Interaction Miner GrassB TrailB Miner 8791 
+Interaction Miner FortCenterB VillagerB CityState 32768 
+Interaction Miner WindCurrent WindCurrent Miner 10000
+Interaction Academy GrassB Academy Hoplite 224 
+Interaction Academy GrassB Academy CityA 10000
+Interaction Academy Ocean Ocean Ocean 100000
+Interaction TrailB GrassB GrassB GrassB 1474 
+Interaction DockB SeasB SeasB FishBingShip 4000 
+Interaction FishBingShip FishB Transport Transport 32768 
+Interaction FishBingShip SeasB STrailB FishBingShip 8791 
+Interaction Transport GrassB FishBingShip VillagerB 16872 
+Interaction Transport SeasB STrailB Transport 8791 
+Interaction OceanBuild GrassB OceanBuild OceanBuild 12752 
+Interaction OceanBuild GrassB OceanBuild SeasB 26888 
+Interaction OceanBuild SeasB SeasB SeasB 6555 
+Interaction ArmaggedonT GrassB ArmaggedonT ArmaggedonT 5253 
+Interaction ArmaggedonT SeasB ArmaggedonT ArmaggedonT 1641 
+Interaction ArmaggedonT TreesBA ArmaggedonT ArmaggedonT 3312 
+Interaction ArmaggedonT SerplaneBment ArmaggedonT ArmaggedonT 1166 
+Interaction ArmaggedonT GoldMine ArmaggedonT ArmaggedonT 3073 
+Interaction ArmaggedonT VillagerB ArmaggedonT ArmaggedonT 2842 
+Interaction ArmaggedonT WoodChopper ArmaggedonT ArmaggedonT 165 
+Interaction ArmaggedonT Miner ArmaggedonT ArmaggedonT 1641 
+Interaction ArmaggedonT DockB ArmaggedonT ArmaggedonT 551 
+Interaction ArmaggedonT TownCenterB ArmaggedonT ArmaggedonT 2197 
+Interaction ArmaggedonT FortCenterB ArmaggedonT ArmaggedonT 73 
+Interaction ArmaggedonT CityState ArmaggedonT ArmaggedonT 890 
+Interaction ArmaggedonT Edgeoftheworld ArmaggedonT ArmaggedonT 1000 
+Interaction VillagerBA GrassB RTrailB VillagerBA 17298 
+Interaction VillagerBA SerplaneBment VillagerBA Academy 32768 
+Interaction Hoplite GrassB TrailB Hoplite 8791
+Interaction Hoplite Titan Hoplite GrassB 1000 
+Interaction SpacePort Ocean SpacePort SpaceShurplaneB 100
+Interaction SpacePort ArmaggedonT ArmaggedonT ArmaggedonT 100000
+Interaction UFO Ocean SpaceTrailB UFO 9193 
+Interaction UFO Edgeoftheworld UFO ArmaggedonT 456 
+Interaction Meteor GrassB DirtA DirtA 165 
+Interaction Meteor DirtA RagingFireB DirtB 32768 
+Interaction Meteor Ocean Meteor RagingFireB 15260 
+Interaction Meteor WindCurrent Ocean Ocean 6216 
+Interaction PlanetDormant Ocean Ocean PlanetDormant 41 
+Interaction PlanetDormant Ocean PlanetDormant PlanetDormant 600
+Interaction PlanetDormant Ocean AtmosphereB PlanetDormant 41 
+Interaction PlanetDormant MainlandB MainlandB MainlandB 30504 
+Interaction PlanetDormant Ocean PlanetDormant CosmicDust 1
+Interaction PlanetDormant CosmicDust MainlandB MainlandB 2000
+Interaction PlanetDormant GrassB GrassB GrassB 10000 
+Interaction CosmicDust Ocean Ocean CosmicDust 1026 
+Interaction CosmicDust GrassB GrassB GrassB 32768 
+Interaction CosmicDust TreesBA TreesBA TreesBA 32768 
+Interaction CosmicDust SeasB SeasB SeasB 32768 
+Interaction EyeOfTheStorm Ocean EyeOfTheStorm WindCurrent 32768
+Interaction EyeOfTheStorm All EyeOfTheStorm Ocean 3000 
+Interaction EyeOfTheStorm Edgeoftheworld EyeOfTheStorm Ocean 32768
+Interaction WindCurrent Ocean Ocean WindCurrent 20000 
+Interaction PDBuild Ocean PDBuild PDBuild 6903 
+Interaction PDBuild PlanetDormant PlanetDormant PlanetDormant 32768 
+Interaction Continents Ocean Continents Edgeoftheworld 32768 
+Interaction Continents Continents Continents IslandB 41 
+Interaction Continents SeasB SeasB SeasB 32768 
+Interaction Continents Continents SerplaneBment SerplaneBment 41
+Interaction MoonCrater Moon MoonCrater CliffB 16290 
+Interaction MoonCrater MoonCrater Moon Moon 9604 
+Interaction MoonDarkside Ocean MoonDarkside Moon 16326 
+Interaction LirplaneBGreenMen Moon Moon LirplaneBGreenMen 8791 
+Interaction LirplaneBGreenMen Ocean LirplaneBGreenMen UFO 18 
+Interaction Star Ocean Star StarRays 32768 
+Interaction Star WindCurrent WindCurrent Star 100000 
+Interaction Star EyeOfTheStorm EyeOfTheStorm EyeOfTheStorm 32768 
+Interaction StarRays Ocean RayTrailB StarRays 3073 
+Interaction StarRays Ocean StarRays RagingFireB 165 
+Interaction StarRays WindCurrent WindCurrent Ocean 32768 
+Interaction RayTrailB WindCurrent WindCurrent Ocean 32768 
+Interaction Collapse Star EyeOfTheStorm Ocean 100000
+Interaction Titan GrassB RagingFireB Titan 8790
+Interaction Titan SeasB RagingFireB Titan 8790
+Interaction Titan VillagerB Titan RagingFireB 10000
+Interaction Titan TownCenterB Titan RagingFireB 10000
+Interaction Titan FortCenterB Titan RagingFireB 10000
+Interaction Titan CityState Titan RagingFireB 10000
+Interaction Titan Ocean Ocean Ocean 32768
+Interaction CityA Ocean Ocean Ocean 32768
+Interaction CityA GrassB CityA CityB 32768
+Interaction CityB Ocean Ocean Ocean 100000
+Interaction CityB GrassB CityB CityC 100000
+Interaction CityC Ocean Ocean Ocean 100000
+Interaction CityC GrassB CityC Hoplite 10
+Interaction CityC GrassB CityC ModernPeople 4
+Interaction ModernPeople VillagerB ModernPeople ModernPeople 200
+Interaction ModernPeople VillagerBA ModernPeople ModernPeople 200
+Interaction ModernPeople Hoplite ModernPeople ModernPeople 200
+Interaction ModernPeople SeasB ModernPeople Airport 200
+Interaction ModernPeople Ocean Ocean ModernPeople 200
+Interaction ModernPeople Ocean Ocean Ocean 10
+Interaction ModernPeople GrassB GrassB ModernPeople 8000
+Interaction ModernPeople Edgeoftheworld ModernPeople SpacePort 30
+Interaction ModernPeople GrassB GrassB GrassB 10
+Interaction Airport SeasB Airport AirplaneB 50
+Interaction Airport Ocean Ocean Ocean 10000
+Interaction AirplaneB SeasB SeasB AirplaneB 9000
+Interaction AirplaneB Ocean Ocean Ocean 10000
+Interaction AirplaneB SeasB SeasB SeasB 200
+Interaction SpaceShurplaneB Ocean HyperWavesTrailB SpaceShurplaneB 30000
+Interaction SpaceShurplaneB HyperWavesTrailB PlanetDormant CosmicDust 1
+Interaction AsteroidBelt Ocean Ocean AsteroidBelt 20000
+Interaction AsteroidBelt Ocean AsteroidBuild AsteroidBuild 30
+Interaction AsteroidBelt Asteroid Asteroid Ocean 3000
+Interaction AsteroidBuild Ocean AsteroidBuild AsteroidBuild 600
+Interaction AsteroidBuild Ocean AsteroidBuild Asteroid 1
+Interaction Asteroid AsteroidBuild Asteroid Asteroid 3000
+Interaction Asteroid RagingFireB RagingFireB Ocean 1000
+Interaction HyperWaves Ocean HyperWavesTrailB HyperWaves 6000
+Interaction HyperWaves All Bang Bang 6
+Interaction DeathWaveB All DeathWaveB DeathWaveB OceanNovaB 10000
+Interaction MarsB MarsB CliffB MarsB2 20000
+Interaction MarsB MarsB2 MarsB2 MarsB2 10000
+Interaction MarsB2 Ocean MarsB2 MarsBAtmosphereB 10000
+
+Interaction WindCurrent Ocean DenseCloud DenseCloud 10
+Interaction WindCurrent WindCurrent DenseCloud DenseCloud 10
+
+
+
+
+
+
+
+// Element Ocean HurricaneStorm 140 40 240 0 1 1 1 0.5% Ocean 0 File pointreflection.bmp
+Element Ocean HurricaneStorm 250 250 250 0 1 1 1 0.5% HurricaneStorm 0 File pointreflection.bmp
+InteractionTrigger HurricaneStorm All <DRAW 0 SWAPPOINTS X1 Y1 X2 Y2> 10000 CollapsingMatter
+
+
+
+Element Ocean DenseCloud 200 200 200 0 1 1 1 0.5% Ocean 0 File pointreflection.bmp
+InteractionTrigger DenseCloud All <DRAW 0 SWAPPOINTS X1 Y1 X2 Y2> 10000 CollapsingMatter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Element None DeathWave 255 255 5 0 1 1 1 1 DeathWave* 0 HEX 000000003C0008002400480025D5C8002555400025C9C8000000000800C106000181030002410480022108800411104004092040080540200803802009FFFF200803802008054020040920400411104002210880024104800181030001C00602003838000807C040000000020000340F010054020800759A00005552000075CB 255 255 255
+
+Element None DeathWave* 255 235 5 0 1 1 1 50 DeathWave** 0 Text None
+
+Interaction DeathWave All DeathWave DeathWave 8000 DeathWave*
+Interaction DeathWave* DeathWave DeathWave* DeathWave* 1000
+Interaction DeathWave* Annihilation DeathWave* DeathWave* 32768
+
+
+Element None DeathWave** 255 215 5 0 1 1 1 1 DeathWave*** 0 Text None
+
+Interaction DeathWave* All DeathWave* DeathWave* 8000 DeathWave**
+Interaction DeathWave** DeathWave* DeathWave** DeathWave** 1000
+Interaction DeathWave** Annihilation DeathWave** DeathWave** 32768
+
+
+
+
+
+Element None DeathWave*** 255 205 5 0 1 1 1 1 DeathWave**** 0 Text None
+
+Interaction DeathWave** All DeathWave** DeathWave** 8000 DeathWave***
+Interaction DeathWave*** DeathWave** DeathWave*** DeathWave*** 1000
+Interaction DeathWave*** Annihilation DeathWave*** DeathWave*** 32768
+
+
+
+
+Element None DeathWave**** 255 185 5 0 1 1 1 1 DeathWave***** 0 Text None
+
+Interaction DeathWave*** All DeathWave*** DeathWave*** 8000 DeathWave****
+Interaction DeathWave**** DeathWave*** DeathWave**** DeathWave**** 1000
+Interaction DeathWave**** Annihilation DeathWave**** DeathWave**** 32768
+
+
+
+
+Element None DeathWave***** 255 155 5 0 1 1 1 1 DeathWave****** 0 Text None
+
+Interaction DeathWave**** All DeathWave**** DeathWave**** 8000 DeathWave*****
+Interaction DeathWave***** DeathWave**** DeathWave***** DeathWave***** 1000
+Interaction DeathWave***** Annihilation DeathWave***** DeathWave***** 32768
+
+
+
+
+
+Element None DeathWave****** 255 255 255 0 1 1 1 1 Ocean 0 Text None
+
+Interaction DeathWave***** All DeathWave***** DeathWave***** 8000 DeathWave******
+Interaction DeathWave****** DeathWave***** DeathWave****** DeathWave****** 1000
+Interaction DeathWave****** Annihilation DeathWave****** DeathWave****** 32768
+
+
+// The Finisher of the DeathWave
+// Interaction Ocean DeathWave****** Ocean Ocean 8000000
+// Interaction Ocean DeathWave****** Ocean Ocean 8000000
+
+
+
+// What stops it from going looping (kinda)
+Interaction DeathWave DeathWave** DeathWave** DeathWave** 999999
+Interaction DeathWave DeathWave*** DeathWave*** DeathWave*** 999999
+Interaction DeathWave DeathWave**** DeathWave**** DeathWave**** 999999
+Interaction DeathWave DeathWave***** DeathWave***** DeathWave***** 999999
+Interaction DeathWave DeathWave****** DeathWave****** DeathWave****** 999999
+
+Interaction DeathWave* DeathWave*** DeathWave*** DeathWave*** 999999
+Interaction DeathWave* DeathWave*** DeathWave*** DeathWave*** 999999
+Interaction DeathWave* DeathWave**** DeathWave**** DeathWave**** 999999
+Interaction DeathWave* DeathWave***** DeathWave***** DeathWave***** 999999
+Interaction DeathWave* DeathWave****** DeathWave****** DeathWave****** 999999
+
+
+
+Interaction DeathWave** DeathWave**** DeathWave**** DeathWave**** 999999
+Interaction DeathWave** DeathWave***** DeathWave***** DeathWave***** 999999
+Interaction DeathWave** DeathWave****** DeathWave****** DeathWave****** 999999
+
+
+
+Interaction DeathWave*** DeathWave***** DeathWave***** DeathWave***** 999999
+Interaction DeathWave*** DeathWave****** DeathWave****** DeathWave****** 999999
+
+Interaction DeathWave**** DeathWave****** DeathWave****** DeathWave****** 999999
+
+
+
+// Check
+Interaction Ocean DeathWave****** Ocean Ocean 999999
+Interaction Ocean DeathWave***** Ocean Ocean 999999
+Interaction Ocean DeathWave***** Ocean Ocean 999999
+Interaction Ocean DeathWave**** Ocean Ocean 999999
+Interaction Ocean DeathWave*** Ocean Ocean 999999
+Interaction Ocean DeathWave** Ocean Ocean 999999
+Interaction Ocean DeathWave* Ocean Ocean 999999
+Interaction Ocean DeathWave Ocean Ocean 99
+
+
+
+
+
+// Element None DestroyedLand 170 47 47 0 1 1 1 1 Trees 0 Text Clear
+
+Element None DestroyedLand 70 77 27 0 1 1 1 1 Trees 0 Text Clear
+Interaction DestroyedLand LandCliff1 DestroyedLand DestroyedLand 100
+Interaction DestroyedLand LandCliff2 DestroyedLand DestroyedLand 100
+
+Interaction DestroyedLand All DestroyedLand DestroyedLand 10 Ocean
+Interaction Ocean DestroyedLand Ocean Ocean 10
+
+
+Interaction DenseCloud LandCliff1 DestroyedLand DestroyedLand 100
+Interaction DenseCloud LandCliff2 DestroyedLand DestroyedLand 100
+
+
+Interaction WindCurrent LandCliff1 DestroyedLand DestroyedLand 100
+Interaction WindCurrent LandCliff2 DestroyedLand DestroyedLand 100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SET BRUSHSIZE 15
+EXEC usefilledcircle
+EXEC listgroups
+EXEC menutop
+EXEC menubottom
+ON KEY_BACKSPACE EXEC back_load
+ON KEY_v IF (CTRL == 1) <INCLUDE CLIPBOARD>
+ON MOUSEWHEELUP IF (wheelfunction == 0) brushizeinc
+ON MOUSEWHEELUP IF (wheelfunction == 1) zoominc
+ON MOUSEWHEELUP IF (wheelfunction == 2) history_back
+ON MOUSEWHEELDOWN IF (wheelfunction == 0) brushizedec
+ON MOUSEWHEELDOWN IF (wheelfunction == 1) zoomdec
+ON MOUSEWHEELDOWN IF (wheelfunction == 2) history_foreward
+
+
+
+// End of File

@@ -1,0 +1,466 @@
+EXEC clearall
+INCLUDE sandbox.bs2 
+INCLUDE explosions.bs2 
+
+GROUP CLEARALL
+ELEMENTSCLEAR
+Message I LOVED this mod. It was not popular, but it's pretty memoriable.  I'm not into all this evolution stuff, but I liked it so much, I enhanced graphics. To play, just draw a large circle of 'evolution' and watch only. It's about humankind will eventually destroy itself with polution. By the unpopular PretzelCorps (2006)
+
+Group Clear 0 File erase.bmp
+Element Clear Clear 0 0 0 1 1 1 1 0 Clear 0 File erase.bmp
+Element None Fire 255 0 0 -400 1 1 1 3100 Clear 0 File fire.BMP
+
+// RandomWorld Mod
+
+Group Evolution 600 Text Evolution
+
+Element Evolution Evolution 0 50 250 0 1 1 1 0 Clear 100 Text Evolution
+NOBIAS ELEMENT:Evolution
+Element None OuterSpace 1 1 1 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Twinkle 0 0 0 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Star1 255 255 254 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Star2 251 200 195 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Star3 244 250 140 0 1 1 1 0 Clear 0 File erase.bmp
+Element None AtmoBuild 255 255 1 0 1 1 1 100 Clear 0 File erase.bmp
+Element None AtmoSphere 0 251 250 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Seas 0 50 255 0 1 1 1 0 Clear 0 File erase.bmp
+Element None GroundBuild 125 1 5 0 1 1 1 0 Clear 0 File erase.bmp
+Element None GroundBuild2 225 1 5 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Ground 25 250 44 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Lake 0 1 200 0 1 1 1 0 Clear 0 File erase.bmp
+Element None RiverBuild 1 0 200 0 1 1 1 0 Clear 0 File erase.bmp
+Element None RiverBuild2 1 1 200 0 1 1 1 0 Clear 0 File erase.bmp
+Element None River 0 1 201 0 1 1 1 0 Clear 0 File erase.bmp
+
+Element None FishEgg 1 0 201 0 1 1 1 10 Seas 0 File erase.bmp
+Element None RiverEgg 1 1 201 0 1 1 1 100 River 0 File erase.bmp
+Element None Fish 0 0 151 0 1 1 1 10 Seas 0 File erase.bmp
+Element None SeaFish 0 1 150 0 1 1 1 10 Seas 0 File erase.bmp
+Element None SeaFish2 1 0 150 0 1 1 1 1000 Seas 0 File erase.bmp
+Element None SeaFishEgg 0 0 199 0 1 1 1 150 Seas 0 File erase.bmp
+
+Element None Ape 250 107 108 0 1 1 1 10 Ground 0 File erase.bmp
+Element None Deer 79 0 0 0 1 1 1 10 Ground 0 File erase.bmp
+Element None Hovel 254 255 255 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Neanderthal 250 245 0 0 1 1 1 10 Ground 0 File erase.bmp
+
+Element None Medieval 201 0 0 0 1 1 1 10 Ground 0 File erase.bmp
+Element None Town 201 200 200 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Port 200 201 200 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Colonist 199 0 0 0 1 1 1 10 Ground 0 File erase.bmp
+Element None Boat 171 89 0 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Boat2 170 89 1 0 1 1 1 1000 Seas 0 File erase.bmp
+Element None Scientist 255 255 255 0 1 1 1 0 Clear 0 File erase.bmp
+
+Element None Ocean 0 0 200 0 1 1 1 0 Clear 0 File erase.bmp
+Element None City 171 170 170 0 1 1 1 0 Clear 0 File erase.bmp
+Element None ModernMan 254 255 1 0 1 1 1 10 Ground 0 File erase.bmp
+Element None ModernManC 255 254 0 0 1 1 1 10 City 0 File erase.bmp
+Element None BuilderA 128 64 63 0 1 1 1 10 Ground 0 File erase.bmp
+Element None SpacePort 200 95 17 0 1 1 1 0 Clear 0 File erase.bmp
+Element None SpentLand 201 81 19 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Launch 255 254 254 0 1 1 1 0 Clear 0 File erase.bmp
+Element None LaunchG 254 254 255 0 1 1 1 0 Clear 0 File erase.bmp
+Element None LaunchC 254 255 254 0 1 1 1 0 Clear 0 File erase.bmp
+Element None LaunchO 254 254 254 0 1 1 1 0 Clear 0 File erase.bmp
+Element None LaunchH 253 254 254 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Satellite 253 255 253 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Satellite2 150 150 150 0 1 1 1 1000 OuterSpace 0 File erase.bmp
+Element None BuilderB 128 63 64 0 1 1 1 10 Ground 0 File erase.bmp
+Element None Harbour 128 64 65 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Ship 201 0 0 0 1 1 1 10 Ocean 0 File erase.bmp
+Element None Ship2 200 1 1 0 1 1 1 1000 Ocean 0 File erase.bmp
+Element None Atmo 54 154 254 0 1 1 1 200 OuterSpace 0 File erase.bmp
+Element None AtmoA 4 254 251 0 1 1 1 1000 OuterSpace 0 File erase.bmp
+Element None AtmoA2 4 255 252 0 1 1 1 1000 OuterSpace 0 File erase.bmp
+Element None BuilderC 2 2 1 0 1 1 1 10 Harbour 0 File erase.bmp
+Element None Factory 101 99 100 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Pollution 1 2 2 0 1 1 1 0 Clear 0 File erase.bmp
+
+Element None ColonyShuttle 240 240 240 0 1 1 1 0 Clear 0 File erase.bmp
+Element None ShuttleTrail 230 20 20 0 1 1 1 1000 OuterSpace 0 File erase.bmp
+Element None StationBuild 100 100 100 0 1 1 1 0 Clear 0 File erase.bmp
+Element None StationBuild2 100 100 100 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Armour 146 146 146 0 1 1 1 0 Clear 0 File erase.bmp
+Element None SpaceStation 148 83 18 0 1 1 1 0 Clear 0 File erase.bmp
+Element None StationCore 156 28 10 0 1 1 1 0 Clear 0 File erase.bmp
+Element None DeadCore 157 29 9 0 1 1 1 0 Clear 0 File erase.bmp
+Element None SpaceMan 205 205 205 0 1 1 1 10 SpaceStation 0 File erase.bmp
+Element None ShuttleBuild 4 4 4 0 1 1 1 0 Clear 0 File erase.bmp
+Element None ShuttleBay 214 131 18 0 1 1 1 0 Clear 0 File erase.bmp
+Element None ProcessBuild 6 6 6 0 1 1 1 0 Clear 0 File erase.bmp
+Element None ProcessPlant 173 173 252 0 1 1 1 0 Clear 0 File erase.bmp
+Element None SpaceSludge 209 209 209 0 1 1 1 0 Clear 0 File erase.bmp
+
+Element None VileSpark 203 203 10 0 1 1 1 0 Clear 0 File erase.bmp
+Element None ChemExplosion 250 125 64 0 1 1 1 10 OuterSpace 0 File erase.bmp
+Element None ChemExplosion2 238 228 117 0 1 1 1 10 OuterSpace 0 File erase.bmp
+Element None ChemExplosion3 220 90 34 0 1 1 1 10 OuterSpace 0 File erase.bmp
+Element None ChemExplosion4 49 227 242 0 1 1 1 600 OuterSpace 0 File erase.bmp
+
+Element None DeadAtmoSphere 255 251 60 0 1 1 1 100 Clear 0 File erase.bmp
+Element None Armageddon 236 77 0 0 1 1 1 10 OuterSpace 0 File erase.bmp
+Element None DeadPlanet 222 0 0 0 1 1 1 10 OuterSpace 0 File erase.bmp
+Element None Armageddon3 80 0 0 0 1 1 1 10 OuterSpace 0 File erase.bmp
+Element None Armageddon4 157 0 0 0 1 1 1 0 Armageddon5 0 File erase.bmp
+Element None Armageddon5 158 0 0 0 1 1 1 500 Clear 0 File erase.bmp
+
+Element None Debris 224 0 0 0 1 1 1 500 OuterSpace 0 File erase.bmp
+Element None Debris2 226 0 0 0 1 1 1 1000 OuterSpace 0 File erase.bmp
+
+// Original BS Coding
+Element None Explosion 200 0 0 0 2 1 5 0 Explosion2 0 File gas.BMP
+Element None Explosion2 200 0 0 0 1 1 4 500 Fire 0 File steam.BMP
+Interaction Explosion All Explosion Explosion 3000 Explosion
+Interaction Explosion All Explosion Explosion2 1 Explosion
+Interaction Explosion2 Explosion Explosion2 Explosion2 40000
+Interaction Explosion2 Clear Explosion2 Fire 400
+// End Original BS Coding
+
+Interaction Evolution Clear Evolution OuterSpace 100000
+Interaction OuterSpace Clear OuterSpace OuterSpace 10000
+Interaction OuterSpace Clear OuterSpace Star1 2
+Interaction OuterSpace Clear OuterSpace Star2 2
+Interaction OuterSpace Clear OuterSpace Star3 2
+Interaction Star1 OuterSpace Twinkle OuterSpace 10
+Interaction Star2 OuterSpace Twinkle OuterSpace 10
+Interaction Star3 OuterSpace Twinkle OuterSpace 10
+Interaction Twinkle OuterSpace Star1 OuterSpace 100
+Interaction Twinkle OuterSpace Star2 OuterSpace 100
+Interaction Twinkle OuterSpace Star3 OuterSpace 100
+Interaction Evolution OuterSpace Evolution AtmoBuild 100000
+Interaction AtmoBuild OuterSpace AtmoSphere AtmoBuild 500
+Interaction AtmoBuild Evolution AtmoBuild Seas 100000
+Interaction Seas Evolution Seas Seas 10000
+
+Interaction Seas Evolution Seas GroundBuild 3
+
+Interaction GroundBuild Seas GroundBuild GroundBuild 1000
+Interaction GroundBuild Seas GroundBuild2 Seas 80
+
+Interaction GroundBuild GroundBuild2 Lake GroundBuild 1
+Interaction Lake GroundBuild RiverBuild GroundBuild 10
+Interaction RiverBuild GroundBuild River RiverBuild 6000
+Interaction RiverBuild Seas RiverBuild2 GroundBuild2 100000
+Interaction Ground RiverBuild Ground RiverBuild2 100000
+Interaction RiverBuild2 Ground River RiverBuild2 6000
+Interaction RiverBuild2 River River RiverBuild2 15000
+Interaction RiverBuild2 Seas Seas FishEgg 100000
+Interaction River River River Fish 1
+Interaction Ground RiverBuild Ground Ground 100000
+
+Interaction GroundBuild2 AtmoSphere Ground AtmoSphere 100000
+Interaction Ground GroundBuild Ground Ground 100000
+Interaction Ground GroundBuild2 Ground Ground 100000
+
+Interaction FishEgg Seas Seas FishEgg 9000
+Interaction FishEgg Seas FishEgg Fish 2000
+Interaction Fish Seas Seas Fish 4000
+Interaction Fish River River Fish 4000
+Interaction Fish Fish Seas SeaFish 10
+Interaction SeaFish Seas SeaFish2 SeaFish 4000
+Interaction SeaFish River Seas River 5000
+Interaction SeaFish Fish Seas SeaFish 10000
+Interaction SeaFish Seas SeaFish SeaFishEgg 2
+Interaction Fish River Fish RiverEgg 1
+Interaction Fish Seas Fish FishEgg 1
+Interaction RiverEgg River River RiverEgg 9000
+Interaction RiverEgg River RiverEgg Fish 1000
+Interaction SeaFishEgg Seas Seas SeaFishEgg 9000
+Interaction SeaFishEgg Seas SeaFishEgg SeaFish 2000
+
+Interaction SeaFish Ground Seas Ape 1000
+Interaction SeaFish Ground Seas Deer 1000
+Interaction Ape Ground Ground Ape 4500
+Interaction Deer Ground Ground Deer 4500
+Interaction Deer Ground Deer Deer 10
+Interaction Ape Deer Ape Ape 3000
+Interaction Ape Lake Hovel Lake 1000
+Interaction Hovel Ground Hovel Neanderthal 10
+Interaction Neanderthal Ground Ground Neanderthal 4500
+Interaction Neanderthal Ape Neanderthal Ground 1000
+Interaction Neanderthal Deer Neanderthal Neanderthal 1000
+Interaction Neanderthal Lake Hovel Lake 4000
+
+Interaction Neanderthal Ape Medieval Ground 10
+Interaction Medieval Ground Ground Medieval 4500
+Interaction Medieval Hovel Medieval Town 4000
+Interaction Medieval Neanderthal Medieval Medieval 6000
+Interaction Medieval Seas Port Port 10
+Interaction Town Ground Town Medieval 10
+Interaction Town Ground Town Colonist 6
+Interaction Town Ground Town Scientist 1
+Interaction Town Medieval Town Town 150
+Interaction Town Lake Town Town 10000
+Interaction Port Medieval Port Town 100
+Interaction Colonist Ground Ground Colonist 4500
+Interaction Colonist Neanderthal Colonist Medieval 6000
+Interaction Colonist River Town River 4000
+Interaction Colonist Seas Port Port 6000
+Interaction Colonist Lake Town Town 4000
+Interaction Port Seas Port Boat 5
+Interaction Boat River Boat2 Boat 4500
+Interaction Boat Seas Boat2 Boat 4500
+Interaction Boat Fish Seas Boat 4500
+Interaction Boat SeaFish Seas Boat 4500
+Interaction Medieval Ape Medieval Ground 4000
+Interaction Medieval Deer Medieval Medieval 4000
+
+Interaction Scientist Ground Ground Scientist 4500
+Interaction Scientist Scientist ModernMan ModernMan 50
+Interaction ModernMan Ape ModernMan Ground 6000
+Interaction ModernMan Deer ModernMan ModernMan 6000
+Interaction ModernMan Neanderthal ModernMan Ground 6000
+Interaction ModernMan Medieval ModernMan ModernMan 6000
+Interaction ModernMan Colonist ModernMan ModernMan 6000
+Interaction ModernMan Town City City 6000
+Interaction ModernMan Hovel City Town 6000
+Interaction ModernMan Port Harbour Harbour 6000
+Interaction City Town City City 6000
+Interaction City Port City Harbour 6000
+Interaction Harbour Seas Harbour Ocean 6000
+Interaction Ocean Seas Ocean Ocean 10000
+Interaction Ocean Boat Ocean Ship 10000
+Interaction FishEgg Ocean Ocean FishEgg 9000
+Interaction FishEgg Ocean FishEgg Fish 2000
+Interaction Fish Ocean Ocean Fish 4000
+Interaction SeaFish Ocean SeaFish2 SeaFish 4000
+Interaction SeaFish Ocean SeaFish SeaFishEgg 2
+Interaction SeaFishEgg Ocean Ocean SeaFishEgg 9000
+Interaction SeaFishEgg Ocean SeaFishEgg SeaFish 2000
+Interaction City Ground City City 10
+Interaction City Ground City ModernMan 5
+Interaction City City ModernMan City 5
+Interaction City City BuilderA City 2
+Interaction City City BuilderB City 2
+Interaction ModernMan City Ground ModernManC 4500
+Interaction ModernManC City City ModernManC 4500
+Interaction ModernManC Ground City ModernMan 4500
+Interaction ModernMan Ground Ground ModernMan 4500
+Interaction ModernMan Ground Ground City 10
+Interaction BuilderA City City BuilderA 4500
+Interaction BuilderA City SpacePort City 10
+Interaction SpacePort ModernMan SpacePort LaunchG 10
+
+Interaction LaunchG Ground Ground LaunchG 10000
+Interaction LaunchC City City LaunchC 10000
+Interaction LaunchO Ocean Ocean LaunchO 10000
+Interaction LaunchH Harbour Harbour LaunchH 10000
+Interaction LaunchG City Ground LaunchC 10000
+Interaction LaunchG Ocean Ground LaunchO 10000
+Interaction LaunchG Harbour Ground LaunchH 10000
+Interaction LaunchG Ship2 Ground LaunchO 10000
+Interaction LaunchG Ground ModernMan Ground 10
+Interaction LaunchG SeaFish SeaFish LaunchO 10000
+Interaction LaunchG SeaFish2 SeaFish2 LaunchO 10000
+Interaction LaunchG Pollution Pollution LaunchO 10000
+Interaction LaunchC Ground City LaunchG 10000
+Interaction LaunchC Ocean City LaunchO 10000
+Interaction LaunchC Harbour City LaunchH 10000
+Interaction LaunchC Ship2 City LaunchO 10000
+Interaction LaunchC SeaFish SeaFish LaunchO 10000
+Interaction LaunchC SeaFish2 SeaFish2 LaunchO 10000
+Interaction LaunchC Pollution Pollution LaunchO 10000
+Interaction LaunchO Ground Ocean LaunchG 10000
+Interaction LaunchO City Ocean LaunchC 10000
+Interaction LaunchO Harbour Ocean LaunchH 10000
+Interaction LaunchO Ship2 Ocean LaunchO 10000
+Interaction LaunchO SeaFish SeaFish LaunchO 10000
+Interaction LaunchO SeaFish2 SeaFish2 LaunchO 10000
+Interaction LaunchO Pollution Pollution LaunchO 10000
+Interaction LaunchH City Harbour LaunchC 10000
+Interaction LaunchH Ocean Harbour LaunchO 10000
+Interaction LaunchH Ground Harbour LaunchG 10000
+Interaction LaunchH Ship2 Harbour LaunchO 10000
+Interaction LaunchH SeaFish SeaFish LaunchO 10000
+Interaction LaunchH SeaFish2 SeaFish2 LaunchO 10000
+Interaction LaunchH Pollution Pollution LaunchO 10000
+
+Interaction LaunchG AtmoSphere Ground Launch 6000
+Interaction LaunchO AtmoSphere Ocean Launch 6000
+Interaction LaunchC AtmoSphere City Launch 6000
+Interaction LaunchH AtmoSphere Harbour Launch 6000
+Interaction Launch Atmo AtmoSphere Satellite 6000
+Interaction Launch AtmoSphere AtmoSphere Launch 6000
+Interaction Launch Atmo AtmoSphere ColonyShuttle 250
+
+Interaction Satellite Atmo Satellite2 Satellite 5000
+Interaction Satellite OuterSpace Satellite2 Satellite 4000
+Interaction AtmoSphere Atmo AtmoSphere AtmoA 100
+Interaction AtmoA Atmo AtmoA2 AtmoA 3000
+Interaction AtmoA OuterSpace AtmoA2 AtmoA 3000
+Interaction AtmoSphere OuterSpace AtmoSphere Atmo 5000
+Interaction Atmo OuterSpace OuterSpace Atmo 4000
+Interaction BuilderB City City BuilderB 4500
+Interaction BuilderB Ocean City Harbour 8000
+Interaction Harbour Ocean Harbour Ship 5
+Interaction Harbour Ocean Harbour Harbour 10
+Interaction Harbour Harbour Harbour BuilderC 1
+Interaction BuilderC Harbour Harbour BuilderC 4500
+Interaction BuilderC Ocean Factory Ocean 1000
+Interaction Ship Harbour Harbour Harbour 10
+Interaction Ship Harbour Factory Harbour 10
+Interaction Factory Ocean Factory Pollution 10
+
+Interaction Ship Ocean Ship2 Ship 4500
+Interaction Ship Fish Ocean Ship 6000
+Interaction Ship SeaFish Ocean Ship 6000
+Interaction Ship Ocean Ship Pollution 10
+Interaction Ship Pollution Ship2 Ship 4500
+
+Interaction Pollution Ocean Ocean Pollution 250
+Interaction Pollution Ocean Pollution Pollution 50
+Interaction Pollution Fish Ocean Pollution 5000
+Interaction Pollution SeaFish Ocean Pollution 5000
+Interaction Pollution Harbour Harbour Harbour 10
+
+Interaction ColonyShuttle OuterSpace ShuttleTrail ColonyShuttle 13000
+Interaction ShuttleTrail OuterSpace OuterSpace ShuttleTrail 3000
+Interaction ColonyShuttle Atmo Atmo ColonyShuttle 5000
+Interaction ColonyShuttle ShuttleTrail ShuttleTrail ColonyShuttle 10000
+Interaction ColonyShuttle Star1 OuterSpace StationCore 10000
+Interaction ColonyShuttle Star2 OuterSpace StationCore 3000
+Interaction ColonyShuttle Star3 OuterSpace StationCore 3000
+Interaction StationCore OuterSpace StationCore StationBuild 1000
+Interaction StationBuild OuterSpace StationBuild StationBuild 1000
+Interaction StationBuild Star1 StationBuild StationBuild 1000
+Interaction StationBuild Star2 StationBuild StationBuild 1000
+Interaction StationBuild Star3 StationBuild StationBuild 1000
+Interaction StationBuild Satellite StationBuild StationBuild 1000
+Interaction StationBuild Satellite2 StationBuild StationBuild 1000
+Interaction StationBuild ColonyShuttle StationBuild StationBuild 1000
+Interaction StationBuild ShuttleTrail StationBuild StationBuild 1000
+Interaction StationCore StationBuild StationCore StationCore 200
+Interaction StationBuild OuterSpace StationBuild2 OuterSpace 1
+Interaction StationBuild2 StationBuild StationBuild2 StationBuild2 100000
+Interaction StationBuild2 OuterSpace Armour OuterSpace 10000
+Interaction Armour StationBuild2 Armour SpaceStation 10000
+Interaction SpaceStation StationBuild2 SpaceStation SpaceStation 10000
+
+Interaction StationCore SpaceStation StationCore SpaceMan 10
+Interaction SpaceMan SpaceStation SpaceStation SpaceMan 4500
+Interaction SpaceMan Armour SpaceStation ShuttleBuild 5
+Interaction SpaceMan Armour SpaceStation ProcessBuild 5
+Interaction ShuttleBuild OuterSpace ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBuild OuterSpace ShuttleBay ShuttleBay 1
+Interaction ShuttleBuild ShuttleBay ShuttleBay ShuttleBay 10000
+Interaction ShuttleBuild Star1 ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBuild Star2 ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBuild Star3 ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBuild Satellite ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBuild Satellite2 ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBuild ColonyShuttle StationBuild ShuttleBuild 200
+Interaction ShuttleBuild ShuttleTrail ShuttleBuild ShuttleBuild 200
+Interaction ShuttleBay OuterSpace ShuttleBay Satellite 5
+Interaction ShuttleBay OuterSpace ShuttleBay ColonyShuttle 1
+Interaction ShuttleBay SpaceSludge ShuttleBay Satellite 5
+Interaction ShuttleBay SpaceSludge ShuttleBay ColonyShuttle 1
+Interaction ProcessBuild OuterSpace ProcessBuild ProcessBuild 200
+Interaction ProcessBuild OuterSpace ProcessPlant ProcessPlant 10
+Interaction ProcessPlant ProcessBuild ProcessPlant ProcessPlant 10000
+Interaction ProcessPlant OuterSpace ProcessPlant SpaceSludge 10
+Interaction ProcessBuild Star1 ProcessBuild ProcessBuild 200
+Interaction ProcessBuild Star2 ProcessBuild ProcessBuild 200
+Interaction ProcessBuild Star3 ProcessBuild ProcessBuild 200
+Interaction ProcessBuild Satellite ProcessBuild ProcessBuild 200
+Interaction ProcessBuild Satellite2 ProcessBuild ProcessBuild 200
+Interaction ProcessBuild ColonyShuttle ProcessBuild ProcessBuild 200
+Interaction ProcessBuild ShuttleTrail ProcessBuild ProcessBuild 200
+Interaction SpaceSludge OuterSpace OuterSpace SpaceSludge 500
+Interaction SpaceSludge OuterSpace SpaceSludge SpaceSludge 50
+Interaction Satellite SpaceSludge Satellite2 Satellite 8000
+Interaction Satellite SpaceSludge Satellite OuterSpace 100
+Interaction ColonyShuttle SpaceSludge SpaceSludge ColonyShuttle 13000
+
+Interaction Armour SpaceSludge Armour VileSpark 3
+Interaction VileSpark SpaceSludge SpaceSludge VileSpark 10000
+Interaction VileSpark VileSpark ChemExplosion ChemExplosion 8
+Interaction ChemExplosion SpaceSludge ChemExplosion2 ChemExplosion 32000
+Interaction ChemExplosion2 SpaceSludge ChemExplosion3 ChemExplosion3 3
+Interaction ChemExplosion3 All ChemExplosion3 ChemExplosion3 8000 OuterSpace Explosion
+Interaction ChemExplosion3 ChemExplosion3 ChemExplosion4 ChemExplosion4 1
+Interaction ChemExplosion4 ChemExplosion3 ChemExplosion4 ChemExplosion4 100000
+Interaction ChemExplosion4 ChemExplosion4 Explosion Explosion 10000
+Interaction Explosion SpaceSludge Explosion Explosion 10000
+Interaction ChemExplosion3 SpaceStation ChemExplosion3 ChemExplosion3 8000
+
+Interaction StationCore SpaceSludge DeadCore SpaceSludge 10000
+Interaction DeadCore StationCore DeadCore DeadCore 10000
+
+Interaction ChemExplosion3 AtmoSphere OuterSpace DeadAtmoSphere 100000
+Interaction ChemExplosion3 Ground OuterSpace DeadAtmoSphere 100000
+Interaction ChemExplosion3 Seas OuterSpace DeadAtmoSphere 100000
+Interaction ChemExplosion3 Ocean OuterSpace DeadAtmoSphere 100000
+Interaction ChemExplosion3 City OuterSpace DeadAtmoSphere 100000
+Interaction DeadAtmoSphere Pollution DeadAtmoSphere Armageddon 10000
+Interaction DeadAtmoSphere Seas DeadAtmoSphere Armageddon 10000
+Interaction DeadAtmoSphere Ocean DeadAtmoSphere Armageddon 10000
+Interaction DeadAtmoSphere Ground DeadAtmoSphere Armageddon 10000
+Interaction DeadAtmoSphere City DeadAtmoSphere Armageddon 10000
+
+Interaction Armageddon Seas Armageddon Armageddon 10000
+Interaction Armageddon GroundBuild Armageddon Armageddon 10000
+Interaction Armageddon GroundBuild2 Armageddon Armageddon 10000
+Interaction Armageddon Ground Armageddon Armageddon 10000
+Interaction Armageddon Lake Armageddon Armageddon 10000
+Interaction Armageddon RiverBuild Armageddon Armageddon 10000
+Interaction Armageddon RiverBuild2 Armageddon Armageddon 10000
+Interaction Armageddon River Armageddon Armageddon 10000
+Interaction Armageddon FishEgg Armageddon Armageddon 10000
+Interaction Armageddon RiverEgg Armageddon Armageddon 10000
+Interaction Armageddon Fish Armageddon Armageddon 10000
+Interaction Armageddon SeaFish Armageddon Armageddon 10000
+Interaction Armageddon SeaFishEgg Armageddon Armageddon 10000
+Interaction Armageddon Ape Armageddon Armageddon 10000
+Interaction Armageddon Deer Armageddon Armageddon 10000
+Interaction Armageddon Hovel Armageddon Armageddon 10000
+Interaction Armageddon Neanderthal Armageddon Armageddon 10000
+Interaction Armageddon Medieval Armageddon Armageddon 10000
+Interaction Armageddon Town Armageddon Armageddon 10000
+Interaction Armageddon Port Armageddon Armageddon 10000
+Interaction Armageddon Colonist Armageddon Armageddon 10000
+Interaction Armageddon Boat Armageddon Armageddon 10000
+Interaction Armageddon Boat2 Armageddon Armageddon 10000
+Interaction Armageddon Scientist Armageddon Armageddon 10000
+Interaction Armageddon Ocean Armageddon Armageddon 10000
+Interaction Armageddon ModernMan Armageddon Armageddon 10000
+Interaction Armageddon ModernManC Armageddon Armageddon 10000
+Interaction Armageddon BuilderA Armageddon Armageddon 10000
+Interaction Armageddon SpacePort Armageddon Armageddon 10000
+Interaction Armageddon Launch Armageddon Armageddon 10000
+Interaction Armageddon LaunchG Armageddon Armageddon 10000
+Interaction Armageddon LaunchC Armageddon Armageddon 10000
+Interaction Armageddon LaunchO Armageddon Armageddon 10000
+Interaction Armageddon LaunchH Armageddon Armageddon 10000
+Interaction Armageddon BuilderB Armageddon Armageddon 10000
+Interaction Armageddon Harbour Armageddon Armageddon 10000
+Interaction Armageddon Ship Armageddon Armageddon 10000
+Interaction Armageddon Ship2 Armageddon Armageddon 10000
+Interaction Armageddon BuilderC Armageddon Armageddon 10000
+Interaction Armageddon Factory Armageddon Armageddon 10000
+Interaction Armageddon Pollution Armageddon Armageddon 10000
+
+Interaction Armageddon AtmoSphere DeadPlanet DeadAtmoSphere 100000
+Interaction DeadPlanet AtmoSphere DeadPlanet DeadAtmoSphere 100000
+Interaction Armageddon3 AtmoSphere DeadPlanet DeadAtmoSphere 100000
+Interaction Armageddon4 AtmoSphere Armageddon4 DeadAtmoSphere 100000
+Interaction Armageddon5 AtmoSphere Armageddon5 DeadAtmoSphere 100000
+Interaction DeadPlanet Armageddon DeadPlanet DeadPlanet 10000
+Interaction DeadAtmoSphere AtmoSphere DeadAtmoSphere DeadAtmoSphere 100000
+Interaction DeadPlanet DeadAtmoSphere DeadPlanet DeadPlanet 5000
+Interaction DeadPlanet DeadAtmoSphere DeadPlanet Armageddon3 100000
+Interaction Armageddon3 DeadPlanet Armageddon4 Armageddon3 10000
+
+Interaction Armageddon4 All Armageddon4 Armageddon4 5000 Armageddon5
+Interaction Armageddon4 OuterSpace Armageddon4 Armageddon5 1 Armageddon4
+Interaction Armageddon4 AtmoSphere Armageddon4 Armageddon4 5000
+Interaction Armageddon4 DeadAtmoSphere Armageddon4 Armageddon4 5000
+Interaction Armageddon5 Armageddon4 Armageddon5 Armageddon5 40000
+Interaction Armageddon5 OuterSpace Armageddon5 Fire 400
+
+Interaction DeadPlanet OuterSpace DeadPlanet Debris 5
+Interaction Debris OuterSpace Debris2 Debris 10000
+Interaction Debris2 OuterSpace OuterSpace Debris2 500
+
+Interaction Debris AtmoSphere Armageddon4 Armageddon4 10000
+Interaction SpacePort Pollution SpentLand Pollution 10000

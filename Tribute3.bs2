@@ -1,0 +1,865 @@
+EXEC clearall
+INCLUDE sandbox.bs2 
+INCLUDE explosions.bs2 
+
+GROUP CLEARALL
+ELEMENTSCLEAR
+Message I don't have much to say about this mod, mainly because it was long gone before I started modding, although this mod is compact and simple, it's where almost all space mods come from. Hear it all to Hazreihel. (2006)
+
+
+
+
+Group Clear 0 File erase.bmp
+
+Element Clear Clear 0 0 0 1 1 1 1 0 Clear 0 File erase.bmp
+
+Element Clear Void 30 30 30 0 1 1 1 0 Clear 0 File hole.bmp
+Interaction Void All Void Clear 50000 Clear
+
+Group Stones 100 File stonegroup.bmp
+
+Element Stones Earth 200 127 0 0 1 1 1 0 Clear 200 File earth.BMP
+
+Element Stones Wall 80 0 0 0 1 1 1 0 Clear 300 File wall.BMP
+
+Element Stones Sand 230 180 0 900 1 1 1 0 Clear 400 File sand.BMP
+Interaction Sand Cloud Clear Sand 300
+Interaction Sand Glue Sand Glue 100000
+
+Element Stones Sandsource 230 180 0 0 1 1 1 0 Clear 500 File sandsource.BMP
+Interaction Sandsource Clear Sandsource Sand 1000
+
+Element Stones Stone 100 100 100 1400 1 1 1 0 Clear 800 File stone.BMP
+Interaction Stone Glue Sand Glue 100000
+
+Group Liquids 200 File liquidgroup.bmp
+
+Element Liquids Water 0 0 255 700 100 20 1 0 Clear 0 File water.BMP
+Interaction Water Fire Clear Steam 10000
+Interaction Water Fire Clear Clear 100000
+Interaction Water Glue Water Glue 25000
+
+Element Liquids Cloud 150 150 255 0 1 1 1 250 Clear 100 File cloud.BMP
+Interaction Cloud Clear Cloud Water 300
+
+Element Liquids Ice 128 128 255 0 1 1 1 0 Clear 200 File ice.BMP
+Interaction Ice Clear Water Clear 20
+Interaction Ice Fire Water Clear 20000
+Interaction Ice Water Ice Ice 200
+Interaction Ice Steam Water Water 500
+
+Element Liquids Glue 255 100 255 680 20 1 1 0 Clear 600 File glue.BMP
+Interaction Glue Earth Glue Earth 100000
+Interaction Glue Wall Glue Wall 100000
+Interaction Glue Explosion Explosion Explosion 10000
+
+Group Burning 300 File firegroup.bmp
+
+Element Burning Fire 255 0 0 -400 1 1 1 3100 Clear 100 File fire.BMP
+Interaction Fire Earth Fire Clear 1000
+Interaction Fire Sand Clear Sand 100000
+Interaction Fire Stone Clear Stone 100000
+Interaction Fire Glue Fire Fire 10000
+
+Element Burning Burner 255 0 0 0 1 1 1 0 Clear 200 File burner.BMP
+Interaction Burner Water Burner Steam 50000
+
+Element Burning TNT 255 255 80 0 2 1 5 0 Clear 400 File dynamit.BMP
+Interaction TNT Fire Explosion Explosion 600000
+Interaction TNT Explosion Explosion Explosion 60000
+
+
+Element None Explosion 200 0 0 0 2 1 5 0 Explosion2 0 File gas.BMP
+Interaction Explosion All Explosion Explosion 3000 Explosion
+Interaction Explosion All Explosion Explosion2 1 Explosion
+
+Element None Explosion2 200 0 0 0 1 1 4 500 Fire 0 File steam.BMP
+Interaction Explosion2 Explosion Explosion2 Explosion2 40000
+Interaction Explosion2 Clear Explosion2 Fire 400
+
+
+Group Gases 500 File gasgroup.bmp
+
+Element Gases Steam 80 80 255 -100 1 1 4 10 Water 100 File steam.BMP
+
+Element Gases Gas 140 40 140 -50 2 1 5 0 Clear 100 File gas.BMP
+Interaction Gas Fire Gas(burning) Fire 10000
+
+Element None Gas(burning) 255 50 50 50 1 1 1 21768 Clear 0 File erase.bmp
+Interaction Gas(burning) Clear Gas(burning) Fire 15000
+Interaction Gas(burning) Gas Gas(burning) Gas(burning) 50000
+
+Element Gases Gassource 140 40 140 0 1 1 1 0 Clear 200 File gassource.BMP
+Interaction Gassource Clear Gassource Gas 500
+
+Element Gases GasII 140 240 180 -25 1 1 1 0 Clear 300 File gas2.BMP
+Interaction GasII Fire GasII(burning) Fire 100000
+
+Element None GasII(burning) 255 50 50 -50 1 1 5 200 Clear 0 File erase.bmp
+Interaction GasII(burning) Clear GasII(burning) Fire 2000
+Interaction GasII(burning) GasII GasII(burning) GasII(burning) 2000
+
+Element Gases GasIIsource 140 240 180 0 1 1 1 0 Clear 400 File gas2source.BMP
+Interaction GasIIsource Clear GasIIsource GasII 250
+
+
+
+
+Group Planet 800 HEX 000000003C00000020011000208390003151100021D91C00215114003D511400000000000000000000000000007FC00000F8200001F0100003F0080007F0040007E07C000400FC000400FC000400FC0004007C00047E3C00047E1400041E0400020E08000100100000802000007FC00000000000000000000000000000000000 255 255 255
+Group Space 900 HEX 0000000078006000401340007BAA60000ABA40007BAB60000200000002000000000000000000000000840000200001000000000006001000060000000618200000180000000000001000000000060000000600000086010000004000800000000000200000000040004000000000000000000000000000000000000000000000 255 255 255
+Group Life 1000 HEX 000000002060000022400000206C000020480000224C0000224800003A4C000000000000000000000000000000000000000000000E1C0E001122110011221100112211000E1C0E00040804000E1C0E00152A150024C9248004080A000A141100112211001122110060E1E0C00000000000000000000000000000000000000000 255 255 255
+Group System 1500 HEX 0000000078200000402000007BAE80000AAAE0007BAE800000000000781898004011D2007A589BE0098892A078989A20010000000200000000000000100000000070F00001FC9000007090000000F3000000030003E0000403E0701403E0705403E070AC03E00050000001A000000040000003C0000000400000000000000000 255 255 255
+
+
+Element None Atmosphere 200 200 255 0 1 1 1 0 Clear 1 Text None 
+Element None Atmosphere2 200 200 255 0 1 1 1 0 Clear 1 Text None 
+Element None Atmosphere3 200 200 255 0 1 1 1 0 Clear 1 Text None 
+Element Planet Planet 80 0 0 0 1 1 1 0 Clear 2 HEX 0000000041008800410088006376B8002A54A8003674B80000000000000000000000000000FF800001F0400003F0200007F010000FE008000FE188000FC7C8000FCFC800080FC800080FC8000807C8000803C800080008000400100002E0200001F8400000FF8000000000000000000000000000000000000000000000000000 255 255 255
+Element Planet Grass 0 255 0 0 1 1 1 0 Clear 3 HEX 000000007C000000400000004109B0005DD52000491DB000791490000001B0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E38E31C1E79E73C34D34D68659659C8FFFFFFFC00000000000000000000000000000000 255 255 255
+Element Planet Berrybush 0 200 0 0 1 1 1 0 Clear 4 HEX 000000007801000048010000480100007A5DE0004A5120004A5D20007BC52000001C000000000000000000000000000000000000000000000000000000000000000FC0000018600007E030000C021E000805018008A000800940204030A050606000202048101120502002904010011000000000000000000000000000000000 255 255 255
+Element None Lava1 80 80 80 0 1 1 1 100 Grass 0 Text Lava
+Element None Lava2 80 80 80 0 1 1 1 100 Grass 0 Text Lava2
+Element None Lava3 80 80 80 0 1 1 1 100 Grass 0 Text Lava3
+Element None Lava4 80 80 80 0 1 1 1 100 Grass 0 Text Lava4
+Element None Lava5 80 80 80 0 1 1 1 100 Grass 0 Text Lava5
+Element None Lava6 80 80 80 0 1 1 1 100 Grass 0 Text Lava5
+Element None Lava7 80 80 80 0 1 1 1 100 Grass 0 Text Lava5
+Element None Lava8 80 80 80 0 1 1 1 100 Grass 0 Text Lava5
+Element None Berry 200 0 0 0 1 1 1 10 Grass 4 Text None
+Element None Beach1 200 127 0 0 1 1 1 0 Clear 5 Text Beach
+Element None Beach2 200 127 0 0 1 1 1 10 Ocean 5 Text Beach
+Element None Beach3 200 127 0 0 1 1 1 10 Ocean 5 Text Beach
+Element Life Life 128 64 0 0 1 1 1 0 Clear 7 HEX 0000000000008B6000008240007C8B6000828A400082EA60008200000082000000820000007C0000001000000038000000540000009200000711C0000010000000100000001000000010000000100000001000000028000000440000008200000082000001010000010100000600C00000000000000000000000000000000000 255 255 255
+Element None Life2 128 64 0 0 1 1 1 5000 Grass 6 Text Life
+Element None LifeB 80 80 80 0 1 1 1 0 Clear 0 Text LifeB
+Element None LifeB2 80 80 80 0 1 1 1 5000 Grass 0 Text LifeB
+Element Planet Volcano 240 50 0 0 1 1 1 0 Clear 4 HEX 0000000044100000441020006DD754702954775039D755700000000000000000000000000000000000490000002A0000001C0000002A000000410000008080000100400002002000040010000800080010000400200002004000010080000080FFFFFFFC00000000000000000000000000000000000000000000000000000000 255 255 255
+Element None LifeA 128 128 255 0 1 1 1 0 Clear 200 Text LifeA
+Element None LifeA2 128 128 255 0 1 1 1 5000 Grass 200 Text LifeA
+Element None Iceage 0 10 150 0 1 1 1 0 Ocean 153 Text Iceage
+Element Life House 200 100 0 50 1 1 1 0 Clear 800 HEX 00000000240030002401A0003DD530002555A00025DCB00000018000000C0000001200000021180000409800008058000100380001003800020018000200180004000800040008000FFFFC000800040008000400080004000800040008000400081C04000814040008140400081404000FFFFC00000000000000000000000000 255 255 255
+Element None House2 200 100 0 50 1 1 1 0 Clear 800 Text House
+Element None House3 200 100 0 50 1 1 1 0 Clear 800 Text House
+Element None Tree 128 64 0 0 1 1 1 0 Clear 700 Text tree
+Element Life Fish 255 0 0 0 1 1 1 0 Clear 100 HEX 0000000006B400000424000006B700000495000004B50000000000000000000000038000000C6000303018002840040024802200230022002000040021000200228002002440040028301800180C6000000380000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 255 255 255
+Element None Fish2 255 0 0 0 1 1 1 5000 Water 100 Text Fish
+Element None Boat 255 255 255 0 1 1 1 0 Clear 7 Text Boat
+Element None Boat2 255 255 255 0 1 1 1 5000 Ocean 7 Text Boat
+Element None Coral 255 0 255 0 1 1 1 0 Ocean 7 Text Coral
+Element None Coral2 255 0 255 0 1 1 1 100 Ocean 7 Text Coral
+Element Space Meteor 255 255 255 800 1 20 1 5000 Meteor 0 HEX 0000000063040000556EDD00494495C04164D500414495004164DD000000000000020000000500000008800000104000002020000020200000401000008F880000904800012224000140140001D00C00004048000042080000201000001020000008400000078000000000000000000000000000000000000000000000000000 255 255 255
+Element None Trail1 255 0 0 0 -100 20 1 1310 Trail2 20 Text Trail
+Element None Trail2 255 100 0 -100 1 1 1 1310 Trail3 22 Text Trail2
+Element None Trail3 255 150 0 -100 1 1 1 1310 Trail4 22 Text Trail3
+Element None Trail4 255 170 0 -100 1 1 1 1310 Clear 22 Text Trail4
+Element None ArticIce2 245 245 245 0 1 1 1 0 Clear 0 Text ArticIce
+Element Planet ArticIce 245 245 245 0 1 1 1 1 ArticIce2 3 HEX 000000003E000000080C000008E80000088C0000088800003EEC0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FFFFFFFCFFFFFFFCFFFFFFFCFFFFFFFCFFFFFFFCFFFFFFFCFFFFFFFC000FE0000000000000000000000000000000000000000000 255 255 255
+Element None iceBeach1 128 128 255 0 1 1 1 0 Clear 5 Text iceBeach
+Element None iceBeach2 128 128 255 0 1 1 1 10 Ocean 5 Text iceBeach
+Element None iceBeach3 128 128 255 0 1 1 1 10 Ocean 5 Text iceBeach
+Element Life IceLife 100 100 100 0 1 1 1 0 Clear 7 HEX 00000000204812D856E31090744A12D8544B1A90000000180000000000AA0000007C000000C600000044000000C600000038000000C6000001010000030180000200800003C7800004444000084420000044000000440000004400000082000001FF000000000000000000000000000000000000000000000000000000000000 255 255 255
+Element None IceLife2 100 100 100 0 1 1 1 5000 ArticIce 7 Text ArcLife
+Element None IceLifeB 100 100 100 500 1 1 1 0 Clear 7 Text ArcLife
+Element None IceLifeB2 100 100 100 0 1 1 1 5000 ArticIce 7 Text ArcLife
+Element None IceLifeA 100 100 100 0 1 1 1 0 Clear 7 Text ArcLife
+Element None IceLifeA2 100 100 100 0 1 1 1 5000 ArticIce 7 Text ArcLife
+Element None LifeS 100 100 100 0 1 1 1 0 Clear 7 Text Life
+Element None LifeS2 100 100 100 0 1 1 1 5000 Grass 7 Text Life
+Element None LifeH 100 100 100 0 1 1 1 0 Clear 7 Text Life
+Element None LifeH2 100 100 100 0 1 1 1 5000 Grass 7 Text Life
+Element Planet IceTree 200 200 255 50 1 1 1 0 Clear 12 HEX 000000003E00F800080C20D808E82090088C26D8088824903EEC24D800080000001400000008000000490000042A20000B9CD00004FFA000003E0000001C0000001C0000001C0000001C0000003E0000007F000000FF8000FFFFFFFCFFFFFFFCFFFFFFFCFFFFFFFC000FE0000000000000000000000000000000000000000000 255 255 255
+Element None IceBerry 100 100 255 0 1 1 1 10 ArticIce2 12 Text tree
+Element Life Igloo 0 150 255 50 1 1 1 0 Clear 800 HEX 000000005D00000011000000513B8000552A80005DBB8000000000000000000000000000000000000000060000000600000F8600001FC600007FF60000FFFE0001FFFE0003FFFE0003FFFE0007FFFF0007FFFF000FFFFF801FF3FFC01FE1FFC03FE1FFE03FE1FFE03FE1FFE07FE1FFF07FE1FFF0000000000000000000000000 255 255 255
+Element None Igloo2 0 150 255 50 1 1 1 0 Clear 800 Text Igloo
+Element None Igloo3 0 150 255 50 1 1 1 0 Clear 800 Text Igloo
+Element None IceageG 0 10 150 0 1 1 1 0 Ocean 153 Text Iceage
+Element None Thaw 0 10 150 0 1 1 1 1 Grass 153 Text Iceage
+Element None Warming 255 200 200 0 1 1 1 0 Clear 153 Text GlobalWarming
+Element None HotWater 50 50 255 700 100 20 1 0 Clear 0 Text HotWater
+Element None HotEarth 0 180 0 0 1 1 10 10 Desert 600 Text HotEarth
+Element None Desert 230 180 0 0 1 1 1 0 Clear 400 Text Desert
+Element None Zombie 0 180 0 0 1 1 10 0 Clear 600 Text Zombie
+Element None Zombie2 0 180 0 0 1 1 10 5000 Desert 600 Text Zombie2
+Element None Graveyard 200 100 0 50 1 1 1 0 Clear 800 Text House
+Element None Graveyard2 255 100 100 50 1 1 1 0 Clear 800 Text House
+Element None Graveyard3 255 100 100 50 1 1 1 0 Clear 800 Text House
+Element None Corpse 255 0 0 0 1 1 1 0 Clear 100 Text Corpse
+Element None Tumbleweed 200 117 0 0 1 1 1 0 Clear 1 Text Tumbleweed
+Element Space SpaceStation 100 100 100 0 1 1 1 0 Clear 7 HEX 00000000700000004726C000755480001774C000145480007456C0000000000072048000474E020072A4BB8012E4AA8072A4BA800000000000000000000000000070000001CE000002418000044840000241800001CE000000700000000000000000000000000000000000000000000000000000000000000000000000000000 255 255 255
+Element None Ship 255 255 255 0 1 1 1 10 Grass 7 Text Ship
+Element None ShipU 255 255 0 0 1 1 1 0 Clear 7 Text Ship
+Element None ShipT 255 255 0 0 1 1 1 0 Clear 7 Text Ship
+Element Space SunCore 255 255 255 0 1 1 1 0 Clear 7 HEX 00000000700000004540000075780000154800001548000077480000000000000000000000040000010410000084200000444000002E800000110000001100000024800003EAF800002480000011000000110000002E800000444000008420000104100000040000000000000000000000000000000000000000000000000000 255 255 255
+Element None SunCoreDead 100 100 255 0 1 1 1 0 Clear 7 Text None
+Element None Sun 255 0 0 0 1 1 1 1 Sun2 7 Text SunCore
+Element None Sun2 255 0 0 0 1 1 1 100 SunM1 7 Text SunCore
+Element None SunM1 255 0 0 0 100 20 1 1310 SunM2 20 Text Sun
+Element None SunM2 255 100 0 0 1 1 1 1310 SunM3 22 Text Sun2
+Element None SunM3 255 150 0 0 1 1 1 1310 SunM4 22 Text Sun3
+Element None SunM4 255 170 0 0 1 1 1 1310 SunM1 22 Text Sun4
+Element None SunFlare 255 170 0 0 1 1 1 0 Clear 24 Text SunFlare
+Element None SunFlare2 255 100 0 0 1 1 1 5000 Clear 24 Text SunFlare
+Element None Sunspot 80 0 0 0 1 1 1 500 SunM1 300 Text None
+Element None SuperNova 0 0 255 0 1 1 1 500 SuperNova2 300 Text None
+Element None SuperNova2 100 0 100 0 1 1 1 500 SuperNova3 300 Text None
+Element None SuperNova3 255 0 0 0 1 1 1 500 SuperNova4 300 Text None
+Element None SuperNova4 255 255 255 0 1 1 1 30 Clear 300 Text None
+Element Space Moon 100 100 100 0 1 1 4 0 Clear 15 HEX 0000000063000000550000004900000041000000417740004155700041555000417750000000000000000000001F000000208000005040000090200001D0100001701000010010000100100001001000008020000040400000208000001F00000000000000000000000000000000000000000000000000000000000000000000 255 255 255
+Element Space Star 255 255 0 0 1 1 4 100 Star2 15 HEX 0000000072000000422400007757600012744000125460007254200000006000000000000408000002082000010840000088800000490000002A0000001C00003FFFFC00001C0000002A000000490000008880000108400002082000040810000008000000080000000800000000000000000000000000000000000000000000 255 255 255
+Element None Star2 255 255 255 0 1 1 4 100 Star 15 Text Star
+Element None MoonLife 255 0 255 0 1 1 1 0 Clear 800 Text MoonLife
+Element None MoonLife2 255 0 255 0 1 1 1 5000 Moon 800 Text MoonLife
+Element None MoonLife3 255 0 255 0 1 1 1 5000 Grass 800 Text MoonLife
+Element None Ocean 0 0 255 700 100 20 1 0 Clear 0 Text None
+Element System Saturn 200 117 0 1000 1 1 1 10 Saturn2 7 HEX 0000000078100000413822007A92BBC00B92A2407A93A24000000000000000000000000000000000001FF0000020080000400400008002000100010001000100070001C01D00017019000130110001101100011019FFFF300FFFFFE003FFFFC00040040000200800001FF0000000000000000000000000000000000000000000 255 255 255
+Element None Saturn2 200 117 0 -1000 1 1 1 10 Saturn 17 Text Saturn
+Element None SaturnAtmosphere 200 117 0 0 1 1 1 0 Saturn 17 Text Saturn
+Element None Saturnring 0 255 255 500 1 1 1 500 Saturnring3 17 Text Saturnring
+Element None Saturnring2 0 100 255 300 1 1 1 300 Saturnring4 17 Text Saturnring
+Element None Saturnring3 255 255 255 200 1 1 1 100 Saturnring 17 Text Saturnring
+Element None Saturnring4 100 100 100 600 1 1 1 700 Saturnring2 17 Text Saturnring
+Element System Pluto 100 100 255 0 1 1 1 10 Pluto2 9 HEX 000000003C000000240200003C0200002107000021027800215248002152480021727800000000000000000000000000000000000000000000000000000000000000000000000000000E0000000E0000000E00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 255 255 255
+Element None Pluto2 90 90 255 0 1 1 1 10 Pluto 18 Text Pluto
+Element None PlutoAtmosphere 200 200 200 0 1 1 1 0 Clear 18 Text Pluto
+Element System Venus 255 255 0 0 1 1 1 10 Venus2 2 HEX 00000000458030004520200029BAB000292A900011ABB0000000000000000000000000000000000000000000003FE00000401000008008000102040002000A00020382000244420002A44200024442000203820002000200010044000080080000401000003FE000000000000000000000000000000000000000000000000000 255 255 255
+Element None Venus2 220 220 0 0 1 1 1 10 Venus 900 Text Venus
+Element None VenusAtmosphere 200 200 200 0 1 1 1 0 Clear 1 Text Venus
+Element System Mercury 150 100 0 0 1 1 1 10 Mercury2 1 HEX 000000006C0000005400000044100000455DD500455115A845D1DD10000000100000002000000000000000000000000000000000007F000000808000010040000202200004051000046210000490100004901000046010000400100004041000020A20000104400000808000007F000000000000000000000000000000000000 255 255 255
+Element None Mercury2 250 100 0 0 1 1 1 10 Mercury 900 Text Mercury
+Element System Mars 150 10 0 0 1 1 1 10 Mars2 3 HEX 00000000318000002A801C002492100020AB9C0020BA040020AA1C0000000000000000000000000000000000001FC00000202000004010000080080001004400010804000100040001000400010004000100040001020400008008000040100000202000001FC000000000000000000000000000000000000000000000000000 255 255 255
+Element None Mars2 250 100 0 0 1 1 1 10 Mars 900 Text Mars
+Element None MarsAtmosphere 200 200 200 0 1 1 1 0 Clear 18 Text Venus
+Element System Jupiter 150 150 150 0 1 1 1 10 Jupiter2 6 HEX 000000007C024000100040001038ED0012AA49C052BA4D0023A2490000224D00002000000000000000000000003FF8000040040000E002000118010003860080026000800218308003860C8003E1838002786080021E1880038786800261E1800218788002061E80010187000080620000401C00003FF8000000000000000000 255 255 255
+Element None Jupiter2 160 50 0 0 1 1 1 10 Jupiter 7 Text Jupiter
+Element None JupiterAtmosphere 200 200 200 0 1 1 1 0 Clear 18 Text None
+Element None LiquidHydrogen 0 0 255 700 100 20 1 0 Clear 0 Text LiquidHydrogen
+Element System Uranus 0 100 255 0 1 1 1 10 Uranus2 8 HEX 0000000000000000000003F80000020000000200007F0200008083F80100400002002000040013E004001040040010400400100004001380040011400400138002002000010043C000808080007F0380000000000000038000000200000003800000000000000B8000000E800000000000000000000000000000000000000000 255 255 255
+Element None Uranus2 0 255 150 0 1 1 1 10 Uranus 900 Text Uranus
+Element None UranusAtmosphere 200 200 200 0 1 1 1 0 Clear 18 Text None
+Element System Neptune 0 0 255 0 1 1 1 10 Neptune2 8 HEX 000000000000000C31604088294EEAEC256A4AA8234E4EAC21680000000800000008000000000000000000000007F000000808000010040000200200004001000040010000460100004F01000046010000400100004001000020020000100400000808000007F000000000000000000000000000000000000000000000000000 255 255 255
+Element None Neptune2 100 100 255 0 1 1 1 10 Neptune 900 Text Neptune
+Element System Neptunestorm 255 255 255 0 1 1 1 0 Neptune2 900 HEX 000000000000000C31604088294EEAEC256A4AA8234E4EAC216800000008000000080000000000003C80000021C000003C9D20000495BE003C9D2A0000000000000000001FFFE00000001000000008000000040000002200001851000024890000048100000846000FF058000000200000000000000000000000000000000000 255 255 255
+Element None Neptunestorm2 255 255 255 0 1 1 1 100 Neptune2 900 Text Neptune
+Element None NeptuneAtmosphere 200 200 200 0 1 1 1 0 Clear 18 Text None
+Element Space Asteroid1 75 75 75 -20 1 1 1 1310 Asteroid2 200 HEX 0000000020000000564C008874E91C08564D94B8524914A8064D1CB8000000000000000000000000300000000F807000007C8800000104003002020003F401000004010003F401003002020000010400007C88000F80700030000000000000000000000000000000000000000000000000000000000000000000000000000000 255 255 255
+Element None Asteroid2 75 75 75 20 1 1 1 1310 Asteroid1 200 Text Asteroid
+Element None AsteroidT1 255 0 0 0 1 1 1 1310 Clear 200 Text Asteroid
+Element None AsteroidT2 255 255 255 0 1 1 1 1310 Clear 200 Text Asteroid
+Element None SatelliteU 255 255 255 0 1 1 1 0 Clear 200 Text Satellite
+Element None SatelliteU2 255 255 255 0 1 1 1 5000 Grass 200 Text Satellite
+Element None SatelliteU3 255 255 255 0 1 1 1 5000 Water 200 Text Satellite
+Element None Satellite 255 255 255 0 1 1 1 0 Clear 200 Text Satellite
+Element None Satellite2 255 255 255 0 1 1 1 5000 Clear 200 Text Satellite
+Element None Smoke 200 200 200 0 1 1 4 1000 Clear 100 File steam.BMP
+Element None Creator 70 70 70 0 1 1 4 0 Clear 15 Text Creator
+Element None Creator2 70 70 70 0 1 1 4 0 Clear 15 Text Creator
+Element None Creator3 70 70 70 0 1 1 4 0 Clear 15 Text Creator
+Element None UFO 0 180 0 0 1 1 10 0 Clear 600 Text UFO
+Element None UFO2 0 180 0 0 1 1 10 5000 Moon 600 Text UFO
+Element None UFO3 0 180 0 0 1 1 10 5000 Clear 600 Text UFO
+Element None ShipG 255 255 0 0 1 1 1 0 Clear 7 Text Ship
+Element None ShipG2 255 255 0 0 1 1 1 5000 Grass 7 Text Ship
+Element None ShipW 255 255 0 0 1 1 1 0 Clear 7 Text Ship
+Element None ShipW2 255 255 0 0 1 1 1 5000 Water 7 Text Ship
+Element None ShipS 255 255 0 0 1 1 1 0 Clear 7 Text Ship
+Element None ShipS2 255 255 0 0 1 1 1 5000 Clear 7 Text Ship
+Element None Probe 0 255 150 0 1 1 1 0 Clear 8 Text Probe
+Element None ProbeP 0 255 150 0 1 1 1 3000 Pluto 8 Text Probe
+Element None ProbeUr 0 255 150 0 1 1 1 3000 Uranus 8 Text Probe
+Element None ProbeMe 0 255 150 0 1 1 1 3000 Mercury 8 Text Probe
+Element None ProbeVe 0 255 150 0 1 1 1 3000 Venus 8 Text Probe
+Element None ProbeMa 0 255 150 0 1 1 1 3000 Mars 8 Text Probe
+Element None ProbeJu 0 255 150 0 1 1 1 3000 Jupiter 8 Text Probe
+Element None ProbeNe 0 255 150 0 1 1 1 3000 Neptune 8 Text Probe
+Element Space Pulsar 150 0 0 0 1 1 1 0 Clear 100 HEX 000000003C080000240800003C09C000200900402149DC702148544021EDDE400000000000100000002000000040000000400000004083800021044000120820000A1010000520080002CC04004392000025A100001B40001004A00008085000041048000220840001C102000000020000000200000004000000080000001000 255 255 255
+Element None Pulsar1 20 0 100 700 1 1 1 28000 Pulsar2 8 Text Pulsar
+Element None Pulsar2 0 100 0 -700 1 1 1 28000 Pulsar3 8 Text Pulsar
+Element None Pulsar3 100 0 100 0 1 1 1 28000 Pulsar1 8 Text Pulsar
+Element Space BlackHole 30 30 30 0 1 1 1 0 Clear 100 HEX 000000003900120029001400390018002539D400252914003DBDD20000000000024138000241280003DD380002552000025DB800000000000000000000000000003060000048900001410800022E00000211000002208C000140520000C06100024058000120A40000F1C200000E200000041000008448000048300000300000 255 255 255
+Element None BlackHole1 10 10 10 700 1 1 1 28000 BlackHole2 8 Text Pulsar
+Element None BlackHole2 10 10 10 -700 1 1 1 28000 BlackHole3 8 Text Pulsar
+Element None BlackHole3 10 10 10 0 1 1 1 28000 BlackHole1 8 Text Pulsar
+Element None Flare 255 255 255 -1000 18 0 20 0 Clear 0 Text Flare
+Element Life Academy 255 100 0 0 1 1 1 0 Clear 900 HEX 00000000300080004800B8004800A9C07B73BAA84A52A2254B7BBA22000000020000000400000008000000100001FFC0000100401FFF8040100080401000804010008040100080401003F040100210401002104011FE1040110210401102104011221040112210401FFF1040FFFFFFFF00000000000000000000000000000000 255 255 255
+Element None Demon 0 0 0 0 1 1 1 0 Clear 1 Text Demon
+Element None Demon2 50 50 50 0 1 1 1 5000 Demonland 1 Text Demon
+Element None Demon3 50 50 50 0 1 1 1 5000 Grass 1 Text Demon
+Element None Solder 0 150 0 0 1 1 1 0 Clear 1 Text Solder
+Element None Solder2 0 100 0 0 1 1 1 5000 Grass 1 Text Solder
+Element None Solder3 0 100 0 0 1 1 1 5000 Demonland 1 Text Solder
+Element Planet Demonland 0 200 0 0 1 1 1 0 Clear 3 HEX 0000000060000000538000004A9B02004B953B805220AA8063A0BA8000000000010000000100010001000100011C87000114E50001DEA700000000000000000000000000000000000000000000000000000000000000000000000000084112081082241021044820FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 255 255 255
+
+
+Interaction Demon Desert HotEarth HotEarth 500
+Interaction Demon HotEarth HotEarth HotEarth 500
+Interaction Demonland HotEarth HotEarth HotEarth 500
+Interaction Demonland IceageG IceageG IceageG 500
+Interaction Demonland Iceage IceageG Iceage 500
+Interaction Demonland Ocean Demonland Beach1 500
+Interaction Demon LifeS Corpse Demon 500
+Interaction Demon LifeA Corpse Demon 500
+Interaction Demon LifeB Corpse Demon 500
+Interaction Demon Life Corpse Demon 500
+Interaction Demon Solder Solder Corpse 500
+Interaction Demon Solder Corpse Demon 500
+Interaction Demon Grass Demon3 Demon 5000
+Interaction Solder Demonland Solder3 Solder 5000
+Interaction Solder Grass Solder2 Solder 5000
+Interaction Demon Demonland Demon2 Demon 5000
+Interaction Academy Grass Academy Solder 1
+Interaction Academy Demonland Academy Demon 1
+Interaction Neptune2 Neptune2 Neptune Neptune 1000
+Interaction Neptune2 Neptune2 Neptunestorm Neptunestorm 1
+Interaction Saturn Saturn2 Saturnring Saturnring2 1
+Interaction Fire BlackHole Clear Clear 32768
+Interaction Fire BlackHole1 Clear Fire 32768
+Interaction Fire BlackHole2 Clear Fire 32768
+Interaction Fire BlackHole3 Clear Fire 32768
+Interaction SunCoreDead Clear SunCoreDead Flare 30
+Interaction SuperNova BlackHole Clear Clear 32768
+Interaction SuperNova BlackHole1 Clear SuperNova 32768
+Interaction SuperNova BlackHole2 Clear SuperNova 32768
+Interaction SuperNova BlackHole3 Clear SuperNova 32768
+Interaction Pulsar BlackHole Clear Clear 32768
+Interaction Pulsar BlackHole1 Clear Pulsar 32768
+Interaction Pulsar BlackHole2 Clear Pulsar 32768
+Interaction Pulsar BlackHole3 Clear Pulsar 32768
+Interaction Pulsar1 BlackHole Clear Clear 32768
+Interaction Pulsar1 BlackHole1 Clear Pulsar1 32768
+Interaction Pulsar1 BlackHole2 Clear Pulsar1 32768
+Interaction Pulsar1 BlackHole3 Clear Pulsar1 32768
+Interaction Pulsar2 BlackHole Clear Clear 32768
+Interaction Pulsar2 BlackHole1 Clear Pulsar2 32768
+Interaction Pulsar2 BlackHole2 Clear Pulsar2 32768
+Interaction Pulsar2 BlackHole3 Clear Pulsar2 32768
+Interaction Pulsar3 BlackHole Clear Clear 32768
+Interaction Pulsar3 BlackHole1 Clear Pulsar3 32768
+Interaction Pulsar3 BlackHole2 Clear Pulsar3 32768
+Interaction Pulsar3 BlackHole3 Clear Pulsar3 32768
+Interaction Asteroid2 BlackHole Clear Clear 32768
+Interaction Asteroid2 BlackHole1 Clear Asteroid1 32768
+Interaction Asteroid2 BlackHole2 Clear Asteroid1 32768
+Interaction Asteroid2 BlackHole3 Clear Asteroid1 32768
+Interaction Asteroid1 BlackHole Clear Clear 32768
+Interaction Asteroid1 BlackHole1 Clear Asteroid1 32768
+Interaction Asteroid1 BlackHole2 Clear Asteroid1 32768
+Interaction Asteroid1 BlackHole3 Clear Asteroid1 32768
+Interaction SunM4 BlackHole Clear Clear 32768
+Interaction SunM4 BlackHole1 Clear SunM4 32768
+Interaction SunM4 BlackHole2 Clear SunM4 32768
+Interaction SunM4 BlackHole3 Clear SunM4 32768
+Interaction SunM3 BlackHole Clear Clear 32768
+Interaction SunM3 BlackHole1 Clear SunM3 32768
+Interaction SunM3 BlackHole2 Clear SunM3 32768
+Interaction SunM3 BlackHole3 Clear SunM3 32768
+Interaction SunM2 BlackHole Clear Clear 32768
+Interaction SunM2 BlackHole1 Clear SunM2 32768
+Interaction SunM2 BlackHole2 Clear SunM2 32768
+Interaction SunM2 BlackHole3 Clear SunM2 32768
+Interaction SunM1 BlackHole Clear Clear 32768
+Interaction SunM1 BlackHole1 Clear SunM1 32768
+Interaction SunM1 BlackHole2 Clear SunM1 32768
+Interaction SunM1 BlackHole3 Clear SunM1 32768
+Interaction Star BlackHole Clear Clear 32768
+Interaction Star BlackHole1 Clear Star 32768
+Interaction Star BlackHole2 Clear Star 32768
+Interaction Star BlackHole3 Clear Star 32768
+Interaction Star2 BlackHole Clear Clear 32768
+Interaction Star2 BlackHole1 Clear Star2 32768
+Interaction Star2 BlackHole2 Clear Star2 32768
+Interaction Star2 BlackHole3 Clear Star2 32768
+Interaction SunCore BlackHole Clear Clear 32768
+Interaction SunCore BlackHole1 Clear SunCore 32768
+Interaction SunCore BlackHole2 Clear SunCore 32768
+Interaction SunCore BlackHole3 Clear SunCore 32768
+Interaction SunCoreDead BlackHole Clear Clear 32768
+Interaction SunCoreDead BlackHole1 Clear SunCoreDead 32768
+Interaction SunCoreDead BlackHole2 Clear SunCoreDead 32768
+Interaction SunCoreDead BlackHole3 Clear SunCoreDead 32768
+Interaction SunFlare BlackHole Clear Clear 32768
+Interaction SunFlare BlackHole1 Clear SunFlare 32768
+Interaction SunFlare BlackHole2 Clear SunFlare 32768
+Interaction SunFlare BlackHole3 Clear SunFlare 32768
+Interaction UFO BlackHole Clear Clear 32768
+Interaction UFO BlackHole1 Clear UFO 32768
+Interaction UFO BlackHole2 Clear UFO 32768
+Interaction UFO BlackHole3 Clear UFO 32768
+Interaction ShipS BlackHole Clear Clear 32768
+Interaction ShipS BlackHole1 Clear ShipS 32768
+Interaction ShipS BlackHole2 Clear ShipS 32768
+Interaction ShipS BlackHole3 Clear ShipS 32768
+Interaction Satellite BlackHole Clear Clear 32768
+Interaction Satellite BlackHole1 Smoke Satellite 32768
+Interaction Satellite BlackHole2 Smoke Satellite 32768
+Interaction Satellite BlackHole3 Smoke Satellite 32768
+Interaction BlackHole Clear BlackHole BlackHole1 1000
+Interaction BlackHole3 Clear Clear Clear 1
+Interaction SunCore Pulsar Clear Pulsar 32768
+Interaction SunCore Pulsar1 Clear SunCore 32768
+Interaction SunCore Pulsar2 Clear SunCore 32768
+Interaction SunCore Pulsar3 Clear SunCore 32768
+Interaction SunCoreDead Pulsar Clear Pulsar 32768
+Interaction SunCoreDead Pulsar1 Clear SunCoreDead 32768
+Interaction SunCoreDead Pulsar2 Clear SunCoreDead 32768
+Interaction SunCoreDead Pulsar3 Clear SunCoreDead 32768
+Interaction Flare Clear Flare Flare 14229
+Interaction Flare Flare Fire Fire 32768
+Interaction SunFlare Pulsar Pulsar Pulsar 32768
+Interaction SunFlare Pulsar1 Clear SunFlare 32768
+Interaction SunFlare Pulsar2 Clear SunFlare 32768
+Interaction SunFlare Pulsar3 Clear SunFlare 32768
+Interaction UFO Pulsar Pulsar Pulsar 32768
+Interaction UFO Pulsar1 Clear UFO 32768
+Interaction UFO Pulsar2 Clear UFO 32768
+Interaction UFO Pulsar3 Clear UFO 32768
+Interaction ShipS Pulsar Pulsar Pulsar 32768
+Interaction ShipS Pulsar1 Clear ShipS 32768
+Interaction ShipS Pulsar2 Clear ShipS 32768
+Interaction ShipS Pulsar3 Clear ShipS 32768
+Interaction Satellite Pulsar Pulsar Pulsar 32768
+Interaction Satellite Pulsar1 Smoke Satellite 32768
+Interaction Satellite Pulsar2 Smoke Satellite 32768
+Interaction Satellite Pulsar3 Smoke Satellite 32768
+Interaction Pulsar3 Fire Gas(burning) Fire 10000
+Interaction Pulsar1 Fire Gas(burning) Fire 10000
+Interaction Pulsar2 Fire Gas(burning) Fire 10000
+Interaction Pulsar2 SuperNova SuperNova Pulsar1 4000
+Interaction Pulsar1 SuperNova SuperNova Pulsar2 4000
+Interaction Pulsar SuperNova Pulsar Pulsar2 1000
+Interaction Pulsar GasII Pulsar Pulsar 500
+Interaction Pulsar Gas Pulsar Pulsar 500
+Interaction Pulsar Clear Pulsar Pulsar1 500
+Interaction Pulsar3 Clear Clear Clear 5
+Interaction Probe Neptunestorm Neptune Neptune2 5000
+Interaction Satellite Neptune NeptuneAtmosphere Probe 9000
+Interaction Satellite NeptuneAtmosphere Clear Satellite 100
+Interaction Probe Neptune ProbeNe Probe 5000
+Interaction Satellite Jupiter JupiterAtmosphere Probe 9000
+Interaction Satellite JupiterAtmosphere Clear Satellite 100
+Interaction Probe Jupiter ProbeJu Probe 5000
+Interaction Satellite Mars MarsAtmosphere Probe 9000
+Interaction Satellite MarsAtmosphere Clear Satellite 100
+Interaction Probe Mars ProbeMa Probe 5000
+Interaction Satellite Venus VenusAtmosphere Probe 9000
+Interaction Satellite VenusAtmosphere Clear Satellite 100
+Interaction Probe Venus ProbeVe Probe 5000
+Interaction Satellite Mercury Clear Probe 9000
+Interaction Probe Mercury ProbeMe Probe 5000
+Interaction Satellite Uranus UranusAtmosphere Probe 9000
+Interaction Satellite UranusAtmosphere Clear Satellite 100
+Interaction Probe Uranus ProbeUr Probe 5000
+Interaction Probe Pluto ProbeP Probe 5000
+Interaction Satellite Pluto PlutoAtmosphere Probe 9000
+Interaction Satellite PlutoAtmosphere Clear Satellite 100
+Interaction ShipG SpaceStation LifeA LifeA 200
+Interaction ShipS Ocean Atmosphere ShipW 200
+Interaction ShipS Clear ShipS2 ShipS 5000
+Interaction ShipS Atmosphere3 Atmosphere3 ShipS 200
+Interaction ShipS Atmosphere2 Atmosphere2 ShipS 200
+Interaction ShipS Atmosphere Atmosphere ShipS 200
+Interaction ShipW Atmosphere Atmosphere ShipS 200
+Interaction ShipW Ocean ShipW2 ShipW 5000
+Interaction ShipW Beach3 Water ShipW 5000
+Interaction ShipW Beach2 Water ShipW 5000
+Interaction ShipW Beach1 Water ShipW 5000
+Interaction ShipW Grass Beach1 ShipG 500
+Interaction ShipG Beach1 Beach1 ShipW 500
+Interaction ShipG Grass ShipG2 ShipG 5000
+Interaction LifeS Ship Grass ShipG 200
+Interaction MoonLife LifeH Corpse MoonLife 5000
+Interaction MoonLife LifeS Corpse MoonLife 5000
+Interaction MoonLife LifeB Corpse MoonLife 5000
+Interaction MoonLife LifeA Corpse MoonLife 5000
+Interaction MoonLife Life Corpse MoonLife 5000
+Interaction MoonLife Grass MoonLife3 MoonLife 5000
+Interaction UFO Clear UFO3 UFO 5000
+Interaction UFO Clear UFO3 UFO 5000
+Interaction UFO Moon UFO2 UFO 5000
+Interaction MoonLife Creator3 UFO Moon 2
+Interaction Creator3 Moon Moon MoonLife 1
+Interaction Creator2 Moon Creator2 Creator3 500
+Interaction Creator Moon Creator Creator2 500
+Interaction Satellite Asteroid1 Smoke Explosion 5000
+Interaction Satellite Clear Smoke Satellite 5000
+Interaction SpaceStation Grass SpaceStation Grass 30000
+Interaction SpaceStation Grass SpaceStation SatelliteU 1
+Interaction SatelliteU Clear Atmosphere3 Satellite 5000
+Interaction SatelliteU Atmosphere3 Atmosphere3 SatelliteU 5000
+Interaction SatelliteU Atmosphere2 Atmosphere2 SatelliteU 5000
+Interaction SatelliteU Atmosphere Atmosphere SatelliteU 5000
+Interaction SatelliteU Ocean SatelliteU3 SatelliteU 5000
+Interaction SatelliteU Beach3 SatelliteU3 SatelliteU 5000
+Interaction SatelliteU Beach2 SatelliteU3 SatelliteU 5000
+Interaction SatelliteU Beach1 SatelliteU3 SatelliteU 5000
+Interaction SatelliteU Grass SatelliteU2 SatelliteU 5000
+Interaction Moon Asteroid1 Creator Clear 5000
+Interaction Saturnring Asteroid1 Clear Explosion 50000
+Interaction Asteroid1 PlutoAtmosphere Asteroid1 Explosion Clear 500
+Interaction Asteroid1 VenusAtmosphere Asteroid1 Explosion 500
+Interaction Asteroid1 MarsAtmosphere Asteroid1 Explosion 500
+Interaction Asteroid1 JupiterAtmosphere Asteroid1 Explosion 500
+Interaction Asteroid1 UranusAtmosphere Asteroid1 Explosion 500
+Interaction Asteroid1 NeptuneAtmosphere Asteroid1 Explosion 500
+Interaction AsteroidT1 Clear AsteroidT1 AsteroidT2 500
+Interaction Asteroid2 Clear Asteroid1 AsteroidT1 500
+Interaction Asteroid1 Clear Asteroid2 AsteroidT1 500
+Interaction Neptune2 Neptunestorm Neptune2 Neptune 1
+Interaction Neptune Neptunestorm Neptunestorm Neptunestorm2 500
+Interaction Neptune2 Neptunestorm Neptunestorm Neptunestorm2 500
+Interaction Neptune Clear Neptune NeptuneAtmosphere 500
+Interaction Uranus Clear Uranus UranusAtmosphere 500
+Interaction LiquidHydrogen Water LiquidHydrogen LiquidHydrogen 50
+Interaction Jupiter Water Jupiter LiquidHydrogen 50
+Interaction Jupiter Clear Jupiter JupiterAtmosphere 500
+Interaction Mars2 Clear Mars2 MarsAtmosphere 500
+Interaction Mars Clear Mars MarsAtmosphere 500
+Interaction Mercury Clear Mercury Fire 500
+Interaction Venus Clear Venus VenusAtmosphere 500
+Interaction VenusAtmosphere Water VenusAtmosphere Steam 50
+Interaction VenusAtmosphere Clear VenusAtmosphere Fire 5000
+Interaction PlutoAtmosphere Water PlutoAtmosphere Ice 500
+Interaction Pluto Clear Pluto PlutoAtmosphere 500
+Interaction Saturn Clear Saturn SaturnAtmosphere 32768
+Interaction Ocean Water Ocean Ocean 5000
+Interaction Atmosphere Water Atmosphere Ocean 500
+Interaction MoonLife Moon MoonLife2 MoonLife 5000
+Interaction Explosion SunCore SuperNova SuperNova 500
+Interaction Meteor SunM4 Explosion Explosion 500
+Interaction Meteor SunM3 Explosion Explosion 500
+Interaction Meteor SunM2 Explosion Explosion 500
+Interaction Meteor SunM1 Explosion Explosion 500
+Interaction Meteor Moon Explosion Explosion 500
+Interaction SunCoreDead SunFlare SunCoreDead SuperNova 500
+Interaction SunCoreDead SunM2 SunCoreDead SuperNova 500
+Interaction SunCoreDead SunM4 SunCoreDead SuperNova 500
+Interaction SunCoreDead SunCore SunCoreDead SunCoreDead 500
+Interaction SuperNova SunCore Fire SunCoreDead 500
+Interaction SuperNova Saturnring SuperNova SuperNova 1000
+Interaction SuperNova Saturnring2 SuperNova SuperNova 1000
+Interaction SuperNova Saturnring3 SuperNova SuperNova 1000
+Interaction SuperNova Saturnring4 SuperNova SuperNova 1000
+Interaction SuperNova SaturnAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Star SuperNova SuperNova 1000
+Interaction SuperNova Star2 SuperNova SuperNova 1000
+Interaction SuperNova House3 SuperNova SuperNova 1000
+Interaction SuperNova House2 SuperNova SuperNova 1000
+Interaction SuperNova House SuperNova SuperNova 1000
+Interaction SuperNova Jupiter SuperNova SuperNova 1000
+Interaction SuperNova Jupiter2 SuperNova SuperNova 1000
+Interaction SuperNova JupiterAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Jupiter SuperNova SuperNova 1000
+Interaction SuperNova Jupiter2 SuperNova SuperNova 1000
+Interaction SuperNova JupiterAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Venus SuperNova SuperNova 1000
+Interaction SuperNova Venus2 SuperNova SuperNova 1000
+Interaction SuperNova VenusAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Saturn SuperNova SuperNova 1000
+Interaction SuperNova Saturn2 SuperNova SuperNova 1000
+Interaction SuperNova MoonLife SuperNova SuperNova 1000
+Interaction SuperNova MoonLife2 SuperNova SuperNova 1000
+Interaction SuperNova Creator SuperNova SuperNova 1000
+Interaction SuperNova Creator2 SuperNova SuperNova 1000
+Interaction SuperNova Creator3 SuperNova SuperNova 1000
+Interaction SuperNova SaturnAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Mercury SuperNova SuperNova 1000
+Interaction SuperNova Mercury2 SuperNova SuperNova 1000
+Interaction SuperNova Asteroid1 SuperNova SuperNova 1000
+Interaction SuperNova Asteroid2 SuperNova SuperNova 1000
+Interaction SuperNova UFO SuperNova SuperNova 1000
+Interaction SuperNova Satellite SuperNova SuperNova 1000
+Interaction SuperNova ShipS SuperNova SuperNova 1000
+Interaction SuperNova Probe SuperNova SuperNova 1000
+Interaction SuperNova Atmosphere2 SuperNova SuperNova 1000
+Interaction SuperNova Atmosphere3 SuperNova SuperNova 1000
+Interaction SuperNova Pluto SuperNova SuperNova 1000
+Interaction SuperNova Pluto2 SuperNova SuperNova 1000
+Interaction SuperNova PlutoAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Mars SuperNova SuperNova 1000
+Interaction SuperNova Mars2 SuperNova SuperNova 1000
+Interaction SuperNova MarsAtmosphere SuperNova SuperNova 1000
+Interaction SunFlare Flare SuperNova SuperNova 5000
+Interaction SuperNova Uranus SuperNova SuperNova 1000
+Interaction SuperNova Uranus2 SuperNova SuperNova 1000
+Interaction SuperNova UranusAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova Neptune SuperNova SuperNova 1000
+Interaction SuperNova Neptune2 SuperNova SuperNova 1000
+Interaction SuperNova Neptunestorm SuperNova SuperNova 1000
+Interaction SuperNova Neptunestorm2 SuperNova SuperNova 1000
+Interaction SuperNova NeptuneAtmosphere SuperNova SuperNova 1000
+Interaction SuperNova IceTree SuperNova SuperNova 1000
+Interaction SuperNova Berrybush SuperNova SuperNova 1000
+Interaction SuperNova SpaceStation SuperNova SuperNova 1000
+Interaction SuperNova Volcano SuperNova SuperNova 1000
+Interaction SuperNova Moon SuperNova SuperNova 1000
+Interaction SuperNova ArticIce2 SuperNova SuperNova 1000
+Interaction SuperNova iceBeach3 SuperNova SuperNova 1000
+Interaction SuperNova iceBeach2 SuperNova SuperNova 1000
+Interaction SuperNova iceBeach1 SuperNova SuperNova 1000
+Interaction SuperNova Beach3 SuperNova SuperNova 1000
+Interaction SuperNova Beach2 SuperNova SuperNova 1000
+Interaction SuperNova Beach1 SuperNova SuperNova 1000
+Interaction SuperNova Grass SuperNova SuperNova 1000
+Interaction SuperNova Ocean SuperNova SuperNova 1000
+Interaction SuperNova Atmosphere SuperNova SuperNova 1000
+Interaction SuperNova SunFlare SuperNova SuperNova 1000
+Interaction SuperNova SunM4 SuperNova SuperNova 32768
+Interaction SuperNova SunM3 SuperNova SuperNova 32768
+Interaction SuperNova SunM2 SuperNova SuperNova 32768
+Interaction SuperNova SunM1 SuperNova SuperNova 32768
+Interaction SuperNova Clear SuperNova SuperNova 1000
+Interaction SunM2 SunM2 Sunspot Sunspot 30
+Interaction SunFlare Clear Clear Clear 5
+Interaction SunFlare UFO Explosion Explosion 3000
+Interaction SunFlare Satellite Explosion Explosion 3000
+Interaction SunFlare ShipS Explosion Explosion 3000
+Interaction SunFlare Atmosphere Explosion Atmosphere 3
+Interaction SunFlare Atmosphere Clear Atmosphere 3000
+Interaction SunFlare Clear SunFlare2 SunFlare 5000
+Interaction SunM4 Clear SunM1 SunFlare 2
+Interaction Sun2 Clear Sun2 Fire 500
+Interaction SunCore Clear SunCore Sun 1
+Interaction Sun Clear Sun Sun 4200
+Interaction Sun2 Sun Sun2 Sun2 12290
+Interaction SpaceStation Grass SpaceStation Ship 100
+Interaction Zombie Corpse Zombie Zombie 200
+Interaction Graveyard3 Desert Desert Zombie 1
+Interaction Graveyard3 Desert Graveyard3 Desert 2000
+Interaction Graveyard House Graveyard Graveyard 2000
+Interaction Graveyard2 House Graveyard2 Graveyard 2000
+Interaction Graveyard3 House2 Graveyard Graveyard2 2000
+Interaction Desert House3 Desert Graveyard3 200
+Interaction Zombie Desert Zombie2 Zombie 5000
+Interaction Boat Grass Boat2 Life 200
+Interaction Boat Beach1 Boat2 Boat 5000
+Interaction Boat Beach2 Boat2 Boat 5000
+Interaction Boat Beach3 Boat2 Boat 5000
+Interaction Boat Ocean Boat2 Boat 5000
+Interaction LifeS Beach1 Grass Boat 200
+Interaction HotWater ArticIce2 HotWater HotWater 500
+Interaction HotWater Igloo3 HotWater HotWater 500
+Interaction HotWater Igloo2 HotWater HotWater 500
+Interaction HotWater Igloo HotWater HotWater 500
+Interaction HotWater IceBerry HotWater HotWater 500
+Interaction HotWater IceTree HotWater HotWater 500
+Interaction HotWater iceBeach3 HotWater HotWater 500
+Interaction HotWater iceBeach2 HotWater HotWater 500
+Interaction HotWater iceBeach1 HotWater HotWater 500
+Interaction Desert Grass Desert Desert 5
+Interaction Desert Berrybush Desert Tumbleweed 100
+Interaction Tumbleweed Berrybush Tumbleweed Tumbleweed 100
+Interaction HotEarth Berrybush HotEarth Tumbleweed 100
+Interaction HotEarth LifeS HotEarth Corpse 50
+Interaction HotEarth LifeA HotEarth Corpse 50
+Interaction HotEarth LifeB HotEarth Corpse 50
+Interaction HotEarth Life HotEarth Corpse 50
+Interaction HotEarth Grass HotEarth HotEarth 100
+Interaction HotEarth Beach3 HotEarth HotEarth 1000
+Interaction HotEarth Beach2 HotEarth HotEarth 1000
+Interaction HotEarth Beach1 HotEarth HotEarth 1000
+Interaction HotWater Beach1 HotWater HotEarth 100
+Interaction HotWater Fish HotWater Water 50
+Interaction HotWater Ocean HotWater HotWater 100
+Interaction Warming Ocean Warming HotWater 100
+Interaction Warming Atmosphere Warming Warming 100
+Interaction Fire Atmosphere Fire Warming 100
+Interaction Fire Atmosphere2 Fire Warming 1000
+Interaction Fire Atmosphere3 Fire Warming 100
+Interaction IceageG Thaw Thaw Thaw 400
+Interaction Planet IceageG Planet Thaw 50
+Interaction Planet Ice Planet Planet 500
+Interaction Planet Iceage Planet Planet 500
+Interaction Igloo Clear Clear Clear 5000
+Interaction Igloo3 ArticIce2 Igloo3 IceLife 1
+Interaction Igloo ArticIce2 Igloo Igloo2 50
+Interaction Igloo2 ArticIce2 Igloo2 Igloo3 50
+Interaction IceLifeA ArticIce2 IceLife IceLife 1
+Interaction Atmosphere ArticIce2 Atmosphere Ocean 500
+Interaction Atmosphere Grass Atmosphere Ocean 500
+Interaction IceLife IceBerry IceLifeB ArticIce2 500
+Interaction IceLifeB IceBerry IceLifeA ArticIce2 200
+Interaction IceLifeB ArticIce2 ArticIce2 ArticIce2 1
+Interaction IceLifeA ArticIce2 ArticIce2 ArticIce2 1
+Interaction IceLifeA ArticIce2 IceLifeA2 IceLifeA 5000
+Interaction IceLifeB ArticIce2 IceLifeB2 IceLifeB 5000
+Interaction IceLife ArticIce2 ArticIce2 ArticIce2 1
+Interaction IceLifeA ArticIce2 ArticIce2 ArticIce2 1
+Interaction IceLifeB ArticIce2 ArticIce2 ArticIce2 1
+Interaction IceTree ArticIce2 IceTree IceBerry 10
+Interaction IceLife ArticIce2 IceLife2 IceLife 5000
+Interaction IceLife Clear Clear Clear 5000
+Interaction ArticIce2 Ocean ArticIce2 iceBeach1 500
+Interaction iceBeach1 Ocean iceBeach1 iceBeach2 500
+Interaction iceBeach2 Ocean iceBeach2 iceBeach3 500
+Interaction ArticIce Ocean ArticIce ArticIce 4200
+Interaction ArticIce2 ArticIce ArticIce2 ArticIce2 12290
+Interaction ArticIce Mars ArticIce ArticIce 4200
+Interaction ArticIce2 ArticIce ArticIce2 ArticIce2 12290
+Interaction ArticIce Mars2 ArticIce ArticIce 4200
+Interaction ArticIce2 ArticIce ArticIce2 ArticIce2 12290
+Interaction Meteor Clear Meteor Trail1 5000
+Interaction Meteor Clear Meteor Fire 100
+Interaction Meteor Warming Explosion TNT 5000
+Interaction Meteor Atmosphere Explosion TNT 5000
+Interaction Meteor Atmosphere2 Explosion TNT 5000
+Interaction Meteor Atmosphere3 Explosion TNT 5000
+Interaction Coral Coral2 Water Water 2
+Interaction Coral Ocean Coral Coral2 500
+Interaction Fish Ocean Fish Coral 1
+Interaction Life Grass Grass Grass 1
+Interaction LifeB Grass Grass Grass 1
+Interaction LifeA Grass Grass Grass 1
+Interaction LifeS Grass Grass Grass 1
+Interaction LifeH Grass House Grass 1
+Interaction House3 Grass House3 Life 1
+Interaction Boat Ocean Boat2 Boat 5000
+Interaction Fish Ocean Fish2 Fish 5000
+Interaction House Grass House House2 50
+Interaction House2 Grass House2 House3 50
+Interaction LifeA Grass Life Life 1
+Interaction Iceage Grass Iceage Iceage 50
+Interaction Iceage Beach1 Iceage Iceage 50
+Interaction Iceage Beach2 Iceage Iceage 50
+Interaction Iceage Beach3 Iceage Iceage 50
+Interaction Iceage Water Iceage Iceage 50
+Interaction Iceage Ocean Iceage Iceage 50
+Interaction iceBeach1 Iceage Iceage Iceage 500
+Interaction iceBeach2 Iceage Iceage Iceage 500
+Interaction iceBeach3 Iceage Iceage Iceage 500
+Interaction iceBeach3 Ice Iceage Iceage 500
+Interaction Ice ArticIce2 Iceage Iceage 500
+Interaction Iceage ArticIce2 Iceage Iceage 500
+Interaction Ice Beach3 Iceage Iceage 500
+Interaction Ice Beach2 Iceage Iceage 500
+Interaction Ice Beach1 Iceage Iceage 500
+Interaction Ice Ocean Ice Ice 500
+Interaction Iceage Grass IceageG IceageG 50
+Interaction IceageG Grass IceageG IceageG 500
+Interaction LifeA Grass LifeA2 LifeA 5000
+Interaction LifeS Grass LifeS2 LifeS 5000
+Interaction LifeH Grass LifeH2 LifeH 5000
+Interaction LifeB Berry LifeA Grass 200
+Interaction LifeA Berry LifeS Grass 200
+Interaction LifeS Berry LifeH Grass 200
+Interaction Volcano Ocean Volcano Lava1 200
+Interaction LifeB Grass LifeB2 LifeB 5000
+Interaction Life Berry LifeB Grass 3000
+Interaction Life Grass Life2 Life 5000
+Interaction Grass Ocean Grass Beach1 500
+Interaction Beach1 Ocean Beach1 Beach2 500
+Interaction Beach2 Ocean Beach2 Beach3 500
+Interaction Water Planet Water Water 3000
+Interaction Ocean Planet Ocean Ocean 3000
+Interaction Berrybush Grass Berrybush Berry 10
+Interaction Grass Clear Clear Clear 3000
+Interaction Beach1 Clear Clear Clear 3000
+Interaction Beach2 Clear Clear Clear 3000
+Interaction Beach3 Clear Clear Clear 3000
+Interaction Boat Clear Clear Clear 3000
+Interaction HotEarth Clear Clear Clear 3000
+Interaction Fish Clear Clear Clear 3000
+Interaction Fish2 Clear Clear Clear 3000
+Interaction Berry Clear Clear Clear 3000
+Interaction Tumbleweed Clear Clear Clear 3000
+Interaction Zombie Clear Clear Clear 3000
+Interaction Graveyard Clear Clear Clear 3000
+Interaction Graveyard2 Clear Clear Clear 3000
+Interaction Graveyard3 Clear Clear Clear 3000
+Interaction Corpse Clear Clear Clear 3000
+Interaction Berrybush Clear Clear Clear 3000
+Interaction Life Clear Clear Clear 3000
+Interaction LifeB Clear Clear Clear 3000
+Interaction Life2 Clear Clear Clear 3000
+Interaction LifeA Clear Clear Clear 3000
+Interaction LifeA2 Clear Clear Clear 3000
+Interaction Volcano Clear Clear Clear 3000
+Interaction ArticIce Clear Clear Clear 3000
+Interaction ArticIce2 Clear Clear Clear 3000
+Interaction iceBeach1 Clear Clear Clear 3000
+Interaction iceBeach2 Clear Clear Clear 3000
+Interaction iceBeach3 Clear Clear Clear 3000
+Interaction IceLife Clear Clear Clear 3000
+Interaction IceLifeA Clear Clear Clear 3000
+Interaction IceLifeB Clear Clear Clear 3000
+Interaction Desert Clear Clear Clear 3000
+Interaction Coral2 Clear Clear Clear 3000
+Interaction Coral Clear Clear Clear 3000
+Interaction Planet Clear Planet Atmosphere 500
+Interaction Atmosphere Clear Atmosphere Atmosphere2 500
+Interaction Atmosphere2 Clear Atmosphere2 Atmosphere3 500
+Interaction Lava7 Ocean Lava7 Lava8 500
+Interaction Lava6 Ocean Lava6 Lava7 500
+Interaction Lava5 Ocean Lava5 Lava6 500
+Interaction Lava4 Ocean Lava4 Lava5 500
+Interaction Lava3 Ocean Lava3 Lava4 500
+Interaction Lava2 Ocean Lava2 Lava3 500
+Interaction Lava1 Ocean Lava1 Lava2 500
+Interaction SpaceStation Clear Clear Clear 3000
+Interaction LifeS Clear Clear Clear 3000
+Interaction LifeH Clear Clear Clear 3000
+Interaction Demonland Clear Clear Clear 3000
+Interaction Demon Clear Clear Clear 3000
+Interaction Solder Clear Clear Clear 3000
+Interaction Academy Clear Clear Clear 3000
+
+
+
+
+
+
+
+
+Element Planet Raincloud 200 200 200 0 1 1 1 0 Clear 100 Text RainC
+Element None Raincloud2 200 200 200 0 1 1 1 500 Ocean 100 Text RainC2
+Element None Raincloud3 200 200 200 0 1 1 1 500 Ocean 100 Text RainC3
+Element None RaincloudL 200 200 200 0 1 1 1 0 Clear 100 Text RainC
+Element None RaincloudL2 200 200 200 0 1 1 1 500 Grass 100 Text RainC2
+Element None RaincloudL3 200 200 200 0 1 1 1 500 Grass 100 Text RainC3
+Element Planet River 0 0 255 0 1 1 1 0 Clear 100 Text River
+Element None River2 0 0 255 0 1 1 1 0 Clear 100 Text River
+
+Interaction Raincloud Ocean Raincloud Raincloud2 5000
+Interaction Raincloud2 Ocean Raincloud2 Raincloud3 5000
+Interaction Raincloud Raincloud2 Raincloud2 Raincloud 5000
+Interaction Raincloud Beach1 Raincloud Raincloud2 5000
+Interaction Raincloud Beach2 Raincloud Raincloud2 5000
+Interaction Raincloud Beach3 Raincloud Raincloud2 5000
+
+Interaction Raincloud Grass Ocean RaincloudL 5000
+Interaction RaincloudL Grass RaincloudL RaincloudL2 5000
+Interaction RaincloudL Grass Grass Grass 100
+Interaction RaincloudL2 Grass RaincloudL2 RaincloudL3 5000
+Interaction RaincloudL RaincloudL2 RaincloudL2 RaincloudL 5000
+
+Interaction RaincloudL3 Grass Water Grass 1
+Interaction RaincloudL3 Grass Grass Grass 5000
+Interaction RaincloudL3 Water Water River 1
+
+Interaction River Grass River2 River 5000
+Interaction River River2 River2 River 5000
+Interaction River Ocean Water Ocean 5000
+Interaction River Beach1 Water Ocean 5000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

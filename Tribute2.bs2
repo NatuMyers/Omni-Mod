@@ -1,0 +1,2272 @@
+EXEC clearall
+INCLUDE sandbox.bs2 
+INCLUDE explosions.bs2 
+
+GROUP CLEARALL
+ELEMENTSCLEAR
+
+// Delvar's edits of Atlas's old .95 Beta mod, "Cosmic Sand Beta 1"
+// 2007, May, 12.  Coded on a Core 2 Duo (x86) processor running XP SP2
+// ATI X1400 Graphics Card, resolution at 1280 x 800 pixels at 32 bit color
+// Notepad.exe used to write config.
+// Hex-o-Matic for HEX images
+// Runs on Sieben's "Burning Sand" for v0.99b (Beta 7).
+
+// PlanetBuilders mod: Green, Black and Cyan compete for control.
+
+// One group contains all the possible drawable elements: Clear, Green, Black, Cyan ships, Nebula, Sun, Earth and Lava (8 elements)
+Message This is such a fundamental mod...Made by the first real person with a good imagination of actual space...WARS, rather than creation. Enjoy this vintage mod by Delvar! (2007)
+
+Group GodTools 0 HEX 00000000000000003C01004020C700402D290050252900503CC68054000000540700105502319355024A5455024A515502319655000000553FFFFFD5000000150FFFFFF50000000503FFFFFD0000000100FFFFFF00000000003FFFFF00000000000FFFFF000000000003FFFF000000000000FFFF0000000000003FFF00000000 255 255 255
+Group PlanetBuilders 100 HEX 00000000000000003A0000902A6189D03A92549422925094226A4C55000000150700101502319315024A5415024A511502319615000000153FFFFFF5000000050FFFFFFD0000000103FFFFFF0000000000FFFFFF00000000003FFFFF00000000000FFFFF000000000003FFFF000000000000FFFF0000000000003FFF00000000 255 255 255
+Group Colors 200 HEX 00000000000000001C08004020C98C40212A5050212A50501CC99054000000540700105502319355024A5455024A515502319655000000553FFFFFD5000000150FFFFFF50000000503FFFFFD0000000100FFFFFF00000000003FFFFF00000000000FFFFF000000000003FFFF000000000000FFFF0000000000003FFF00000000 255 255 255
+
+// Drawable elements at the top in their menu order
+// 'Behind the scenes' elements follow after.
+
+// Clear - Nothing.
+Element GodTools Clear 0 0 0 1 1 1 1 0 Clear 0 HEX 0000000000000000000000000E400040114000401048C35010552450115124540E4CD454000000541FFFFFD50000001507FFFFF50000000501FFFFFD00000001007FFFFF00000000001FFFFF000000000007FFFF000000000001FFFF0000000000007FFF0000000000001FFF00000000000007FF00000000000001FF00000000 255 255 255
+
+// Colored ships - The three colors signify the three factions fighting for control.
+// When they touch lava, they colonize it and begin to terraform it.
+// When they touch an enemy color, they explode.
+
+Element Colors GreenShip 0 180 0 0 0 1 1 0 Clear 0 HEX 000000000000000000000000000000000000000003800000044CC6380411294404D1CE44045108440390E744000000007E0000002100000010C0000008380000040600000601FFC0180000201001021008060C2007F81FC000106000006180000086000000780000000000000000000000000000000000000000000000000000 255 255 255
+Element Colors BlackShip 199 199 199 0 0 1 1 0 Clear 100 HEX 00000000000000000000000000000000000000000790008004530C90079492A0045490C0045492A007934C90000000007E0000002100000010C0000008380000040600000601FFC0180000201001021008060C2007F81FC000106000006180000086000000780000000000000000000000000000000000000000000000000000 255 255 255
+Element Colors CyanShip 0 250 250 0 0 1 1 0 Clear 200 HEX 000000000000000000000000000000000000000003800000045261C004129220040E922004429220038C6A20000000007E0000002100000010C0000008380000040600000601FFC0180000201001021008060C2007F81FC000106000006180000086000000780000000000000000000000000000000000000000000000000000 255 255 255
+Element Colors GreenSpy 34 255 67 0 0 1 1 0 Clear 300 HEX 00000000000E70000011D8000021EC000020EC0003C0678004400AE00840055008300BA8080E17580401FEA80300015002C0002003F00040031FFFC0791FBFC0490F2F4040C021805840210048C06180794001C001300340010CE4400103084001019040010194600F030AF83083F9D64047FEA90023F5500011EBA000000000 255 255 255
+Element Colors BlackSpy 172 172 172 0 0 1 1 0 Clear 400 HEX 00000000000E70000011D8000021EC000020EC0003C0678004400AE00840055008300BA8080E17580401FEA80300015002C0002003F00040031FFFC0711FBFC0490F2F4070C021804840210048C06180714001C001300340010CE4400103084001019040010194600F030AF83083F9D64047FEA90023F5500011EBA000000000 255 255 255
+Element Colors CyanSpy 132 245 255 0 0 1 1 0 Clear 500 HEX 00000000000E70000011D8000021EC000020EC0003C0678004400AE00840055008300BA8080E17580401FEA80300015002C0002003F00040031FFFC0391FBFC0410F2F4040C021804040210040C06180394001C001300340010CE4400103084001019040010194600F030AF83083F9D64047FEA90023F5500011EBA000000000 255 255 255
+Element Colors GSoldier 0 167 0 0 0 1 1 0 Clear 600 HEX 000000000000000000000000000000000000000003800000044CC6380411294404D1CE44045108440390E74400000000000000000000000000000000000000000200000007FFFC00020002000100020003FFFC0002240000064800000570000004C000000D4000000F8000000000000000000000000000000000000000000000 255 255 255
+Element Colors CSoldier 10 240 240 0 0 1 1 0 Clear 700 HEX 0000000000000000000000000000000000000000038000000452000004126180040E924004429240039C6A4000000000000000000000000000000000000000000200000007FFFC00020002000100020003FFFC0002240000064800000570000004C000000D4000000F8000000000000000000000000000000000000000000000 255 255 255
+Element Colors BSoldier 90 90 90 0 0 1 1 0 Clear 800 HEX 00000000000000000000000000000000000000000790008004500C90079312A0045490C0045492A007934C9000000000000000000000000000000000000000000200000007FFFC00020002000100020003FFFC0002240000064800000570000004C000000D4000000F8000000000000000000000000000000000000000000000 255 255 255
+
+// Nebulas are obstacles that destroy the colored ships.
+// They do not harm the planetoids.
+
+Element PlanetBuilders Nebula 255 0 255 0 0 0 20 4 Clear 0 HEX 000000000000000000004100010001008202004004000000000C1E10080400800A004000090000000000000800000000000485001008010000E501000028110040000000008208800120808212018060040104004000040000000480000033000100E201021B82220000020000600780800000000000100000000004000001C0 255 255 255
+
+// Sun is just for decoration.  It draws a starlit background, but slows the game down.
+
+Element PlanetBuilders Sun 255 225 5 0 1 1 1 1000 Sun_2 100 HEX 0000000000000000000000000F001000100010000E499400014A5400014A55001E325500000015401FFFF5400000055007FFFD500000015401FFFF5400000055007FFFD500000015001FFFF5000000050007FFFD000000010001FFFF0000000000007FFF0000000000001FFF0000000000000FFF00000000000007FF00000000 255 255 255
+
+// Earth is what the ships terraform it to and assign a color to.  The option to draw it manually gives the user the option to make a 'starting planetoid' as the planet will change to that color immediately.
+
+Element PlanetBuilders Earth 200 127 0 0 1 1 1 0 Clear 200 HEX 0000000000000000000000001F000110100009101C30DD1410490994104909551F350555000000151FFFFFF50000000507FFFFFD0000000101FFFFFF00000000007FFFFF00000000001FFFFF000000000007FFFF000000000001FFFF0000000000007FFF0000000000001FFF00000000000007FF00000000000001FF00000000 255 255 255
+
+// Lava is what the user draws to make a normal planetoid.  When a ship lands on it, it will slowly terraform it and change the lava into Earth, which will then be colored.  Competing colors on one planet will have to use ship to ship explosions in order to remove the enemy color, then take the untouched inner Earth.  A color will slowly expand throughout a planet over time.
+
+Element PlanetBuilders Lava 190 50 0 0 20 1 1 500 Stone 300 HEX 000000000000000000000000100000401000004010314C5010495250104952541F348D54000000551FFFFFD50000001507FFFFF50000000501FFFFFD00000001007FFFFF00000000001FFFFF000000000007FFFF000000000001FFFF0000000000007FFF0000000000001FFF00000000000007FF00000000000001FF00000000 255 255 255
+
+// The moon colonies can only build Tier 3 buildings when colonized, and are claimed once landed on.  They slowly decay, and are impermanent installations.
+
+Element PlanetBuilders Moon 85 85 85 0 1 1 1 100 Moon_2 400 HEX 000000000000000000000000110000801B00008015318CA0114A52A0114A52A8113192A8000000AA1FFFFFAA0000002A07FFFFEA0000000A01FFFFFA00000002007FFFFE00000000001FFFFF000000000007FFFF000000000001FFFF0000000000007FFF0000000000001FFF00000000000007FF00000000000001FF00000000 255 255 255
+
+// Jungle can either be put on an existing planet to convert it into jungle (slowly) or created as a planet in and of itself. 
+
+Element PlanetBuilders Jungle 118 254 84 0 1 1 1 100 Jungle2 500 HEX 0000000000000000000000001E00010404001D040493252504949D55149485450864B935000000051FFFFFFD0000000107FFFFFF0000000001FFFFFF00000000007FFFFF00000000001FFFFF000000000007FFFF000000000001FFFF0000000000007FFF0000000000001FFF00000000000007FF00000000000001FF00000000 255 255 255
+
+// Collapser collapses stellar objects
+
+Element GodTools Collapser 8 8 8 0 1 1 1 1000 Clear 100 HEX 00000000400000022000000410000008080000100400002002000040010000800088110000481200002814000018180000F81F00000180000003C0000007E0000007E0000003C0000001800000F81F00001818000028140000481200008811000100008002000040040000200800001010000008200000044000000200000000 255 255 255
+
+// Cataclysm destroys planets only.
+
+Element GodTools Cataclysm 240 121 100 0 1 1 1 32768 Cataclysm2 200 HEX 0000000000004000000060000000E0000000E0041801E00C0C0010380E0FC0F0073031E0064C09C0028405800083040001070200010F22FC0D0E32F83D1C72E07D003A001D60FA0000B0E4000083E5800047E98001303380018FC3C001C001C003C1C0E00381C0600601C0200C00C0000800C0000000C0000000400000000000 255 255 255
+
+Element GodTools BlackHole 5 5 5 0 0 1 1 0 Clear 0 HEX 0000000000F80000078F80003800F000203F9C0000E0E60001803300031F11000671D1000CC051000880511011005310130E5220121BF4C03211E9802211A3002111FC0021180000210C00E00183C78000C07C00004000000020000000180004000E001C7203AF004A0020705261A8884A9230884A9228887269A87000000000 255 255 255
+
+Element GodTools Plague 255 149 152 0 0 1 1 100 Clear 400 HEX 00000000001FFE0000FFFF8001FFFFC003FFFFE003FFFFE003FFFFE003FFFFE003FFFFE003C7F1E00383E0C0018360C001C6318003FC1F8001FEBF8000FFFF80000FF8000024900006100400071614E00FCFF9E00FF887E0001E3C600003E0000007F000001C1E0000E003C00780007EFC00001E7000001C3000000000000000 255 255 255
+
+Element GodTools Quarantine 255 255 255 0 0 1 1 0 Clear 500 HEX 003FE000001FC0000C0FC0000C0FC0000007C0000027C0000027C0007023C0001023C0000003C0000003C0E00001C1100001C1100001C1103001C1500301C0E00201C0200001C0000001C0000001C0000001C0000003C0000003C0000203C0000103C0000007C0000007C0001807C000080FC000000FC000001FC000003FE000 255 255 255
+
+Element GodTools MotherShip 118 80 197 0 0 1 1 3000 MotherShip2 600 HEX 0000000000000000000000000000000000001E0000006100000080000001000001FF000002010000070100000BFF000008810000048080000440610002401E000220000001200000011000000090000000900000008C00000303C00004003F003FFFFFFC5C71C71E628A28A2628A28A2628A28A25C71C71E3FFFFFFC00000000 255 255 255
+Element GodTools Core 123 84 204 0 0 1 1 1000 Core2 700 HEX 0000000000000030000000480000004000001E48000061300000800C0001001201FF0012020100120701000C0BFF007008810048048080480440617002401E48022000000120000E011000080090000C00900008008C000E0303C00004003F003FFFFFFC5C71C71E628A28A2628A28A2628A28A25C71C71E3FFFFFFC00000000 255 255 255
+
+// Behind the scenes elements follow
+// Planet related life elements 
+
+Element None Animal2 0 255 0 0 1 1 20 200 Clear 0 File erase.bmp
+Element None Gas 255 255 255 0 2 1 5 200 Clear 0 File erase.bmp
+Element None Life 25 255 25 0 0 0 20 200 Clear 0 File erase.bmp
+Element None Animal 255 21 36 0 12 15 5 200 Clear 0 File erase.bmp
+Element None Water 0 0 255 0 100 20 1 200 Clear 0 File erase.bmp
+
+// Planetoid composition
+
+Element None Stone 100 100 100 0 1 1 1 500 Lava 0 File erase.bmp
+Element None Moon_2 75 75 75 0 1 1 1 0 Clear 0 File erase.bmp
+
+// Destructives
+
+Element None Fire 255 0 0 0 1 1 1 1500 Fire2 0 File erase.bmp
+Element None Fire2 230 0 0 0 1 1 1 1300 Clear 0 File erase.bmp
+Element None Cataclysm2 164 2 2 0 1 1 1 1 Clear 0 File erase.bmp
+Element None Explosion 253 177 0 0 2 1 5 0 Explosion2 0 File erase.bmp
+Element None Explosion2 255 128 0 0 1 1 4 500 Fire 0 File erase.bmp
+
+// Colors
+// The "Tiers" are the stages of space station construction that occur during colonization.  Tier 3 produces ships.
+
+Element None Green 0 144 36 0 12 15 5 0 Clear 0 File erase.bmp
+Element None GTier1 0 168 0 0 1 1 1 1 Clear 0 File erase.bmp
+Element None GTier2 2 170 2 0 1 1 1 1 Clear 0 File erase.bmp
+Element None GTier3 4 172 4 0 1 1 1 1 Clear 0 File erase.bmp
+Element None EarthGreen 0 127 0 0 1 1 1 0 Clear 0 File erase.bmp
+Element None MoonGreen 0 117 0 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Black 170 170 170 0 12 15 5 0 Clear 0 File erase.bmp
+Element None BTier1 100 100 100 0 1 1 1 1 Clear 0 File erase.bmp
+Element None BTier2 102 102 102 0 1 1 1 1 Clear 0 File erase.bmp
+Element None BTier3 104 104 104 0 1 1 1 1 Clear 0 File erase.bmp
+Element None EarthBlack 150 152 150 0 1 1 1 0 Clear 0 File erase.bmp
+Element None MoonBlack 140 142 140 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Cyan 30 225 255 0 12 15 5 0 Clear 0 File erase.bmp
+Element None CTier1 0 255 255 0 1 1 1 1 Clear 0 File erase.bmp
+Element None CTier2 2 255 255 0 1 1 1 1 Clear 0 File erase.bmp
+Element None CTier3 4 255 255 0 1 1 1 1 Clear 0 File erase.bmp
+Element None EarthCyan 0 187 251 0 1 1 1 0 Clear 0 File erase.bmp
+Element None MoonCyan 0 177 241 0 1 1 1 0 Clear 0 File erase.bmp
+
+// Ground battle
+// Template for explosions
+// Element None GroundBoom 250 174 0 0 2 1 5 0 GroundBoom2 0 File erase.bmp
+// Element None GroundBoom2 250 125 0 0 1 1 4 500 Earth 0 File erase.bmp
+Element None GreenBlackBoom 250 177 0 0 2 1 5 0 GreenBlackBoom2 2 0 File erase.bmp
+Element None GreenBlackBoom2 230 157 0 0 1 1 4 500 EarthGreen 0 File erase.bmp
+Element None GreenCyanBoom 250 177 0 0 2 1 5 0 GreenCyanBoom2 2 0 File erase.bmp
+Element None GreenCyanBoom2 230 157 0 0 1 1 4 500 EarthGreen 0 File erase.bmp
+Element None BlackGreenBoom 255 179 5 0 2 1 5 0 BlackGreenBoom2 0 File erase.bmp
+Element None BlackGreenBoom2 235 159 0 0 1 1 4 500 EarthBlack 0 File erase.bmp
+Element None BlackCyanBoom 255 179 5 0 2 1 5 0 BlackCyanBoom2 0 File erase.bmp
+Element None BlackCyanBoom2 235 159 0 0 1 1 4 500 EarthBlack 0 File erase.bmp
+Element None CyanGreenBoom 255 179 5 0 2 1 5 0 CyanGreenBoom2 0 File erase.bmp
+Element None CyanGreenBoom2 235 159 0 0 1 1 4 500 EarthCyan 0 File erase.bmp
+Element None CyanBlackBoom 255 179 5 0 2 1 5 0 CyanBlackBoom2 0 File erase.bmp
+Element None CyanBlackBoom2 235 159 0 0 1 1 4 500 EarthCyan 0 File erase.bmp
+
+// Color bases
+
+Element None GBase 0 175 0 0 12 15 5 0 Clear 0 File erase.bmp
+Element None CBase 0 240 240 0 12 15 5 0 Clear 0 File erase.bmp
+Element None BBase 88 88 88 0 12 15 5 0 Clear 0 File erase.bmp
+
+// Additional Sun Elements
+
+Element None Sun_2 255 132 0 0 1 1 1 1000 Sun 0 File erase.bmp
+Element None Space 2 2 2 0 1 1 1 0 Clear 0 File erase.bmp
+Element None Star 250 250 250 0 1 1 1 10 Eclipse 0 File erase.bmp
+Element None Eclipse 3 3 3 0 1 1 1 1000 Star 0 File erase.bmp
+
+// Dust is inert.
+
+Element None Dust 120 50 0 0 0 1 1 1 Clear 0 File erase.bmp
+
+// Collapsing Processes
+
+Element None CollapsingNebula 200 0 200 0 0 0 20 10 Lava 0 File erase.bmp
+Element None CollapsingSun 250 122 0 0 1 1 1 1 Nova 0 File erase.bmp
+Element None Nova 243 243 200 0 1 1 1 1000 Clear 0 File erase.bmp
+Element None CollapsingMoon 119 121 119 0 1 1 1 10 Dust 0 File erase.bmp
+Element None CollapsingEarth 188 115 0 0 1 1 1 10 Moon 0 File erase.bmp
+Element None Collapsing 130 132 131 0 1 1 1 10 Moon 0 File erase.bmp
+
+// Black Hole related
+
+Element None BH1 6 6 6 0 0 1 1 10000 Clear 0 File erase.bmp
+Element None BH2 7 7 7 0 0 1 1 12000 Clear 0 File erase.bmp
+Element None BH3 8 8 8 0 0 1 1 14000 Clear 0 File erase.bmp
+Element None BH4 9 9 9 0 0 1 1 16000 Clear 0 File erase.bmp
+Element None BH5 10 10 10 0 0 1 1 18000 Clear 0 File erase.bmp
+Element None BH6 11 11 11 0 0 1 1 20000 Clear 0 File erase.bmp
+Element None BH7 12 12 12 0 0 1 1 26000 Clear 0 File erase.bmp
+Element None BH8 13 13 13 0 0 1 1 30000 Clear 0 File erase.bmp
+Element None BH9 14 14 14 0 0 1 1 32000 Clear 0 File erase.bmp
+
+// White Hole
+
+Element None WhiteHole 249 249 249 0 0 1 1 0 Clear 0 File erase.bmp
+
+// Plague
+
+Element None PlagueShip 255 155 158 0 0 1 1 50 Clear 0 File erase.bmp
+Element None Plagued 230 120 128 0 1 1 1 1 Clear 0 File erase.bmp
+Element None PlagueSoldier 220 110 118 0 0 1 1 10 Earth 0 File erase.bmp
+Element None PlagueBase 225 115 123 0 12 15 5 10 Earth 0 File erase.bmp
+Element None PlaguedEarth 210 100 108 0 1 1 1 30 Earth 0 File erase.bmp
+
+// Jungle
+
+Element None Jungle2 118 224 84 0 1 1 1 100 Jungle 0 File erase.bmp
+Element None LavaGenerator 180 40 0 0 0 1 1 1 StopGenerator 0 File erase.bmp
+Element None StopGenerator 174 36 0 0 0 1 1 30000 Lava 0 File erase.bmp
+
+// Assimilation
+
+Element None MotherShip2 20 0 198 0 0 1 1 3000 MotherShip 0 File erase.bmp
+Element None DisableStop 133 252 148 0 0 1 1 0 Clear 0 File erase.bmp
+Element None Assimilation 164 167 31 0 0 1 1 1800 Clear 0 File erase.bmp
+Element None RobotDrone 198 0 192 0 0 1 1 4 Clear 0 File erase.bmp
+Element None DisablePulse 232 58 0 0 0 1 1 0 Clear 0 File erase.bmp
+Element None DisablePulse2 212 38 0 0 0 1 1 120 Clear 0 File erase.bmp
+Element None MotherShipShield 255 189 100 0 0 1 1 10 Clear 0 File erase.bmp
+Element None Core2 93 54 174 0 0 1 1 100 Core 0 HEX 0000000000000030000000480000004000001E48000061300000800C0001001201FF0012020100120701000C0BFF007008810048048080480440617002401E48022000000120000E011000080090000C00900008008C000E0303C00004003F003FFFFFFC5C71C71E628A28A2628A28A2628A28A25C71C71E3FFFFFFC00000000 255 255 255
+
+// AssimilatedMaterials
+
+Element None LavaAssimilated 227 106 185 0 0 1 1 0 Clear 0 File erase.bmp
+Element None StoneAssimilated 225 104 183 0 0 1 1 0 Clear 0 File erase.bmp
+Element None EarthAssimilated 223 102 191 0 0 1 1 0 Clear 0 File erase.bmp
+Element None EarthBlackAssimilated 211 90 179 0 0 1 1 0 Clear 0 File erase.bmp
+Element None EarthGreenAssimilated 209 88 177 0 0 1 1 0 Clear 0 File erase.bmp
+Element None EarthCyanAssimilated 207 86 175 0 0 1 1 0 Clear 0 File erase.bmp
+Element None MoonAssimilated 205 84 173 0 0 1 1 0 Clear 0 File erase.bmp
+Element None Moon_2Assimilated 203 82 171 0 0 1 1 0 Clear 0 File erase.bmp
+Element None SunAssimilated 201 80 169 0 0 1 1 0 Clear 0 File erase.bmp
+Element None Sun_2Assimilated 199 78 167 0 0 1 1 0 Clear 0 File erase.bmp
+Element None MoonGreenAssimilated 197 76 165 0 0 1 1 0 Clear 0 File erase.bmp
+Element None MoonBlackAssimilated 195 74 163 0 0 1 1 0 Clear 0 File erase.bmp
+Element None MoonCyanAssimilated 193 72 161 0 0 1 1 0 Clear 0 File erase.bmp
+Element None GTier1Assimilated 191 70 159 0 0 1 1 0 Clear 0 File erase.bmp
+Element None GTier2Assimilated 189 68 157 0 0 1 1 0 Clear 0 File erase.bmp
+Element None GTier3Assimilated 187 66 155 0 0 1 1 0 Clear 0 File erase.bmp
+Element None BTier1Assimilated 185 64 153 0 0 1 1 0 Clear 0 File erase.bmp
+Element None BTier2Assimilated 183 62 151 0 0 1 1 0 Clear 0 File erase.bmp
+Element None BTier3Assimilated 181 60 149 0 0 1 1 0 Clear 0 File erase.bmp
+Element None CTier1Assimilated 179 58 147 0 0 1 1 0 Clear 0 File erase.bmp
+Element None CTier2Assimilated 177 56 145 0 0 1 1 0 Clear 0 File erase.bmp
+Element None CTier3Assimilated 175 54 143 0 0 1 1 0 Clear 0 File erase.bmp
+Element None JungleAssimilated 173 52 141 0 0 1 1 0 Clear 0 File erase.bmp
+Element None Jungle2Assimilated 171 50 139 0 0 1 1 0 Clear 0 File erase.bmp
+Element None NebulaAssimilated 169 48 137 0 0 1 1 0 Clear 0 File erase.bmp
+Element None GBaseAssimilated 167 46 135 0 0 1 1 0 Clear 0 File erase.bmp
+Element None BBaseAssimilated 165 44 133 0 0 1 1 0 Clear 0 File erase.bmp
+Element None CBaseAssimilated 163 42 131 0 0 1 1 0 Clear 0 File erase.bmp
+Element None CyanAssimilated 161 40 129 0 0 1 1 0 Clear 0 File erase.bmp
+Element None GreenAssimilated 159 38 127 0 0 1 1 0 Clear 0 File erase.bmp
+Element None BlackAssimilated 157 36 125 0 0 1 1 0 Clear 0 File erase.bmp
+
+// DisablePulse TravelThrough
+
+Element None LavaHolder 254 220 126 0 0 1 1 400 Lava 0 File erase.bmp
+Element None EarthHolder 252 218 124 0 0 1 1 400 Earth 0 File erase.bmp
+Element None EarthBlackHolder 250 216 122 0 0 1 1 400 EarthBlack 0 File erase.bmp
+Element None EarthGreenHolder 248 214 120 0 0 1 1 400 EarthGreen 0 File erase.bmp
+Element None EarthCyanHolder 246 212 118 0 0 1 1 400 EarthCyan 0 File erase.bmp
+Element None MoonHolder 244 210 116 0 0 1 1 400 Moon 0 File erase.bmp
+Element None SunHolder 242 208 114 0 0 1 1 400 Sun 0 File erase.bmp
+Element None MoonGreenHolder 240 206 112 0 0 1 1 400 MoonGreen 0 File erase.bmp
+Element None MoonBlackHolder 238 204 110 0 0 1 1 400 MoonBlack 0 File erase.bmp
+Element None MoonCyanHolder 236 202 108 0 0 1 1 400 MoonCyan 0 File erase.bmp
+Element None GTier1Holder 234 200 106 0 0 1 1 400 GTier1 0 File erase.bmp
+Element None GTier2Holder 232 198 104 0 0 1 1 400 GTier2 0 File erase.bmp
+Element None GTier3Holder 230 196 102 0 0 1 1 400 GTier3 0 File erase.bmp
+Element None BTier1Holder 228 194 100 0 0 1 1 400 BTier1 0 File erase.bmp
+Element None BTier2Holder 226 192 98 0 0 1 1 400 BTier2 0 File erase.bmp
+Element None BTier3Holder 224 190 96 0 0 1 1 400 BTier3 0 File erase.bmp
+Element None CTier1Holder 222 188 94 0 0 1 1 400 CTier1 0 File erase.bmp
+Element None CTier2Holder 220 186 92 0 0 1 1 400 CTier2 0 File erase.bmp
+Element None CTier3Holder 218 184 90 0 0 1 1 400 CTier3 0 File erase.bmp
+Element None JungleHolder 216 182 88 0 0 1 1 400 Jungle 0 File erase.bmp
+Element None NebulaHolder 214 180 86 0 0 1 1 400 Nebula 0 File erase.bmp
+Element None GBaseHolder 202 168 74 0 0 1 1 400 GBase 0 File erase.bmp
+Element None BBaseHolder 200 166 72 0 0 1 1 400 BBase 0 File erase.bmp
+Element None CBaseHolder 198 164 70 0 0 1 1 400 CBase 0 File erase.bmp
+Element None GreenHolder 196 162 68 0 0 1 1 400 Green 0 File erase.bmp
+Element None CyanHolder 194 160 66 0 0 1 1 400 Cyan 0 File erase.bmp
+Element None BlackHolder 192 158 64 0 0 1 1 400 Black 0 File erase.bmp
+
+Element None GSpyWave 210 13 0 0 1 1 1 2000 GSpyWave2 0 File erase.bmp
+Element None GSpyWave2 210 15 0 0 1 1 1 140 GTier1 0 File erase.bmp
+Element None BSpyWave 178 178 178 0 1 1 1 2000 BSpyWave2 0 File erase.bmp
+Element None BSpyWave2 180 180 180 0 1 1 1 140 BTier1 0 File erase.bmp
+Element None CSpyWave 52 243 172 0 1 1 1 2000 CSpyWave2 0 File erase.bmp
+Element None CSpyWave2 54 245 174 0 1 1 1 140 CTier1 0 File erase.bmp
+
+Element None GSpyLimit 0 0 0 0 1 1 1 2000 GSpyWave2 0 File erase.bmp
+Element None CSpyLimit 0 0 0 0 1 1 1 2000 CSpyWave2 0 File erase.bmp
+Element None BSpyLimit 0 0 0 0 1 1 1 2000 BSpyWave2 0 File erase.bmp
+
+
+// Interactions
+
+// Plainly drawn Earth will auto generate life forms
+
+Interaction Earth Water Earth Animal 4
+Interaction Earth Water Earth Life 2
+Interaction Earth Water Earth Gas 1818
+Interaction Earth Clear Earth Water 2003
+Interaction Earth Space Earth Water 2003
+Interaction Earth Gas Earth Animal 2
+Interaction Earth Gas Earth Life 1
+
+// Fire can only come from explosions
+
+Interaction Explosion Quarantine Clear Quarantine 50000
+Interaction Explosion MotherShipShield Clear MotherShipShield 50000
+
+Interaction Explosion All Explosion Explosion 3000 Explosion
+Interaction Explosion All Explosion Explosion2 2 Explosion
+Interaction Explosion2 Explosion Explosion2 Explosion2 40000
+Interaction Explosion2 Clear Explosion2 Fire 400
+Interaction Explosion2 Space Explosion2 Fire 400
+
+// Interaction GroundBoom All GroundBoom GroundBoom 3000 GroundBoom
+// Interaction GroundBoom All GroundBoom GroundBoom2 26 GroundBoom
+// Interaction GroundBoom2 GroundBoom GroundBoom2 GroundBoom2 40000
+// Interaction GroundBoom2 Clear Explosion Explosion 400
+// Interaction GroundBoom2 Space Explosion Explosion 400
+
+Interaction GreenBlackBoom All GreenBlackBoom GreenBlackBoom 3000 GreenBlackBoom
+Interaction GreenBlackBoom All GreenBlackBoom GreenBlackBoom2 26 GreenBlackBoom
+Interaction GreenBlackBoom2 GreenBlackBoom GreenBlackBoom2 GreenBlackBoom2 40000
+Interaction GreenBlackBoom2 Clear Explosion Explosion 400
+Interaction GreenBlackBoom2 Space Explosion Explosion 400
+Interaction GreenCyanBoom All GreenCyanBoom GreenCyanBoom 3000 GreenCyanBoom
+Interaction GreenCyanBoom All GreenCyanBoom GreenCyanBoom2 26 GreenCyanBoom
+Interaction GreenCyanBoom2 GreenCyanBoom GreenCyanBoom2 GreenCyanBoom2 40000
+Interaction GreenCyanBoom2 Clear Explosion Explosion 400
+Interaction GreenCyanBoom2 Space Explosion Explosion 400
+Interaction CyanGreenBoom All CyanGreenBoom CyanGreenBoom 3000 CyanGreenBoom
+Interaction CyanGreenBoom All CyanGreenBoom CyanGreenBoom2 26 CyanGreenBoom
+Interaction CyanGreenBoom2 CyanGreenBoom CyanGreenBoom2 CyanGreenBoom2 40000
+Interaction CyanGreenBoom2 Clear Explosion Explosion 400
+Interaction CyanGreenBoom2 Space Explosion Explosion 400
+Interaction CyanBlackBoom All CyanBlackBoom CyanBlackBoom 3000 CyanBlackBoom
+Interaction CyanBlackBoom All CyanBlackBoom CyanBlackBoom2 26 CyanBlackBoom
+Interaction CyanBlackBoom2 CyanBlackBoom CyanBlackBoom2 CyanBlackBoom2 40000
+Interaction CyanBlackBoom2 Clear Explosion Explosion 400
+Interaction CyanBlackBoom2 Space Explosion Explosion 400
+Interaction BlackGreenBoom All BlackGreenBoom BlackGreenBoom 3000 BlackGreenBoom
+Interaction BlackGreenBoom All BlackGreenBoom BlackGreenBoom2 26 BlackGreenBoom
+Interaction BlackGreenBoom2 BlackGreenBoom BlackGreenBoom2 BlackGreenBoom2 40000
+Interaction BlackGreenBoom2 Clear Explosion Explosion 400
+Interaction BlackGreenBoom2 Space Explosion Explosion 400
+Interaction BlackCyanBoom All BlackCyanBoom BlackCyanBoom 3000 BlackCyanBoom
+Interaction BlackCyanBoom All BlackCyanBoom BlackCyanBoom2 26 BlackCyanBoom
+Interaction BlackCyanBoom2 BlackCyanBoom BlackCyanBoom2 BlackCyanBoom2 40000
+Interaction BlackCyanBoom2 Clear Explosion Explosion 400
+Interaction BlackCyanBoom2 Space Explosion Explosion 400
+
+
+// The following are all fire-influenced
+
+Interaction Water Fire Clear Clear 100000
+
+Interaction Fire Earth Fire Clear 1000
+Interaction Fire EarthCyan Fire Clear 1026
+Interaction Fire EarthBlack Fire Clear 1026
+Interaction Fire EarthGreen Fire Clear 1026
+Interaction Fire Life Fire Clear 2
+Interaction Fire Life Fire Animal 1
+Interaction Fire Water Fire Clear 2
+
+// Planetoid composition and colonization
+
+Interaction Lava Water Earth Water 32768
+Interaction Lava Earth Lava Lava 80
+Interaction Lava Earth Earth Earth 73
+Interaction Lava EarthGreen Lava Lava 73
+Interaction Lava EarthGreen EarthGreen EarthGreen 80
+Interaction Lava EarthBlack Lava Lava 73
+Interaction Lava EarthBlack EarthBlack EarthBlack 80
+Interaction Lava EarthCyan Lava Lava 73
+Interaction Lava EarthCyan EarthCyan EarthCyan 80
+Interaction Lava Life Earth Water 32768
+
+// Atmosphere and life conditions
+
+Interaction Gas Water Water Gas 6903
+Interaction Gas Clear Gas Water 6
+Interaction Gas Space Gas Water 6
+Interaction Gas Moon Clear Moon 10000
+
+Interaction Life Gas Life Life 3081
+Interaction Life Clear Life Water 32768
+Interaction Life Space Life Water 32768
+Interaction Life Moon Clear Moon 10000
+
+Interaction Animal Water Water Animal 6962
+Interaction Animal Gas Animal Water 32768
+Interaction Animal Life Animal Animal 655
+Interaction Animal Animal Gas Animal 3073
+Interaction Animal Moon Clear Moon 10000
+
+Interaction Animal2 Moon Clear Moon 10000
+Interaction Animal2 Gas Animal2 Water 19760
+
+Interaction Water Moon Clear Moon 10000
+
+// Jungle
+
+Interaction Jungle Clear LavaGenerator Clear 1000
+Interaction Jungle Space LavaGenerator Space 1000
+Interaction LavaGenerator Jungle LavaGenerator LavaGenerator 4000
+Interaction StopGenerator LavaGenerator StopGenerator StopGenerator 32768
+
+Interaction Jungle Earth Jungle Jungle 90
+Interaction Jungle Earth Earth Earth 73
+Interaction Jungle EarthGreen Jungle Jungle 90
+Interaction Jungle EarthGreen EarthGreen EarthGreen 73
+Interaction Jungle EarthBlack Jungle Jungle 90
+Interaction Jungle EarthBlack EarthBlack EarthBlack 73
+Interaction Jungle EarthCyan Jungle Jungle 90
+Interaction Jungle EarthCyan EarthCyan EarthCyan 73
+Interaction Jungle Lava Jungle Jungle 90
+Interaction Jungle Lava Lava Lava 80
+Interaction Jungle Stone Jungle Jungle 90
+Interaction Jungle Stone Stone Stone 73
+Interaction Jungle GSoldier Jungle PlagueSoldier 32768
+Interaction Jungle BSoldier Jungle PlagueSoldier 32768
+Interaction Jungle CSoldier Jungle PlagueSoldier 32768
+
+Interaction Jungle Moon Moon_2 Moon 3000
+Interaction Jungle Moon_2 Moon Moon_2 3000
+
+// Space Plague!
+
+Interaction Plague GreenShip Clear PlagueShip 32768
+Interaction Plague BlackShip Clear PlagueShip 32768
+Interaction Plague CyanShip Clear PlagueShip 32768
+Interaction Plague GTier1 Clear Plagued 32768
+Interaction Plague GTier2 Clear Plagued 32768
+Interaction Plague GTier3 Clear Plagued 32768
+Interaction Plague BTier1 Clear Plagued 32768
+Interaction Plague BTier2 Clear Plagued 32768
+Interaction Plague BTier3 Clear Plagued 32768
+Interaction Plague CTier1 Clear Plagued 32768
+Interaction Plague CTier2 Clear Plagued 32768
+Interaction Plague CTier3 Clear Plagued 32768
+
+Interaction PlagueShip Space Space PlagueShip 2000
+Interaction PlagueShip Clear Clear PlagueShip 2000
+Interaction PlagueShip GreenShip GreenShip PlagueShip 300
+Interaction PlagueShip BlackShip BlackShip PlagueShip 300
+Interaction PlagueShip CyanShip CyanShip PlagueShip 300
+Interaction PlagueShip GTier1 Plagued Plagued 30000
+Interaction PlagueShip GTier2 Plagued Plagued 30000
+Interaction PlagueShip GTier3 Plagued Plagued 30000
+Interaction PlagueShip BTier1 Plagued Plagued 30000
+Interaction PlagueShip BTier2 Plagued Plagued 30000
+Interaction PlagueShip BTier3 Plagued Plagued 30000
+Interaction PlagueShip CTier1 Plagued Plagued 30000
+Interaction PlagueShip CTier2 Plagued Plagued 30000
+Interaction PlagueShip CTier3 Plagued Plagued 30000
+
+Interaction Plagued Clear Plagued PlagueShip 1
+Interaction Plagued Space Plagued PlagueShip 1
+Interaction Plagued GTier1 Plagued Plagued 200
+Interaction Plagued GTier2 Plagued Plagued 200
+Interaction Plagued GTier3 Plagued Plagued 200
+Interaction Plagued BTier1 Plagued Plagued 200
+Interaction Plagued BTier2 Plagued Plagued 200
+Interaction Plagued BTier3 Plagued Plagued 200
+Interaction Plagued CTier1 Plagued Plagued 200
+Interaction Plagued CTier2 Plagued Plagued 200
+Interaction Plagued CTier3 Plagued Plagued 200
+Interaction Plagued EarthGreen Plagued PlagueBase 32767
+Interaction Plagued EarthBlack Plagued PlagueBase 32767
+Interaction Plagued EarthCyan Plagued PlagueBase 32767
+Interaction Plagued GBase PlagueBase PlagueBase 32767
+Interaction Plagued BBase PlagueBase PlagueBase 32767
+Interaction Plagued CBase PlagueBase PlagueBase 32767
+Interaction Plagued MoonGreen Plagued Plagued 200
+Interaction Plagued MoonBlack Plagued Plagued 200
+Interaction Plagued MoonCyan Plagued Plagued 200
+Interaction Plagued Explosion Explosion Explosion 32768
+Interaction Plagued Explosion2 Explosion2 Explosion2 32768
+
+Interaction PlagueBase GBase PlagueBase PlagueBase 100
+Interaction PlagueBase BBase PlagueBase PlagueBase 100
+Interaction PlagueBase CBase PlagueBase PlagueBase 100
+
+Interaction PlagueBase GSoldier PlagueBase PlagueSoldier 100
+Interaction PlagueBase BSoldier PlagueBase PlagueSoldier 100
+Interaction PlagueBase CSoldier PlagueBase PlagueSoldier 100
+Interaction PlagueBase EarthGreen PlagueBase PlaguedEarth 20000
+Interaction PlagueBase EarthBlack PlagueBase PlaguedEarth 20000
+Interaction PlagueBase EarthCyan PlagueBase PlaguedEarth 20000
+
+Interaction PlaguedEarth EarthGreen PlaguedEarth PlaguedEarth 500
+Interaction PlaguedEarth EarthBlack PlaguedEarth PlaguedEarth 500
+Interaction PlaguedEarth EarthCyan PlaguedEarth PlaguedEarth 500
+Interaction PlaguedEarth Green PlaguedEarth PlaguedEarth 1000
+Interaction PlaguedEarth Black PlaguedEarth PlaguedEarth 1000
+Interaction PlaguedEarth Cyan PlaguedEarth PlaguedEarth 1000
+Interaction PlaguedEarth GSoldier PlaguedEarth PlaguedEarth 30000
+Interaction PlaguedEarth BSoldier PlaguedEarth PlaguedEarth 30000
+Interaction PlaguedEarth CSoldier PlaguedEarth PlaguedEarth 30000
+Interaction PlaguedEarth GBase PlaguedEarth PlaguedEarth 30
+Interaction PlaguedEarth BBase PlaguedEarth PlaguedEarth 30
+Interaction PlaguedEarth CBase PlaguedEarth PlaguedEarth 30
+Interaction PlaguedEarth GTier1 PlaguedEarth Plagued 1
+Interaction PlaguedEarth BTier1 PlaguedEarth Plagued 1
+Interaction PlaguedEarth CTier1 PlaguedEarth Plagued 1
+
+Interaction PlagueSoldier Earth Earth PlagueSoldier 3000
+Interaction PlagueSoldier Lava Lava PlagueSoldier 3000
+Interaction PlagueSoldier Stone Stone PlagueSoldier 3000
+Interaction PlagueSoldier EarthGreen EarthGreen PlagueSoldier 3000
+Interaction PlagueSoldier EarthBlack EarthBlack PlagueSoldier 3000
+Interaction PlagueSoldier EarthCyan EarthCyan PlagueSoldier 3000
+Interaction PlagueSoldier GSoldier PlagueSoldier PlagueSoldier 100
+Interaction PlagueSoldier BSoldier PlagueSoldier PlagueSoldier 100
+Interaction PlagueSoldier CSoldier PlagueSoldier PlagueSoldier 100
+Interaction PlagueSoldier GBase Plagued Plagued 30
+Interaction PlagueSoldier BBase Plagued Plagued 30 
+Interaction PlagueSoldier CBase Plagued Plagued 30
+
+// Colors:
+// Green
+
+Interaction Green Clear Green GTier1 18
+Interaction Green Space Green GTier1 18
+Interaction Green Water Water Green 890
+Interaction Green Animal Green Green 7260
+Interaction Green Green Green Water 9800
+Interaction Green Life Green Green 4086
+Interaction Green Earth Green EarthGreen 21218
+Interaction Green Gas Green Water 5886
+
+Interaction GreenShip Clear Clear GreenShip 3200
+Interaction GreenShip Space Space GreenShip 3200
+Interaction GreenShip BlackShip Clear Explosion 31752
+Interaction GreenShip Earth EarthGreen EarthGreen 17298
+Interaction GreenShip Moon MoonGreen MoonGreen 17298
+Interaction GreenShip Lava GTier1 EarthGreen 17298
+Interaction GreenShip CyanShip Clear Explosion 31752
+Interaction GreenShip EarthBlack Clear Explosion 31752
+Interaction GreenShip BTier1 Clear Explosion 31752
+Interaction GreenShip BTier2 Clear Explosion 31752
+Interaction GreenShip BTier3 Clear Explosion 31752
+Interaction GreenShip EarthCyan Clear Explosion 31752
+Interaction GreenShip CTier1 Clear Explosion 31752
+Interaction GreenShip CTier2 Clear Explosion 31752
+Interaction GreenShip CTier3 Clear Explosion 31752
+Interaction GreenShip GTier1 Clear GTier1 31752
+Interaction GreenShip MoonBlack Clear Explosion 31752
+Interaction GreenShip MoonCyan Clear Explosion 31752
+Interaction GreenShip MoonGreen Clear GTier3 17298
+Interaction GreenShip BlackSpy Explosion Explosion 31752
+Interaction GreenShip CyanSpy Explosion Explosion 31752
+Interaction GreenShip RobotDrone Explosion Explosion 31752
+Interaction GreenShip MotherShip Explosion Explosion 31752
+Interaction GreenShip MotherShip2 Explosion Explosion 31752
+
+Interaction EarthGreen Earth EarthGreen EarthGreen 1653
+Interaction EarthGreen Water EarthGreen Green 4
+Interaction EarthGreen Water EarthGreen Life 2
+Interaction EarthGreen Water EarthGreen Gas 1818
+Interaction EarthGreen Clear EarthGreen Water 2003
+Interaction EarthGreen Space EarthGreen Water 2003
+Interaction EarthGreen Gas EarthGreen Green 2
+Interaction EarthGreen Gas EarthGreen Life 1
+
+Interaction MoonGreen Moon MoonGreen MoonGreen 10000
+Interaction MoonGreen Space GTier3 MoonGreen 2
+Interaction MoonGreen Clear GTier3 MoonGreen 2
+
+Interaction GTier1 Clear GTier1 GTier1 8
+Interaction GTier1 Clear GTier1 GTier2 8
+Interaction GTier1 Clear GTier1 GTier3 1
+Interaction GTier1 Space GTier1 GTier1 8
+Interaction GTier1 Space GTier1 GTier2 8
+Interaction GTier1 Space GTier1 GTier3 1
+Interaction GTier1 Water GTier1 Green 1
+Interaction GTier1 Fire Clear Fire 4940
+Interaction GTier2 Fire Clear Fire 6903
+Interaction GTier3 Clear GTier3 GreenShip 1
+Interaction GTier3 Space GTier3 GreenShip 1
+Interaction GTier3 Clear GTier3 GreenSpy 1
+Interaction GTier3 Space GTier3 GreenSpy 1
+Interaction GTier3 Fire Clear Fire 14229
+
+Interaction GTier1 EarthGreen GTier1 GBase 10
+Interaction GTier2 EarthGreen GTier2 GBase 10
+Interaction GTier3 EarthGreen GTier3 GBase 10
+
+Interaction GBase EarthGreen GBase GBase 4
+Interaction GBase EarthGreen GBase GSoldier 1
+
+Interaction GSoldier Earth Earth GSoldier 5200
+Interaction GSoldier Lava Lava GSoldier 5200
+Interaction GSoldier Stone Stone GSoldier 5200
+Interaction GSoldier EarthGreen EarthGreen GSoldier 5200
+Interaction GSoldier EarthBlack EarthBlack GSoldier 5200
+Interaction GSoldier EarthCyan EarthCyan GSoldier 5200
+Interaction GSoldier BSoldier GSoldier GreenBlackBoom 31752
+Interaction GSoldier CSoldier GSoldier GreenCyanBoom 31752
+Interaction GSoldier Life Earth GTier1 31752
+Interaction GSoldier Water Earth GTier1 31752
+Interaction GSoldier Clear GTier1 Clear 1000
+Interaction GSoldier Space GTier1 Space 1000
+Interaction GSoldier GBase GBase GSoldier 5200
+Interaction GSoldier GBaseAssimilated GSoldier GBase 1000
+Interaction GSoldier BBaseAssimilated GSoldier GBase 1000
+Interaction GSoldier CBaseAssimilated GSoldier GBase 1000
+
+Interaction GreenSpy Clear Clear GreenSpy 3200
+Interaction GreenSpy Space Space GreenSpy 3200
+Interaction GreenSpy GTier1 Clear GTier1 31752
+Interaction GreenSpy GTier2 Clear GTier2 31752
+Interaction GreenSpy GTier3 Clear GTier3 31752
+Interaction GreenSpy BTier1 Clear GSpyWave 31752
+Interaction GreenSpy BTier2 Clear GSpyWave 31752
+Interaction GreenSpy BTier3 Clear GSpyWave 31752
+Interaction GreenSpy CTier1 Clear GSpyWave 31752
+Interaction GreenSpy CTier2 Clear GSpyWave 31752
+Interaction GreenSpy CTier3 Clear GSpyWave 31752
+
+// Black
+
+Interaction Black Space Black BTier1 18
+Interaction Black Clear Black BTier1 18
+Interaction Black Water Water Black 890
+Interaction Black Animal Black Black 7260
+Interaction Black Black Black Water 9800
+Interaction Black Life Black Black 4086
+Interaction Black Earth Black EarthBlack 21218
+Interaction Black Gas Black Water 5886
+
+Interaction BlackShip Space Space BlackShip 3200
+Interaction BlackShip Clear Clear BlackShip 3200
+Interaction BlackShip GreenShip Clear Explosion 31752
+Interaction BlackShip Earth EarthBlack EarthBlack 17298
+Interaction BlackShip Moon MoonBlack MoonBlack 17298
+Interaction BlackShip Lava BTier1 EarthBlack 17298
+Interaction BlackShip CyanShip Clear Explosion 31752
+Interaction BlackShip EarthGreen Clear Explosion 31752
+Interaction BlackShip GTier1 Clear Explosion 31752
+Interaction BlackShip GTier2 Clear Explosion 31752
+Interaction BlackShip GTier3 Clear Explosion 31752
+Interaction BlackShip EarthCyan Clear Explosion 31752
+Interaction BlackShip CTier1 Clear Explosion 31752
+Interaction BlackShip CTier2 Clear Explosion 31752
+Interaction BlackShip CTier3 Clear Explosion 31752
+Interaction BlackShip BTier1 Clear BTier1 31752
+Interaction BlackShip MoonGreen Clear Explosion 31752
+Interaction BlackShip MoonCyan Clear Explosion 31752
+Interaction BlackShip MoonBlack Clear BTier3 17298
+Interaction BlackShip GreenSpy Explosion Explosion 31752
+Interaction BlackShip CyanSpy Explosion Explosion 31752
+Interaction BlackShip RobotDrone Explosion Explosion 31752
+Interaction BlackShip MotherShip Explosion Explosion 31752
+Interaction BlackShip MotherShip2 Explosion Explosion 31752
+
+Interaction EarthBlack Earth EarthBlack EarthBlack 1653
+Interaction EarthBlack Water EarthBlack Black 4
+Interaction EarthBlack Water EarthBlack Life 2
+Interaction EarthBlack Water EarthBlack Gas 1818
+Interaction EarthBlack Space EarthBlack Water 2003
+Interaction EarthBlack Clear EarthBlack Water 2003
+Interaction EarthBlack Gas EarthBlack Black 2
+Interaction EarthBlack Gas EarthBlack Life 1
+
+Interaction MoonBlack Moon MoonBlack MoonBlack 10000
+Interaction MoonBlack Space BTier3 MoonBlack 2
+Interaction MoonBlack Clear BTier3 MoonBlack 2
+
+Interaction BTier1 Clear BTier1 BTier1 8
+Interaction BTier1 Clear BTier1 BTier2 8
+Interaction BTier1 Clear BTier1 BTier3 1
+Interaction BTier1 Space BTier1 BTier1 8
+Interaction BTier1 Space BTier1 BTier2 8
+Interaction BTier1 Space BTier1 BTier3 1
+Interaction BTier1 Water BTier1 Black 1
+Interaction BTier1 Fire Clear Fire 4940
+Interaction BTier2 Fire Clear Fire 6903
+Interaction BTier3 Clear BTier3 BlackShip 1
+Interaction BTier3 Space BTier3 BlackShip 1
+Interaction BTier3 Clear BTier3 BlackSpy 1
+Interaction BTier3 Space BTier3 BlackSpy 1
+Interaction BTier3 Fire Clear Fire 14229
+
+Interaction BTier1 EarthBlack BTier1 BBase 10
+Interaction BTier2 EarthBlack BTier2 BBase 10
+Interaction BTier3 EarthBlack BTier3 BBase 10
+
+Interaction BBase EarthBlack BBase BSoldier 1
+Interaction BBase EarthBlack BBase BBase 4
+
+Interaction BSoldier Earth Earth BSoldier 5200
+Interaction BSoldier Lava Lava BSoldier 5200
+Interaction BSoldier Stone Stone BSoldier 5200
+Interaction BSoldier EarthGreen EarthGreen BSoldier 5200
+Interaction BSoldier EarthBlack EarthBlack BSoldier 5200
+Interaction BSoldier EarthCyan EarthCyan BSoldier 5200
+Interaction BSoldier GSoldier BSoldier BlackGreenBoom 31752
+Interaction BSoldier CSoldier BSoldier BlackCyanBoom 31752
+Interaction BSoldier Life Earth BTier1 31752
+Interaction BSoldier Water Earth BTier1 31752
+Interaction BSoldier Clear BTier1 Clear 1000
+Interaction BSoldier Space BTier1 Space 1000
+Interaction BSoldier GBaseAssimilated BSoldier BBase 1000
+Interaction BSoldier BBaseAssimilated BSoldier BBase 1000
+Interaction BSoldier CBaseAssimilated BSoldier BBase 1000
+Interaction BSoldier BBase BBase BSoldier 5200
+
+Interaction BlackSpy Clear Clear BlackSpy 3200
+Interaction BlackSpy Space Space BlackSpy 3200
+Interaction BlackSpy BTier1 Clear BTier1 31752
+Interaction BlackSpy BTier2 Clear BTier2 31752
+Interaction BlackSpy BTier3 Clear BTier3 31752
+Interaction BlackSpy GTier1 Clear BSpyWave 31752
+Interaction BlackSpy GTier2 Clear BSpyWave 31752
+Interaction BlackSpy GTier3 Clear BSpyWave 31752
+Interaction BlackSpy CTier1 Clear BSpyWave 31752
+Interaction BlackSpy CTier2 Clear BSpyWave 31752
+Interaction BlackSpy CTier3 Clear BSpyWave 31752
+
+// Cyan
+
+Interaction Cyan Clear Cyan CTier1 18
+Interaction Cyan Space Cyan CTier1 18
+Interaction Cyan Water Water Cyan 890
+Interaction Cyan Animal Cyan Cyan 7260
+Interaction Cyan Cyan Cyan Water 9800
+Interaction Cyan Life Cyan Cyan 4086
+Interaction Cyan Earth Cyan EarthCyan 21218
+Interaction Cyan Gas Cyan Water 5886
+
+Interaction CyanShip Clear Clear CyanShip 3200
+Interaction CyanShip Space Space CyanShip 3200
+Interaction CyanShip GreenShip Clear Explosion 31752
+Interaction CyanShip BlackShip Clear Explosion 31752
+Interaction CyanShip Earth EarthCyan EarthCyan 17298
+Interaction CyanShip Moon MoonCyan MoonCyan 17298
+Interaction CyanShip Lava CTier1 EarthCyan 17298
+Interaction CyanShip EarthGreen Clear Explosion 31752
+Interaction CyanShip GTier1 Clear Explosion 31752
+Interaction CyanShip GTier2 Clear Explosion 31752
+Interaction CyanShip GTier3 Clear Explosion 31752
+Interaction CyanShip EarthBlack Clear Explosion 31752
+Interaction CyanShip BTier1 Clear Explosion 31752
+Interaction CyanShip BTier2 Clear Explosion 31752
+Interaction CyanShip BTier3 Clear Explosion 31752
+Interaction CyanShip CTier1 Clear CTier1 31752
+Interaction CyanShip MoonGreen Clear Explosion 31752
+Interaction CyanShip MoonBlack Clear Explosion 31752
+Interaction CyanShip MoonCyan Clear CTier3 17298
+Interaction CyanShip BlackSpy Explosion Explosion 31752
+Interaction CyanShip GreenSpy Explosion Explosion 31752
+Interaction CyanShip RobotDrone Explosion Explosion 31752
+Interaction CyanShip MotherShip Explosion Explosion 31752
+Interaction CyanShip MotherShip2 Explosion Explosion 31752
+
+Interaction EarthCyan Earth EarthCyan EarthCyan 1653
+Interaction EarthCyan Water EarthCyan Cyan 4
+Interaction EarthCyan Water EarthCyan Life 2
+Interaction EarthCyan Water EarthCyan Gas 1818
+Interaction EarthCyan Clear EarthCyan Water 2003
+Interaction EarthCyan Space EarthCyan Water 2003
+Interaction EarthCyan Gas EarthCyan Cyan 2
+Interaction EarthCyan Gas EarthCyan Life 1
+
+Interaction MoonCyan Moon MoonCyan MoonCyan 10000
+Interaction MoonCyan Space CTier3 MoonCyan 2
+Interaction MoonCyan Clear CTier3 MoonCyan 2
+
+Interaction CTier1 Clear CTier1 CTier1 8
+Interaction CTier1 Clear CTier1 CTier2 8
+Interaction CTier1 Clear CTier1 CTier3 1
+Interaction CTier1 Space CTier1 CTier1 8
+Interaction CTier1 Space CTier1 CTier2 8
+Interaction CTier1 Space CTier1 CTier3 1
+Interaction CTier1 Water CTier1 Cyan 1
+Interaction CTier1 Fire Clear Fire 4940
+Interaction CTier2 Fire Clear Fire 6903
+Interaction CTier3 Clear CTier3 CyanShip 1
+Interaction CTier3 Space CTier3 CyanShip 1
+Interaction CTier3 Clear CTier3 CyanSpy 1
+Interaction CTier3 Space CTier3 CyanSpy 1
+Interaction CTier3 Fire Clear Fire 14229
+
+Interaction CTier1 EarthCyan CTier1 CBase 10
+Interaction CTier2 EarthCyan CTier2 CBase 10
+Interaction CTier3 EarthCyan CTier3 CBase 10
+
+Interaction CBase EarthCyan CBase CSoldier 1
+Interaction CBase EarthCyan CBase CBase 4
+
+Interaction CSoldier Earth Earth CSoldier 5200
+Interaction CSoldier Lava Lava CSoldier 5200
+Interaction CSoldier Stone Stone CSoldier 5200
+Interaction CSoldier EarthGreen EarthGreen CSoldier 5200
+Interaction CSoldier EarthBlack EarthBlack CSoldier 5200
+Interaction CSoldier EarthCyan EarthCyan CSoldier 5200
+Interaction CSoldier BSoldier CSoldier CyanBlackBoom 31752
+Interaction CSoldier GSoldier CSoldier CyanGreenBoom 31752
+Interaction CSoldier Water Earth CTier1 31752
+Interaction CSoldier Life Earth CTier1 31752
+Interaction CSoldier Clear CTier1 Clear 1000
+Interaction CSoldier Space CTier1 Space 1000
+Interaction CSoldier GBaseAssimilated CSoldier CBase 1000
+Interaction CSoldier BBaseAssimilated CSoldier CBase 1000
+Interaction CSoldier CBaseAssimilated CSoldier CBase 1000
+Interaction CSoldier CBase CBase CSoldier 5200
+
+Interaction CyanSpy Clear Clear CyanSpy 3200
+Interaction CyanSpy Space Space CyanSpy 3200
+Interaction CyanSpy CTier1 Clear CTier1 31752
+Interaction CyanSpy CTier2 Clear CTier2 31752
+Interaction CyanSpy CTier3 Clear CTier3 31752
+Interaction CyanSpy BTier1 Clear CSpyWave 31752
+Interaction CyanSpy BTier2 Clear CSpyWave 31752
+Interaction CyanSpy BTier3 Clear CSpyWave 31752
+Interaction CyanSpy GTier1 Clear CSpyWave 31752
+Interaction CyanSpy GTier2 Clear CSpyWave 31752
+Interaction CyanSpy GTier3 Clear CSpyWave 31752
+
+// Nebula serves to impeded colonization and kills ships.
+
+Interaction Nebula Clear Nebula Nebula 250
+Interaction Nebula Clear Clear Clear 250
+Interaction Nebula Space Nebula Nebula 250
+Interaction Nebula Space Space Space 250
+Interaction Nebula Nebula Nebula Nebula 4646
+Interaction Nebula GreenShip Clear Clear 32768
+Interaction Nebula BlackShip Clear Clear 32768
+Interaction Nebula CyanShip Clear Clear 32768
+Interaction Nebula Fire Clear Fire 32768
+
+// The sun draws a starscape background (Is not needed for functionality, however.)
+
+Interaction Sun Clear Sun Space 1000
+
+Interaction Space Clear Space Space 10000
+Interaction Space Clear Star Space 10
+
+// The moon is two toned
+
+Interaction Moon_2 Moon Moon Moon 100
+
+
+// Collapser interactions - Collapser collapses stellar objects
+
+Interaction Collapser Nebula Clear CollapsingNebula 1000
+Interaction Collapser Sun Clear CollapsingSun 1000
+Interaction Collapser Moon Clear CollapsingMoon 1000
+Interaction Collapser MoonGreen Clear CollapsingMoon 1000
+Interaction Collapser MoonBlack Clear CollapsingMoon 1000
+Interaction Collapser MoonCyan Clear CollapsingMoon 1000
+Interaction Collapser Moon_2 Clear CollapsingMoon 1000
+Interaction Collapser Earth Clear CollapsingEarth 1000
+Interaction Collapser EarthGreen Clear CollapsingEarth 1000
+Interaction Collapser EarthBlack Clear CollapsingEarth 1000
+Interaction Collapser EarthCyan Clear CollapsingEarth 1000
+Interaction Collapser Lava Clear Collapsing 1000
+Interaction Collapser Stone Clear Collapsing 1000
+Interaction Collapser BlackHole Clear WhiteHole 1000
+Interaction Collapser Jungle Jungle Jungle 1000
+Interaction Collapser Jungle2 Jungle Jungle 1000
+
+// What if...
+
+Interaction Collapser Cataclysm2 BlackHole BlackHole 32768
+
+// Collapser Processes
+
+Interaction CollapsingNebula Nebula CollapsingNebula CollapsingNebula 1000
+Interaction CollapsingSun Sun CollapsingSun CollapsingSun 10000
+Interaction CollapsingMoon Moon CollapsingMoon CollapsingMoon 1000
+Interaction CollapsingMoon Moon_2 CollapsingMoon CollapsingMoon 1000
+Interaction CollapsingEarth Earth CollapsingEarth CollapsingEarth 1000
+Interaction CollapsingEarth EarthGreen CollapsingEarth CollapsingEarth 1000
+Interaction CollapsingEarth EarthBlack CollapsingEarth CollapsingEarth 1000
+Interaction CollapsingEarth EarthCyan CollapsingEarth CollapsingEarth 1000
+Interaction Collapsing Lava Collapsing Collapsing 1000
+Interaction Collapsing Stone Collapsing Collapsing 1000
+Interaction CollapsingEarth Jungle CollapsingEarth CollapsingEarth 1000
+Interaction CollapsingEarth Jungle2 CollapsingEarth CollapsingEarth 1000
+
+// Nova is caused by collapsed suns
+
+Interaction Nova Space Fire Nebula 1000
+Interaction Nova Sun Nova Fire 1000
+Interaction Nova Sun_2 Nova Nebula 1000
+Interaction Nova CollapsingSun Nova Nova 10000
+
+// Dust movement
+
+Interaction Dust Space Space Dust 3200
+Interaction Dust Clear Clear Dust 3200
+
+// Cataclysm 
+
+Interaction Cataclysm2 Lava Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Stone Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Earth Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 EarthBlack Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 EarthGreen Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 EarthCyan Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Space Explosion Explosion 32768
+Interaction Cataclysm2 Clear Explosion Explosion 32768
+Interaction Cataclysm2 Animal Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Life Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Gas Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Water Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 GBase Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 BBase Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 CBase Cataclysm2 Cataclysm2 13500
+Interaction Cataclysm2 Sun CollapsingSun CollapsingSun 32767
+Interaction Cataclysm2 Jungle Cataclysm2 Cataclysm2 20000
+Interaction Cataclysm2 Jungle2 Cataclysm2 Cataclysm2 20000
+
+// Black Hole
+
+Interaction BlackHole Cataclysm2 BlackHole BlackHole 32768
+Interaction BlackHole Clear BlackHole BH1 32768
+Interaction BlackHole Space BlackHole BH1 32768
+
+// It gets bigger and bigger!
+Interaction BlackHole All BlackHole BlackHole 50
+
+// Healing block code
+Interaction BH1 Clear BH1 BH2 20000
+Interaction BH2 Clear BH2 BH3 20000
+Interaction BH3 Clear BH3 BH4 20000
+Interaction BH4 Clear BH4 BH5 20000
+Interaction BH5 Clear BH5 BH6 20000
+Interaction BH6 Clear BH6 BH7 20000
+Interaction BH7 Clear BH7 BH8 20000
+Interaction BH8 Clear BH8 BH9 20000
+Interaction BH1 Space BH1 BH2 20000
+Interaction BH2 Space BH2 BH3 20000
+Interaction BH3 Space BH3 BH4 20000
+Interaction BH4 Space BH4 BH5 20000
+Interaction BH5 Space BH5 BH6 20000
+Interaction BH6 Space BH6 BH7 20000
+Interaction BH7 Space BH7 BH8 20000
+Interaction BH8 Space BH8 BH9 10000
+// Object specific 'sucking' code.
+Interaction BlackHole GreenShip BlackHole BH1 5000
+Interaction BH9 GreenShip GreenShip BH9 5000
+Interaction BH8 GreenShip GreenShip BH8 5000
+Interaction BH7 GreenShip GreenShip BH7 5000
+Interaction BH6 GreenShip GreenShip BH6 5000
+Interaction BH5 GreenShip GreenShip BH5 5000
+Interaction BH4 GreenShip GreenShip BH4 5000
+Interaction BH3 GreenShip GreenShip BH3 5000
+Interaction BH2 GreenShip GreenShip BH2 5000
+Interaction BH1 GreenShip GreenShip BH1 5000
+Interaction BlackHole BlackShip BlackHole BH1 5000
+Interaction BH9 BlackShip BlackShip BH9 5000
+Interaction BH8 BlackShip BlackShip BH8 5000
+Interaction BH7 BlackShip BlackShip BH7 5000
+Interaction BH6 BlackShip BlackShip BH6 5000
+Interaction BH5 BlackShip BlackShip BH5 5000
+Interaction BH4 BlackShip BlackShip BH4 5000
+Interaction BH3 BlackShip BlackShip BH3 5000
+Interaction BH2 BlackShip BlackShip BH2 5000
+Interaction BH1 BlackShip BlackShip BH1 5000
+Interaction BlackHole CyanShip BlackHole BH1 5000
+Interaction BH9 CyanShip CyanShip BH9 5000
+Interaction BH8 CyanShip CyanShip BH8 5000
+Interaction BH7 CyanShip CyanShip BH7 5000
+Interaction BH6 CyanShip CyanShip BH6 5000
+Interaction BH5 CyanShip CyanShip BH5 5000
+Interaction BH4 CyanShip CyanShip BH4 5000
+Interaction BH3 CyanShip CyanShip BH3 5000
+Interaction BH2 CyanShip CyanShip BH2 5000
+Interaction BH1 CyanShip CyanShip BH1 5000
+Interaction BlackHole GreenSpy BlackHole BH1 5000
+Interaction BH9 GreenSpy GreenSpy BH9 5000
+Interaction BH8 GreenSpy GreenSpy BH8 5000
+Interaction BH7 GreenSpy GreenSpy BH7 5000
+Interaction BH6 GreenSpy GreenSpy BH6 5000
+Interaction BH5 GreenSpy GreenSpy BH5 5000
+Interaction BH4 GreenSpy GreenSpy BH4 5000
+Interaction BH3 GreenSpy GreenSpy BH3 5000
+Interaction BH2 GreenSpy GreenSpy BH2 5000
+Interaction BH1 GreenSpy GreenSpy BH1 5000
+Interaction BlackHole CyanSpy BlackHole BH1 5000
+Interaction BH9 CyanSpy CyanSpy BH9 5000
+Interaction BH8 CyanSpy CyanSpy BH8 5000
+Interaction BH7 CyanSpy CyanSpy BH7 5000
+Interaction BH6 CyanSpy CyanSpy BH6 5000
+Interaction BH5 CyanSpy CyanSpy BH5 5000
+Interaction BH4 CyanSpy CyanSpy BH4 5000
+Interaction BH3 CyanSpy CyanSpy BH3 5000
+Interaction BH2 CyanSpy CyanSpy BH2 5000
+Interaction BH1 CyanSpy CyanSpy BH1 5000
+Interaction BlackHole BlackSpy BlackHole BH1 5000
+Interaction BH9 BlackSpy BlackSpy BH9 5000
+Interaction BH8 BlackSpy BlackSpy BH8 5000
+Interaction BH7 BlackSpy BlackSpy BH7 5000
+Interaction BH6 BlackSpy BlackSpy BH6 5000
+Interaction BH5 BlackSpy BlackSpy BH5 5000
+Interaction BH4 BlackSpy BlackSpy BH4 5000
+Interaction BH3 BlackSpy BlackSpy BH3 5000
+Interaction BH2 BlackSpy BlackSpy BH2 5000
+Interaction BH1 BlackSpy BlackSpy BH1 5000
+Interaction BlackHole Nebula BlackHole BH1 5000
+Interaction BH9 Nebula Nebula BH9 5000
+Interaction BH8 Nebula Nebula BH8 5000
+Interaction BH7 Nebula Nebula BH7 5000
+Interaction BH6 Nebula Nebula BH6 5000
+Interaction BH5 Nebula Nebula BH5 5000
+Interaction BH4 Nebula Nebula BH4 5000
+Interaction BH3 Nebula Nebula BH3 5000
+Interaction BH2 Nebula Nebula BH2 5000
+Interaction BH1 Nebula Nebula BH1 5000
+Interaction BlackHole Sun BlackHole BH1 5000
+Interaction BH9 Sun Sun BH9 5000
+Interaction BH8 Sun Sun BH8 5000
+Interaction BH7 Sun Sun BH7 5000
+Interaction BH6 Sun Sun BH6 5000
+Interaction BH5 Sun Sun BH5 5000
+Interaction BH4 Sun Sun BH4 5000
+Interaction BH3 Sun Sun BH3 5000
+Interaction BH2 Sun Sun BH2 5000
+Interaction BH1 Sun Sun BH1 5000
+Interaction BlackHole Sun_2 BlackHole BH1 5000
+Interaction BH9 Sun_2 Sun_2 BH9 5000
+Interaction BH8 Sun_2 Sun_2 BH8 5000
+Interaction BH7 Sun_2 Sun_2 BH7 5000
+Interaction BH6 Sun_2 Sun_2 BH6 5000
+Interaction BH5 Sun_2 Sun_2 BH5 5000
+Interaction BH4 Sun_2 Sun_2 BH4 5000
+Interaction BH3 Sun_2 Sun_2 BH3 5000
+Interaction BH2 Sun_2 Sun_2 BH2 5000
+Interaction BH1 Sun_2 Sun_2 BH1 5000
+Interaction BlackHole Moon BlackHole BH1 5000
+Interaction BH9 Moon Moon BH9 5000
+Interaction BH8 Moon Moon BH8 5000
+Interaction BH7 Moon Moon BH7 5000
+Interaction BH6 Moon Moon BH6 5000
+Interaction BH5 Moon Moon BH5 5000
+Interaction BH4 Moon Moon BH4 5000
+Interaction BH3 Moon Moon BH3 5000
+Interaction BH2 Moon Moon BH2 5000
+Interaction BH1 Moon Moon BH1 5000
+Interaction BlackHole Moon_2 BlackHole BH1 5000
+Interaction BH9 Moon_2 Moon_2 BH9 5000
+Interaction BH8 Moon_2 Moon_2 BH8 5000
+Interaction BH7 Moon_2 Moon_2 BH7 5000
+Interaction BH6 Moon_2 Moon_2 BH6 5000
+Interaction BH5 Moon_2 Moon_2 BH5 5000
+Interaction BH4 Moon_2 Moon_2 BH4 5000
+Interaction BH3 Moon_2 Moon_2 BH3 5000
+Interaction BH2 Moon_2 Moon_2 BH2 5000
+Interaction BH1 Moon_2 Moon_2 BH1 5000
+Interaction BlackHole Earth BlackHole BH1 5000
+Interaction BH9 Earth Earth BH9 5000
+Interaction BH8 Earth Earth BH8 5000
+Interaction BH7 Earth Earth BH7 5000
+Interaction BH6 Earth Earth BH6 5000
+Interaction BH5 Earth Earth BH5 5000
+Interaction BH4 Earth Earth BH4 5000
+Interaction BH3 Earth Earth BH3 5000
+Interaction BH2 Earth Earth BH2 5000
+Interaction BH1 Earth Earth BH1 5000
+Interaction BlackHole Lava BlackHole BH1 5000
+Interaction BH9 Lava Lava BH9 5000
+Interaction BH8 Lava Lava BH8 5000
+Interaction BH7 Lava Lava BH7 5000
+Interaction BH6 Lava Lava BH6 5000
+Interaction BH5 Lava Lava BH5 5000
+Interaction BH4 Lava Lava BH4 5000
+Interaction BH3 Lava Lava BH3 5000
+Interaction BH2 Lava Lava BH2 5000
+Interaction BH1 Lava Lava BH1 5000
+Interaction BlackHole Stone BlackHole BH1 5000
+Interaction BH9 Stone Stone BH9 5000
+Interaction BH8 Stone Stone BH8 5000
+Interaction BH7 Stone Stone BH7 5000
+Interaction BH6 Stone Stone BH6 5000
+Interaction BH5 Stone Stone BH5 5000
+Interaction BH4 Stone Stone BH4 5000
+Interaction BH3 Stone Stone BH3 5000
+Interaction BH2 Stone Stone BH2 5000
+Interaction BH1 Stone Stone BH1 5000
+Interaction BlackHole EarthBlack BlackHole BH1 5000
+Interaction BH9 EarthBlack EarthBlack BH9 5000
+Interaction BH8 EarthBlack EarthBlack BH8 5000
+Interaction BH7 EarthBlack EarthBlack BH7 5000
+Interaction BH6 EarthBlack EarthBlack BH6 5000
+Interaction BH5 EarthBlack EarthBlack BH5 5000
+Interaction BH4 EarthBlack EarthBlack BH4 5000
+Interaction BH3 EarthBlack EarthBlack BH3 5000
+Interaction BH2 EarthBlack EarthBlack BH2 5000
+Interaction BH1 EarthBlack EarthBlack BH1 5000
+Interaction BlackHole EarthCyan BlackHole BH1 5000
+Interaction BH9 EarthCyan EarthCyan BH9 5000
+Interaction BH8 EarthCyan EarthCyan BH8 5000
+Interaction BH7 EarthCyan EarthCyan BH7 5000
+Interaction BH6 EarthCyan EarthCyan BH6 5000
+Interaction BH5 EarthCyan EarthCyan BH5 5000
+Interaction BH4 EarthCyan EarthCyan BH4 5000
+Interaction BH3 EarthCyan EarthCyan BH3 5000
+Interaction BH2 EarthCyan EarthCyan BH2 5000
+Interaction BH1 EarthCyan EarthCyan BH1 5000
+Interaction BlackHole EarthGreen BlackHole BH1 5000
+Interaction BH9 EarthGreen EarthGreen BH9 5000
+Interaction BH8 EarthGreen EarthGreen BH8 5000
+Interaction BH7 EarthGreen EarthGreen BH7 5000
+Interaction BH6 EarthGreen EarthGreen BH6 5000
+Interaction BH5 EarthGreen EarthGreen BH5 5000
+Interaction BH4 EarthGreen EarthGreen BH4 5000
+Interaction BH3 EarthGreen EarthGreen BH3 5000
+Interaction BH2 EarthGreen EarthGreen BH2 5000
+Interaction BH1 EarthGreen EarthGreen BH1 5000
+Interaction BlackHole GTier1 BlackHole BH1 5000
+Interaction BH9 GTier1 GTier1 BH9 5000
+Interaction BH8 GTier1 GTier1 BH8 5000
+Interaction BH7 GTier1 GTier1 BH7 5000
+Interaction BH6 GTier1 GTier1 BH6 5000
+Interaction BH5 GTier1 GTier1 BH5 5000
+Interaction BH4 GTier1 GTier1 BH4 5000
+Interaction BH3 GTier1 GTier1 BH3 5000
+Interaction BH2 GTier1 GTier1 BH2 5000
+Interaction BH1 GTier1 GTier1 BH1 5000
+Interaction BlackHole GTier2 BlackHole BH1 5000
+Interaction BH9 GTier2 GTier2 BH9 5000
+Interaction BH8 GTier2 GTier2 BH8 5000
+Interaction BH7 GTier2 GTier2 BH7 5000
+Interaction BH6 GTier2 GTier2 BH6 5000
+Interaction BH5 GTier2 GTier2 BH5 5000
+Interaction BH4 GTier2 GTier2 BH4 5000
+Interaction BH3 GTier2 GTier2 BH3 5000
+Interaction BH2 GTier2 GTier2 BH2 5000
+Interaction BH1 GTier2 GTier2 BH1 5000
+Interaction BlackHole GTier3 BlackHole BH1 5000
+Interaction BH9 GTier3 GTier3 BH9 5000
+Interaction BH8 GTier3 GTier3 BH8 5000
+Interaction BH7 GTier3 GTier3 BH7 5000
+Interaction BH6 GTier3 GTier3 BH6 5000
+Interaction BH5 GTier3 GTier3 BH5 5000
+Interaction BH4 GTier3 GTier3 BH4 5000
+Interaction BH3 GTier3 GTier3 BH3 5000
+Interaction BH2 GTier3 GTier3 BH2 5000
+Interaction BH1 GTier3 GTier3 BH1 5000
+Interaction BlackHole BTier1 BlackHole BH1 5000
+Interaction BH9 BTier1 BTier1 BH9 5000
+Interaction BH8 BTier1 BTier1 BH8 5000
+Interaction BH7 BTier1 BTier1 BH7 5000
+Interaction BH6 BTier1 BTier1 BH6 5000
+Interaction BH5 BTier1 BTier1 BH5 5000
+Interaction BH4 BTier1 BTier1 BH4 5000
+Interaction BH3 BTier1 BTier1 BH3 5000
+Interaction BH2 BTier1 BTier1 BH2 5000
+Interaction BH1 BTier1 BTier1 BH1 5000
+Interaction BlackHole BTier2 BlackHole BH1 5000
+Interaction BH9 BTier2 BTier2 BH9 5000
+Interaction BH8 BTier2 BTier2 BH8 5000
+Interaction BH7 BTier2 BTier2 BH7 5000
+Interaction BH6 BTier2 BTier2 BH6 5000
+Interaction BH5 BTier2 BTier2 BH5 5000
+Interaction BH4 BTier2 BTier2 BH4 5000
+Interaction BH3 BTier2 BTier2 BH3 5000
+Interaction BH2 BTier2 BTier2 BH2 5000
+Interaction BH1 BTier2 BTier2 BH1 5000
+Interaction BlackHole BTier3 BlackHole BH1 5000
+Interaction BH9 BTier3 BTier3 BH9 5000
+Interaction BH8 BTier3 BTier3 BH8 5000
+Interaction BH7 BTier3 BTier3 BH7 5000
+Interaction BH6 BTier3 BTier3 BH6 5000
+Interaction BH5 BTier3 BTier3 BH5 5000
+Interaction BH4 BTier3 BTier3 BH4 5000
+Interaction BH3 BTier3 BTier3 BH3 5000
+Interaction BH2 BTier3 BTier3 BH2 5000
+Interaction BH1 BTier3 BTier3 BH1 5000
+Interaction BlackHole CTier1 BlackHole BH1 5000
+Interaction BH9 CTier1 CTier1 BH9 5000
+Interaction BH8 CTier1 CTier1 BH8 5000
+Interaction BH7 CTier1 CTier1 BH7 5000
+Interaction BH6 CTier1 CTier1 BH6 5000
+Interaction BH5 CTier1 CTier1 BH5 5000
+Interaction BH4 CTier1 CTier1 BH4 5000
+Interaction BH3 CTier1 CTier1 BH3 5000
+Interaction BH2 CTier1 CTier1 BH2 5000
+Interaction BH1 CTier1 CTier1 BH1 5000
+Interaction BlackHole CTier2 BlackHole BH1 5000
+Interaction BH9 CTier2 CTier2 BH9 5000
+Interaction BH8 CTier2 CTier2 BH8 5000
+Interaction BH7 CTier2 CTier2 BH7 5000
+Interaction BH6 CTier2 CTier2 BH6 5000
+Interaction BH5 CTier2 CTier2 BH5 5000
+Interaction BH4 CTier2 CTier2 BH4 5000
+Interaction BH3 CTier2 CTier2 BH3 5000
+Interaction BH2 CTier2 CTier2 BH2 5000
+Interaction BH1 CTier2 CTier2 BH1 5000
+Interaction BlackHole CTier3 BlackHole BH1 5000
+Interaction BH9 CTier3 CTier3 BH9 5000
+Interaction BH8 CTier3 CTier3 BH8 5000
+Interaction BH7 CTier3 CTier3 BH7 5000
+Interaction BH6 CTier3 CTier3 BH6 5000
+Interaction BH5 CTier3 CTier3 BH5 5000
+Interaction BH4 CTier3 CTier3 BH4 5000
+Interaction BH3 CTier3 CTier3 BH3 5000
+Interaction BH2 CTier3 CTier3 BH2 5000
+Interaction BH1 CTier3 CTier3 BH1 5000
+Interaction BlackHole Life BlackHole BH1 5000
+Interaction BH9 Life Life BH9 5000
+Interaction BH8 Life Life BH8 5000
+Interaction BH7 Life Life BH7 5000
+Interaction BH6 Life Life BH6 5000
+Interaction BH5 Life Life BH5 5000
+Interaction BH4 Life Life BH4 5000
+Interaction BH3 Life Life BH3 5000
+Interaction BH2 Life Life BH2 5000
+Interaction BH1 Life Life BH1 5000
+Interaction BlackHole Water BlackHole BH1 5000
+Interaction BH9 Water Water BH9 5000
+Interaction BH8 Water Water BH8 5000
+Interaction BH7 Water Water BH7 5000
+Interaction BH6 Water Water BH6 5000
+Interaction BH5 Water Water BH5 5000
+Interaction BH4 Water Water BH4 5000
+Interaction BH3 Water Water BH3 5000
+Interaction BH2 Water Water BH2 5000
+Interaction BH1 Water Water BH1 5000
+Interaction BlackHole Gas BlackHole BH1 5000
+Interaction BH9 Gas Gas BH9 5000
+Interaction BH8 Gas Gas BH8 5000
+Interaction BH7 Gas Gas BH7 5000
+Interaction BH6 Gas Gas BH6 5000
+Interaction BH5 Gas Gas BH5 5000
+Interaction BH4 Gas Gas BH4 5000
+Interaction BH3 Gas Gas BH3 5000
+Interaction BH2 Gas Gas BH2 5000
+Interaction BH1 Gas Gas BH1 5000
+Interaction BlackHole Animal BlackHole BH1 5000
+Interaction BH9 Animal Animal BH9 5000
+Interaction BH8 Animal Animal BH8 5000
+Interaction BH7 Animal Animal BH7 5000
+Interaction BH6 Animal Animal BH6 5000
+Interaction BH5 Animal Animal BH5 5000
+Interaction BH4 Animal Animal BH4 5000
+Interaction BH3 Animal Animal BH3 5000
+Interaction BH2 Animal Animal BH2 5000
+Interaction BH1 Animal Animal BH1 5000
+Interaction BlackHole Animal2 BlackHole BH1 5000
+Interaction BH9 Animal2 Animal2 BH9 5000
+Interaction BH8 Animal2 Animal2 BH8 5000
+Interaction BH7 Animal2 Animal2 BH7 5000
+Interaction BH6 Animal2 Animal2 BH6 5000
+Interaction BH5 Animal2 Animal2 BH5 5000
+Interaction BH4 Animal2 Animal2 BH4 5000
+Interaction BH3 Animal2 Animal2 BH3 5000
+Interaction BH2 Animal2 Animal2 BH2 5000
+Interaction BH1 Animal2 Animal2 BH1 5000
+Interaction BlackHole Star BlackHole BH1 5000
+Interaction BH9 Star Star BH9 5000
+Interaction BH8 Star Star BH8 5000
+Interaction BH7 Star Star BH7 5000
+Interaction BH6 Star Star BH6 5000
+Interaction BH5 Star Star BH5 5000
+Interaction BH4 Star Star BH4 5000
+Interaction BH3 Star Star BH3 5000
+Interaction BH2 Star Star BH2 5000
+Interaction BH1 Star Star BH1 5000
+Interaction BlackHole GBase BlackHole BH1 5000
+Interaction BH9 GBase GBase BH9 5000
+Interaction BH8 GBase GBase BH8 5000
+Interaction BH7 GBase GBase BH7 5000
+Interaction BH6 GBase GBase BH6 5000
+Interaction BH5 GBase GBase BH5 5000
+Interaction BH4 GBase GBase BH4 5000
+Interaction BH3 GBase GBase BH3 5000
+Interaction BH2 GBase GBase BH2 5000
+Interaction BH1 GBase GBase BH1 5000
+Interaction BlackHole BBase BlackHole BH1 5000
+Interaction BH9 BBase BBase BH9 5000
+Interaction BH8 BBase BBase BH8 5000
+Interaction BH7 BBase BBase BH7 5000
+Interaction BH6 BBase BBase BH6 5000
+Interaction BH5 BBase BBase BH5 5000
+Interaction BH4 BBase BBase BH4 5000
+Interaction BH3 BBase BBase BH3 5000
+Interaction BH2 BBase BBase BH2 5000
+Interaction BH1 BBase BBase BH1 5000
+Interaction BlackHole CBase BlackHole BH1 5000
+Interaction BH9 CBase CBase BH9 5000
+Interaction BH8 CBase CBase BH8 5000
+Interaction BH7 CBase CBase BH7 5000
+Interaction BH6 CBase CBase BH6 5000
+Interaction BH5 CBase CBase BH5 5000
+Interaction BH4 CBase CBase BH4 5000
+Interaction BH3 CBase CBase BH3 5000
+Interaction BH2 CBase CBase BH2 5000
+Interaction BH1 CBase CBase BH1 5000
+Interaction BlackHole GSoldier BlackHole BH1 5000
+Interaction BH9 GSoldier GSoldier BH9 5000
+Interaction BH8 GSoldier GSoldier BH8 5000
+Interaction BH7 GSoldier GSoldier BH7 5000
+Interaction BH6 GSoldier GSoldier BH6 5000
+Interaction BH5 GSoldier GSoldier BH5 5000
+Interaction BH4 GSoldier GSoldier BH4 5000
+Interaction BH3 GSoldier GSoldier BH3 5000
+Interaction BH2 GSoldier GSoldier BH2 5000
+Interaction BH1 GSoldier GSoldier BH1 5000
+Interaction BlackHole CSoldier BlackHole BH1 5000
+Interaction BH9 CSoldier CSoldier BH9 5000
+Interaction BH8 CSoldier CSoldier BH8 5000
+Interaction BH7 CSoldier CSoldier BH7 5000
+Interaction BH6 CSoldier CSoldier BH6 5000
+Interaction BH5 CSoldier CSoldier BH5 5000
+Interaction BH4 CSoldier CSoldier BH4 5000
+Interaction BH3 CSoldier CSoldier BH3 5000
+Interaction BH2 CSoldier CSoldier BH2 5000
+Interaction BH1 CSoldier CSoldier BH1 5000
+Interaction BlackHole BSoldier BlackHole BH1 5000
+Interaction BH9 BSoldier BSoldier BH9 5000
+Interaction BH8 BSoldier BSoldier BH8 5000
+Interaction BH7 BSoldier BSoldier BH7 5000
+Interaction BH6 BSoldier BSoldier BH6 5000
+Interaction BH5 BSoldier BSoldier BH5 5000
+Interaction BH4 BSoldier BSoldier BH4 5000
+Interaction BH3 BSoldier BSoldier BH3 5000
+Interaction BH2 BSoldier BSoldier BH2 5000
+Interaction BH1 BSoldier BSoldier BH1 5000
+Interaction BlackHole Explosion BlackHole BH1 5000
+Interaction BH9 Explosion Explosion BH9 5000
+Interaction BH8 Explosion Explosion BH8 5000
+Interaction BH7 Explosion Explosion BH7 5000
+Interaction BH6 Explosion Explosion BH6 5000
+Interaction BH5 Explosion Explosion BH5 5000
+Interaction BH4 Explosion Explosion BH4 5000
+Interaction BH3 Explosion Explosion BH3 5000
+Interaction BH2 Explosion Explosion BH2 5000
+Interaction BH1 Explosion Explosion BH1 5000
+Interaction BlackHole Explosion2 BlackHole BH1 5000
+Interaction BH9 Explosion2 Explosion2 BH9 5000
+Interaction BH8 Explosion2 Explosion2 BH8 5000
+Interaction BH7 Explosion2 Explosion2 BH7 5000
+Interaction BH6 Explosion2 Explosion2 BH6 5000
+Interaction BH5 Explosion2 Explosion2 BH5 5000
+Interaction BH4 Explosion2 Explosion2 BH4 5000
+Interaction BH3 Explosion2 Explosion2 BH3 5000
+Interaction BH2 Explosion2 Explosion2 BH2 5000
+Interaction BH1 Explosion2 Explosion2 BH1 5000
+Interaction BlackHole Plagued BlackHole BH1 5000
+Interaction BH9 Plagued Plagued BH9 5000
+Interaction BH8 Plagued Plagued BH8 5000
+Interaction BH7 Plagued Plagued BH7 5000
+Interaction BH6 Plagued Plagued BH6 5000
+Interaction BH5 Plagued Plagued BH5 5000
+Interaction BH4 Plagued Plagued BH4 5000
+Interaction BH3 Plagued Plagued BH3 5000
+Interaction BH2 Plagued Plagued BH2 5000
+Interaction BH1 Plagued Plagued BH1 5000
+Interaction BlackHole PlagueShip BlackHole BH1 5000
+Interaction BH9 PlagueShip PlagueShip BH9 5000
+Interaction BH8 PlagueShip PlagueShip BH8 5000
+Interaction BH7 PlagueShip PlagueShip BH7 5000
+Interaction BH6 PlagueShip PlagueShip BH6 5000
+Interaction BH5 PlagueShip PlagueShip BH5 5000
+Interaction BH4 PlagueShip PlagueShip BH4 5000
+Interaction BH3 PlagueShip PlagueShip BH3 5000
+Interaction BH2 PlagueShip PlagueShip BH2 5000
+Interaction BH1 PlagueShip PlagueShip BH1 5000
+Interaction BlackHole PlagueSoldier BlackHole BH1 5000
+Interaction BH9 PlagueSoldier PlagueSoldier BH9 5000
+Interaction BH8 PlagueSoldier PlagueSoldier BH8 5000
+Interaction BH7 PlagueSoldier PlagueSoldier BH7 5000
+Interaction BH6 PlagueSoldier PlagueSoldier BH6 5000
+Interaction BH5 PlagueSoldier PlagueSoldier BH5 5000
+Interaction BH4 PlagueSoldier PlagueSoldier BH4 5000
+Interaction BH3 PlagueSoldier PlagueSoldier BH3 5000
+Interaction BH2 PlagueSoldier PlagueSoldier BH2 5000
+Interaction BH1 PlagueSoldier PlagueSoldier BH1 5000
+Interaction BlackHole PlaguedEarth BlackHole BH1 5000
+Interaction BH9 PlaguedEarth PlaguedEarth BH9 5000
+Interaction BH8 PlaguedEarth PlaguedEarth BH8 5000
+Interaction BH7 PlaguedEarth PlaguedEarth BH7 5000
+Interaction BH6 PlaguedEarth PlaguedEarth BH6 5000
+Interaction BH5 PlaguedEarth PlaguedEarth BH5 5000
+Interaction BH4 PlaguedEarth PlaguedEarth BH4 5000
+Interaction BH3 PlaguedEarth PlaguedEarth BH3 5000
+Interaction BH2 PlaguedEarth PlaguedEarth BH2 5000
+Interaction BH1 PlaguedEarth PlaguedEarth BH1 5000
+Interaction BlackHole PlagueBase BlackHole BH1 5000
+Interaction BH9 PlagueBase PlagueBase BH9 5000
+Interaction BH8 PlagueBase PlagueBase BH8 5000
+Interaction BH7 PlagueBase PlagueBase BH7 5000
+Interaction BH6 PlagueBase PlagueBase BH6 5000
+Interaction BH5 PlagueBase PlagueBase BH5 5000
+Interaction BH4 PlagueBase PlagueBase BH4 5000
+Interaction BH3 PlagueBase PlagueBase BH3 5000
+Interaction BH2 PlagueBase PlagueBase BH2 5000
+Interaction BH1 PlagueBase PlagueBase BH1 5000
+Interaction BlackHole Jungle BlackHole BH1 5000
+Interaction BH9 Jungle Jungle BH9 5000
+Interaction BH8 Jungle Jungle BH8 5000
+Interaction BH7 Jungle Jungle BH7 5000
+Interaction BH6 Jungle Jungle BH6 5000
+Interaction BH5 Jungle Jungle BH5 5000
+Interaction BH4 Jungle Jungle BH4 5000
+Interaction BH3 Jungle Jungle BH3 5000
+Interaction BH2 Jungle Jungle BH2 5000
+Interaction BH1 Jungle Jungle BH1 5000
+Interaction BlackHole Jungle2 BlackHole BH1 5000
+Interaction BH9 Jungle2 Jungle2 BH9 5000
+Interaction BH8 Jungle2 Jungle2 BH8 5000
+Interaction BH7 Jungle2 Jungle2 BH7 5000
+Interaction BH6 Jungle2 Jungle2 BH6 5000
+Interaction BH5 Jungle2 Jungle2 BH5 5000
+Interaction BH4 Jungle2 Jungle2 BH4 5000
+Interaction BH3 Jungle2 Jungle2 BH3 5000
+Interaction BH2 Jungle2 Jungle2 BH2 5000
+Interaction BH1 Jungle2 Jungle2 BH1 5000
+Interaction BlackHole LavaGenerator BlackHole BH1 5000
+Interaction BH9 LavaGenerator LavaGenerator BH9 5000
+Interaction BH8 LavaGenerator LavaGenerator BH8 5000
+Interaction BH7 LavaGenerator LavaGenerator BH7 5000
+Interaction BH6 LavaGenerator LavaGenerator BH6 5000
+Interaction BH5 LavaGenerator LavaGenerator BH5 5000
+Interaction BH4 LavaGenerator LavaGenerator BH4 5000
+Interaction BH3 LavaGenerator LavaGenerator BH3 5000
+Interaction BH2 LavaGenerator LavaGenerator BH2 5000
+Interaction BH1 LavaGenerator LavaGenerator BH1 5000
+Interaction BlackHole CollapsingSun BlackHole BH1 5000
+Interaction BH9 CollapsingSun CollapsingSun BH9 5000
+Interaction BH8 CollapsingSun CollapsingSun BH8 5000
+Interaction BH7 CollapsingSun CollapsingSun BH7 5000
+Interaction BH6 CollapsingSun CollapsingSun BH6 5000
+Interaction BH5 CollapsingSun CollapsingSun BH5 5000
+Interaction BH4 CollapsingSun CollapsingSun BH4 5000
+Interaction BH3 CollapsingSun CollapsingSun BH3 5000
+Interaction BH2 CollapsingSun CollapsingSun BH2 5000
+Interaction BH1 CollapsingSun CollapsingSun BH1 5000
+Interaction BlackHole Core BlackHole BH1 5000
+Interaction BH9 Core Core BH9 5000
+Interaction BH8 Core Core BH8 5000
+Interaction BH7 Core Core BH7 5000
+Interaction BH6 Core Core BH6 5000
+Interaction BH5 Core Core BH5 5000
+Interaction BH4 Core Core BH4 5000
+Interaction BH3 Core Core BH3 5000
+Interaction BH2 Core Core BH2 5000
+Interaction BH1 Core Core BH1 5000
+Interaction BlackHole Core2 BlackHole BH1 5000
+Interaction BH9 Core2 Core2 BH9 5000
+Interaction BH8 Core2 Core2 BH8 5000
+Interaction BH7 Core2 Core2 BH7 5000
+Interaction BH6 Core2 Core2 BH6 5000
+Interaction BH5 Core2 Core2 BH5 5000
+Interaction BH4 Core2 Core2 BH4 5000
+Interaction BH3 Core2 Core2 BH3 5000
+Interaction BH2 Core2 Core2 BH2 5000
+Interaction BH1 Core2 Core2 BH1 5000
+Interaction BlackHole MotherShip BlackHole BH1 5000
+Interaction BH9 MotherShip MotherShip BH9 5000
+Interaction BH8 MotherShip MotherShip BH8 5000
+Interaction BH7 MotherShip MotherShip BH7 5000
+Interaction BH6 MotherShip MotherShip BH6 5000
+Interaction BH5 MotherShip MotherShip BH5 5000
+Interaction BH4 MotherShip MotherShip BH4 5000
+Interaction BH3 MotherShip MotherShip BH3 5000
+Interaction BH2 MotherShip MotherShip BH2 5000
+Interaction BH1 MotherShip MotherShip BH1 5000
+Interaction BlackHole MotherShip2 BlackHole BH1 5000
+Interaction BH9 MotherShip2 MotherShip2 BH9 5000
+Interaction BH8 MotherShip2 MotherShip2 BH8 5000
+Interaction BH7 MotherShip2 MotherShip2 BH7 5000
+Interaction BH6 MotherShip2 MotherShip2 BH6 5000
+Interaction BH5 MotherShip2 MotherShip2 BH5 5000
+Interaction BH4 MotherShip2 MotherShip2 BH4 5000
+Interaction BH3 MotherShip2 MotherShip2 BH3 5000
+Interaction BH2 MotherShip2 MotherShip2 BH2 5000
+Interaction BH1 MotherShip2 MotherShip2 BH1 5000
+Interaction BlackHole RobotDrone BlackHole BH1 5000
+Interaction BH9 RobotDrone RobotDrone BH9 5000
+Interaction BH8 RobotDrone RobotDrone BH8 5000
+Interaction BH7 RobotDrone RobotDrone BH7 5000
+Interaction BH6 RobotDrone RobotDrone BH6 5000
+Interaction BH5 RobotDrone RobotDrone BH5 5000
+Interaction BH4 RobotDrone RobotDrone BH4 5000
+Interaction BH3 RobotDrone RobotDrone BH3 5000
+Interaction BH2 RobotDrone RobotDrone BH2 5000
+Interaction BH1 RobotDrone RobotDrone BH1 5000
+Interaction BlackHole MotherShipShield BlackHole BH1 5000
+Interaction BH9 MotherShipShield MotherShipShield BH9 5000
+Interaction BH8 MotherShipShield MotherShipShield BH8 5000
+Interaction BH7 MotherShipShield MotherShipShield BH7 5000
+Interaction BH6 MotherShipShield MotherShipShield BH6 5000
+Interaction BH5 MotherShipShield MotherShipShield BH5 5000
+Interaction BH4 MotherShipShield MotherShipShield BH4 5000
+Interaction BH3 MotherShipShield MotherShipShield BH3 5000
+Interaction BH2 MotherShipShield MotherShipShield BH2 5000
+Interaction BH1 MotherShipShield MotherShipShield BH1 5000
+Interaction BlackHole LavaHolder BlackHole BH1 5000
+Interaction BH9 LavaHolder LavaHolder BH9 5000
+Interaction BH8 LavaHolder LavaHolder BH8 5000
+Interaction BH7 LavaHolder LavaHolder BH7 5000
+Interaction BH6 LavaHolder LavaHolder BH6 5000
+Interaction BH5 LavaHolder LavaHolder BH5 5000
+Interaction BH4 LavaHolder LavaHolder BH4 5000
+Interaction BH3 LavaHolder LavaHolder BH3 5000
+Interaction BH2 LavaHolder LavaHolder BH2 5000
+Interaction BH1 LavaHolder LavaHolder BH1 5000
+Interaction BlackHole EarthHolder BlackHole BH1 5000
+Interaction BH9 EarthHolder EarthHolder BH9 5000
+Interaction BH8 EarthHolder EarthHolder BH8 5000
+Interaction BH7 EarthHolder EarthHolder BH7 5000
+Interaction BH6 EarthHolder EarthHolder BH6 5000
+Interaction BH5 EarthHolder EarthHolder BH5 5000
+Interaction BH4 EarthHolder EarthHolder BH4 5000
+Interaction BH3 EarthHolder EarthHolder BH3 5000
+Interaction BH2 EarthHolder EarthHolder BH2 5000
+Interaction BH1 EarthHolder EarthHolder BH1 5000
+Interaction BlackHole EarthBlackHolder BlackHole BH1 5000
+Interaction BH9 EarthBlackHolder EarthBlackHolder BH9 5000
+Interaction BH8 EarthBlackHolder EarthBlackHolder BH8 5000
+Interaction BH7 EarthBlackHolder EarthBlackHolder BH7 5000
+Interaction BH6 EarthBlackHolder EarthBlackHolder BH6 5000
+Interaction BH5 EarthBlackHolder EarthBlackHolder BH5 5000
+Interaction BH4 EarthBlackHolder EarthBlackHolder BH4 5000
+Interaction BH3 EarthBlackHolder EarthBlackHolder BH3 5000
+Interaction BH2 EarthBlackHolder EarthBlackHolder BH2 5000
+Interaction BH1 EarthBlackHolder EarthBlackHolder BH1 5000
+Interaction BlackHole EarthGreenHolder BlackHole BH1 5000
+Interaction BH9 EarthGreenHolder EarthGreenHolder BH9 5000
+Interaction BH8 EarthGreenHolder EarthGreenHolder BH8 5000
+Interaction BH7 EarthGreenHolder EarthGreenHolder BH7 5000
+Interaction BH6 EarthGreenHolder EarthGreenHolder BH6 5000
+Interaction BH5 EarthGreenHolder EarthGreenHolder BH5 5000
+Interaction BH4 EarthGreenHolder EarthGreenHolder BH4 5000
+Interaction BH3 EarthGreenHolder EarthGreenHolder BH3 5000
+Interaction BH2 EarthGreenHolder EarthGreenHolder BH2 5000
+Interaction BH1 EarthGreenHolder EarthGreenHolder BH1 5000
+Interaction BlackHole EarthCyanHolder BlackHole BH1 5000
+Interaction BH9 EarthCyanHolder EarthCyanHolder BH9 5000
+Interaction BH8 EarthCyanHolder EarthCyanHolder BH8 5000
+Interaction BH7 EarthCyanHolder EarthCyanHolder BH7 5000
+Interaction BH6 EarthCyanHolder EarthCyanHolder BH6 5000
+Interaction BH5 EarthCyanHolder EarthCyanHolder BH5 5000
+Interaction BH4 EarthCyanHolder EarthCyanHolder BH4 5000
+Interaction BH3 EarthCyanHolder EarthCyanHolder BH3 5000
+Interaction BH2 EarthCyanHolder EarthCyanHolder BH2 5000
+Interaction BH1 EarthCyanHolder EarthCyanHolder BH1 5000
+Interaction BlackHole MoonHolder BlackHole BH1 5000
+Interaction BH9 MoonHolder MoonHolder BH9 5000
+Interaction BH8 MoonHolder MoonHolder BH8 5000
+Interaction BH7 MoonHolder MoonHolder BH7 5000
+Interaction BH6 MoonHolder MoonHolder BH6 5000
+Interaction BH5 MoonHolder MoonHolder BH5 5000
+Interaction BH4 MoonHolder MoonHolder BH4 5000
+Interaction BH3 MoonHolder MoonHolder BH3 5000
+Interaction BH2 MoonHolder MoonHolder BH2 5000
+Interaction BH1 MoonHolder MoonHolder BH1 5000
+Interaction BlackHole SunHolder BlackHole BH1 5000
+Interaction BH9 SunHolder SunHolder BH9 5000
+Interaction BH8 SunHolder SunHolder BH8 5000
+Interaction BH7 SunHolder SunHolder BH7 5000
+Interaction BH6 SunHolder SunHolder BH6 5000
+Interaction BH5 SunHolder SunHolder BH5 5000
+Interaction BH4 SunHolder SunHolder BH4 5000
+Interaction BH3 SunHolder SunHolder BH3 5000
+Interaction BH2 SunHolder SunHolder BH2 5000
+Interaction BH1 SunHolder SunHolder BH1 5000
+Interaction BlackHole MoonGreenHolder BlackHole BH1 5000
+Interaction BH9 MoonGreenHolder MoonGreenHolder BH9 5000
+Interaction BH8 MoonGreenHolder MoonGreenHolder BH8 5000
+Interaction BH7 MoonGreenHolder MoonGreenHolder BH7 5000
+Interaction BH6 MoonGreenHolder MoonGreenHolder BH6 5000
+Interaction BH5 MoonGreenHolder MoonGreenHolder BH5 5000
+Interaction BH4 MoonGreenHolder MoonGreenHolder BH4 5000
+Interaction BH3 MoonGreenHolder MoonGreenHolder BH3 5000
+Interaction BH2 MoonGreenHolder MoonGreenHolder BH2 5000
+Interaction BH1 MoonGreenHolder MoonGreenHolder BH1 5000
+Interaction BlackHole MoonBlackHolder BlackHole BH1 5000
+Interaction BH9 MoonBlackHolder MoonBlackHolder BH9 5000
+Interaction BH8 MoonBlackHolder MoonBlackHolder BH8 5000
+Interaction BH7 MoonBlackHolder MoonBlackHolder BH7 5000
+Interaction BH6 MoonBlackHolder MoonBlackHolder BH6 5000
+Interaction BH5 MoonBlackHolder MoonBlackHolder BH5 5000
+Interaction BH4 MoonBlackHolder MoonBlackHolder BH4 5000
+Interaction BH3 MoonBlackHolder MoonBlackHolder BH3 5000
+Interaction BH2 MoonBlackHolder MoonBlackHolder BH2 5000
+Interaction BH1 MoonBlackHolder MoonBlackHolder BH1 5000
+Interaction BlackHole MoonCyanHolder BlackHole BH1 5000
+Interaction BH9 MoonCyanHolder MoonCyanHolder BH9 5000
+Interaction BH8 MoonCyanHolder MoonCyanHolder BH8 5000
+Interaction BH7 MoonCyanHolder MoonCyanHolder BH7 5000
+Interaction BH6 MoonCyanHolder MoonCyanHolder BH6 5000
+Interaction BH5 MoonCyanHolder MoonCyanHolder BH5 5000
+Interaction BH4 MoonCyanHolder MoonCyanHolder BH4 5000
+Interaction BH3 MoonCyanHolder MoonCyanHolder BH3 5000
+Interaction BH2 MoonCyanHolder MoonCyanHolder BH2 5000
+Interaction BH1 MoonCyanHolder MoonCyanHolder BH1 5000
+Interaction BlackHole GTier1Holder BlackHole BH1 5000
+Interaction BH9 GTier1Holder GTier1Holder BH9 5000
+Interaction BH8 GTier1Holder GTier1Holder BH8 5000
+Interaction BH7 GTier1Holder GTier1Holder BH7 5000
+Interaction BH6 GTier1Holder GTier1Holder BH6 5000
+Interaction BH5 GTier1Holder GTier1Holder BH5 5000
+Interaction BH4 GTier1Holder GTier1Holder BH4 5000
+Interaction BH3 GTier1Holder GTier1Holder BH3 5000
+Interaction BH2 GTier1Holder GTier1Holder BH2 5000
+Interaction BH1 GTier1Holder GTier1Holder BH1 5000
+Interaction BlackHole GTier2Holder BlackHole BH1 5000
+Interaction BH9 GTier2Holder GTier2Holder BH9 5000
+Interaction BH8 GTier2Holder GTier2Holder BH8 5000
+Interaction BH7 GTier2Holder GTier2Holder BH7 5000
+Interaction BH6 GTier2Holder GTier2Holder BH6 5000
+Interaction BH5 GTier2Holder GTier2Holder BH5 5000
+Interaction BH4 GTier2Holder GTier2Holder BH4 5000
+Interaction BH3 GTier2Holder GTier2Holder BH3 5000
+Interaction BH2 GTier2Holder GTier2Holder BH2 5000
+Interaction BH1 GTier2Holder GTier2Holder BH1 5000
+Interaction BlackHole GTier3Holder BlackHole BH1 5000
+Interaction BH9 GTier3Holder GTier3Holder BH9 5000
+Interaction BH8 GTier3Holder GTier3Holder BH8 5000
+Interaction BH7 GTier3Holder GTier3Holder BH7 5000
+Interaction BH6 GTier3Holder GTier3Holder BH6 5000
+Interaction BH5 GTier3Holder GTier3Holder BH5 5000
+Interaction BH4 GTier3Holder GTier3Holder BH4 5000
+Interaction BH3 GTier3Holder GTier3Holder BH3 5000
+Interaction BH2 GTier3Holder GTier3Holder BH2 5000
+Interaction BH1 GTier3Holder GTier3Holder BH1 5000
+Interaction BlackHole BTier1Holder BlackHole BH1 5000
+Interaction BH9 BTier1Holder BTier1Holder BH9 5000
+Interaction BH8 BTier1Holder BTier1Holder BH8 5000
+Interaction BH7 BTier1Holder BTier1Holder BH7 5000
+Interaction BH6 BTier1Holder BTier1Holder BH6 5000
+Interaction BH5 BTier1Holder BTier1Holder BH5 5000
+Interaction BH4 BTier1Holder BTier1Holder BH4 5000
+Interaction BH3 BTier1Holder BTier1Holder BH3 5000
+Interaction BH2 BTier1Holder BTier1Holder BH2 5000
+Interaction BH1 BTier1Holder BTier1Holder BH1 5000
+Interaction BlackHole BTier2Holder BlackHole BH1 5000
+Interaction BH9 BTier2Holder BTier2Holder BH9 5000
+Interaction BH8 BTier2Holder BTier2Holder BH8 5000
+Interaction BH7 BTier2Holder BTier2Holder BH7 5000
+Interaction BH6 BTier2Holder BTier2Holder BH6 5000
+Interaction BH5 BTier2Holder BTier2Holder BH5 5000
+Interaction BH4 BTier2Holder BTier2Holder BH4 5000
+Interaction BH3 BTier2Holder BTier2Holder BH3 5000
+Interaction BH2 BTier2Holder BTier2Holder BH2 5000
+Interaction BH1 BTier2Holder BTier2Holder BH1 5000
+Interaction BlackHole BTier3Holder BlackHole BH1 5000
+Interaction BH9 BTier3Holder BTier3Holder BH9 5000
+Interaction BH8 BTier3Holder BTier3Holder BH8 5000
+Interaction BH7 BTier3Holder BTier3Holder BH7 5000
+Interaction BH6 BTier3Holder BTier3Holder BH6 5000
+Interaction BH5 BTier3Holder BTier3Holder BH5 5000
+Interaction BH4 BTier3Holder BTier3Holder BH4 5000
+Interaction BH3 BTier3Holder BTier3Holder BH3 5000
+Interaction BH2 BTier3Holder BTier3Holder BH2 5000
+Interaction BH1 BTier3Holder BTier3Holder BH1 5000
+Interaction BlackHole CTier1Holder BlackHole BH1 5000
+Interaction BH9 CTier1Holder CTier1Holder BH9 5000
+Interaction BH8 CTier1Holder CTier1Holder BH8 5000
+Interaction BH7 CTier1Holder CTier1Holder BH7 5000
+Interaction BH6 CTier1Holder CTier1Holder BH6 5000
+Interaction BH5 CTier1Holder CTier1Holder BH5 5000
+Interaction BH4 CTier1Holder CTier1Holder BH4 5000
+Interaction BH3 CTier1Holder CTier1Holder BH3 5000
+Interaction BH2 CTier1Holder CTier1Holder BH2 5000
+Interaction BH1 CTier1Holder CTier1Holder BH1 5000
+Interaction BlackHole CTier2Holder BlackHole BH1 5000
+Interaction BH9 CTier2Holder CTier2Holder BH9 5000
+Interaction BH8 CTier2Holder CTier2Holder BH8 5000
+Interaction BH7 CTier2Holder CTier2Holder BH7 5000
+Interaction BH6 CTier2Holder CTier2Holder BH6 5000
+Interaction BH5 CTier2Holder CTier2Holder BH5 5000
+Interaction BH4 CTier2Holder CTier2Holder BH4 5000
+Interaction BH3 CTier2Holder CTier2Holder BH3 5000
+Interaction BH2 CTier2Holder CTier2Holder BH2 5000
+Interaction BH1 CTier2Holder CTier2Holder BH1 5000
+Interaction BlackHole CTier3Holder BlackHole BH1 5000
+Interaction BH9 CTier3Holder CTier3Holder BH9 5000
+Interaction BH8 CTier3Holder CTier3Holder BH8 5000
+Interaction BH7 CTier3Holder CTier3Holder BH7 5000
+Interaction BH6 CTier3Holder CTier3Holder BH6 5000
+Interaction BH5 CTier3Holder CTier3Holder BH5 5000
+Interaction BH4 CTier3Holder CTier3Holder BH4 5000
+Interaction BH3 CTier3Holder CTier3Holder BH3 5000
+Interaction BH2 CTier3Holder CTier3Holder BH2 5000
+Interaction BH1 CTier3Holder CTier3Holder BH1 5000
+Interaction BlackHole JungleHolder BlackHole BH1 5000
+Interaction BH9 JungleHolder JungleHolder BH9 5000
+Interaction BH8 JungleHolder JungleHolder BH8 5000
+Interaction BH7 JungleHolder JungleHolder BH7 5000
+Interaction BH6 JungleHolder JungleHolder BH6 5000
+Interaction BH5 JungleHolder JungleHolder BH5 5000
+Interaction BH4 JungleHolder JungleHolder BH4 5000
+Interaction BH3 JungleHolder JungleHolder BH3 5000
+Interaction BH2 JungleHolder JungleHolder BH2 5000
+Interaction BH1 JungleHolder JungleHolder BH1 5000
+Interaction BlackHole NebulaHolder BlackHole BH1 5000
+Interaction BH9 NebulaHolder NebulaHolder BH9 5000
+Interaction BH8 NebulaHolder NebulaHolder BH8 5000
+Interaction BH7 NebulaHolder NebulaHolder BH7 5000
+Interaction BH6 NebulaHolder NebulaHolder BH6 5000
+Interaction BH5 NebulaHolder NebulaHolder BH5 5000
+Interaction BH4 NebulaHolder NebulaHolder BH4 5000
+Interaction BH3 NebulaHolder NebulaHolder BH3 5000
+Interaction BH2 NebulaHolder NebulaHolder BH2 5000
+Interaction BH1 NebulaHolder NebulaHolder BH1 5000
+Interaction BlackHole GBaseHolder BlackHole BH1 5000
+Interaction BH9 GBaseHolder GBaseHolder BH9 5000
+Interaction BH8 GBaseHolder GBaseHolder BH8 5000
+Interaction BH7 GBaseHolder GBaseHolder BH7 5000
+Interaction BH6 GBaseHolder GBaseHolder BH6 5000
+Interaction BH5 GBaseHolder GBaseHolder BH5 5000
+Interaction BH4 GBaseHolder GBaseHolder BH4 5000
+Interaction BH3 GBaseHolder GBaseHolder BH3 5000
+Interaction BH2 GBaseHolder GBaseHolder BH2 5000
+Interaction BH1 GBaseHolder GBaseHolder BH1 5000
+Interaction BlackHole BBaseHolder BlackHole BH1 5000
+Interaction BH9 BBaseHolder BBaseHolder BH9 5000
+Interaction BH8 BBaseHolder BBaseHolder BH8 5000
+Interaction BH7 BBaseHolder BBaseHolder BH7 5000
+Interaction BH6 BBaseHolder BBaseHolder BH6 5000
+Interaction BH5 BBaseHolder BBaseHolder BH5 5000
+Interaction BH4 BBaseHolder BBaseHolder BH4 5000
+Interaction BH3 BBaseHolder BBaseHolder BH3 5000
+Interaction BH2 BBaseHolder BBaseHolder BH2 5000
+Interaction BH1 BBaseHolder BBaseHolder BH1 5000
+Interaction BlackHole CBaseHolder BlackHole BH1 5000
+Interaction BH9 CBaseHolder CBaseHolder BH9 5000
+Interaction BH8 CBaseHolder CBaseHolder BH8 5000
+Interaction BH7 CBaseHolder CBaseHolder BH7 5000
+Interaction BH6 CBaseHolder CBaseHolder BH6 5000
+Interaction BH5 CBaseHolder CBaseHolder BH5 5000
+Interaction BH4 CBaseHolder CBaseHolder BH4 5000
+Interaction BH3 CBaseHolder CBaseHolder BH3 5000
+Interaction BH2 CBaseHolder CBaseHolder BH2 5000
+Interaction BH1 CBaseHolder CBaseHolder BH1 5000
+Interaction BlackHole GreenHolder BlackHole BH1 5000
+Interaction BH9 GreenHolder GreenHolder BH9 5000
+Interaction BH8 GreenHolder GreenHolder BH8 5000
+Interaction BH7 GreenHolder GreenHolder BH7 5000
+Interaction BH6 GreenHolder GreenHolder BH6 5000
+Interaction BH5 GreenHolder GreenHolder BH5 5000
+Interaction BH4 GreenHolder GreenHolder BH4 5000
+Interaction BH3 GreenHolder GreenHolder BH3 5000
+Interaction BH2 GreenHolder GreenHolder BH2 5000
+Interaction BH1 GreenHolder GreenHolder BH1 5000
+Interaction BlackHole BlackHolder BlackHole BH1 5000
+Interaction BH9 BlackHolder BlackHolder BH9 5000
+Interaction BH8 BlackHolder BlackHolder BH8 5000
+Interaction BH7 BlackHolder BlackHolder BH7 5000
+Interaction BH6 BlackHolder BlackHolder BH6 5000
+Interaction BH5 BlackHolder BlackHolder BH5 5000
+Interaction BH4 BlackHolder BlackHolder BH4 5000
+Interaction BH3 BlackHolder BlackHolder BH3 5000
+Interaction BH2 BlackHolder BlackHolder BH2 5000
+Interaction BH1 BlackHolder BlackHolder BH1 5000
+Interaction BlackHole CyanHolder BlackHole BH1 5000
+Interaction BH9 CyanHolder CyanHolder BH9 5000
+Interaction BH8 CyanHolder CyanHolder BH8 5000
+Interaction BH7 CyanHolder CyanHolder BH7 5000
+Interaction BH6 CyanHolder CyanHolder BH6 5000
+Interaction BH5 CyanHolder CyanHolder BH5 5000
+Interaction BH4 CyanHolder CyanHolder BH4 5000
+Interaction BH3 CyanHolder CyanHolder BH3 5000
+Interaction BH2 CyanHolder CyanHolder BH2 5000
+Interaction BH1 CyanHolder CyanHolder BH1 5000
+Interaction BlackHole LavaAssimilated BlackHole BH1 5000
+Interaction BH9 LavaAssimilated LavaAssimilated BH9 5000
+Interaction BH8 LavaAssimilated LavaAssimilated BH8 5000
+Interaction BH7 LavaAssimilated LavaAssimilated BH7 5000
+Interaction BH6 LavaAssimilated LavaAssimilated BH6 5000
+Interaction BH5 LavaAssimilated LavaAssimilated BH5 5000
+Interaction BH4 LavaAssimilated LavaAssimilated BH4 5000
+Interaction BH3 LavaAssimilated LavaAssimilated BH3 5000
+Interaction BH2 LavaAssimilated LavaAssimilated BH2 5000
+Interaction BH1 LavaAssimilated LavaAssimilated BH1 5000
+Interaction BlackHole StoneAssimilated BlackHole BH1 5000
+Interaction BH9 StoneAssimilated StoneAssimilated BH9 5000
+Interaction BH8 StoneAssimilated StoneAssimilated BH8 5000
+Interaction BH7 StoneAssimilated StoneAssimilated BH7 5000
+Interaction BH6 StoneAssimilated StoneAssimilated BH6 5000
+Interaction BH5 StoneAssimilated StoneAssimilated BH5 5000
+Interaction BH4 StoneAssimilated StoneAssimilated BH4 5000
+Interaction BH3 StoneAssimilated StoneAssimilated BH3 5000
+Interaction BH2 StoneAssimilated StoneAssimilated BH2 5000
+Interaction BH1 StoneAssimilated StoneAssimilated BH1 5000
+Interaction BlackHole MoonAssimilated BlackHole BH1 5000
+Interaction BH9 MoonAssimilated MoonAssimilated BH9 5000
+Interaction BH8 MoonAssimilated MoonAssimilated BH8 5000
+Interaction BH7 MoonAssimilated MoonAssimilated BH7 5000
+Interaction BH6 MoonAssimilated MoonAssimilated BH6 5000
+Interaction BH5 MoonAssimilated MoonAssimilated BH5 5000
+Interaction BH4 MoonAssimilated MoonAssimilated BH4 5000
+Interaction BH3 MoonAssimilated MoonAssimilated BH3 5000
+Interaction BH2 MoonAssimilated MoonAssimilated BH2 5000
+Interaction BH1 MoonAssimilated MoonAssimilated BH1 5000
+Interaction BlackHole Moon_2Assimilated BlackHole BH1 5000
+Interaction BH9 Moon_2Assimilated Moon_2Assimilated BH9 5000
+Interaction BH8 Moon_2Assimilated Moon_2Assimilated BH8 5000
+Interaction BH7 Moon_2Assimilated Moon_2Assimilated BH7 5000
+Interaction BH6 Moon_2Assimilated Moon_2Assimilated BH6 5000
+Interaction BH5 Moon_2Assimilated Moon_2Assimilated BH5 5000
+Interaction BH4 Moon_2Assimilated Moon_2Assimilated BH4 5000
+Interaction BH3 Moon_2Assimilated Moon_2Assimilated BH3 5000
+Interaction BH2 Moon_2Assimilated Moon_2Assimilated BH2 5000
+Interaction BH1 Moon_2Assimilated Moon_2Assimilated BH1 5000
+Interaction BlackHole SunAssimilated BlackHole BH1 5000
+Interaction BH9 SunAssimilated SunAssimilated BH9 5000
+Interaction BH8 SunAssimilated SunAssimilated BH8 5000
+Interaction BH7 SunAssimilated SunAssimilated BH7 5000
+Interaction BH6 SunAssimilated SunAssimilated BH6 5000
+Interaction BH5 SunAssimilated SunAssimilated BH5 5000
+Interaction BH4 SunAssimilated SunAssimilated BH4 5000
+Interaction BH3 SunAssimilated SunAssimilated BH3 5000
+Interaction BH2 SunAssimilated SunAssimilated BH2 5000
+Interaction BH1 SunAssimilated SunAssimilated BH1 5000
+Interaction BlackHole Sun_2Assimilated BlackHole BH1 5000
+Interaction BH9 Sun_2Assimilated Sun_2Assimilated BH9 5000
+Interaction BH8 Sun_2Assimilated Sun_2Assimilated BH8 5000
+Interaction BH7 Sun_2Assimilated Sun_2Assimilated BH7 5000
+Interaction BH6 Sun_2Assimilated Sun_2Assimilated BH6 5000
+Interaction BH5 Sun_2Assimilated Sun_2Assimilated BH5 5000
+Interaction BH4 Sun_2Assimilated Sun_2Assimilated BH4 5000
+Interaction BH3 Sun_2Assimilated Sun_2Assimilated BH3 5000
+Interaction BH2 Sun_2Assimilated Sun_2Assimilated BH2 5000
+Interaction BH1 Sun_2Assimilated Sun_2Assimilated BH1 5000
+
+// WhiteHole code
+
+Interaction WhiteHole BlackHole WhiteHole WhiteHole 29000
+
+// Random element generation
+
+Interaction WhiteHole All WhiteHole Earth 100 WhiteHole
+Interaction WhiteHole All WhiteHole Moon 100 WhiteHole
+Interaction WhiteHole All WhiteHole Stone 100 WhiteHole
+Interaction WhiteHole All WhiteHole Lava 100 WhiteHole
+Interaction WhiteHole All WhiteHole Moon_2 100 WhiteHole
+Interaction WhiteHole All WhiteHole Nebula 100 WhiteHole
+
+// It gets smaller and smaller!
+
+Interaction WhiteHole All Clear Clear 10 WhiteHole
+
+// Quarantine Field
+
+Interaction Quarantine All Quarantine Clear 100000 Quarantine
+
+// Robots
+
+Interaction Core Clear Core DisablePulse 10
+Interaction Core Space Core DisablePulse 10
+Interaction DisablePulse Core DisablePulse2 Core 3
+Interaction Core Clear Core DisableStop 100
+Interaction Core Space Core DisableStop 100
+Interaction DisableStop DisablePulse DisableStop DisablePulse2 1
+
+Interaction MotherShip2 Clear MotherShip RobotDrone 9
+Interaction MotherShip2 Space MotherShip RobotDrone 9
+Interaction MotherShip Clear MotherShip MotherShipShield 10
+Interaction MotherShip Space MotherShip MotherShipShield 10
+
+Interaction RobotDrone Clear Assimilation RobotDrone 3100
+Interaction RobotDrone Space Assimilation RobotDrone 3100
+
+// template: Interaction Assimilation [material] [materialAssimilated] [materialAssimilated] 1000
+//           Interaction [materialAssimilated] [material] [materialAssimilated] [material] 1
+Interaction Assimilation Lava Clear LavaAssimilated 1000
+Interaction Assimilation Stone Clear StoneAssimilated 1000
+Interaction Assimilation Earth Clear EarthAssimilated 1000
+Interaction Assimilation EarthBlack Clear EarthBlackAssimilated 1000
+Interaction Assimilation EarthGreen Clear EarthGreenAssimilated 1000
+Interaction Assimilation EarthCyan Clear EarthCyanAssimilated 1000
+Interaction Assimilation Moon Clear MoonAssimilated 1000
+Interaction Assimilation Moon_2 Clear Moon_2Assimilated 1000
+Interaction Assimilation Sun Clear SunAssimilated 1000
+Interaction Assimilation Sun_2 Clear Sun_2Assimilated 1000
+Interaction Assimilation MoonGreen Clear MoonGreenAssimilated 1000
+Interaction Assimilation MoonBlack Clear MoonBlackAssimilated 1000
+Interaction Assimilation MoonCyan Clear MoonCyanAssimilated 1000
+Interaction Assimilation GTier1 Clear GTier1Assimilated 1000
+Interaction Assimilation GTier2 Clear GTier2Assimilated 1000
+Interaction Assimilation GTier3 Clear GTier3Assimilated 1000
+Interaction Assimilation BTier1 Clear BTier1Assimilated 1000
+Interaction Assimilation BTier2 Clear BTier2Assimilated 1000
+Interaction Assimilation BTier3 Clear BTier3Assimilated 1000
+Interaction Assimilation CTier1 Clear CTier1Assimilated 1000
+Interaction Assimilation CTier2 Clear CTier2Assimilated 1000
+Interaction Assimilation CTier3 Clear CTier3Assimilated 1000
+Interaction Assimilation Jungle Clear JungleAssimilated 1000
+Interaction Assimilation Jungle2 Clear Jungle2Assimilated 1000
+Interaction Assimilation Nebula Clear NebulaAssimilated 1000
+
+Interaction LavaAssimilated Lava LavaAssimilated LavaAssimilated 1
+Interaction StoneAssimilated Stone StoneAssimilated StoneAssimilated 1
+Interaction EarthAssimilated Earth EarthAssimilated EarthAssimilated 1
+Interaction EarthBlackAssimilated EarthBlack EarthBlackAssimilated EarthBlackAssimilated 1
+Interaction EarthGreenAssimilated EarthGreen EarthGreenAssimilated EarthGreenAssimilated 1
+Interaction EarthCyanAssimilated EarthCyan EarthCyanAssimilated EarthCyanAssimilated 1
+Interaction MoonAssimilated Moon MoonAssimilated MoonAssimilated 1
+Interaction Moon_2Assimilated Moon_2 Moon_2Assimilated Moon_2Assimilated 1
+Interaction SunAssimilated Sun SunAssimilated SunAssimilated 1
+Interaction Sun_2Assimilated Sun_2 Sun_2Assimilated Sun_2Assimilated 1
+Interaction MoonGreenAssimilated MoonGreen MoonGreenAssimilated MoonGreenAssimilated 1
+Interaction MoonBlackAssimilated MoonBlack MoonBlackAssimilated MoonBlackAssimilated 1
+Interaction MoonCyanAssimilated MoonCyan MoonCyanAssimilated MoonCyanAssimilated 1
+Interaction GTier1Assimilated GTier1 GTier1Assimilated GTier1Assimilated 1
+Interaction GTier1Assimilated GTier2 GTier1Assimilated GTier2Assimilated 1
+Interaction GTier1Assimilated GTier3 GTier1Assimilated GTier3Assimilated 1
+Interaction CTier1Assimilated CTier1 CTier1Assimilated CTier1Assimilated 1
+Interaction CTier1Assimilated CTier2 CTier1Assimilated CTier2Assimilated 1
+Interaction CTier1Assimilated CTier3 CTier1Assimilated CTier3Assimilated 1
+Interaction BTier1Assimilated BTier1 BTier1Assimilated BTier1Assimilated 1
+Interaction BTier1Assimilated BTier2 BTier1Assimilated BTier2Assimilated 1
+Interaction BTier1Assimilated BTier3 BTier1Assimilated BTier3Assimilated 1
+Interaction GTier2Assimilated GTier1 GTier2Assimilated GTier1Assimilated 1
+Interaction GTier2Assimilated GTier2 GTier2Assimilated GTier2Assimilated 1
+Interaction GTier2Assimilated GTier3 GTier2Assimilated GTier3Assimilated 1
+Interaction CTier2Assimilated CTier2 CTier2Assimilated CTier1Assimilated 1
+Interaction CTier2Assimilated CTier2 CTier2Assimilated CTier2Assimilated 1
+Interaction CTier2Assimilated CTier3 CTier2Assimilated CTier3Assimilated 1
+Interaction BTier2Assimilated BTier2 BTier2Assimilated BTier1Assimilated 1
+Interaction BTier2Assimilated BTier2 BTier2Assimilated BTier2Assimilated 1
+Interaction BTier2Assimilated BTier3 BTier2Assimilated BTier3Assimilated 1
+Interaction GTier3Assimilated GTier1 GTier3Assimilated GTier1Assimilated 1
+Interaction GTier3Assimilated GTier2 GTier3Assimilated GTier2Assimilated 1
+Interaction GTier3Assimilated GTier3 GTier3Assimilated GTier3Assimilated 1
+Interaction CTier3Assimilated CTier3 CTier3Assimilated CTier3Assimilated 1
+Interaction CTier3Assimilated CTier1 CTier3Assimilated CTier1Assimilated 1
+Interaction CTier3Assimilated CTier2 CTier3Assimilated CTier2Assimilated 1
+Interaction BTier3Assimilated BTier3 BTier3Assimilated BTier3Assimilated 1
+Interaction BTier3Assimilated BTier1 BTier3Assimilated BTier1Assimilated 1
+Interaction BTier3Assimilated BTier2 BTier3Assimilated BTier2Assimilated 1
+Interaction JungleAssimilated Jungle JungleAssimilated JungleAssimilated 1
+Interaction Jungle2Assimilated Jungle2 Jungle2Assimilated Jungle2Assimilated 1
+Interaction NebulaAssimilated Nebula NebulaAssimilated NebulaAssimilated 1
+Interaction LavaAssimilated Jungle LavaAssimilated JungleAssimilated 1
+Interaction LavaAssimilated Jungle2 LavaAssimilated Jungle2Assimilated 1
+Interaction LavaAssimilated Stone LavaAssimilated StoneAssimilated 1
+Interaction StoneAssimilated Jungle StoneAssimilated JungleAssimilated 1
+Interaction StoneAssimilated Jungle2 StoneAssimilated Jungle2Assimilated 1
+Interaction GTier1Assimilated Green GTier1Assimilated GreenAssimilated 1
+Interaction BTier1Assimilated Black BTier1Assimilated BlackAssimilated 1
+Interaction CTier1Assimilated Cyan CTier1Assimilated CyanAssimilated 1
+Interaction GTier1Assimilated GBase GTier1Assimilated GBaseAssimilated 1
+Interaction BTier1Assimilated BBase BTier1Assimilated BBaseAssimilated 1
+Interaction CTier1Assimilated CBase CTier1Assimilated CBaseAssimilated 1
+Interaction GreenAssimilated GBase GreenAssimilated GBaseAssimilated 1
+Interaction BlackAssimilated BBase BlackAssimilated BBaseAssimilated 1
+Interaction CyanAssimilated CBase CyanAssimilated CBaseAssimilated 1
+Interaction GBaseAssimilated GBase GBaseAssimilated GBaseAssimilated 1
+Interaction BBaseAssimilated BBase BBaseAssimilated BBaseAssimilated 1
+Interaction CBaseAssimilated CBase CBaseAssimilated CBaseAssimilated 1
+Interaction GBaseAssimilated EarthGreen GBaseAssimilated EarthGreenAssimilated 1
+Interaction BBaseAssimilated EarthBlack BBaseAssimilated EarthBlackAssimilated 1
+Interaction CBaseAssimilated EarthCyan CBaseAssimilated EarthCyanAssimilated 1
+Interaction EarthGreenAssimilated GBase EarthGreenAssimilated GBase 1
+Interaction EarthBlackAssimilated BBase EarthBlackAssimilated BBase 1
+Interaction EarthCyanAssimilated CBase EarthCyanAssimilated CBase 1
+
+Interaction DisablePulse Clear DisablePulse DisablePulse 4000
+Interaction DisablePulse Space DisablePulse DisablePulse 4000
+Interaction DisablePulse Star DisablePulse DisablePulse 4000
+Interaction DisablePulse Eclipse DisablePulse DisablePulse 4000
+Interaction DisablePulse MotherShip DisablePulse DisablePulse 4000
+Interaction DisablePulse MotherShip2 DisablePulse DisablePulse 4000
+Interaction DisablePulse RobotDrone DisablePulse Dust 4000
+Interaction DisablePulse Assimilation DisablePulse DisablePulse 4000
+Interaction DisablePulse MotherShipShield DisablePulse DisablePulse 4000
+Interaction DisablePulse2 DisablePulse DisablePulse2 DisablePulse2 5000
+
+// Disable pulse travel through solids code, kill robots, etc.
+// Template : First the pulse transforms the material into the holder
+
+Interaction DisablePulse Lava DisablePulse LavaHolder 4000
+Interaction DisablePulse Stone DisablePulse LavaHolder 4000
+Interaction DisablePulse LavaAssimilated DisablePulse LavaHolder 4000
+Interaction DisablePulse StoneAssimilated DisablePulse LavaHolder 4000
+
+// Then the holder permeates the material
+Interaction LavaHolder Stone LavaHolder LavaHolder 1000
+Interaction LavaHolder Lava LavaHolder LavaHolder 1000
+// it is 4000 to 'kill robots' together
+Interaction LavaHolder LavaAssimilated LavaHolder LavaHolder 4000
+Interaction LavaHolder StoneAssimilated LavaHolder LavaHolder 4000
+
+// Self destructive, just, you know, to be cool.
+Interaction LavaHolder LavaHolder Lava Lava 1000
+
+// End template.  Conclusion: Organize what holder is used (look at elements list) then build
+// interactions around that.
+// Moon
+
+Interaction DisablePulse Moon DisablePulse MoonHolder 4000
+Interaction DisablePulse Moon_2 DisablePulse MoonHolder 4000
+Interaction DisablePulse MoonAssimilated DisablePulse MoonHolder 4000
+Interaction DisablePulse Moon_2Assimilated DisablePulse MoonHolder 4000
+Interaction MoonHolder Moon MoonHolder MoonHolder 1000
+Interaction MoonHolder Moon_2 MoonHolder MoonHolder 1000
+Interaction MoonHolder MoonAssimilated MoonHolder MoonHolder 4000
+Interaction MoonHolder Moon_2Assimilated MoonHolder MoonHolder 4000
+Interaction MoonHolder MoonHolder Moon Moon 1000
+
+Interaction DisablePulse MoonGreen DisablePulse MoonGreenHolder 4000
+Interaction DisablePulse MoonBlack DisablePulse MoonBlackHolder 4000
+Interaction DisablePulse MoonCyan DisablePulse MoonCyanHolder 4000
+Interaction DisablePulse MoonGreenAssimilated DisablePulse MoonGreenHolder 4000
+Interaction DisablePulse MoonBlackAssimilated DisablePulse MoonBlackHolder 4000
+Interaction DisablePulse MoonCyanAssimilated DisablePulse MoonCyanHolder 4000
+Interaction MoonGreenHolder MoonGreen MoonGreenHolder MoonGreenHolder 1000
+Interaction MoonBlackHolder MoonBlack MoonBlackHolder MoonBlackHolder 1000
+Interaction MoonCyanHolder MoonCyan MoonCyanHolder MoonCyanHolder 1000
+Interaction MoonGreenHolder MoonGreenAssimilated MoonGreenHolder MoonGreenHolder 4000
+Interaction MoonBlackHolder MoonBlackAssimilated MoonBlackHolder MoonBlackHolder 4000
+Interaction MoonCyanHolder MoonCyanAssimilated MoonCyanHolder MoonCyanHolder 4000
+Interaction MoonGreenHolder MoonGreenHolder MoonGreen MoonGreen 1000
+Interaction MoonBlackHolder MoonBlackHolder MoonBlack MoonBlack 1000
+Interaction MoonCyanHolder MoonCyanHolder MoonCyan MoonCyan 1000
+
+
+// Sun
+
+Interaction DisablePulse Sun DisablePulse SunHolder 4000
+Interaction DisablePulse Sun_2 DisablePulse SunHolder 4000
+Interaction DisablePulse SunAssimilated DisablePulse SunHolder 4000
+Interaction DisablePulse Sun_2Assimilated DisablePulse SunHolder 4000
+Interaction SunHolder Sun SunHolder SunHolder 1000
+Interaction SunHolder Sun_2 SunHolder SunHolder 1000
+Interaction SunHolder SunAssimilated SunHolder SunHolder 4000
+Interaction SunHolder Sun_2Assimilated SunHolder SunHolder 4000
+Interaction SunHolder SunHolder Sun Sun 1000
+
+// Nebula
+
+Interaction DisablePulse Nebula DisablePulse NebulaHolder 4000
+Interaction DisablePulse NebulaAssimilated DisablePulse NebulaHolder 4000
+Interaction NebulaHolder Nebula NebulaHolder NebulaHolder 1000
+Interaction NebulaHolder NebulaAssimilated NebulaHolder NebulaHolder 4000
+Interaction NebulaHolder NebulaHolder Nebula Nebula 1000
+
+// Jungle: As a sub-element (requires lava), a little different.
+Interaction LavaHolder Jungle LavaHolder JungleHolder 4000
+Interaction LavaHolder Jungle2 LavaHolder JungleHolder 4000
+Interaction LavaHolder JungleAssimilated LavaHolder JungleHolder 4000
+Interaction LavaHolder Jungle2Assimilated LavaHolder JungleHolder 4000
+Interaction JungleHolder Jungle JungleHolder JungleHolder 1000
+Interaction JungleHolder Jungle2 JungleHolder JungleHolder 1000
+Interaction JungleHolder JungleAssimilated JungleHolder JungleHolder 4000
+Interaction JungleHolder Jungle2Assimilated JungleHolder JungleHolder 4000
+Interaction JungleHolder JungleHolder Jungle Jungle 1000
+
+// Save this spot for colors;
+// Organize it as follows;  then bases, then colors, then earthcolors
+
+Interaction DisablePulse GTier1 DisablePulse GTier1Holder 4000
+Interaction DisablePulse GTier1Assimilated DisablePulse GTier1Holder 4000
+Interaction GTier1Holder GTier1 GTier1Holder GTier1Holder 1000
+Interaction GTier1Holder GTier1Assimilated GTier1Holder GTier1Holder 4000
+Interaction GTier1Holder GTier2Assimilated GTier1Holder GTier2Holder 4000
+Interaction GTier1Holder GTier3Assimilated GTier1Holder GTier3Holder 4000
+Interaction GTier1Holder GTier1Holder GTier1 GTier1 675
+Interaction GTier1Holder GTier2Holder GTier1 GTier2 675
+Interaction GTier1Holder GTier3Holder GTier1 GTier3 675
+Interaction GTier1Holder GTier2 GTier1Holder GTier2Holder 1000
+Interaction GTier1Holder GTier3 GTier1Holder GTier3Holder 1000
+Interaction DisablePulse BTier1 DisablePulse BTier1Holder 4000
+Interaction DisablePulse BTier1Assimilated DisablePulse BTier1Holder 4000
+Interaction BTier1Holder BTier1 BTier1Holder BTier1Holder 1000
+Interaction BTier1Holder BTier1Assimilated BTier1Holder BTier1Holder 4000
+Interaction BTier1Holder BTier2Assimilated BTier1Holder BTier2Holder 4000
+Interaction BTier1Holder BTier3Assimilated BTier1Holder BTier3Holder 4000
+Interaction BTier1Holder BTier1Holder BTier1 BTier1 675
+Interaction BTier1Holder BTier2Holder BTier1 BTier2 675
+Interaction BTier1Holder BTier3Holder BTier1 BTier3 675
+Interaction BTier1Holder BTier2 BTier1Holder BTier2Holder 1000
+Interaction BTier1Holder BTier3 BTier1Holder BTier3Holder 1000
+Interaction DisablePulse CTier1 DisablePulse CTier1Holder 4000
+Interaction DisablePulse CTier1Assimilated DisablePulse CTier1Holder 4000
+Interaction CTier1Holder CTier1 CTier1Holder CTier1Holder 1000
+Interaction CTier1Holder CTier1Assimilated CTier1Holder CTier1Holder 4000
+Interaction CTier1Holder CTier2Assimilated CTier1Holder CTier2Holder 4000
+Interaction CTier1Holder CTier3Assimilated CTier1Holder CTier3Holder 4000
+Interaction CTier1Holder CTier1Holder CTier1 CTier1 675
+Interaction CTier1Holder CTier2Holder CTier1 CTier2 675
+Interaction CTier1Holder CTier3Holder CTier1 CTier3 675
+Interaction CTier1Holder CTier2 CTier1Holder CTier2Holder 1000
+Interaction CTier1Holder CTier3 CTier1Holder CTier3Holder 1000
+Interaction DisablePulse GTier2 DisablePulse GTier2Holder 4000
+Interaction DisablePulse GTier2Assimilated DisablePulse GTier2Holder 4000
+Interaction GTier2Holder GTier2 GTier2Holder GTier2Holder 1000
+Interaction GTier2Holder GTier1Assimilated GTier2Holder GTier1Holder 4000
+Interaction GTier2Holder GTier2Assimilated GTier2Holder GTier2Holder 4000
+Interaction GTier2Holder GTier3Assimilated GTier2Holder GTier3Holder 4000
+Interaction GTier2Holder GTier1Holder GTier2 GTier1 675
+Interaction GTier2Holder GTier2Holder GTier2 GTier2 675
+Interaction GTier2Holder GTier3Holder GTier2 GTier3 675
+Interaction GTier2Holder GTier1 GTier2Holder GTier1Holder 1000
+Interaction GTier2Holder GTier3 GTier2Holder GTier3Holder 1000
+Interaction DisablePulse BTier2 DisablePulse BTier2Holder 4000
+Interaction DisablePulse BTier2Assimilated DisablePulse BTier2Holder 4000
+Interaction BTier2Holder BTier2 BTier2Holder BTier2Holder 1000
+Interaction BTier2Holder BTier1Assimilated BTier2Holder BTier1Holder 4000
+Interaction BTier2Holder BTier2Assimilated BTier2Holder BTier2Holder 4000
+Interaction BTier2Holder BTier3Assimilated BTier2Holder BTier3Holder 4000
+Interaction BTier2Holder BTier1Holder BTier2 BTier1 675
+Interaction BTier2Holder BTier2Holder BTier2 BTier2 675
+Interaction BTier2Holder BTier3Holder BTier2 BTier3 675
+Interaction BTier2Holder BTier1 BTier2Holder BTier1Holder 1000
+Interaction BTier2Holder BTier3 BTier2Holder BTier3Holder 1000
+Interaction DisablePulse CTier2 DisablePulse CTier2Holder 4000
+Interaction DisablePulse CTier2Assimilated DisablePulse CTier2Holder 4000
+Interaction CTier2Holder CTier2 CTier2Holder CTier2Holder 1000
+Interaction CTier2Holder CTier1Assimilated CTier2Holder CTier1Holder 4000
+Interaction CTier2Holder CTier2Assimilated CTier2Holder CTier2Holder 4000
+Interaction CTier2Holder CTier3Assimilated CTier2Holder CTier3Holder 4000
+Interaction CTier2Holder CTier1Holder CTier2 CTier1 675
+Interaction CTier2Holder CTier2Holder CTier2 CTier2 675
+Interaction CTier2Holder CTier3Holder CTier2 CTier3 675
+Interaction CTier2Holder CTier1 CTier2Holder CTier1Holder 1000
+Interaction CTier2Holder CTier3 CTier2Holder CTier3Holder 1000
+Interaction DisablePulse GTier3 DisablePulse GTier3Holder 4000
+Interaction DisablePulse GTier3Assimilated DisablePulse GTier3Holder 4000
+Interaction GTier3Holder GTier3 GTier3Holder GTier3Holder 1000
+Interaction GTier3Holder GTier1Assimilated GTier3Holder GTier1Holder 4000
+Interaction GTier3Holder GTier2Assimilated GTier3Holder GTier2Holder 4000
+Interaction GTier3Holder GTier3Assimilated GTier3Holder GTier3Holder 4000
+Interaction GTier3Holder GTier1Holder GTier3 GTier1 675
+Interaction GTier3Holder GTier2Holder GTier3 GTier2 675
+Interaction GTier3Holder GTier3Holder GTier3 GTier3 675
+Interaction GTier3Holder GTier1 GTier3Holder GTier1Holder 1000
+Interaction GTier3Holder GTier2 GTier3Holder GTier2Holder 1000
+Interaction DisablePulse BTier3 DisablePulse BTier3Holder 4000
+Interaction DisablePulse BTier3Assimilated DisablePulse BTier3Holder 4000
+Interaction BTier3Holder BTier3 BTier3Holder BTier3Holder 1000
+Interaction BTier3Holder BTier1Assimilated BTier3Holder BTier1Holder 4000
+Interaction BTier3Holder BTier2Assimilated BTier3Holder BTier2Holder 4000
+Interaction BTier3Holder BTier3Assimilated BTier3Holder BTier3Holder 4000
+Interaction BTier3Holder BTier1Holder BTier3 BTier1 675
+Interaction BTier3Holder BTier2Holder BTier3 BTier2 675
+Interaction BTier3Holder BTier3Holder BTier3 BTier3 675
+Interaction BTier3Holder BTier1 BTier3Holder BTier1Holder 1000
+Interaction BTier3Holder BTier2 BTier3Holder BTier2Holder 1000
+Interaction DisablePulse CTier3 DisablePulse CTier3Holder 4000
+Interaction DisablePulse CTier3Assimilated DisablePulse CTier3Holder 4000
+Interaction CTier3Holder CTier3 CTier3Holder CTier3Holder 1000
+Interaction CTier3Holder CTier1Assimilated CTier3Holder CTier1Holder 4000
+Interaction CTier3Holder CTier2Assimilated CTier3Holder CTier2Holder 4000
+Interaction CTier3Holder CTier3Assimilated CTier3Holder CTier3Holder 4000
+Interaction CTier3Holder CTier1Holder CTier3 CTier1 675
+Interaction CTier3Holder CTier2Holder CTier3 CTier2 675
+Interaction CTier3Holder CTier3Holder CTier3 CTier3 675
+Interaction CTier3Holder CTier1 CTier3Holder CTier1Holder 1000
+Interaction CTier3Holder CTier2 CTier3Holder CTier2Holder 1000
+
+// Interaction [color]Tier1Holder [color]Assimilated [color]Tier1Holder [color]Holder 7600
+// Interaction [color]Tier1Holder [color] [color]Tier1Holder [color]Holder 1000
+
+Interaction DisablePulse GBase DisablePulse GBaseHolder 1000
+Interaction GTier1Holder GreenAssimilated GTier1Holder GreenHolder 1000
+Interaction GTier1Holder Green GTier1Holder GreenHolder 1000
+Interaction GreenHolder GBaseAssimilated GreenHolder GBaseHolder 1000
+Interaction GreenHolder GBase GreenHolder GBaseHolder 1000
+Interaction GreenHolder Green GreenHolder GreenHolder 1000
+Interaction GreenHolder GreenAssimilated GreenHolder GreenHolder 1000
+Interaction GBaseHolder EarthGreenAssimilated GBaseHolder EarthGreenHolder 1000
+Interaction GBaseHolder EarthGreen GBaseHolder EarthGreenHolder 1000
+Interaction GBaseHolder GBase GBaseHolder GBaseHolder 2000
+Interaction GBaseHolder GBaseAssimilated GBaseHolder GBaseHolder 2000
+Interaction GBaseHolder GBaseHolder GBase GBase 4000
+Interaction EarthGreenHolder EarthGreen EarthGreenHolder EarthGreenHolder 1000
+Interaction EarthGreenHolder EarthGreenHolder EarthGreen EarthGreen 4000
+Interaction GTier1Holder GBase GTier1Holder GBaseHolder 2000
+Interaction GTier1Holder GBaseAssimilated GTier1Holder GBaseHolder 2000
+Interaction GTier2Holder GBase GTier2Holder GBaseHolder 2000
+Interaction GTier2Holder GBaseAssimilated GTier2Holder GBaseHolder 2000
+Interaction GTier3Holder GBase GTier3Holder GBaseHolder 2000
+Interaction GTier3Holder GBaseAssimilated GTier3Holder GBaseHolder 2000
+Interaction GTier1Holder EarthGreen GTier1Holder EarthGreenHolder 1000
+Interaction GTier1Holder EarthGreenAssimilated GTier1Holder EarthGreenHolder 1000
+Interaction GTier2Holder EarthGreen GTier2Holder EarthGreenHolder 1000
+Interaction GTier2Holder EarthGreenAssimilated GTier2Holder EarthGreenHolder 1000
+Interaction GTier3Holder EarthGreen GTier3Holder EarthGreenHolder 1000
+Interaction GTier3Holder EarthGreenAssimilated GTier3Holder EarthGreenHolder 1000
+Interaction EarthGreenHolder GBase EarthGreenHolder GBaseHolder 1000
+Interaction EarthGreenHolder GBaseAssimilated EarthGreenHolder GBaseHolder 1000
+Interaction EarthGreenHolder Green EarthGreenHolder GreenHolder 1000
+Interaction EarthGreenHolder GreenAssimilated EarthGreenHolder GreenHolder 1000
+
+Interaction DisablePulse BBase DisablePulse BBaseHolder 1000
+Interaction BTier1Holder BlackAssimilated BTier1Holder BlackHolder 1000
+Interaction BTier1Holder Black BTier1Holder BlackHolder 1000
+Interaction BlackHolder BBaseAssimilated BlackHolder BBaseHolder 1000
+Interaction BlackHolder BBase BlackHolder BBaseHolder 1000
+Interaction BlackHolder Black BlackHolder BlackHolder 1000
+Interaction BlackHolder BlackAssimilated BlackHolder BlackHolder 1000
+Interaction BBaseHolder EarthBlackAssimilated BBaseHolder EarthBlackHolder 1000
+Interaction BBaseHolder EarthBlack BBaseHolder EarthBlackHolder 1000
+Interaction BBaseHolder BBase BBaseHolder BBaseHolder 2000
+Interaction BBaseHolder BBaseAssimilated BBaseHolder BBaseHolder 2000
+Interaction BBaseHolder BBaseHolder BBase BBase 4000
+Interaction EarthBlackHolder EarthBlack EarthBlackHolder EarthBlackHolder 1000
+Interaction EarthBlackHolder EarthBlackHolder EarthBlack EarthBlack 4000
+Interaction BTier1Holder BBase BTier1Holder BBaseHolder 2000
+Interaction BTier1Holder BBaseAssimilated BTier1Holder BBaseHolder 2000
+Interaction BTier2Holder BBase BTier2Holder BBaseHolder 2000
+Interaction BTier2Holder BBaseAssimilated BTier2Holder BBaseHolder 2000
+Interaction BTier3Holder BBase BTier3Holder BBaseHolder 2000
+Interaction BTier3Holder BBaseAssimilated BTier3Holder BBaseHolder 2000
+Interaction BTier1Holder EarthBlack BTier1Holder EarthBlackHolder 1000
+Interaction BTier1Holder EarthBlackAssimilated BTier1Holder EarthBlackHolder 1000
+Interaction BTier2Holder EarthBlack BTier2Holder EarthBlackHolder 1000
+Interaction BTier2Holder EarthBlackAssimilated BTier2Holder EarthBlackHolder 1000
+Interaction BTier3Holder EarthBlack BTier3Holder EarthBlackHolder 1000
+Interaction BTier3Holder EarthBlackAssimilated BTier3Holder EarthBlackHolder 1000
+Interaction EarthBlackHolder BBase EarthBlackHolder BBaseHolder 1000
+Interaction EarthBlackHolder BBaseAssimilated EarthBlackHolder BBaseHolder 1000
+Interaction EarthBlackHolder Black EarthBlackHolder BlackHolder 1000
+Interaction EarthBlackHolder BlackAssimilated EarthBlackHolder BlackHolder 1000
+
+Interaction DisablePulse CBase DisablePulse CBaseHolder 1000
+Interaction CTier1Holder CyanAssimilated CTier1Holder CyanHolder 1000
+Interaction CTier1Holder Cyan CTier1Holder CyanHolder 1000
+Interaction CyanHolder CBaseAssimilated CyanHolder CBaseHolder 1000
+Interaction CyanHolder CBase CyanHolder CBaseHolder 1000
+Interaction CyanHolder Cyan CyanHolder CyanHolder 1000
+Interaction CyanHolder CyanAssimilated CyanHolder CyanHolder 1000
+Interaction CBaseHolder EarthCyanAssimilated CBaseHolder EarthCyanHolder 1000
+Interaction CBaseHolder EarthCyan CBaseHolder EarthCyanHolder 1000
+Interaction CBaseHolder CBase CBaseHolder CBaseHolder 2000
+Interaction CBaseHolder CBaseAssimilated CBaseHolder CBaseHolder 2000
+Interaction CBaseHolder CBaseHolder CBase CBase 4000
+Interaction EarthCyanHolder EarthCyan EarthCyanHolder EarthCyanHolder 1000
+Interaction EarthCyanHolder EarthCyanHolder EarthCyan EarthCyan 4000
+Interaction CTier1Holder CBase CTier1Holder CBaseHolder 2000
+Interaction CTier1Holder CBaseAssimilated CTier1Holder CBaseHolder 2000
+Interaction CTier2Holder CBase CTier2Holder CBaseHolder 2000
+Interaction CTier2Holder CBaseAssimilated CTier2Holder CBaseHolder 2000
+Interaction CTier3Holder CBase CTier3Holder CBaseHolder 2000
+Interaction CTier3Holder CBaseAssimilated CTier3Holder CBaseHolder 2000
+Interaction CTier1Holder EarthCyan CTier1Holder EarthCyanHolder 1000
+Interaction CTier1Holder EarthCyanAssimilated CTier1Holder EarthCyanHolder 1000
+Interaction CTier2Holder EarthCyan CTier2Holder EarthCyanHolder 1000
+Interaction CTier2Holder EarthCyanAssimilated CTier2Holder EarthCyanHolder 1000
+Interaction CTier3Holder EarthCyan CTier3Holder EarthCyanHolder 1000
+Interaction CTier3Holder EarthCyanAssimilated CTier3Holder EarthCyanHolder 1000
+Interaction EarthCyanHolder CBase EarthCyanHolder CBaseHolder 1000
+Interaction EarthCyanHolder CBaseAssimilated EarthCyanHolder CBaseHolder 1000
+Interaction EarthCyanHolder Cyan EarthCyanHolder CyanHolder 1000
+Interaction EarthCyanHolder CyanAssimilated EarthCyanHolder CyanHolder 1000
+
+// The newer Spy system utilizes a ??? wave to take over an area
+
+Interaction GSpyWave All GSpyLimit All 1000
+Interaction GSpyLimit GSpyWave GSpyWave2 GSpyLimit 12000
+Interaction GSpyWave BTier1 GSpyWave GSpyWave 6000
+Interaction GSpyWave BTier2 GSpyWave GSpyWave 6000
+Interaction GSpyWave BTier3 GSpyWave GSpyWave 6000
+Interaction GSpyWave CTier1 GSpyWave GSpyWave 6000
+Interaction GSpyWave CTier2 GSpyWave GSpyWave 6000
+Interaction GSpyWave CTier3 GSpyWave GSpyWave 6000
+
+Interaction BSpyWave All BSpyLimit All 1000
+Interaction BSpyLimit BSpyWave BSpyWave2 BSpyLimit 12000
+Interaction BSpyWave GTier1 BSpyWave BSpyWave 6000
+Interaction BSpyWave GTier2 BSpyWave BSpyWave 6000
+Interaction BSpyWave GTier3 BSpyWave BSpyWave 6000
+Interaction BSpyWave CTier1 BSpyWave BSpyWave 6000
+Interaction BSpyWave CTier2 BSpyWave BSpyWave 6000
+Interaction BSpyWave CTier3 BSpyWave BSpyWave 6000
+
+Interaction CSpyWave All CSpyLimit All 1000
+Interaction CSpyLimit CSpyWave CSpyWave2 CSpyLimit 12000
+Interaction CSpyWave GTier1 CSpyWave CSpyWave 6000
+Interaction CSpyWave GTier2 CSpyWave CSpyWave 6000
+Interaction CSpyWave GTier3 CSpyWave CSpyWave 6000
+Interaction CSpyWave CTier1 CSpyWave CSpyWave 6000
+Interaction CSpyWave CTier2 CSpyWave CSpyWave 6000
+Interaction CSpyWave CTier3 CSpyWave CSpyWave 6000

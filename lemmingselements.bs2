@@ -1,0 +1,31 @@
+Element None Earth 200 127 0 0 1 1 1 0 Clear 200 File earth.BMP
+Element None Earth2 200 187 0 0 1 1 1 0 Clear 200 File earth.BMP
+Element None Grass 0 127 0 0 1 1 1 0 Clear 200 File earth.BMP
+Element None Wall 80 0 0 0 1 1 1 0 Clear 200 File wall.BMP
+
+Element None Lemmings 0 0 255 700 100 20 1 0 Clear 0 File water.BMP
+
+Element None Exit 255 0 0 0 100 20 1 0 Clear 0 File water.BMP
+InteractionTrigger Exit Lemmings lemmingsininc 100000
+
+Element None Explosion 255 0 0 700 100 20 1 0 Clear 0 File water.BMP
+InteractionTrigger Explosion All lemmingsexplosion 100000
+Element None Explosion2 255 0 0 0 100 20 1 0 Clear 0 File water.BMP
+
+Element None Stop 255 0 0 0 100 20 1 0 Clear 0 File water.BMP
+InteractionTrigger Stop All lemmingsstop 100000
+
+Element None Shovel 255 0 0 2000 10000 1000 1 0 Clear 0 File water.BMP
+InteractionTrigger Shovel Earth lemmingsshovel 100000
+InteractionTrigger Shovel Earth2 lemmingsshovel 100000
+InteractionTrigger Shovel Grass lemmingsshovel 100000
+
+Element None ShovelLeft 255 0 0 2000 100 20 1 0 Clear 0 File water.BMP
+InteractionTrigger ShovelLeft Earth lemmingsshovelleft 100000
+InteractionTrigger ShovelLeft Earth2 lemmingsshovelleft 100000
+InteractionTrigger ShovelLeft Grass lemmingsshovelleft 100000
+
+Element None ShovelRight 255 0 0 2000 100 20 1 0 Clear 0 File water.BMP
+InteractionTrigger ShovelRight Earth lemmingsshovelright 100000
+InteractionTrigger ShovelRight Earth2 lemmingsshovelright 100000
+InteractionTrigger ShovelRight Grass lemmingsshovelright 100000

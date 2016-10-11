@@ -1,0 +1,321 @@
+Alpha1 -> Alpha1a:
+- Changed compiler flags, because it didn't run probably on AMD CPUs
+
+Alpha1a -> Alpha1b:
+- RANDOMFILLEDRECT is now RANDOMFILLEDCIRCLE
+- faster Gunpowderexplosions
+- DRAW function doesn't need dummy parameters any more
+
+Alpha1b -> Alpha1c:
+- fixed webicons
+- CRTL+v now includes Clipboard in Sandbox
+- fixed a memory bug
+- fixed a bug in the sizeselector
+
+Alpha1c -> Alpha1d:
+- increased BS1 compatibility
+
+Alpha1d: -> Alpha2:
+- fixed some memory bugs
+- added INCLUDE FILEDIALOG
+- added LOAD SAND FILEDIALOG
+- added SAVE SAND FILEDIALOG
+- fixed crash on wrong start.png
+- "Include" is the same as "INCLUDE" (BS1 compatibility)
+- enhanced WRITE
+- added YEAR, MONTH, DAY, WEEKDAY, HOUR, MINUTE, SECOND, UNIXTIME
+- fixed the textspacing problem
+- last 2 chars of a file were not parsed
+- added online mods
+- added SWAPPOINTS
+- fixed expressions
+- console is logged to console.txt
+- many small bugs fixed
+
+Alpha2 -> Alpha2a:
+- fixed the mousebutton bug
+- fixed paste bs1 mod
+- improved importing of bs1 mods
+- speedup explosions
+- always exit on ESC
+- Include config.cfg works now
+
+Alpha2a -> Alpha2b:
+- doesn't crash if you remove the currently executed trigger.
+- doesn't crash if you click save
+- rewrote the GET function
+- increased max. recrusion depth to 1024
+
+Alpha2b -> Alpha2c:
+- fixed problems on high elementweight
+- fixed SWAPPOINT at the edge of the sanbox
+- corrected rotation at edge
+- new elevator
+
+Alpha2c: -> Alpha3:
+- completly rewrote the KEY code
+- added KEYCODE
+- added SHOWKEYCODE
+- added KEYREPEAT_*
+- added KEYREPEATDELAY and KEYREPEATRATE
+- added Message
+- added MESSAGE CLEAR
+- added MESSAGE ADDTEXT
+- added MESSAGE ADDELENEMT
+- added MESSAGE ADDGROUP
+- added MESSAGE ADDNUMBER
+- added MESSAGE SEND
+- added MESSAGE SENDTEXT
+- added MESSAGE SAVE
+- added MESSAGE EXEC
+- added MESSAGEID
+- added FILE OPEN
+- added FILE CLOSE
+- added FILE CLEAR
+- added SAVE VAR
+- added ALLOWALLIPS
+- added ELEMENTDEATHRATE
+- ??? doesn't destroy nature any more
+- border can be enabled in high gravity mode
+- fixed crash on REMOVETRIGGER
+- fixed several small bugs
+
+Alpha3 -> Alpha4:
+- added FOR
+- added GETFILE
+- added INTERACTIONTRIGGERAT
+- added INTERACTIONAT
+- added INTERACTIONREMOVE
+- fixed LIST INTERACTIONS
+- added TIMER REMOVE X
+- added TIMER REMOVEALL X
+- added FILLEDELLIPSE
+- added ELLIPSE
+- added REPLACEFILLEDELLIPSE
+- added RANDOMFILLEDELLIPSE
+- rewrote explosions
+- enhanced RESTART
+- fixed several small bugs
+- fixed memory leak
+- speed improvements
+- added ELSE
+- added PHYSICS
+- added drawing lines (hold CTRL)
+- added drawing lines (hold ALT)
+
+Alpha4 -> Alpha5:
+
+- added THIS
+- added TRIGGER
+- added { }
+- fixed crash on menu bug
+- fixed gunpowder image
+- rewrote great parts of the config
+
+Alpha5 -> Alpha5a:
+
+- fixed crash on wrong start.png
+- several other bugs fixed
+- bmp savegames
+
+Alpha5a -> Alpha5b:
+
+- loading bmp now works with every bpp
+- loading bmp is now based on nearest color to work with every image.
+- added .bs2 savegames
+- added DRAW POINTS
+
+Alpha5b -> Alpha5c:
+
+- enhanced DRAW POINTS
+- removed "All *.*" in open and save dialog
+- bug fixes (as always)
+
+Alpha5c -> Alpha6:
+
+- added EXTENDS
+- fixed crash on network disconnect
+- console button
+- include of html
+- INCLUDE downloads on demand
+- added DEBUGPARSER
+- added DEBUGPARAMETER
+- added DEBUGTRIGGER
+- added DEBUGACTION
+- added DEBUGVAR
+- added DEBUGFRAME
+- added SYSTEM
+- scrollable menus
+- added MESSAGE ADDLINE
+- added MESSAGE SYSTEM
+- INCLUDE FILEDIALOG can now be used for online mods
+- added BORDERR, BORDERG, BORDERB
+- added BACKGROUNDR, BACKGROUNDG, BACKGROUNDB
+- added LIST TRIGGERS
+- added LIST ACTIONS
+- added LIST TIMERS
+- added button for console
+- added button for opening console.txt
+- added two layers
+- added LOAD BGLAYER
+- added LOAD FGLAYER
+- added FGLAYERTRANSPARENT
+- added FGLAYERTRANSPARENTR, FGLAYERTRANSPARENTG, FGLAYERTRANSPARENTB
+- added FGLAYERALPHA
+- added Layermenu
+- added arrays
+- URLs can directly be pasted
+- fixed many bugs
+- added PREPHYSICS, POSTPHYSICS
+- added PRETIMER, POSTTIMER
+- added POSTUPDATESCREEN, POSTUPDATESCREEN
+- added Physicdirection menu
+- added SEED
+- values can be assigned in percent
+- name of element can now be MESSAGE
+- name of group can now be MESSAGE
+- name of trigger can now be MESSAGE
+- filename can now be MESSAGE
+
+Alpha6 -> Alpha7:
+- added CLOSEST
+- added COUNT
+- added FOR EACH
+- added INC
+- added LOAD FONT
+- added LOAD MENUFONT
+- added LOAD FILE FILEDIALOG
+- fixed html import
+- fixed resize
+- new wget version
+- cleaned up -dlls
+
+Alpha7 -> Alpha7a:
+- fixed clickable buttonarea
+- added online wiki modlists
+- fixed import of wikis
+- warning will only be displayed once
+- fixed crash on pasting SUBMENU
+- removed tutorials
+
+Alpha7a -> Alpha7b:
+- XML config format for elements
+- online wiki modlist moved to siebn.de
+
+Alpha7b -> Alpha7c:
+- middle click on consolebutton opens telnet
+- Message behaves extactly like in BS1 now
+- added INTERACTION GROUP:groupname ...
+
+Alpha7c -> Alpha8:
+- increased keyrepeatrate
+- added MIN
+- added MAX
+- added default values to ELEMENT
+- added basicelements
+- added edit elements to config menu
+- added online addon mods menu (rightclick home)
+- added online savegames menu (rightclick load)
+- added Fullscreen default
+- added support for .zip files
+- added SIZE to OBJECT
+- added flipv, fliph, pointreflection, rotate180
+
+Alpha8 -> Alpha8a:
+- slightly modified interaction rate
+- improved INTERACTION
+- added =
+- added NOBIAS
+- improved COUNT
+
+Alpha8a -> Alpha8b:
+- fixed problem with NOBIAS at bottomborders
+- added IF {...} ELSE {...}
+- improved position of in submenus created submenus
+- improved html import
+- added LCTRL, LSHIFT, LALT
+- added RCTRL, RSHIFT, RALT
+- added CAPSLOCK, NUMLOCK
+- enabled preview for drawing lines and rects
+
+Alpha8b -> Alpha8c:
+- fixed bug in NOBIAS
+- added BSVERSION
+- checks for new BS2 version on click on MODs
+- fixed includepath of images
+- fixed many bugs
+- saltwater is now selectable
+- an element can be in one group only once
+- alt+^ opens telnet
+- spray error will only be shown once
+
+Alpha8c -> Alpha8d:
+- added bs2mod:// protocol
+
+Alpha8d -> Alpha8e:
+- fixed the bs2mod:// protocol
+
+Alpha8e -> Alpha9:
+- fixed SYSTEM
+- added ^ (power)
+- added object shrinking
+- replaced NUMLOCK by RCTRL for drawing lines
+- added replace solids and nonsolids
+- added HOLDKEY
+- fixed bs2mod:// protocol
+- added bs2addon:// protocol
+- fixed some hundred memoryleaks
+- added CONNECT
+- added REMOTE SET
+- added REMOTE EXEC
+
+Alpha9 -> Alpha9a:
+- fixed freeze on object shrinking
+- fixed importing of bad formated urls
+- really replaced NUMLOCK
+
+Alpha9a -> Alpha9b:
+- fixed bug in preview of stamps
+- triggers can be used as functions and have a return value
+
+Alpha9b -> Alpha10:
+- added AUTOEXEC
+- fixed interactions that transform into "ALL ALL"
+- fixed crash in ADDELEMENT
+- added DRAG&DROP of files from explorer
+- added myconfig.bs2
+- added FOR ... STEP
+- many bugs fixed
+- many small changes
+- many speed improvements
+- added WRITE ... CENTER ...
+
+Alpha10 -> Alpha10a:
+- fixed text crash bug
+- fixed double execution on MOUSEDOWN
+- fixed COUNT on non square sandbox
+- fixed RETURN bug
+- fixed INTERACTION with 4 groups
+
+Alpha10a -> Alpha10b:
+- fixed BRUSHSIZE <= 1 bug
+- added MENUFONTCOLORR, MENUFONTCOLORG, MENUFONTCOLORB
+- fixed menubackground bug
+- added MESSAGE for MENU ADD
+- fixed groupordering
+- fixed arrays
+
+Alpha10b -> Alpha11:
+- fixes double keys
+- added MESSAGE ADDELEMENTTEXT
+- added WRITE ... MESSAGE
+- added LIST TRIGGEREXECS
+- added MULTILINE MENUS
+- added SUBMENU X Y
+- improved performance of creating many elements
+- added STRINGS
+- added TAN, SIN-1, COS-1, TAN-1
+- added trigger SECOND
+- added LASTACTIONMSEC, LASTACTIONFRAME
+- added screensaver
+- pasting code now always works

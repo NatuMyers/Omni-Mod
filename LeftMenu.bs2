@@ -1,0 +1,129 @@
+EXEC clearall
+EXEC clearscreen
+
+// Crutial stuff
+INCLUDE keys.bs2
+INCLUDE sandbox.bs2
+
+LOAD BGLAYER <>
+
+BORDERR = 0
+BORDERG = 0
+BORDERB = 0
+
+SET CURSOR 2
+SET MENUTOP 0
+SET MENUBOTTOM 0
+SET MENULEFT 0
+SET MENURIGHT 0
+SET STATUS 0
+
+
+// Window stuff
+SET BORDER 0
+
+
+REMOVETRIGGER WINDOWRESIZED
+ON WINDOWRESIZED SET newwidth WIDTH
+ON WINDOWRESIZED IF (autowidth) <SET newwidth (WINDOWWIDTH / autowidth)>
+ON WINDOWRESIZED SET newheight HEIGHT
+ON WINDOWRESIZED IF (autoheight) <SET newheight (WINDOWHEIGHT / autoheight)>
+ON WINDOWRESIZED IF ( autowidth || autoheight ) <RESIZE newwidth newheight>
+ON WINDOWRESIZED EXEC OmniMenu
+
+RESIZE 1280 1024
+
+SET wheelfunction 0
+
+
+TRIGGER OmniMenu {
+	SUBMENU CLEAR
+
+MENU SUB CLEAR
+	MENU SUB ADD TEXT "" NEWLINE 8 <>
+	MENU SUB ADD TEXT "" File OmniTitle2.bmp { 
+EXEC clearall
+SUBMENU CLOSE 
+REMOVETRIGGER OmniMenu
+REMOVETRIGGER OmniMenuLeft
+REMOVETRIGGER OmniMenuRight
+BORDERR = 155
+BORDERG = 155
+BORDERB = 155
+LOAD BGLAYER OmniBG2.bmp
+INCLUDE OiiiSource.bs2
+}
+
+	MENU SUB ADD TEXT "" NEWLINE 200 <>
+	MENU SUB ADD TEXT "" TEXT "  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" <>
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::Q1. 'What's the point of this mod'?!" <>
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::A1. There's no point. That's the point. Interact with things. Watch wars. Explode things." SETTHING 1
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::Q2.'I don't see any kind of war. Should I quit?'" SETTHING 2
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::A2. Wait! Wait for them to develop. It takes 1-3 mins. They then will have an epic fight." <>
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::Q3. 'I have no idea what's going on. I just see fancy effects. Neat colors though.'" SETTHING 3
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::A3. To see what's going on, click the arrow at the top. To get a printout, ''Xtra > Source Codes > Console.txt.''" SETTHING 4
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" TEXT "  :::::::::These questions are pretty much what newbs might be thinking." <>
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" File MenuCell.bmp <>
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" File MenuCell3b.bmp  { 
+EXEC clearall
+SUBMENU CLOSE 
+REMOVETRIGGER OmniMenu
+REMOVETRIGGER OmniMenuLeft
+REMOVETRIGGER OmniMenuRight
+BORDERR = 155
+BORDERG = 155
+BORDERB = 155
+LOAD BGLAYER <>
+INCLUDE start.bs2
+}
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" File MenuCell3.bmp { 
+EXEC clearall
+SUBMENU CLOSE 
+REMOVETRIGGER OmniMenu
+REMOVETRIGGER OmniMenuLeft
+REMOVETRIGGER OmniMenuRight
+BORDERR = 155
+BORDERG = 155
+BORDERB = 155
+LOAD BGLAYER <>
+INCLUDE RightMenu.bs2
+}
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" File MenuCell1.bmp { 
+EXEC clearall
+SUBMENU CLOSE 
+REMOVETRIGGER OmniMenu
+REMOVETRIGGER OmniMenuLeft
+REMOVETRIGGER OmniMenuRight
+BORDERR = 155
+BORDERG = 155
+BORDERB = 155
+LOAD BGLAYER OmniBG2.bmp
+INCLUDE OiiiSource.bs2
+}
+	MENU SUB ADD TEXT "" NEWLINE 20 <>
+	MENU SUB ADD TEXT "" File MenuCell4.bmp <EXEC Creds>
+	MENU SUB ADD TEXT "" NEWLINE 800 <>
+	SUBMENU HORIZONTAL ((WIDTH / 2) - (WINDOWWIDTH / 2)) ((HEIGHT / 2) - (WINDOWHEIGHT / 2)) STAY
+
+TIMER 150 FRAMES OmniMenu
+}
+
+
+
+
+
+// 1=game,2=faqs,3b=intro
+
+
+EXEC OmniMenu

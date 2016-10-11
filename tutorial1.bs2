@@ -1,0 +1,38 @@
+EXEC clearall
+INCLUDE elements.bs2
+MENU TOP ADD TEXT "Main menu" FILE home.bmp <INCLUDE start.bs2>
+MENU TOP ADD TEXT "" SEPERATOR 0 <>
+MENU TOP ADD TEXT "Restart Level" FILE restart.bmp <INCLUDE tutorial1.bs2>
+
+EXEC listgroups
+
+InteractionTrigger Saltwater All tutorial1done 1000
+
+SET ELEMENT1 0
+SET ELEMENT2 0
+SET ELEMENT4 0
+SET BRUSHSIZE 20
+EXEC usefilledcircle
+SET ZOOM 1
+SET BORDER 0
+SET tutorialdone 0
+
+ON DRAW IF ((ELEMENT1 == ELEMENT:Oil) && (tutorialdone == 0)) tutorialdone
+
+SET writex 10
+SET writey 50
+WRITE ELEMENT:Earth writex writey 25 TEXT "Welcome to Tutorial 1."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Here you are going to learn how to draw."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "First select the liquids group (fourth icon on the left side)"
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "by clicking on it."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Then select oil (fifth icon on the right side)."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Now click somewhere in the middle."
+
+REMOVETRIGGER tutorialdone
+ON tutorialdone WRITE ELEMENT:Burner 50 300 70 TEXT "You did it!"
+ON tutorialdone SET tutorialdone 1

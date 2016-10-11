@@ -1,0 +1,41 @@
+ELEMENT None EarthBullet 250 250 250 1 1 1 1 10000 EarthPellet 1 Text Crisp
+ELEMENT None FyronBullet 250 250 250 1 1 1 1 10000 Pellet 1 Text Crisp
+ELEMENT None NhorBullet 250 250 250 1 1 1 1 10000 NhorPellet 1 Text Crisp
+ELEMENT None HadeBullet 250 250 250 1 1 1 1 10000 HadePellet 1 Text Crisp
+ELEMENT None ThermaBullet 250 250 250 1 1 1 1 10000 ThermaPellet 1 Text Crisp
+ELEMENT None TitaniaBullet 250 250 250 1 1 1 1 10000 TitaniaPellet 1 Text Crisp
+ELEMENT None LuminaBullet 250 250 250 1 1 1 1 10000 LuminaPellet 1 Text Crisp
+ELEMENT None MoonBullet 250 250 250 1 1 1 1 10000 LunarPellet 1 Text Crisp
+
+ELEMENT None EarthMissile 250 250 250 1 1 1 1 10000 CannonTrail 1 Text Crisp
+ELEMENT None HadeMissile 250 250 250 1 1 1 1 10000 CurseLaser2 1 Text Crisp
+ELEMENT None NhorMissile 250 250 250 1 1 1 1 10000 NhorianLaser2 1 Text Crisp
+ELEMENT None FyronMissile 250 250 250 1 1 1 1 10000 FyroniteLaser2 1 Text Crisp
+ELEMENT None LuminaMissile 250 250 250 1 1 1 1 10000 NovaCannon2 1 Text Crisp
+ELEMENT None ThermaMissile 250 250 250 1 1 1 1 10000 WingCannon2 1 Text Crisp
+ELEMENT None TitaniaMissile 250 250 250 1 1 1 1 10000 TitanBlast2 1 Text Crisp
+ELEMENT None HyperionMissile 250 250 250 1 1 1 1 10000 Blaze* 1 Text Crisp
+ELEMENT None SyreaneaMissile 250 250 250 1 1 1 1 10000 DivineJudgement 1 Text Crisp
+ELEMENT None OmicraMissile 250 250 250 1 1 1 1 10000 PlanetOmicraSmoke 1 Text Crisp
+ELEMENT None ThoronMissile1 250 250 250 1 1 1 1 10000 PealOfThunder 1 Text Crisp
+ELEMENT None ThoronMissile2 250 250 250 1 1 1 1 10000 AngerOfZeus 1 Text Crisp
+ELEMENT None ThoronMissile2 250 250 250 1 1 1 1 10000 StrongAngerOfZeus 1 Text Crisp
+ELEMENT None PhaazeMissile 250 250 250 1 1 1 1 10000 PhazonFire 1 Text Crisp
+ELEMENT None PlaguaMissile 250 250 250 1 1 1 1 10000 PutridGermRig2 1 Text Crisp
+ELEMENT None TechnusMissile1 250 250 250 1 1 1 1 10000 Bullet 1 Text Crisp
+ELEMENT None TechnusMissile2 250 250 250 1 1 1 1 10000 Laser 1 Text Crisp
+ELEMENT None TechnusMissile3 250 250 250 1 1 1 1 10000 StrongLaser 1 Text Crisp
+
+
+
+ELEMENT None StarProjectile 250 250 250 1 1 1 1 10000 StarDust 1 Text Crisp
+ELEMENT None FireProjectile 250 2 2 1 1 1 1 10000 Fire 1 Text Crisp
+ELEMENT None HotProjectile 250 2 2 1 1 1 1 10000 ConcussiveBlast 1 Text Crisp
+ELEMENT None HotProjectile2 250 2 2 1 1 1 1 10000 RME 1 Text Crisp
+ELEMENT None BlueHotProjectile2 250 2 2 1 1 1 1 10000 BME 1 Text Crisp
+
+
+
+
+
+

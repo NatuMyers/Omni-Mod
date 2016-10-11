@@ -1,0 +1,81 @@
+EXEC clearall
+INCLUDE elements.bs2
+
+MENU TOP CLEAR
+MENU TOP ADD TEXT "Mainmenu" FILE home.bmp <INCLUDE start.bs2>
+MENU TOP ADD TEXT "" SEPERATOR 0 <>
+MENU TOP ADD TEXT "Pause" FILE pause.bmp <SET SPEED 0>
+MENU TOP ADD TEXT "Normal Speed" FILE play.bmp <SET SPEED 60>
+MENU TOP ADD TEXT "Fast Speed" FILE fast.bmp <SET SPEED 100000>
+MENU TOP ADD TEXT "" SEPERATOR 0 <>
+MENU TOP ADD TEXT "Restart Level" FILE restart.bmp <INCLUDE level1.bs2>
+
+Element None Target 255 0 0 0 1 1 1 0 Clear 0 File hole.bmp
+InteractionTrigger Target Saltwater saltwaterinc 100000
+InteractionTrigger Target Water otherinc 100000
+InteractionTrigger Target Salt otherinc 100000
+
+REMOVETRIGGER otherinc
+ON otherinc DRAW ELEMENT:Clear FILLEDCIRCLE X2 Y2 0
+ON otherinc SET other (other + 1)
+
+REMOVETRIGGER saltwaterinc
+ON saltwaterinc DRAW ELEMENT:Clear FILLEDCIRCLE X2 Y2 0
+ON saltwaterinc SET saltwater (saltwater + 1)
+
+EXEC menubottom
+
+SET saltwater 0
+SET other 0
+
+SET writex 10
+SET writey 50
+WRITE ELEMENT:Earth writex writey 25 TEXT "Welcome to Level 1."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Create 1000 Pixels of Saltwater."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "You fail if you got more than 10 other Pixels."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "You can draw only Earth. You cannot clear."
+
+MENU LEFT CLEAR
+MENU LEFT ADD TEXT "Saltwater:" TEXT Salt- <>
+MENU LEFT ADD TEXT "Saltwater:" TEXT water: <>
+MENU LEFT ADD TEXT "Saltwater:" NUMBER saltwater <>
+MENU RIGHT CLEAR
+MENU RIGHT ADD TEXT "Other:" TEXT Other: <>
+MENU RIGHT ADD TEXT "Other:" NUMBER other <>
+
+REMOVETRIGGER updatestats
+ON updatestats TIMER 3 FRAMES updatestats
+ON updatestats MENU REFRESH
+
+REMOVETRIGGER level1sources
+ON level1sources DRAW ELEMENT:Water FILLEDCIRCLE 380 150 1
+ON level1sources DRAW ELEMENT:Salt FILLEDCIRCLE 40 150 1
+ON level1sources DRAW ELEMENT:Target FILLEDCIRCLE 210 400 10
+ON level1sources TIMER 3 FRAMES level1sources
+
+REMOVETRIGGER levelchecker
+ON levelchecker IF (other > 10) levellost
+ON levelchecker IF (saltwater > 1000) levelwon
+ON levelchecker IF ((saltwater <= 1000) && (other <= 10) ) <TIMER 4 FRAMES levelchecker>
+
+REMOVETRIGGER levelwon
+ON levelwon WRITE ELEMENT:Burner 70 250 70 TEXT "You won!"
+
+REMOVETRIGGER levellost
+ON levellost REMOVETRIGGER levelwon
+ON levellost WRITE ELEMENT:Burner 80 250 70 TEXT "You lost!"
+
+EXEC levelchecker
+EXEC updatestats
+TIMER 1 FRAMES level1sources
+ 
+SET ELEMENT1 ELEMENT:Earth
+SET ELEMENT2 1
+SET ELEMENT4 ELEMENT:Earth
+SET BRUSHSIZE 20
+EXEC usefilledcircle
+SET ZOOM 1
+SET BORDER 0

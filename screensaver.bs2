@@ -1,0 +1,51 @@
+Group Stones 100 FILE stonegroup.bmp
+Element Stones Earth 200 127 0
+Element Stones Sand 230 180 0 80% 
+Element Stones Salt 202 202 202 75% 1% 4%
+Element Stones Water 0 0 255 70% 100% 20%
+Interaction Water Salt Saltwater Clear 1%
+Element None Saltwater 0 0 180 71% 100% 20%
+Element Stones Plant 0 255 0 0 1 1 1
+Interaction Plant Water Plant Plant 3%
+Interaction Plant Fire BurningPlant Fire 2%
+Interaction Plant BurningPlant BurningPlant BurningPlant 2%
+Interaction Plant Salt Clear Salt 1%
+Element None BurningPlant 199 0 0 0 1% 1% 1% 1% Clear
+Interaction BurningPlant Clear BurningPlant Fire 50%
+Element Stones Oil 100 0 0 50% 10% 15%
+Interaction Oil Fire Fire Fire 10%
+Element Stones Fire 255 0 0 -400 1 1 1 10% Clear
+TRIGGER Sources {
+	DRAW ELEMENT:Oil LINE (WIDTH / 4 * 1 - 2) 1 5 0
+	DRAW ELEMENT:Water LINE (WIDTH / 4 * 2 - 2) 1 5 0
+	DRAW ELEMENT:Salt LINE (WIDTH / 4 * 3 - 2) 1 5 0
+	DRAW ELEMENT:Fire LINE (WIDTH / 2 + 10) 50 1 0
+	DRAW ELEMENT:Fire LINE (WIDTH / 2 - 10) 50 1 0
+	DRAW ELEMENT:Plant LINE (WIDTH / 2 - 2) (HEIGHT - 10) 5 0
+	TIMER 1 FRAMES Sources
+	IF (LASTACTIONFRAME > 10) <EXIT>
+}
+TRIGGER Start {
+	FOR i FROM 1 TO 10 DO {
+		DRAW ELEMENT:Earth LINE 10 ((HEIGHT / 2) + i) (WIDTH / 2 - 30) (HEIGHT / 5)
+		DRAW ELEMENT:Earth LINE (WIDTH - 10) ((HEIGHT / 2) + i) (0 - (WIDTH / 2 - 30)) (HEIGHT / 5)
+	}
+	EXEC Sources
+}
+TRIGGER WINDOWRESIZED {
+	SET ZOOM 2
+	RESIZE ((WINDOWWIDTH / ZOOM) + 2) ((WINDOWHEIGHT / ZOOM) + 2) 
+	TIMER 60 FRAMES Start
+}
+TIMER 1 FRAMES {
+	SET FULLSCREEN 1
+	SET FULLSCREENX 0
+	SET FULLSCREENY 0
+	SET MENULEFT 0
+	SET MENURIGHT 0
+	SET MENUTOP 0
+	SET MENUBOTTOM 0
+	SET STATUS 0
+	SET ZOOM 2
+}
+SET SPEED 60

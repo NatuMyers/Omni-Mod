@@ -1,0 +1,35 @@
+EXEC clearall
+INCLUDE elements.bs2
+MENU TOP ADD TEXT "Main menu" FILE home.bmp <INCLUDE start.bs2>
+MENU TOP ADD TEXT "" SEPERATOR 0 <>
+MENU TOP ADD TEXT "Restart Level" FILE restart.bmp <INCLUDE tutorial2.bs2>
+
+MENU RIGHT ADD TEXT "Earth" ELEMENT ELEMENT:Earth <SET ELEMENT1 ELEMENT:Earth>
+MENU RIGHT ADD TEXT "Water" ELEMENT ELEMENT:Water <SET ELEMENT1 ELEMENT:Water>
+MENU RIGHT ADD TEXT "Salt" ELEMENT ELEMENT:Salt <SET ELEMENT1 ELEMENT:Salt>
+
+EXEC menubottom
+
+InteractionTrigger Saltwater All tutorialdone 1000
+
+SET ELEMENT1 ELEMENT:Water
+SET ELEMENT2 1
+SET ELEMENT4 ELEMENT:Clear
+SET BRUSHSIZE 20
+EXEC usefilledcircle
+SET ZOOM 1
+SET BORDER 0
+
+SET writex 10
+SET writey 50
+WRITE ELEMENT:Earth writex writey 25 TEXT "Welcome to Tutorial 2."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Here you are going to learn to create Saltwater."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Simply create a bowl of Earth (first element)."
+SET writey (writey + WRITEHEIGHT)
+WRITE ELEMENT:Earth writex writey 15 TEXT "Then put Water (second) and Salt (third element) into it."
+
+REMOVETRIGGER tutorialdone
+ON tutorialdone INTERACTIONCLEAR Saltwater
+ON tutorialdone WRITE ELEMENT:Burner 50 200 70 TEXT "You did it!"

@@ -1,0 +1,2 @@
+REMOVETRIGGER MainMenuTrig1
+ON MainMenuTrig1 EXEC start.bs2

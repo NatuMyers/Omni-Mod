@@ -1,0 +1,450 @@
+// listgroups will create a button for each group on the left side
+
+TRIGGER listgroups {
+	MENU LEFT CLEAR
+	IF (texticons == 0) <MENU LEFT ADDBORDER TEXT "Scroll" FILE scroll.bmp ((ELEMENT1 == 1) * 255) ((ELEMENT2 == 1) * 255) ((ELEMENT4 == 1) * 255) dragmenu>
+	IF (texticons == 1) <MENU LEFT ADDBORDER TEXT "Scroll" TEXT "Scroll" ((ELEMENT1 == 1) * 255) ((ELEMENT2 == 1) * 255) ((ELEMENT4 == 1) * 255) dragmenu>
+	SET groupcount 1
+	IF (COUNT:GROUPS == 0) <SET groupcount 0>
+	WHILE (groupcount - COUNT:GROUPS < 0) {
+		IF ((texticons == 1) && (elementgroulisted == groupcount)) <MENU LEFT ADDBORDER GROUP groupcount GROUPNAME groupcount 255 255 255 listgroupclick groupcount>
+		IF ((texticons == 1) && (elementgroulisted != groupcount)) <MENU LEFT ADD GROUP groupcount GROUPNAME groupcount listgroupclick groupcount>
+		IF ((texticons == 0) && (elementgroulisted == groupcount)) <MENU LEFT ADDBORDER GROUP groupcount GROUP groupcount 255 255 255 listgroupclick groupcount>
+		IF ((texticons == 0) && (elementgroulisted != groupcount)) <MENU LEFT ADD GROUP groupcount GROUP groupcount listgroupclick groupcount>
+		SET groupcount (groupcount + 1)
+	}
+}
+TRIGGER listgroupclick {
+	IF (BUTTON == 1) <SET ELEMENT1 GROUP:$0:1>
+	IF (BUTTON == 1) listelements
+	IF (BUTTON == 2) listelements
+	IF (BUTTON == 4) sublistelements
+	IF (BUTTON != 4) listgroups
+}
+
+// listelements will create a button for each elemnt in group $0 on the right side
+
+TRIGGER listelements {
+	MENU RIGHT CLEAR
+	SET elementcount 0
+	SET elementgroulisted $0
+	WHILE (elementcount - COUNT:GROUP:$0) {
+		SET elementcount (elementcount + 1)
+		IF (((ELEMENT1 == GROUP:$0:elementcount) || (ELEMENT2 == GROUP:$0:elementcount)) || (ELEMENT4 == GROUP:$0:elementcount)) listelementborder
+		IF (((ELEMENT1 != GROUP:$0:elementcount) && (ELEMENT2 != GROUP:$0:elementcount)) && (ELEMENT4 != GROUP:$0:elementcount)) listelementnoborder
+	}
+}
+TRIGGER listelementnoborder {
+	IF (texticons == 1) <MENU RIGHT ADD ELEMENT GROUP:$0:elementcount ELEMENTNAME GROUP:$0:elementcount selectelement GROUP:$0:elementcount>
+	IF (texticons == 0) <MENU RIGHT ADD ELEMENT GROUP:$0:elementcount ELEMENT GROUP:$0:elementcount selectelement GROUP:$0:elementcount>
+}
+TRIGGER listelementborder {
+	SET borderr ((ELEMENT1 == GROUP:$0:elementcount) * 255)
+	SET borderg ((ELEMENT2 == GROUP:$0:elementcount) * 255)
+	SET borderb ((ELEMENT4 == GROUP:$0:elementcount) * 255)
+	IF (texticons == 1) <MENU RIGHT ADDBORDER ELEMENT GROUP:$0:elementcount ELEMENTNAME GROUP:$0:elementcount borderr borderg borderb selectelement GROUP:$0:elementcount> 
+	IF (texticons == 0) <MENU RIGHT ADDBORDER ELEMENT GROUP:$0:elementcount ELEMENT GROUP:$0:elementcount borderr borderg borderb selectelement GROUP:$0:elementcount>
+}
+
+// sublistelements will create a button for each elemnt in group $0 on a submenu
+
+TRIGGER sublistelements {
+	MENU SUB CLEAR
+	SET elementcount 0
+	WHILE (elementcount - COUNT:GROUP:$0) {
+		SET elementcount (elementcount + 1)
+		IF (texticons == 1) <MENU SUB ADD ELEMENT GROUP:$0:elementcount ELEMENTNAME GROUP:$0:elementcount selectelement GROUP:$0:elementcount> $0 
+		IF (texticons == 1) <MENU SUB ADD TEXT "" SEPERATOR 2 nothing> 
+		IF (texticons == 0) <MENU SUB ADD ELEMENT GROUP:$0:elementcount ELEMENT GROUP:$0:elementcount selectelement GROUP:$0:elementcount> $0
+	}
+	SUBMENU
+}
+
+// selectelement will set the elementvariable based on the button currently pressed
+
+TRIGGER selectelement {
+	IF (BUTTON == 1) <SET ELEMENT1 $0> $0
+	IF (BUTTON == 2) <SET ELEMENT2 $0> $0
+	IF (BUTTON == 4) <SET ELEMENT4 $0> $0
+	EXEC listgroups
+	EXEC listelements elementgroulisted
+}
+
+// setcustomcolorsX will set the customcolorX of the element $0
+
+TRIGGER setcustomcolors1 {
+	SET ELEMENTCUSTOMR1:$0 $1
+	SET ELEMENTCUSTOMG1:$0 $2
+	SET ELEMENTCUSTOMB1:$0 $3
+}
+
+TRIGGER setcustomcolors2 {
+	SET ELEMENTCUSTOMR2:$0 $1
+	SET ELEMENTCUSTOMG2:$0 $2
+	SET ELEMENTCUSTOMB2:$0 $3
+}
+
+TRIGGER setcustomcolors3 {
+	SET ELEMENTCUSTOMR3:$0 $1
+	SET ELEMENTCUSTOMG3:$0 $2
+	SET ELEMENTCUSTOMB3:$0 $3
+}
+
+// togglepause
+
+TRIGGER togglepause {
+	IF ( SPEED > 0 ) <SET lastspeed SPEED>
+	IF ( SPEED > 0 ) <SET SPEED -1>
+	IF ( SPEED == 0 ) setspeed lastspeed
+	IF ( SPEED == -1 ) setspeed 0
+}
+
+// dragmenu will sett the current pressed button to dragmode
+
+TRIGGER dragmenu {
+	IF ( BUTTON == 1 ) <SET ELEMENT1 1>
+	IF ( BUTTON == 2 ) <SET ELEMENT2 1>
+	IF ( BUTTON == 4 ) <SET ELEMENT4 1>
+	EXEC listgroups
+}
+
+// defaultstatus
+
+REMOVETRIGGER defaultstatus
+ON defaultstatus IF (statustype == 0) {
+	STATUS CLEAR
+	STATUS ADDTEXT "FPS: "
+	STATUS ADDNUMBER FPS
+	STATUS ADDTEXT " Over: "
+	STATUS ADDMOUSEOVER
+	STATUS ADDTEXT " Selected: "
+	EXEC defaultstatusselected ELEMENT1
+	STATUS ADDTEXT "/"
+	EXEC defaultstatusselected ELEMENT2
+	STATUS ADDTEXT "/"
+	EXEC defaultstatusselected ELEMENT4
+	STATUS ADDTEXT " X/Y: "
+	STATUS ADDNUMBER X
+	STATUS ADDTEXT "/"
+	STATUS ADDNUMBER Y
+}
+
+REMOVETRIGGER defaultstatusselected
+ON defaultstatusselected IF ($0 != 1) <STATUS ADDELEMENT $0>
+ON defaultstatusselected IF ($0 == 1) <STATUS ADDTEXT "Scroll">
+
+// clearall will clear everything
+
+TRIGGER clearall {
+	ELEMENTSCLEAR
+	GROUP CLEARALL
+	RESIZE DEFAULTWIDTH DEFAULTHEIGHT
+	EXEC clearscreen
+	EXEC clearmenus
+	SET BORDER 0
+	EXEC usefilledcircle
+	SET ELEMENT1 1
+	SET ELEMENT2 0
+	SET ELEMENT4 0
+	SET BRUSHSIZE 0
+	SET ZOOM 1
+	SET BORDER 0
+	SET SPEED 60
+	SET REVERSE 0
+	SET SOLIDDRAW 1
+	REMOVETRIGGER WINDOWRESIZED
+	REMOVETRIGGER QUIT
+	REMOVETRIGGER drawing
+	REMOVETRIGGER STATUS
+	REMOVETRIGGER PREPHYSICS
+	REMOVETRIGGER POSTPHYSICS
+	REMOVETRIGGER PRETIMER
+	REMOVETRIGGER POSTTIMER
+	REMOVETRIGGER PREUPDATESCREEN
+	REMOVETRIGGER POSTUPDATESCREEN
+	EXEC clearkeys
+	ON KEY_ESC EXIT
+	ON QUIT EXIT
+	SET statustype 0
+	IF (PPC) <ON KEY_SPACE EXIT>
+	ON STATUS EXEC defaultstatus
+	SET STATUS 1
+	SET MENUTOP DEFAULTMENUWIDTH
+	SET MENUBOTTOM DEFAULTMENUWIDTH
+	SET MENULEFT DEFAULTMENUWIDTH
+	SET MENURIGHT DEFAULTMENUWIDTH
+	SET PHYSICS 1
+	SET GRAVITY 1000
+	SET INTERACTIONS 1
+	SET DEATH 1
+	SET SHOWPREVIEW 0
+	SET WIND 0
+	SET ALPHA1 256
+	SET ALPHA2 256
+	SET VIEW 0
+	SET CURSOR 2
+	SET CONSOLE 0
+	SET stampid 1
+	SET KEYREPEATDELAY 150
+	SET KEYREPEATRATE 30
+	ON KEY_^ IF ((SHIFT == 0) && (ALT == 0)) <SET CONSOLE (1 - CONSOLE)>
+	ON KEY_^ IF (SHIFT == 1) <SYSTEM "start notepad console.txt">
+	ON KEY_^ IF (ALT == 1) <SYSTEM "start telnet localhost 7777">
+	LOAD FGLAYER ""
+	LOAD BGLAYER ""
+	ON KEY_v IF (CTRL == 1) <INCLUDE CLIPBOARD>
+}
+
+// clearmenus will clear all menus
+
+TRIGGER clearmenus {
+	MENU TOP CLEAR
+	MENU LEFT CLEAR
+	MENU RIGHT CLEAR
+	MENU BOTTOM CLEAR
+	MENU SUB CLEAR
+}
+
+// clearmenus will clear the screen and the timers
+
+TRIGGER clearscreen {
+	DRAW ELEMENT:Clear FILLEDRECT 0 0 (WIDTH + 2) (HEIGHT + 2)
+	TIMER CLEAR
+}
+
+
+
+
+// maxhistories is the maximum of historysaves. maxhistories < 1000
+
+SET maxhistories 100
+
+// history_save will save the current screen in the history
+
+TRIGGER history_save {
+	SAVE QUICKSAND (1000 + (histories % maxhistories))
+	SET histories (histories + 1)
+	SET historylastsave histories
+}
+
+// history_back will step back in history
+
+ON history_back IF (histories > (historylastsave - maxhistories)) {
+	SET histories (histories - 1)
+	LOAD QUICKSAND (1000 + (histories % maxhistories))
+}
+// history_foreward will step foreward in history
+
+ON history_foreward IF (histories < (historylastsave - 1)) {
+	SET histories (histories + 1)
+	LOAD QUICKSAND (1000 + (histories % maxhistories))
+}
+
+// history_load will load the n-th last history
+TRIGGER history_load {
+	SET historiesd $0
+	IF (historiesd >= maxhistories) <SET historiesd (maxhistories - 1)>
+	IF (historiesd >= historylastsave) <SET historiesd (historylastsave - 1)>
+	SET histories (historylastsave - historiesd)
+	LOAD QUICKSAND (1000 + (histories % maxhistories))
+}
+
+// maxbacks is the maximum of backsaves. maxbacks < 1000
+
+SET maxbacks 100
+
+// back_save will save the current screen in the history
+
+TRIGGER back_save {
+	SET backpos (backpos + 1)
+	SAVE QUICKSAND (2000 + (backpos % maxbacks))
+	SET backlastpos backpos
+}
+
+// back_load will step back in history
+
+ON back_load IF (backpos > (backlastpos - maxbacks)) {
+	SET backpos (backpos - 1)
+	LOAD QUICKSAND (2000 + (backpos % maxbacks))
+}
+
+// sandboxmenu
+
+TRIGGER sandboxmenu {
+	EXEC loaddefaultsandbox
+}
+
+// loadsandbox
+
+TRIGGER loaddefaultsandbox {
+	EXEC clearall
+	INCLUDE elements.bs2
+	INCLUDE sandbox.bs2
+}
+
+// clearkeys clears all Keytriggers
+
+TRIGGER clearkeys {
+	REMOVETRIGGER MOUSEWHEELUP
+	REMOVETRIGGER MOUSEWHEELDOWN
+	REMOVETRIGGER KEY_a
+	REMOVETRIGGER KEY_b
+	REMOVETRIGGER KEY_c
+	REMOVETRIGGER KEY_d
+	REMOVETRIGGER KEY_e
+	REMOVETRIGGER KEY_f
+	REMOVETRIGGER KEY_g
+	REMOVETRIGGER KEY_h
+	REMOVETRIGGER KEY_i
+	REMOVETRIGGER KEY_j
+	REMOVETRIGGER KEY_k
+	REMOVETRIGGER KEY_l
+	REMOVETRIGGER KEY_m
+	REMOVETRIGGER KEY_n
+	REMOVETRIGGER KEY_o
+	REMOVETRIGGER KEY_p
+	REMOVETRIGGER KEY_q
+	REMOVETRIGGER KEY_r
+	REMOVETRIGGER KEY_s
+	REMOVETRIGGER KEY_t
+	REMOVETRIGGER KEY_u
+	REMOVETRIGGER KEY_v
+	REMOVETRIGGER KEY_w
+	REMOVETRIGGER KEY_x
+	REMOVETRIGGER KEY_y
+	REMOVETRIGGER KEY_z
+	REMOVETRIGGER KEY_1
+	REMOVETRIGGER KEY_2
+	REMOVETRIGGER KEY_3
+	REMOVETRIGGER KEY_4
+	REMOVETRIGGER KEY_5
+	REMOVETRIGGER KEY_6
+	REMOVETRIGGER KEY_7
+	REMOVETRIGGER KEY_8
+	REMOVETRIGGER KEY_9
+	REMOVETRIGGER KEY_0
+	REMOVETRIGGER KEY_F1
+	REMOVETRIGGER KEY_F2
+	REMOVETRIGGER KEY_F3
+	REMOVETRIGGER KEY_F4
+	REMOVETRIGGER KEY_F5
+	REMOVETRIGGER KEY_F6
+	REMOVETRIGGER KEY_F7
+	REMOVETRIGGER KEY_F8
+	REMOVETRIGGER KEY_F9
+	REMOVETRIGGER KEY_F10
+	REMOVETRIGGER KEY_F11
+	REMOVETRIGGER KEY_F12
+	REMOVETRIGGER KEY_BACKSPACE
+	REMOVETRIGGER KEY_TAB
+	REMOVETRIGGER KEY_SHIFT
+	REMOVETRIGGER KEY_ALT
+	REMOVETRIGGER KEY_CTRL
+	REMOVETRIGGER KEY_SPACE
+	REMOVETRIGGER KEY_ALTGR
+	REMOVETRIGGER KEY_MENU
+	REMOVETRIGGER KEY_UP
+	REMOVETRIGGER KEY_DOWN
+	REMOVETRIGGER KEY_RIGHT
+	REMOVETRIGGER KEY_LEFT
+	REMOVETRIGGER KEY_PAGEUP
+	REMOVETRIGGER KEY_PAGEDOWN
+	REMOVETRIGGER KEY_RETURN
+	REMOVETRIGGER KEY_DEL
+	REMOVETRIGGER KEY_INSERT
+	REMOVETRIGGER KEY_HOME
+	REMOVETRIGGER KEY_END
+	REMOVETRIGGER KEY_PAUSE
+	REMOVETRIGGER KEY_[
+	REMOVETRIGGER KEY_]
+	REMOVETRIGGER KEY_;
+	REMOVETRIGGER KEY_=
+	REMOVETRIGGER KEY_`
+	REMOVETRIGGER KEY_'
+	REMOVETRIGGER KEY_/
+	REMOVETRIGGER KEY_,
+	REMOVETRIGGER KEY_.
+	REMOVETRIGGER KEY_-
+	REMOVETRIGGER KEY_ESC
+	REMOVETRIGGER KEY_^
+	REMOVETRIGGER KEYUP_a
+	REMOVETRIGGER KEYUP_b
+	REMOVETRIGGER KEYUP_c
+	REMOVETRIGGER KEYUP_d
+	REMOVETRIGGER KEYUP_e
+	REMOVETRIGGER KEYUP_f
+	REMOVETRIGGER KEYUP_g
+	REMOVETRIGGER KEYUP_h
+	REMOVETRIGGER KEYUP_i
+	REMOVETRIGGER KEYUP_j
+	REMOVETRIGGER KEYUP_k
+	REMOVETRIGGER KEYUP_l
+	REMOVETRIGGER KEYUP_m
+	REMOVETRIGGER KEYUP_n
+	REMOVETRIGGER KEYUP_o
+	REMOVETRIGGER KEYUP_p
+	REMOVETRIGGER KEYUP_q
+	REMOVETRIGGER KEYUP_r
+	REMOVETRIGGER KEYUP_s
+	REMOVETRIGGER KEYUP_t
+	REMOVETRIGGER KEYUP_u
+	REMOVETRIGGER KEYUP_v
+	REMOVETRIGGER KEYUP_w
+	REMOVETRIGGER KEYUP_x
+	REMOVETRIGGER KEYUP_y
+	REMOVETRIGGER KEYUP_z
+	REMOVETRIGGER KEYUP_1
+	REMOVETRIGGER KEYUP_2
+	REMOVETRIGGER KEYUP_3
+	REMOVETRIGGER KEYUP_4
+	REMOVETRIGGER KEYUP_5
+	REMOVETRIGGER KEYUP_6
+	REMOVETRIGGER KEYUP_7
+	REMOVETRIGGER KEYUP_8
+	REMOVETRIGGER KEYUP_9
+	REMOVETRIGGER KEYUP_0
+	REMOVETRIGGER KEYUP_F1
+	REMOVETRIGGER KEYUP_F2
+	REMOVETRIGGER KEYUP_F3
+	REMOVETRIGGER KEYUP_F4
+	REMOVETRIGGER KEYUP_F5
+	REMOVETRIGGER KEYUP_F6
+	REMOVETRIGGER KEYUP_F7
+	REMOVETRIGGER KEYUP_F8
+	REMOVETRIGGER KEYUP_F9
+	REMOVETRIGGER KEYUP_F10
+	REMOVETRIGGER KEYUP_F11
+	REMOVETRIGGER KEYUP_F12
+	REMOVETRIGGER KEYUP_BACKSPACE
+	REMOVETRIGGER KEYUP_TAB
+	REMOVETRIGGER KEYUP_SHIFT
+	REMOVETRIGGER KEYUP_ALT
+	REMOVETRIGGER KEYUP_CTRL
+	REMOVETRIGGER KEYUP_SPACE
+	REMOVETRIGGER KEYUP_ALTGR
+	REMOVETRIGGER KEYUP_MENU
+	REMOVETRIGGER KEYUP_UP
+	REMOVETRIGGER KEYUP_DOWN
+	REMOVETRIGGER KEYUP_RIGHT
+	REMOVETRIGGER KEYUP_LEFT
+	REMOVETRIGGER KEYUP_PAGEUP
+	REMOVETRIGGER KEYUP_PAGEDOWN
+	REMOVETRIGGER KEYUP_RETURN
+	REMOVETRIGGER KEYUP_DEL
+	REMOVETRIGGER KEYUP_INSERT
+	REMOVETRIGGER KEYUP_HOME
+	REMOVETRIGGER KEYUP_END
+	REMOVETRIGGER KEYUP_PAUSE
+	REMOVETRIGGER KEYUP_[
+	REMOVETRIGGER KEYUP_]
+	REMOVETRIGGER KEYUP_;
+	REMOVETRIGGER KEYUP_=
+	REMOVETRIGGER KEYUP_`
+	REMOVETRIGGER KEYUP_'
+	REMOVETRIGGER KEYUP_/
+	REMOVETRIGGER KEYUP_,
+	REMOVETRIGGER KEYUP_.
+	REMOVETRIGGER KEYUP_-
+	REMOVETRIGGER KEYUP_ESC
+	REMOVETRIGGER KEYUP_^
+}

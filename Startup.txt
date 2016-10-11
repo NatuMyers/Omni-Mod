@@ -1,0 +1,100 @@
+INCLUDE keys.bs2
+INCLUDE functions.bs2
+INCLUDE sandbox.bs2 
+
+MESSAGE SENDTEXT "Omni III: Universe Without End"
+
+
+
+EXEC clearall
+INCLUDE elements.bs2
+
+Message Message 1,266,379+, Chars excluding spaces. 150,335+ words. 900+ Triggers. 17,000+ interactions. Biggest Mod to date. Close most applications before using this mod. It works as well fullscreen as it should a window. Special Thanks to inferno, Zonii, Mudjosh, Dr. Seryal, duskofdawn, the-evil-bucket, DarkSDL, and neilnapier from FSG. Thanks guys || Hopefully you right clicked the gears, clicked loadconfig, and loaded the txt you downloaded. If you did this, you have no worries for major glitches. 
+
+// Text Display Elements
+ELEMENT none ScreenText 255 255 0 0 1 1 1 0 Clear 0 TEXT "ScreenText"
+ELEMENT none ScreenText2 255 255 255 0 1 1 1 0 Clear 0 TEXT "ScreenText"
+ELEMENT none ScreenText3 5 255 5 0 1 1 1 0 Clear 0 TEXT "ScreenText"
+
+// THIS HANDLE THE "CLICK TO START"
+ON DRAW IF (BUTTON == 1) <INCLUDE CANNONBALL\Cannonball.bs2>
+
+// Draw Startup Screen
+TRIGGER StartupScreen {
+	// TITLE
+	WRITE ELEMENT:ScreenText3 20 50 50 TEXT "-:Omni III:--:Omni III:--:Omni III:--:Omni III:--:Omni III:-"
+	WRITE ELEMENT:ScreenText3 -40 100 50 TEXT "-:Omni III:--:Omni III:--:Omni III:--:Omni III:--:Omni III:-"
+	DRAW ELEMENT:ScreenText LINE 0 115 505 0
+	DRAW ELEMENT:ScreenText2 LINE 0 120 500 0
+	DRAW ELEMENT:ScreenText2 LINE 0 125 500 0
+	DRAW ELEMENT:ScreenText LINE 0 130 500 0
+
+	DRAW ELEMENT:ScreenText LINE 5 130 0 600
+	DRAW ELEMENT:ScreenText LINE 480 130 0 600
+	DRAW ELEMENT:ScreenText LINE 475 130 0 600
+
+
+
+
+
+	// INSTRUCTIONS
+	WRITE ELEMENT:ScreenText 10 150 15 TEXT "This is it. You own a Universe. Do with it what you will."
+
+	WRITE ELEMENT:ScreenText 10 195 15 TEXT "The Universe Without End."
+	WRITE ELEMENT:ScreenText2 10 450 15 TEXT "-- Look in the console (top right arrow) for status during gameplay --"
+	
+	// THIS PART SHOW GAMES INFOS
+	DRAW ELEMENT:ScreenText2 RECT 20 230 450 200
+	
+	WRITE ELEMENT:ScreenText 70 260 20 TEXT "The Universe"
+	DRAW ELEMENT:ScreenText2 LINE 70 265 90 0
+	
+	WRITE ELEMENT:ScreenText 280 260 20 TEXT "Without End"
+	DRAW ELEMENT:ScreenText2 LINE 280 265 105 0
+	
+	EXEC ShowEnnemyLVL1 45 280
+	WRITE ELEMENT:ScreenText 30 290 15 TEXT "Use the wheel on your mouse to make your circles to draw.  "
+	EXEC ShowEnnemyLVL2 45 300
+
+	WRITE ELEMENT:ScreenText 30 310 15 TEXT "Everything you see represents your changing Universe. "
+
+	EXEC ShowEnnemyLVL3 45 320
+	WRITE ELEMENT:ScreenText 30 330 15 TEXT "To create a war, select the desired amount of planets/sub races. "
+
+	EXEC ShowEnnemyLVL4 40 340
+	WRITE ELEMENT:ScreenText 30 350 15 TEXT "Draw a dab of them, and watch! The more the planets/ships... "
+
+	EXEC ShowEnnemyLVL5 40 360
+	WRITE ELEMENT:ScreenText 30 370 15 TEXT "The greater the war! To interact with your universe, select things "
+
+	EXEC ShowEnnemyLVL5 40 380
+	WRITE ELEMENT:ScreenText 30 390 15 TEXT "that aren't planets or races! For random planets wars, fill your"
+
+	EXEC ShowEnnemyLVL6 40 400
+	WRITE ELEMENT:ScreenText 30 410 15 TEXT "universe with explosions, wait 2-5 mins, & all out wars happen!"
+
+
+
+	// DISPLAY THE "CLICK TO PLAY"
+	WRITE ELEMENT:ScreenText 60 475 25 TEXT "-Click Here To Enter Your Universe-"
+	
+	// Signature
+	EXEC Towelie 430 440
+	WRITE ELEMENT:ScreenText2 250 500 12 TEXT "***********Altermax Copyright 2009"
+	
+	// CREDITS
+	WRITE ELEMENT:ScreenText2 25 425 11 TEXT "(Note: There are 100+ tidbits. Play this mod a lot to view them all! "
+}
+
+SET CURSOR 2
+SET MENUTOP 0
+SET MENUBOTTOM 0
+SET MENULEFT 0
+SET MENURIGHT 0
+MENU REFRESH
+
+RESIZE 486 504
+EXEC clearscreen
+EXEC StartupScreen
+
+TIMER 1 FRAMES <SET STATUS 0>

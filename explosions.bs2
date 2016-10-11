@@ -1,0 +1,49 @@
+TRIGGER GunPowderexplosion {
+	DRAW 0 FILLEDCIRCLE X1 Y1 (3 RAND 5)
+	FOR dotexplosionraycount FROM 0 TO 2 DO GunPowderexplosionRay (X1 * 50) (Y1 * 50) ((0 - 100) RAND 100) ((0 - 100) RAND 100) (5 RAND 10) 
+}
+
+TRIGGER GunPowderexplosionRay {
+	DRAW elementfire POINT ($0 / 50) ($1 / 50)
+	IF ($4 > 0) <TIMER 1 FRAMES GunPowderexplosionRay ($0 - $3) ($1 - $2) ($2 - 1) $3 ($4 - 1)>
+}
+
+TRIGGER TNTexplosion {
+	DRAW 0 FILLEDCIRCLE X1 Y1 (0 RAND 20) 0
+	FOR explosion1raycount FROM 1 TO 2 DO TNTexplosionRay (X1 * 100) (Y1 * 100) ((0 - 100) RAND 100) ((0 - 100) RAND 100) (25 RAND 50)
+}
+
+TRIGGER TNTexplosionRay {
+	DRAW elementfire FILLEDCIRCLE ($0 / 100) ($1 / 100) 2 0
+	IF ($4 > 0) <TIMER 1 FRAMES TNTexplosionRay ($0 - $3) ($1 - $2) ($2 - 1) $3 ($4 - 1)>
+}
+
+TRIGGER Fireworkexplosion {
+	DRAW 0 FILLEDCIRCLE X1 Y1 10 0
+	DRAW elementfire FILLEDCIRCLE X1 Y1 5 0
+	IF (REVERSE == 0) <SET Fireworkexplosionreverse 1> ELSE <SET Fireworkexplosionreverse -1>
+	FOR Fireworkexplosioncount FROM 1 TO 2 DO FireworkexplosionRay (X1 * 100) (Y1 * 100) (Fireworkexplosionreverse * (225 RAND 350)) ((0 - 100) RAND 100) 100 2 (40 RAND 80)
+}
+
+TRIGGER FireworkexplosionRay {
+	DRAW elementfire FILLEDCIRCLE ($0 / $4) ($1 / 100) $5 0
+	IF ($6 > 0) <TIMER 1 FRAMES FireworkexplosionRay ($0 - $3) ($1 - $2) $2 $3 $4 $5 ($6 - 1)> ELSE <FOR Fireworkexplosioncount FROM 1 TO 4 DO FireworkexplosionEndRay $0 $1 ((0 - 500) RAND 500) ((0 - 500) RAND 500) 15>
+}
+
+TRIGGER FireworkexplosionEndRay {
+	DRAW elementfire LINE ($0 / 100) ($1 / 100) ($3 / 50) ($2 / 50)
+	IF ($4 > 0) <TIMER 1 FRAMES FireworkexplosionEndRay ($0 - $3) ($1 - $2) ($2 - 1) $3 ($4 - 1)>
+}
+
+TRIGGER FuseExplosion {
+	IF (X1 > X2) FuseExplosionRay (X2 * 100) (Y2 * 100) 0 50 10
+	IF (X1 < X2) FuseExplosionRay (X2 * 100) (Y2 * 100) 0 -50 10
+	IF (Y1 > Y2) FuseExplosionRay (X2 * 100) (Y2 * 100) 50 0 10
+	IF (Y1 < Y2) FuseExplosionRay (X2 * 100) (Y2 * 100) -50 0 10
+}
+
+TRIGGER FuseExplosionRay {
+	DRAW elementfire FILLEDCIRCLE ($0 / 100) ($1 / 100) 0 0
+	IF ($4 > 0) <TIMER 1 FRAMES FuseExplosionRay ($0 - $3) ($1 - $2) ($2 - 1) $3 ($4 - 1)>
+}
+

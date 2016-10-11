@@ -1,0 +1,217 @@
+INCLUDE keys.bs2
+INCLUDE functions.bs2
+INCLUDE draw.bs2
+INCLUDE network.bs2
+INCLUDE start.bs2
+TIMER CLEAR
+
+EXEC clearall
+INCLUDE elements.bs2
+
+SET BORDER 1
+SET frames 500
+
+MENU LEFT CLEAR
+MENU LEFT ADD TEXT "Empty screen" NUMBER empty <>
+MENU LEFT ADD TEXT "Fullscreen Earth" NUMBER earth <>
+MENU LEFT ADD TEXT "Fullscreen Sand" NUMBER sand <>
+MENU LEFT ADD TEXT "Fullscreen Saltwater" NUMBER saltwater <>
+MENU LEFT ADD TEXT "???" NUMBER ??? <>
+MENU LEFT ADD TEXT "Fireworks" NUMBER firework <>
+MENU LEFT ADD TEXT "Explosions" NUMBER explosion <>
+MENU LEFT ADD TEXT "Draws" NUMBER draw <>
+MENU LEFT ADD TEXT "Save" NUMBER save <>
+MENU LEFT ADD TEXT "Menu Refresh" NUMBER menurefresh <>
+MENU LEFT ADD TEXT "Growing and Burning Plant" NUMBER plant <>
+MENU LEFT ADD TEXT "TOTAL" NUMBER (( empty * 2 + earth + sand + saltwater + ??? + firework + explosion + draw + save + menurefresh + plant ) / 11) <>
+
+ON benchmarkempty TIMER (frames * 10) FRAMES benchmarkearth
+ON benchmarkempty SET empty MSEC
+ON benchmarkempty MENU REFRESH
+ON benchmarkempty MENU TOP CLEAR
+ON benchmarkempty MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkempty MENU TOP ADD TEXT "Benchmarking Clear Screen" TEXT "Benchmarking Clear Screen" <>
+ON benchmarkempty MENU TOP ADD TEXT "" SEPERATOR 0 <>
+
+ON benchmarkearth TIMER frames FRAMES benchmarksand
+ON benchmarkearth SET empty ((10000 * frames) / (MSEC - empty))
+ON benchmarkearth DRAW ELEMENT:Earth FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkearth MENU REFRESH
+ON benchmarkearth MENU TOP CLEAR
+ON benchmarkearth MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkearth MENU TOP ADD TEXT "Benchmarking Fullscreen Earth" TEXT "Benchmarking Fullscreen Eart" <>
+ON benchmarkearth MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkearth SET earth MSEC
+
+ON benchmarksand TIMER frames FRAMES benchmarksaltwater
+ON benchmarksand SET earth ((1000 * frames) / (MSEC - earth))
+ON benchmarksand DRAW ELEMENT:Sand FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarksand MENU REFRESH
+ON benchmarksand MENU TOP CLEAR
+ON benchmarksand MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarksand MENU TOP ADD TEXT "Benchmarking Fullscreen Sand" TEXT "Benchmarking Fullscreen Sand" <>
+ON benchmarksand MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarksand SET sand MSEC
+
+ON benchmarksaltwater TIMER frames FRAMES benchmark???
+ON benchmarksaltwater SET sand ((1000 * frames) / (MSEC - sand))
+ON benchmarksaltwater SET benchmarksaltwaterx 1
+ON benchmarksaltwater WHILE (benchmarksaltwaterx < WIDTH) benchmarksaltwaterline
+ON benchmarksaltwater SET saltwater MSEC
+ON benchmarksaltwater MENU TOP CLEAR
+ON benchmarksaltwater MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarksaltwater MENU TOP ADD TEXT "Benchmarking Saltwater" TEXT "Benchmarking Saltwater" <>
+ON benchmarksaltwater MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarksaltwater MENU REFRESH
+
+ON benchmarksaltwaterline DRAW ELEMENT:Water FILLEDRECT benchmarksaltwaterx 1 20 HEIGHT
+ON benchmarksaltwaterline DRAW ELEMENT:Salt FILLEDRECT (benchmarksaltwaterx + 20) 1 20 HEIGHT
+ON benchmarksaltwaterline SET benchmarksaltwaterx (benchmarksaltwaterx + 40)
+
+ON benchmark??? TIMER frames FRAMES benchmarkfirework
+ON benchmark??? SET saltwater ((1000 * frames) / (MSEC - saltwater))
+ON benchmark??? DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmark??? DRAW ELEMENT:??? CIRCLE (WIDTH / 2) (HEIGHT / 2) 100
+ON benchmark??? TIMER (frames / 2) FRAMES <ON draw??? DRAW ELEMENT:??? CIRCLE (WIDTH / 2) (HEIGHT / 2) 100>
+ON benchmark??? SET ??? MSEC
+ON benchmark??? MENU TOP CLEAR
+ON benchmark??? MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmark??? MENU TOP ADD TEXT "Benchmarking ???" TEXT "Benchmarking ???" <>
+ON benchmark??? MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmark??? MENU REFRESH
+
+ON benchmarkfirework TIMER frames FRAMES benchmarkexplosion
+ON benchmarkfirework SET ??? ((1000 * frames) / (MSEC - ???))
+ON benchmarkfirework DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkfirework EXEC drawfirework
+ON benchmarkfirework MENU REFRESH
+ON benchmarkfirework MENU TOP CLEAR
+ON benchmarkfirework MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkfirework MENU TOP ADD TEXT "Benchmarking Firework" TEXT "Benchmarking Firework" <>
+ON benchmarkfirework MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkfirework SET firework MSEC
+
+ON drawfirework DRAW ELEMENT:Firework FILLEDRECT 1 (HEIGHT - 100) WIDTH 50
+ON drawfirework DRAW ELEMENT:Fire FILLEDRECT 1 (HEIGHT - 40) WIDTH 10
+ON drawfirework TIMER 120 FRAMES drawfirework
+
+ON benchmarkexplosion TIMER CLEAR
+ON benchmarkexplosion TIMER frames FRAMES benchmarkdraw
+ON benchmarkexplosion SET firework ((1000 * frames) / (MSEC - firework))
+ON benchmarkexplosion DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkexplosion EXEC drawexplosion
+ON benchmarkexplosion DRAW ELEMENT:Fire FILLEDCIRCLE (WIDTH / 2 + 30) HEIGHT 60
+ON benchmarkexplosion MENU REFRESH
+ON benchmarkexplosion MENU TOP CLEAR
+ON benchmarkexplosion MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkexplosion MENU TOP ADD TEXT "Benchmarking Explosions" TEXT "Benchmarking Explosions" <>
+ON benchmarkexplosion MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkexplosion SET explosion MSEC
+
+ON drawexplosion DRAW ELEMENT:TNT FILLEDCIRCLE (WIDTH / 2) (HEIGHT / 2) 200
+ON drawexplosion DRAW ELEMENT:Clear FILLEDCIRCLE (WIDTH / 2) (HEIGHT / 2) 150
+ON drawexplosion TIMER 50 FRAMES drawexplosion
+
+ON benchmarkdraw TIMER CLEAR
+ON benchmarkdraw TIMER frames FRAMES benchmarksave
+ON benchmarkdraw SET explosion ((1000 * frames) / (MSEC - explosion))
+ON benchmarkdraw DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkdraw MENU REFRESH
+ON benchmarkdraw MENU TOP CLEAR
+ON benchmarkdraw MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkdraw MENU TOP ADD TEXT "Benchmarking Draw" TEXT "Benchmarking Draw" <>
+ON benchmarkdraw MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkdraw SET draw MSEC
+ON benchmarkdraw EXEC benchmarkdrawtrigger (0 RAND 4) (0 RAND 4)
+
+ON benchmarkdrawtrigger IF ($0 == 0) <SET benchmarkdrawelement ELEMENT:Earth>
+ON benchmarkdrawtrigger IF ($0 == 1) <SET benchmarkdrawelement ELEMENT:Wall>
+ON benchmarkdrawtrigger IF ($0 == 2) <SET benchmarkdrawelement ELEMENT:Clear>
+ON benchmarkdrawtrigger IF ($0 == 3) <SET benchmarkdrawelement ELEMENT:Plant>
+ON benchmarkdrawtrigger IF ($1 == 0) <DRAW benchmarkdrawelement CIRCLE (WIDTH / 2) (HEIGHT / 2) ((0 RAND HEIGHT) / 2)>
+ON benchmarkdrawtrigger IF ($1 == 1) <DRAW benchmarkdrawelement FILLEDCIRCLE (WIDTH / 2) (HEIGHT / 2) ((0 RAND HEIGHT) / 2)>
+ON benchmarkdrawtrigger IF ($1 == 2) <DRAW benchmarkdrawelement RECT 1 1 (0 RAND HEIGHT) (0 RAND HEIGHT)>
+ON benchmarkdrawtrigger IF ($1 == 3) <DRAW benchmarkdrawelement FILLEDRECT ((WIDTH / 2) - ((0 RAND WIDTH) / 2)) ((HEIGHT / 2) - ((0 RAND HEIGHT) / 2)) ((WIDTH / 2) + ((0 RAND WIDTH) / 2)) (HEIGHT / 2) + ((0 RAND HEIGHT) / 2))>
+ON benchmarkdrawtrigger TIMER 1 FRAMES benchmarkdrawtrigger (0 RAND 4) (0 RAND 4)
+
+ON benchmarksave TIMER CLEAR
+ON benchmarksave TIMER (frames / 10) FRAMES benchmarkmenurefresh
+ON benchmarksave SET draw ((1000 * frames) / (MSEC - draw))
+ON benchmarksave DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarksave MENU REFRESH
+ON benchmarksave DRAW ELEMENT:Plant FILLEDCIRCLE (WIDTH / 2) (HEIGHT / 2) 200
+ON benchmarksave SET save MSEC
+ON benchmarksave MENU TOP CLEAR
+ON benchmarksave MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarksave MENU TOP ADD TEXT "Benchmarking Save" TEXT "Benchmarking Save" <>
+ON benchmarksave MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarksave EXEC benchmarksavetrigger
+
+ON benchmarksavetrigger SAVE SAND benchmark.png
+ON benchmarksavetrigger TIMER 1 FRAMES benchmarksavetrigger
+
+ON benchmarkmenurefresh TIMER CLEAR
+ON benchmarkmenurefresh TIMER frames FRAMES benchmarkplant
+ON benchmarkmenurefresh SET save ((100 * frames) / (MSEC - save))
+ON benchmarkmenurefresh DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkmenurefresh MENU REFRESH
+ON benchmarkmenurefresh SET menurefresh MSEC
+ON benchmarkmenurefresh MENU TOP CLEAR
+ON benchmarkmenurefresh MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkmenurefresh MENU TOP ADD TEXT "Benchmarking Menu Refresh" TEXT "Benchmarking Menu Refresh" <>
+ON benchmarkmenurefresh MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 0.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 1.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 2.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 3.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 4.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 5.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 6.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 7.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 8.bmp <>
+ON benchmarkmenurefresh MENU BOTTOM ADD TEXT "" FILE 9.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 0.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 1.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 2.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 3.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 4.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 5.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 6.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 7.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 8.bmp <>
+ON benchmarkmenurefresh MENU RIGHT ADD TEXT "" FILE 9.bmp <>
+ON benchmarkmenurefresh EXEC benchmarkmenurefreshtrigger
+
+ON benchmarkmenurefreshtrigger MENU REFRESH
+ON benchmarkmenurefreshtrigger TIMER 1 FRAMES benchmarkmenurefreshtrigger
+
+ON benchmarkplant TIMER CLEAR
+ON benchmarkplant TIMER frames FRAMES benchmarkend
+ON benchmarkplant SET menurefresh ((1000 * frames) / (MSEC - menurefresh))
+ON benchmarkplant DRAW ELEMENT:Water FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkplant DRAW ELEMENT:Plant FILLEDCIRCLE (WIDTH / 4) (HEIGHT / 4) 20
+ON benchmarkplant DRAW ELEMENT:Fire FILLEDCIRCLE (WIDTH / 4) (HEIGHT / 4) 10
+ON benchmarkplant DRAW ELEMENT:Plant FILLEDCIRCLE (WIDTH / 4 * 3) (HEIGHT / 4) 20
+ON benchmarkplant DRAW ELEMENT:Fire FILLEDCIRCLE (WIDTH / 4 * 3) (HEIGHT / 4) 10
+ON benchmarkplant DRAW ELEMENT:Plant FILLEDCIRCLE (WIDTH / 4) (HEIGHT / 4 * 3) 20
+ON benchmarkplant DRAW ELEMENT:Fire FILLEDCIRCLE (WIDTH / 4) (HEIGHT / 4 * 3) 10
+ON benchmarkplant DRAW ELEMENT:Plant FILLEDCIRCLE (WIDTH / 4 * 3) (HEIGHT / 4 * 3) 20
+ON benchmarkplant DRAW ELEMENT:Fire FILLEDCIRCLE (WIDTH / 4 * 3) (HEIGHT / 4 * 3) 10
+ON benchmarkplant MENU REFRESH
+ON benchmarkplant MENU TOP CLEAR
+ON benchmarkplant MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkplant MENU TOP ADD TEXT "Benchmarking Growing and Burning Plant" TEXT "Benchmarking Growing and Burning Plant" <>
+ON benchmarkplant MENU TOP ADD TEXT "" SEPERATOR 0 <>
+ON benchmarkplant MENU RIGHT CLEAR
+ON benchmarkplant MENU BOTTOM CLEAR
+ON benchmarkplant SET plant MSEC
+
+ON benchmarkend SET finishfirework MSEC
+ON benchmarkend SET plant ((1000 * frames) / (MSEC - plant))
+ON benchmarkend DRAW ELEMENT:Clear FILLEDRECT 1 1 WIDTH HEIGHT
+ON benchmarkend MENU TOP CLEAR
+ON benchmarkend MENU REFRESH
+
+SET SPEED 1000000
+
+EXEC benchmarkempty

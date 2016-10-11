@@ -1,0 +1,10 @@
+UPDATEVIEW = 30
+
+INCLUDE debug.bs2
+INCLUDE keys.bs2
+INCLUDE functions.bs2
+INCLUDE menu.bs2
+INCLUDE draw.bs2
+INCLUDE network.bs2
+INCLUDE start.bs2
+// INCLUDE benchmark.bs2

@@ -1,0 +1,652 @@
+EXEC clearall
+
+// Crutial stuff
+INCLUDE keys.bs2
+INCLUDE functions.bs2
+// INCLUDE sandbox.bs2
+SET wheelfunction 0
+// INCLUDE explosions.bs2 
+
+
+
+
+// EXEC clearall
+// INCLUDE elements.bs2
+
+
+
+EXEC setview 0 1 1 1 1 1 20
+// Text Display Elements
+ELEMENT none ScreenText 255 255 255 0 1 1 1 0 Clear 0 TEXT "ScreenText"
+ELEMENT none ScreenText2 255 5 255 0 1 1 1 0 Clear 0 TEXT "ScreenText"
+ELEMENT none ScreenText3 5 5 155 0 1 1 1 0 Clear 0 TEXT "ScreenText"
+
+// Making it start
+// ON DRAW IF (BUTTON == 1) <INCLUDE File Omni III- Pack'd\OiiiV16.bs2>
+// ON DRAW IF (BUTTON == 1) <File Omni III- Pack'd\OiiiV16.bs2> 10000
+// ON MOUSEDOWN IF (BUTTON == 1) <INCLUDE Omni III- Pack'd\OiiiV16.bs2> 10000
+
+// ON DRAW IF (BUTTON == 1) <INCLUDE File OiiiV16.bs2>
+// ON DRAW IF (BUTTON == 1) <File Omni III- OiiiV16.bs2> 10000
+// ON MOUSEDOWN IF (BUTTON == 1) <INCLUDE OiiiV16.bs2> 10000
+// ON MOUSEDOWN IF (BUTTON == 1) <INCLUDE OiiiV16.bs2> 10000
+// ON DRAW IF (BUTTON == 1) <INCLUDE File Omni III- Pack'd\OiiiV16.bs2>
+// ON DRAW IF (BUTTON == 1) <File Omni III- Pack'd\OiiiV16.bs2>
+// ON MOUSEDOWN IF (BUTTON == 1) <INCLUDE Omni III- Pack'd\OiiiV16.bs2>
+
+// Draw Startup Screen
+TRIGGER StartupScreenLeft {
+	// TITLE
+	WRITE ELEMENT:ScreenText3 20 50 50 TEXT "-:Omni III:--:Extras:--:Omni III:--:Extras:--:Omni III:-"
+	WRITE ELEMENT:ScreenText3 -40 100 50 TEXT "-:Extras:--:Omni III:--:Extras:--:Omni III:--:Extras:-"
+	DRAW ELEMENT:ScreenText LINE 0 115 505 0
+	DRAW ELEMENT:ScreenText2 LINE 0 120 500 0
+	DRAW ELEMENT:ScreenText2 LINE 0 125 500 0
+	DRAW ELEMENT:ScreenText LINE 0 130 500 0
+
+	DRAW ELEMENT:ScreenText LINE 5 130 0 600
+	DRAW ELEMENT:ScreenText LINE 480 130 0 600
+	DRAW ELEMENT:ScreenText LINE 475 130 0 600
+
+
+
+
+
+	
+	WRITE ELEMENT:ScreenText 10 150 15 TEXT "*Omni Extras!!"
+	WRITE ELEMENT:ScreenText 10 175 15 TEXT "Check this area every version to find some new ones!"
+	WRITE ELEMENT:ScreenText 10 185 15 TEXT "Try them out. Some are pretty interesting..."
+
+
+// DRAW ELEMENT:WhiteDwarfStar 10 195 15 TEXT "
+// WRITE ELEMENT:ScreenText 10 195 15 TEXT "WhiteDwarfStar
+	DRAW ELEMENT:WhiteDwarfStar FILLEDCIRCLE 200 180 15 0
+	DRAW ELEMENT:WhiteDwarfStar FILLEDCIRCLE 250 180 15 0
+	DRAW ELEMENT:WhiteDwarfStar FILLEDCIRCLE 300 180 15 0
+	DRAW ELEMENT:WhiteDwarfStar FILLEDCIRCLE 350 180 15 0
+	DRAW ELEMENT:WhiteDwarfStar FILLEDCIRCLE 400 180 15 0
+	DRAW ELEMENT:WhiteDwarfStar FILLEDCIRCLE 450 180 15 0
+
+
+
+
+	WRITE ELEMENT:ScreenText2 10 450 15 TEXT "-- Look in the console (top right arrow) for status during gameplay --"
+	
+	// Descriptions
+	DRAW ELEMENT:ScreenText2 RECT 20 230 450 200
+	
+	WRITE ELEMENT:ScreenText 70 260 20 TEXT "Some of the Extras"
+	DRAW ELEMENT:ScreenText2 LINE 70 265 90 0
+	DRAW ELEMENT:WhiteDwarf FILLEDCIRCLE 235 255 10 0
+
+
+
+	
+	WRITE ELEMENT:ScreenText 280 260 20 TEXT "FAQS"
+	DRAW ELEMENT:ScreenText2 LINE 280 265 105 0
+	
+	
+
+	WRITE ELEMENT:ScreenText 30 290 15 TEXT "Press the '1' key to play Oiii in Fading View!!"
+	WRITE ELEMENT:ScreenText 30 310 15 TEXT "Press the '2' key to play Oiii in Blur View!!"
+	WRITE ELEMENT:ScreenText 30 330 15 TEXT "Press the '3' key to play Oiii in Stange View!!"
+	WRITE ELEMENT:ScreenText 30 350 15 TEXT "Press the '4' key to play Oiii in Random View!!"
+	WRITE ELEMENT:ScreenText 30 370 15 TEXT "Press the '5' key to play Oiii in Inverted View!!"
+	WRITE ELEMENT:ScreenText 30 390 15 TEXT "Press the '6' key to play the origional Omni Mod. (Good times...)"
+
+	WRITE ELEMENT:ScreenText 30 410 15 TEXT "More extras probably coming soon!"
+
+
+
+	// DISPLAY THE "CLICK TO PLAY"
+	WRITE ELEMENT:ScreenText3 100 475 25 TEXT "<<<-Use Left Arrow Key to Return"
+
+
+
+//               {
+// 	INCLUDE OiiiV16.bs2
+// }
+
+	
+	
+	
+	WRITE ELEMENT:ScreenText2 250 500 12 TEXT "***********Altermax Copyright 2009"
+	
+	
+	WRITE ELEMENT:ScreenText2 25 425 11 TEXT "(Note: There are 100+ tidbits. Play this mod a lot to view them all! "
+}
+
+
+
+
+TRIGGER KEY_LEFT {
+EXEC MainMenu
+}
+
+
+
+TRIGGER MainMenu {
+INCLUDE start.bs2
+}
+TIMER 1 FRAMES <SET STATUS 0>
+
+// TRIGGER MOUSEDOWN {
+// 	IF (BUTTON == 1) { INCLUDE OiiiV16.bs2
+// 		}
+// }
+
+// ON MOUSEDOWN {
+// INCLUDE Latest OIII.txt
+// }
+
+
+// 
+
+INTERACTION ScreenText3 Clear ScreenText3 ScreenText 3000
+
+
+
+INTERACTION ScreenText Clear ScreenText ScreenText2 3000
+
+
+ELEMENT Galaxy Fyron 120 20 0 0 1 1 1 0 Clear 1 HEX 000000000003E000001FFE0000755500009FFEC00307F8200200001004000070080000A80C00005C1A00106C150079D41A80A9AC3584D0D62B0A686A3616D0162A1AA86A350E54D61B06686C1500F0541A00006C0C0000340800001804000010020000100307F060009FFC8000755700001FFC000003E0000000000000000000 255 0 0
+
+
+
+ELEMENT None Fyronosphere 255 125 10 0 1 1 1 0 Clear 0 Text None
+ELEMENT None Fyronosphere2 225 0 10 0 1 1 1 0 Clear 0 Text None
+ELEMENT None Fyronosphere3 195 0 0 0 1 1 1 200 Clear 0 Text None
+ELEMENT None Fyronosphere4 155 0 10 0 1 1 1 3000 Clear 0 Text None
+
+INTERACTION Fyron Clear Fyron Fyronosphere 300000
+INTERACTION Fyronosphere FieryFortress FieryFortress FieryFortress 300000
+INTERACTION Fyronosphere2 FieryFortress FieryFortress FieryFortress 300000
+INTERACTION Fyronosphere3 FieryFortress FieryFortress FieryFortress 300000
+INTERACTION Fyronosphere4 FieryFortress FieryFortress FieryFortress 300000
+
+
+
+
+
+
+INTERACTION Fyronosphere Clear Fyronosphere Fyronosphere2 32768
+INTERACTION Fyronosphere2 Clear Fyronosphere2 Fyronosphere3 32768
+INTERACTION Fyronosphere3 Clear Fyronosphere3 Fyronosphere4 32768
+
+
+
+// Important for FieryFortress!
+INTERACTION UltraFyronite Clear UltraFyronite FieryFortressBuild 1
+INTERACTION UltraFyronite Fyronosphere UltraFyronite FieryFortressBuild 10
+INTERACTION UltraFyronite Fyronosphere2 UltraFyronite FieryFortressBuild 10
+INTERACTION UltraFyronite Fyronosphere3 UltraFyronite FieryFortressBuild 10
+INTERACTION UltraFyronite Fyronosphere4 UltraFyronite FieryFortressBuild 10
+
+
+INTERACTION ExplosionFollowUp Fyronosphere ExplosionFollowUp ExplosionFollowUp 100000
+INTERACTION ExplosionFollowUp Fyronosphere2 ExplosionFollowUp ExplosionFollowUp 100000
+INTERACTION ExplosionFollowUp Fyronosphere3 ExplosionFollowUp ExplosionFollowUp 100000
+INTERACTION ExplosionFollowUp Fyronosphere4 ExplosionFollowUp ExplosionFollowUp 100000
+
+
+
+
+
+ELEMENT None Damage 255 100 100 0 1 1 1 6000 Clear 1 Text Boom
+
+
+ELEMENT None MagmaPit 150 50 0 0 1 1 4 0 Clear 15 Text MagmaPit
+ELEMENT None MagmaPit2 250 170 0 0 1 1 4 0 Clear 15 Text MagmaPit
+ELEMENT None MagmaPit3 250 50 0 0 1 1 4 0 Clear 15 Text MagmaPit
+
+// 130 30 0
+// Main Planet Stuff
+
+ELEMENT None LowFyronite 100 0 0 0 1 1 1 1 Fyron 1 HEX 0000000045DD2EE0455548A0555D8EE0555948C029D52EA00000000000000000000420000008100000066000000240000007E0000008100000124800001248000008100000066000010E708000F00F0000100800000C3000000C300001F00F8000100800000C3000000C300000F00F0001100880000FF0000000000000000000 255 255 255
+
+
+// This deathrate is crutial
+ELEMENT None FyronCivilian 200 50 0 1 1 1 100 Slider 1 Text LowFyronite
+ELEMENT None WorshipPlain 105 5 0 0 1 1 1 1 LowFyronite 2 Text Blah
+ELEMENT None UltraFyroniteBuild 100 50 0 0 1 1 1 2000 UltraFyronite 1 Text None
+ELEMENT None UltraFyronite 220 50 20 0 1 1 1 6 Fyron 3 Text Blah
+ELEMENT Fighters3 FyronAttacker 230 50 20 0 1 1 1 900 FyronAttacker2 10 HEX 00000000000000000000000000000000000000000000000000000000000E20003F8A3E00209F02003FD91F8000511F8001FFF8883FD55F88207FFFF82FAAAAAC3FAABFFE207FF80027FFFF8029E23F801F7E040003383C0007F0200018E000000F80000000000000000000000000000000000000000000000000000000000000 255 0 0
+ELEMENT Fighters2 SpawnShip 250 20 0 0 1 1 1 90 FyronAttacker2 20 HEX 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000003F0000003180000020FF0000201FE0003FFFF0703FEAA8D0102AAD90121FFFF8120000181E55554C025555460200001E03FCFC030E0303FF0A0586300F0CDEE00188730000F06000006000000020000000000000 255 0 0
+ELEMENT None FyronAttacker2 200 50 20 0 1 1 1 5000 Clear 4 Text FyronAttacker2
+ELEMENT None FieryFortressBuild 150 50 0 0 1 1 1 0 Clear 1 Text Mar
+
+INTERACTION FieryFortress Clear Lair Lair 1
+
+ELEMENT None FyroniteLaser 250 250 0 0 1 1 1 15000 FyronAttacker2 1 Text Laser
+ELEMENT None FyroniteLaser2 200 50 20 0 1 1 1 9000 F6 1 Text Laser
+ELEMENT None Boom 250 250 25 0 1 1 1 0 Clear 1 Text Boom
+INTERACTION FyroniteLaser2 F6 FyronAttacker2 FyronAttacker2 5000
+
+
+
+ELEMENT None F6 255 141 0 -400 1 1 1 3000 Fi7 0 Text F
+ELEMENT None F7 255 180 0 -400 1 1 1 3000 Clear 0 Text F
+
+
+
+INTERACTION LowFyronite LowFyronite WorshipPlain WorshipPlain 1
+INTERACTION LowFyronite FyronCivilian WorshipPlain WorshipPlain 1
+
+
+
+
+INTERACTION UltraFyronite LowFyronite UltraFyronite UltraFyronite 300
+INTERACTION WorshipPlain LowFyronite WorshipPlain WorshipPlain 30
+INTERACTION WorshipPlain LowFyronite UltraFyronite UltraFyronite 30
+
+
+INTERACTION Fyron Fyron MagmaPit Fyron 1
+INTERACTION Fyron MagmaPit Fyron Fyron 100
+INTERACTION Fyron MagmaPit2 Fyron Fyron 100
+INTERACTION Fyron MagmaPit3 Fyron Fyron 10
+INTERACTION LowFyronite MagmaPit3 FyronCivilian FyronCivilian 1
+
+
+INTERACTION MagmaPit2 Fyron MagmaPit2 MagmaPit3 300
+INTERACTION MagmaPit Fyron MagmaPit MagmaPit2 300
+INTERACTION Fyron Moon Fyron Fyron 10
+
+// Evolution Trigger
+INTERACTION LowFyronite LowFyronite LowFyronite WorshipPlain 20
+
+INTERACTION LowFyronite Fyron FyronCivilian LowFyronite 15
+INTERACTION LowFyronite Fyron UltraFyroniteBuild Fyron 1
+INTERACTION UltraFyroniteBuild Fyron UltraFyroniteBuild UltraFyroniteBuild 1000
+INTERACTION UltraFyroniteBuild MagmaPit UltraFyroniteBuild UltraFyroniteBuild 2000
+INTERACTION UltraFyroniteBuild MagmaPit2 UltraFyroniteBuild UltraFyroniteBuild 2000
+INTERACTION UltraFyroniteBuild MagmaPit3 UltraFyroniteBuild UltraFyroniteBuild 2000
+INTERACTION UltraFyronite Fyron UltraFyronite LowFyronite 10
+
+
+
+
+INTERACTION UltraFyronite MagmaPit UltraFyronite UltraFyronite 20
+INTERACTION UltraFyronite MagmaPit2 UltraFyronite UltraFyronite 20
+INTERACTION UltraFyronite MagmaPit3 UltraFyronite UltraFyronite 20
+INTERACTION WorshipPlain Fyron WorshipPlain LowFyronite 5
+
+INTERACTION LowFyronite Lair FyronCivilian LowFyronite 1
+INTERACTION LowFyronite Lair UltraFyroniteBuild Lair 10
+INTERACTION UltraFyroniteBuild Lair UltraFyroniteBuild UltraFyroniteBuild 1000
+INTERACTION WorshipPlain Fyron LowFyronite WorshipPlain 1
+
+// Important for war!
+INTERACTION FieryFortressBuild All FieryFortressBuild FieryFortressBuild 200 WorshipPlain
+
+
+INTERACTION FieryFortressBuild FieryFortressBuild FieryFortress FieryFortress 1
+INTERACTION FieryFortressBuild FieryFortress FieryFortress FieryFortress 40000
+INTERACTION FieryFortress Clear FieryFortress FyronAttacker 1
+INTERACTION FieryFortress Fyron FieryFortress WorshipPlain 1
+INTERACTION FieryFortress Fyron FieryFortress LowFyronite 1
+INTERACTION FieryFortress Fyron  FieryFortress MagmaPit 1
+
+
+INTERACTION Fyron UltraFyronite LowFyronite Fyron 1
+
+// Fyron ship source
+INTERACTION FieryFortress Clear FieryFortress FyronAttacker 10
+
+
+
+
+
+INTERACTION FieryFortress LowFyronite FieryFortress SpawnShip 20
+INTERACTION FyronAttacker Clear FyronAttacker2 FyronAttacker 4500
+INTERACTION FyronAttacker FyronAttacker FyronAttacker2 SpawnShip 1
+INTERACTION SpawnShip Clear FyronAttacker SpawnShip 7500
+INTERACTION SpawnShip FyronAttacker FyronAttacker SpawnShip 5000
+INTERACTION FyronAttacker Ocean SpaceShipO FyronAttacker 5000
+INTERACTION SpawnShip Ocean SpaceShipO SpawnShip 5000
+INTERACTION FyronAttacker Atmosphere SpaceShipA FyronAttacker 1000
+INTERACTION FyronAttacker Atmosphere2 SpaceShipA2 FyronAttacker 1000
+INTERACTION FyronAttacker Atmosphere3 SpaceShipA3 FyronAttacker 1000
+INTERACTION SpawnShip Atmosphere SpaceShipA SpawnShip 1000
+INTERACTION SpawnShip Atmosphere2 SpaceShipA2 SpawnShip 1000
+INTERACTION SpawnShip Atmosphere3 SpaceShipA3 SpawnShip 1000
+
+
+INTERACTION FyronAttacker Clear FyronAttacker FyroniteLaser 1
+INTERACTION FyronAttacker UFO3 FyronAttacker2 FyronAttacker 10000
+INTERACTION FyronAttacker UFO FyronAttacker2 FyronAttacker 20000
+INTERACTION FyronAttacker SpaceShipS FyronAttacker2 FyronAttacker 10000
+INTERACTION FyronAttacker SpaceShip FyronAttacker2 FyronAttacker 20000
+INTERACTION FyronAttacker StationCore FieryFortressBuild FieryFortressBuild 1500
+INTERACTION FyronAttacker SpaceStation FieryFortressBuild FieryFortressBuild 1500
+INTERACTION FyronAttacker AlienCitadel FieryFortressBuild FieryFortressBuild 1500
+INTERACTION FyronAttacker Asteroid FieryFortress FieryFortress 1500
+INTERACTION FyronAttacker Moon Clear WorshipPlain 500
+INTERACTION FyronAttacker Beach1 Beach1 WorshipPlain 5000
+INTERACTION FyronAttacker Beach2 Beach2 WorshipPlain 5000
+INTERACTION FyronAttacker Beach3 Beach3 WorshipPlain 5000
+INTERACTION FyronAttacker Grass Grass WorshipPlain 5000
+
+INTERACTION SpawnShip StationCore FieryFortressBuild FieryFortressBuild 2500
+INTERACTION SpawnShip StationCore FieryFortressBuild FieryFortressBuild 2500
+INTERACTION SpawnShip AlienCitadel FieryFortressBuild FieryFortressBuild 2500
+INTERACTION SpawnShip Moon WorshipPlain WorshipPlain 5000
+INTERACTION SpawnShip Beach1 WorshipPlain WorshipPlain 5000
+INTERACTION SpawnShip Beach2 WorshipPlain WorshipPlain 5000
+INTERACTION SpawnShip Beach3 WorshipPlain WorshipPlain 5000
+INTERACTION SpawnShip Grass WorshipPlain WorshipPlain 5000
+
+INTERACTION WorshipPlain Moon Lair WorshipPlain 500
+INTERACTION Plain AlienColony Lair WorshipPlain 100
+INTERACTION WorshipPlain AlienColony2 Lair WorshipPlain 100
+INTERACTION WorshipPlain Grass Lair WorshipPlain 500
+INTERACTION WorshipPlain Beach1 Lair WorshipPlain 500
+INTERACTION WorshipPlain Beach2 Lair WorshipPlain 500
+INTERACTION WorshipPlain Beach3 Lair WorshipPlain 500
+INTERACTION WorshipPlain Road Lair WorshipPlain 500
+
+INTERACTION Fyron Grass Fyron Desert 100
+INTERACTION Fyron Beach1 Fyron Desert 100
+INTERACTION Fyron Beach2 Fyron Desert 100
+INTERACTION Fyron Beach3 Fyron Desert 100
+INTERACTION Fyron Road Fyron Desert 100
+INTERACTION Fyron Desert Fyron Fyron 250
+INTERACTION Fyron Ocean Fyron HotWater 100
+
+
+
+// INTERACTION FyroniteLaser Clear FyroniteLaser2 FyroniteLaser 60000
+INTERACTION FyroniteLaser FyronAttacker2 FyroniteLaser2 FyroniteLaser 60000
+INTERACTION FyroniteLaser UFO3 FyroniteLaser2 FyroniteLaser 60000
+INTERACTION FyroniteLaser SpaceShipS FyroniteLaser2 FyroniteLaser 60000
+INTERACTION FyroniteLaser LifePod FyroniteLaser2 FyroniteLaser 60000
+INTERACTION FyroniteLaser SpaceShip Boom Boom 100000
+INTERACTION FyroniteLaser SpaceDock Boom Boom 100000
+INTERACTION FyroniteLaser SpaceStation Boom Boom 100000
+INTERACTION FyroniteLaser StationCore Boom Boom 100000
+INTERACTION FyroniteLaser UFO Boom Boom 100000
+INTERACTION FyroniteLaser UFOCruiser Boom Boom 100000
+INTERACTION FyroniteLaser AlienCitadel Boom Boom 100000
+INTERACTION FyroniteLaser AlienColony Boom Boom 100000
+INTERACTION FyroniteLaser AlienColony2 Boom Boom 100000
+INTERACTION FyroniteLaser IceBase Boom Boom 100000
+
+INTERACTION Boom All Boom Boom 1000 Boom
+INTERACTION Boom Boom Boom Explosion2 1
+INTERACTION Explosion2 Boom Explosion2 Explosion2 40000
+
+INTERACTION Fyron Clear Clear Clear 1
+
+INTERACTION FieryFortress SpaceStation FieryFortressFieryFortress 10
+INTERACTION FieryFortress StationCore FieryFortress Shield 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INTERACTION Crack Fyron Crack2 Crack 9000000
+INTERACTION Crack LowFyronite Crack2 Crack 9000000
+INTERACTION Crack FyronCivilian Crack2 Crack 9000000
+INTERACTION Crack Wasteland Crack2 Crack 15000
+INTERACTION Crack Clear Crack Wasteland 1500000
+INTERACTION Crack2 Fyron Crack2 Destruction 100
+INTERACTION Destruction Fyron Destruction Destruction 5500
+INTERACTION Ray Fyron RayT Ray 60000
+INTERACTION Ray Fyron RayT Ray 60000
+INTERACTION RayT Fyron RayT RayS 60000
+INTERACTION RayT Fyron RayT RayS 60000
+INTERACTION RayT FieryFortress RayT RayS 60000
+INTERACTION RayT Asteroid RayT RayS 60000
+
+INTERACTION Ray MagmaPit RayT Ray 60000
+INTERACTION Ray MagmaPit2 RayT Ray 60000
+INTERACTION Ray MagmaPit3 RayT Ray 60000
+INTERACTION Ray Lair RayT Ray 60000
+INTERACTION Ray UltraFyronite RayT Ray 60000
+INTERACTION Ray FieryFortress RayT Ray 60000
+INTERACTION Ray Fyron RayT Ray 60000
+INTERACTION Ray WorshipPlain RayT Ray 60000
+INTERACTION Ray LowFyronite RayT Ray 60000
+INTERACTION Ray FyronCivilian RayT Ray 60000
+INTERACTION RayP MagmaPit RayP RayP 3500
+INTERACTION RayP MagmaPit2 RayP RayP 3500
+INTERACTION RayP MagmaPit3 RayP RayP 3500
+INTERACTION RayP Lair RayP RayP 3500
+INTERACTION RayP UltraFyronite RayP RayP 3500
+INTERACTION RayP Fyron RayP RayP 3500
+INTERACTION RayP FieryFortress RayP RayP 3500
+INTERACTION RayP WorshipPlain RayP RayP 3500
+INTERACTION RayP LowFyronite RayP RayP 3500
+INTERACTION RayP FyronCivilian RayP RayP 3500
+
+
+// Moving particles
+
+// ELEMENT None Slider 255 0 0 0 0 99 1 0 Clear 0 Text Slider
+// ELEMENT None SliderT 255 0 0 0 0 99 1 0 Clear 0 Text SliderT
+// ELEMENT None Slider2 255 0 0 0 0 99 1 0 Clear 0 Text Slider2
+// INTERACTION Slider Clear SliderT Slider2 32768
+// INTERACTION Slider2 SliderT Slider Clear 
+
+
+ELEMENT None GSlider 255 0 0 0 0 99 1 0 Clear 0 Text Slider
+ELEMENT None GSliderT 255 0 0 0 0 99 1 0 Clear 0 Text SliderT
+ELEMENT None GSlider2 255 0 0 0 0 99 1 0 Clear 0 Text Slider2
+INTERACTION GSlider Clear GSliderT GSlider2 32768
+INTERACTION GSlider2 GSliderT GSlider Clear 
+
+
+
+ELEMENT None Slider 235 50 0 0 0 99 1 0 Clear 0 Text Slider
+ELEMENT None SliderT 235 50 0 0 99 1 0 Clear 0 Text SliderT
+ELEMENT None Slider2 235 50 0 0 99 1 0 Clear 0 Text Slider2
+INTERACTION Slider FyronCivilian SliderT Slider2 32768
+INTERACTION Slider UltraFyronite SliderT Slider2 32768
+INTERACTION Slider2 SliderT Slider FyronCivilian 32768
+
+
+
+ELEMENT None FSlider 255 255 0 0 0 99 1 0 Clear 0 Text Slider
+ELEMENT None FSliderT 255 255 0 0 0 99 1 0 Clear 0 Text SliderT
+ELEMENT None FSlider2 255 255 0 0 0 99 1 0 Clear 0 Text Slider2
+INTERACTION FSlider UltraFyronite SliderT Slider2 32768
+INTERACTION FSlider FyronCivilian FSliderT FSlider2 32768
+INTERACTION FSlider2 SliderT Slider UltraFyronite 32768
+
+INTERACTION MagmaPit UltraFyronite MagmaPit Slider 68
+
+// FyronGod
+
+ELEMENT None Sanctuary 200 0 0 0 1 1 1 1 LarvalWorshipPlain 0 Text Sanctuary
+ELEMENT None LarvalWorshipPlain 255 255 0 0 1 1 1 1 Clear 0 Text larv
+ELEMENT Fighters FyronGod 255 255 0 0 1 1 1 1700 Clear 9999 HEX 0000000000000000000000000000000000000000000000000000000000000000000000000007F0000007F800FF004800E183C40020604200601841003FFFE1C03FFFFFF0100000101249249872492488D249248C700000061000000273FCF003100007FF3FFFFE303FFFFCE02000018060000700FFFFF8000000000000000000 250 0 0
+
+
+ELEMENT None FyronGod2 255 0 0 0 1 1 1 20000 Clear 0 Text none
+INTERACTION FyronGod Clear FyronGod OmegaFyronCannonStarter 1
+
+
+INTERACTION FieryFortress FyronAttacker FieryFortressSanctuary 5
+INTERACTION Sanctuary Clear Clear Clear 50
+// INTERACTION Sanctuary Clear FyronGod FyronGod 20
+INTERACTION LarvalWorshipPlain Clear Clear Clear 1
+INTERACTION FyronGod Clear FyronGod2 FyronGod 25000
+INTERACTION FyronGod Clear SpawnShip FyronGod 1000
+
+// Fyron Ship source
+INTERACTION FieryFortress Clear FieryFortress FyronAttacker 40
+
+INTERACTION Damage FyronAttacker Damage Damage 7500
+INTERACTION Damage FyronAttacker2 Damage Damage 7500
+INTERACTION Damage FieryFortress Damage Damage 6500
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INTERACTION AlienCitadel Asteroid AlienCitadel AlienCitadel 1
+INTERACTION FieryFortress Asteroid FieryFortress FieryFortress 1
+
+
+
+// Debris interactions
+INTERACTION Debris Debris Debris Debris 500
+INTERACTION Debris Debris Asteroid Asteroid 1
+INTERACTION Debris Asteroid Asteroid Asteroid 500
+
+
+
+
+INTERACTION Planet Fyron Fyron Fyron 1000
+
+
+
+
+
+
+
+
+
+INTERACTION Planet FyronAttacker Fyron Fyron 50000
+INTERACTION Planet SpawnShip Fyron Fyron 50000
+
+
+
+
+
+INTERACTION Damage FieryFortress Damage Damage 500
+INTERACTION Damage FyronAttacker Damage Damage 5500
+
+
+INTERACTION Fyron Clear Fyron Fire 70
+INTERACTION Fyron Clear Fyron WorshipPlain 70
+INTERACTION FieryFortress Clear FieryFortress Fire 10
+
+
+INTERACTION LowFyronite WorshipPlain LowFyronite LowFyronite 100
+INTERACTION WorshipPlain LowFyronite WorshipPlain WorshipPlain 101
+
+INTERACTION WorshipPlain Fyron WorshipPlain WorshipPlain 15
+INTERACTION WorshipPlain LowFyronite WorshipPlain WorshipPlain 150
+
+// The following INTERACTION is IMPORTANT!! Toggle to adjust development speed
+INTERACTION WorshipPlain FyronCivilian FyronCivilian FyronCivilian 400
+
+INTERACTION FieryFortress Fyron FieryFortress WorshipPlain 1500
+
+
+ELEMENT None Fort 220 50 0 0 1 1 1 1 LowFyronite 1 Text Fort
+INTERACTION Fort Fyron Fort LowFyronite 80000000
+
+INTERACTION MagmaPit3 Fyron Fort Fort 5
+
+INTERACTION LowFyronite Fort WorshipPlain WorshipPlain 5000
+INTERACTION LowFyronite WorshipPlain WorshipPlain WorshipPlain 5000
+
+
+
+
+ELEMENT None FieryFortress2 240 170 0 1 1 1 1 0 FieryFortressSpawner 1 Text Mar
+
+
+INTERACTION FieryFortress2 FieryFortress FieryFortress2 FieryFortress2 100
+INTERACTION FieryFortress FieryFortress2 FieryFortress FieryFortress 100
+INTERACTION FieryFortress2 Clear FieryFortress2 FieryFortress 1000
+
+INTERACTION FieryFortress2 Clear FieryFortress2 FieryFortressBuild 900000
+
+
+
+ELEMENT None FieryFortressSpawner 255 160 0 1 1 1 1 Clear 1 Text Mar
+
+
+INTERACTION Clear FieryFortressSpawner Clear Clear 10
+
+INTERACTION FieryFortress2 FieryFortressSpawner FieryFortress2 FieryFortress2 100
+INTERACTION FieryFortressSpawner FieryFortress2 FieryFortressSpawner FieryFortressSpawner 100
+INTERACTION FieryFortressSpawner Clear FieryFortressSpawner FieryFortress 100000
+
+
+
+
+
+
+
+
+
+// The following INTERACTION is IMPORTANT!! Toggle to adjust development speed
+INTERACTION UltraFyronite FyronCivilian UltraFyronite UltraFyronite 200
+
+
+
+INTERACTION FyronCivilian Fyronosphere UltraFyronite UltraFyronite 2
+INTERACTION FyronCivilian Clear UltraFyronite UltraFyronite 2
+
+INTERACTION UltraFyronite WorshipPlain UltraFyronite FyronCivilian 2
+
+
+INTERACTION UltraFyronite Clear WorshipPlain WorshipPlain 100
+INTERACTION WorshipPlain UltraFyronite WorshipPlain WorshipPlain 100
+
+INTERACTION Fyron UltraFyronite Fyron Fyron 50
+INTERACTION UltraFyronite Fyron UltraFyronite UltraFyronite 50
+
+
+
+
+
+
+
+
+
+BORDERR = 0
+BORDERG = 250
+BORDERB = 0
+
+SET CURSOR 2
+SET MENUTOP 0
+SET MENUBOTTOM 0
+SET MENULEFT 0
+SET MENURIGHT 0
+MENU REFRESH
+
+RESIZE 486 504
+EXEC clearscreen
+EXEC StartupScreenLeft

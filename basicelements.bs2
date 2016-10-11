@@ -1,0 +1,126 @@
+// Here's the syntax for creating groups, elements and interactions.
+
+// Groups :
+// Group [Groupname] [Menuorder] [Icon]
+// [Groupname]: The name of the Group. One word only.
+// [Menuorder]: The Elementorder of the Group.
+// [Icon]: The Icon of the Group.
+
+// Elements :
+// Element [Group] [Elementname] [Color-Red] [Color-Greeb] [Color-Blue] [Weight] [Spray] [Slide] [Viscousity] [Deathrate] [Die to] [Menuorder] [Icon]
+// [Group]: The Group the Element is in. Group must be defined when you define element.
+// [Elementname]: The name of the element. One word only.
+//                If an element with the same name already exists it is overwritten.
+// [Colors]: The RGB-values of the color the element should have.
+// [Weight]: The weight of the element. 0 means the Element cannot fall.
+//           1000 means 100% falling in air.
+// [Spray]: The spray rate.
+// [Slide]: How fast does the element slide.
+// [Viscousity]: the viscousity of the element.
+// [Deathrate]: The rate of dying. A higher rate causes a shorter life.
+//              32768 meands instant death
+// [Die to]: When the Element dies in converts to this element.
+// [Menuorder]: The Elementorder of the Group. (between 0 and 9999)
+// [Icon]: The Icon of the Element.
+
+// Interactions :
+// Interaction [Element] [Neighbour] [Element converts to] [Neighbour converts to] [Rate]
+// [Element]: The element thats starts the interaction.
+// [Neighbour]: The element that has to be next to the element.
+//              All means the element interacts with every element.
+// [Element converts to]: The element that replaces the element.
+// [Nighbour converts to]: The element that replaces the nighbour.
+// [Rate]: The rate. A higher rate means faster interactions.
+//         32768 meands instant interaction.
+
+// Create one group for all Elements with the icon stonegroup.bmp
+
+Group Stones 100 FILE stonegroup.bmp
+
+// Create an Element called Earth.
+// It has a color of (R:200 G:127 B:0).
+// It has no gravity, so it is fixed and will not fall down.
+
+Element Stones Earth 200 127 0
+
+// Create Sand.
+// It has a color of (R:230 G:180 B:255). It is yellow.
+// It has a weight of 90%. It will fall down.
+
+Element Stones Sand 230 180 0 10% 
+
+// Create Salt.
+// It has a color of (R:202 G:202 B:202). It is grey.
+// It has a weight of 75%. It will fall down.
+// It has an increased spray and slide rate. Tt will go faster to the side.
+
+Element Stones Salt 202 202 202 75% 1% 4%
+
+// Create Water.
+// It has a color of (R:0 G:0 B:255). It is blue.
+// It has a weight of 70%. It will fall down.
+// It has an increased spray and slide rate. It will go very fast to the side.
+
+Element Stones Water 0 0 255 70% 100% 20%
+
+// If Water gets in touch with Salt it converts itself into Saltwater and
+// clear the salt at a rate of 1%.
+
+Interaction Water Salt Saltwater Clear 1%
+
+// Create Saltwater.
+// It has a color of (R:0 G:0 B:180). It is darkblue.
+// It has a weight of 71%. It will fall down. It is heavier as water so
+// it will sink in water.
+// It has an increased spray and slide rate. It will go very fast to the side.
+
+Element None Saltwater 0 0 180 71% 100% 20%
+
+// Create an Element called Plant.
+// It has a color of (R:0 G:255 B:0). It is green.
+// It has no gravity, so it is fixed and will not fall down.
+
+Element Stones Plant 0 255 0 0 1 1 1
+
+// If Plant gets in touch with Water it grows by transfering the Water Pixel
+// into Plant at a rate of 3%.
+
+Interaction Plant Water Plant Plant 3%
+
+// If Plant gets in touch with Fire it is transfered into BurningPlant.
+
+Interaction Plant Fire BurningPlant Fire 1%
+
+// If Plant gets in touch with BurningPlant it is transfered into BurningPlant.
+
+Interaction Plant BurningPlant BurningPlant BurningPlant 1%
+
+// Create an Element called Plant.
+// It has a color of (R:0 G:199 B:0). It is darkred.
+// It has no gravity, so it is fixed and will not fall down.
+// It dies to Clear at a rate of 1%. It will vanish by time.
+
+Element None BurningPlant 199 0 0 0 1% 1% 1% 1% Clear
+
+// If Plant is at the border to nothing it will produce Fire at a rate of 50%.
+
+Interaction BurningPlant Clear BurningPlant Fire 50%
+
+// Create Oil.
+// It has a color of (R:100 G:0 B:0). It is darkred.
+// It has a weight of 50%. It will fall down.
+// It has an increased spray and slide rate. It will go very fast to the side.
+
+Element Stones Oil 100 0 0 50% 10% 15%
+
+// If Oil gets in touch with Fire it is transfered into Fire.
+
+Interaction Oil Fire Fire Fire 10%
+
+// Create an Element called Fire.
+// It has a color of (R:255 G:0 B:0). It is red.
+// It has a negative gravity, so it will not rise up.
+// It dies to Clear at a rate of 10%. It will vanish by time.
+
+Element Stones Fire 255 0 0 -400 1 1 1 10% Clear
+

@@ -1,0 +1,199 @@
+INCLUDE lemmingselements.bs2
+
+MENU TOP CLEAR
+MENU TOP ADD TEXT "Main Menu" FILE home.bmp <INCLUDE start.bs2>
+MENU TOP ADD TEXT "" SEPERATOR 0 <>
+MENU TOP ADD TEXT "Pause" FILE pause.bmp <SET SPEED 0>
+MENU TOP ADD TEXT "Speed: 60" FILE play.bmp <SET SPEED 60>
+MENU TOP ADD TEXT "Speed: Unlimited" FILE fast.bmp <SET SPEED 100000>
+MENU TOP ADD TEXT "" SEPERATOR 0 <>
+
+SET ELEMENT1 ELEMENT:Lemmings
+SET ELEMENT2 0
+SET ELEMENT4 1
+SET ZOOM 1
+SET BORDER 0
+SET lemmingsout 0
+SET lemmingsin 0
+
+REMOVETRIGGER lemmingsstart
+
+REMOVETRIGGER lemmingsininc
+ON lemmingsininc SET lemmingsin (lemmingsin + 1)
+ON lemmingsininc DRAW ELEMENT:Clear FILLEDCIRCLE X2 Y2 0
+
+REMOVETRIGGER entry
+ON entry DRAW ELEMENT:Earth FILLEDRECT ($0 - 10) ($1 - 2) 21 2  
+ON entry DRAW ELEMENT:CLEAR LINE ($0 - 10) $1 (COS ($3 * 1000) / 100) (SIN ($3 * 1000) / 100)
+ON entry DRAW ELEMENT:Earth LINE ($0 - 10) $1 (COS (($3 + 1) * 1000) / 100) (SIN (($3 + 1) * 1000) / 100)
+ON entry DRAW ELEMENT:CLEAR LINE ($0 + 10) $1 (0 - (COS ($3 * 1000) / 100)) (SIN ($3 * 1000) / 100)
+ON entry DRAW ELEMENT:Earth LINE ($0 + 10) $1 (0 - (COS (($3 + 1) * 1000) / 100)) (SIN (($3 + 1) * 1000) / 100)
+ON entry IF ($3 < 90) <TIMER 1 FRAMES entry $0 $1 $2 ($3 + 1)>
+ON entry IF ($3 >= 90) <TIMER 1 FRAMES entrytimer $0 $1 ($2 - 1)>
+
+REMOVETRIGGER entrytimer
+ON entrytimer SET lemmingsout (lemmingsout + 5)
+ON entrytimer DRAW ELEMENT:Lemmings LINE ($0 - 2) $1 4 0
+ON entrytimer IF ($2 >= 5) <TIMER 5 FRAMES entrytimer $0 $1 $2> $0 $1 ($2 - 5)
+
+REMOVETRIGGER exit
+ON exit WRITE ELEMENT:Exit ($0 - 10) ($1 - 1) 12 TEXT "Exit"  
+ON exit DRAW ELEMENT:Exit LINE ($0 - 11) $1 22 0  
+ON exit DRAW ELEMENT:Exit LINE ($0 - 11) $1 0 -13  
+ON exit DRAW ELEMENT:Exit LINE ($0 + 11) $1 0 -13  
+ON exit DRAW ELEMENT:Exit LINE ($0 - 11) ($1 - 13) 22 0  
+
+MENU LEFT CLEAR
+MENU LEFT ADD TEXT "" TEXT Out: <>
+MENU LEFT ADD TEXT "Lemmings out:" NUMBER lemmingsout <>
+MENU LEFT ADD TEXT "" TEXT " " <>
+MENU LEFT ADD TEXT "" TEXT In: <>
+MENU LEFT ADD TEXT "Lemmings in" NUMBER lemmingsin <>
+MENU LEFT ADD TEXT "" TEXT of <>
+MENU LEFT ADD TEXT "Lemmings needed" NUMBER lemmingsneeded <>
+
+REMOVETRIGGER updatestats
+ON updatestats MENU REFRESH
+ON updatestats IF (lemmingsin >= lemmingsneeded) win
+ON updatestats IF (lemmingsin >= lemmingsneeded) <REMOVETRIGGER win>
+ON updatestats TIMER 2 FRAMES updatestats
+EXEC updatestats
+
+REMOVETRIGGER win
+ON win MENU BOTTOM ADD TEXT "" SEPERATOR 0 <>
+ON win MENU BOTTOM ADD TEXT "" FILE youwon.bmp <>
+ON win MENU BOTTOM ADD TEXT "" SEPERATOR 0 <>
+
+REMOVETRIGGER drawing 
+ON drawing IF ((BUTTON == 1) && (CLICKED == 1) && ((X PIXEL Y) == ELEMENT:Lemmings) ) drawclick
+ON drawing IF ((BUTTON == 2) && (CLICKED == 1) ) togglezoom
+
+REMOVETRIGGER togglezoom 
+ON togglezoom IF (ZOOM == 1) <SET ZOOM 3>
+ON togglezoom IF (ZOOM == 2) <SET ZOOM 1>
+ON togglezoom IF (ZOOM == 3) <SET ZOOM 2>
+ON togglezoom IF (ZOOM == 2) <SCROLL X Y> 
+
+REMOVETRIGGER drawclick 
+ON drawclick IF ((ELEMENT1 == ELEMENT:Explosion) && (explosionscounter == 0)) <SET ELEMENT1 ELEMENT:Lemmings>
+ON drawclick IF (ELEMENT1 == ELEMENT:Explosion) <SET explosionscounter (explosionscounter - 1)>
+ON drawclick IF ((ELEMENT1 == ELEMENT:Shovel) && (shovelcounter == 0)) <SET ELEMENT1 ELEMENT:Lemmings>
+ON drawclick IF (ELEMENT1 == ELEMENT:Shovel) <SET shovelcounter (shovelcounter - 1)>
+ON drawclick IF ((ELEMENT1 == ELEMENT:ShovelLeft) && (shovelleftcounter == 0)) <SET ELEMENT1 ELEMENT:Lemmings>
+ON drawclick IF (ELEMENT1 == ELEMENT:ShovelLeft) <SET shovelleftcounter (shovelleftcounter - 1)>
+ON drawclick IF ((ELEMENT1 == ELEMENT:ShovelRight) && (shovelrightcounter == 0)) <SET ELEMENT1 ELEMENT:Lemmings>
+ON drawclick IF (ELEMENT1 == ELEMENT:ShovelRight) <SET shovelrightcounter (shovelrightcounter - 1)>
+ON drawclick IF ((ELEMENT1 == ELEMENT:Stop) && (stopcounter == 0)) <SET ELEMENT1 ELEMENT:Lemmings>
+ON drawclick IF (ELEMENT1 == ELEMENT:Stop) <SET stopcounter (stopcounter - 1)>
+ON drawclick DRAW ELEMENT1 REPLACEFILLEDCIRCLE X Y 0 0 ELEMENT:Lemmings
+ON drawclick EXEC rightlemmingsmenu
+
+REMOVETRIGGER lemmingsreplacefilledcircle 
+ON lemmingsreplacefilledcircle DRAW $0 REPLACEFILLEDCIRCLE $1 $2 $3 0 ELEMENT:Lemmings
+ON lemmingsreplacefilledcircle DRAW $0 REPLACEFILLEDCIRCLE $1 $2 $3 0 ELEMENT:Earth
+ON lemmingsreplacefilledcircle DRAW $0 REPLACEFILLEDCIRCLE $1 $2 $3 0 ELEMENT:Earth2
+ON lemmingsreplacefilledcircle DRAW $0 REPLACEFILLEDCIRCLE $1 $2 $3 0 ELEMENT:Grass
+ON lemmingsreplacefilledcircle DRAW $0 REPLACEFILLEDCIRCLE $1 $2 $3 0 ELEMENT:Clear
+
+REMOVETRIGGER lemmingsreplaceline 
+ON lemmingsreplaceline DRAW $0 REPLACELINE $1 $2 $3 $4 ELEMENT:Lemmings
+ON lemmingsreplaceline DRAW $0 REPLACELINE $1 $2 $3 $4 ELEMENT:Earth
+ON lemmingsreplaceline DRAW $0 REPLACELINE $1 $2 $3 $4 ELEMENT:Earth2
+ON lemmingsreplaceline DRAW $0 REPLACELINE $1 $2 $3 $4 ELEMENT:Grass
+ON lemmingsreplaceline DRAW $0 REPLACELINE $1 $2 $3 $4 ELEMENT:Clear
+
+REMOVETRIGGER isdestroyable
+ON isdestroyable SET destroyable 0
+ON isdestroyable IF (($0 PIXEL $1) == ELEMENT:Earth ) <SET destroyable 1>
+ON isdestroyable IF (($0 PIXEL $1) == ELEMENT:Earth2 ) <SET destroyable 1>
+ON isdestroyable IF (($0 PIXEL $1) == ELEMENT:Grass ) <SET destroyable 1>
+
+REMOVETRIGGER lemmingsexplosion 
+ON lemmingsexplosion DRAW ELEMENT:Explosion2 FILLEDCIRCLE X1 Y1 1 0
+ON lemmingsexplosion TIMER 25 FRAMES lemmingsexplosiontimer X2 Y2 0
+
+REMOVETRIGGER lemmingsexplosiontimer 
+ON lemmingsexplosiontimer EXEC lemmingsreplacefilledcircle ELEMENT:Explosion2 $0 $1 $2 $3
+ON lemmingsexplosiontimer DRAW ELEMENT:Clear REPLACEFILLEDCIRCLE $0 $1 ($2 - 1) 0 ELEMENT:Explosion2
+ON lemmingsexplosiontimer IF ($2 < 10) <TIMER 2 FRAMES lemmingsexplosiontimer $0 $1 $2> $0 $1 ($2 + 1)
+ON lemmingsexplosiontimer IF ($2 == 10) <DRAW ELEMENT:Clear REPLACEFILLEDCIRCLE $0 $1 ($2 - 1) 0 ELEMENT:Explosion2> $0 $1 ($2 + 1)
+
+REMOVETRIGGER lemmingsstop
+ON lemmingsstop DRAW ELEMENT:Earth FILLEDCIRCLE X1 Y1 1 0
+ON lemmingsstop TIMER 25 FRAMES lemmingsstoptimer X1 Y1 0
+
+REMOVETRIGGER lemmingsstoptimer 
+ON lemmingsstoptimer EXEC lemmingsreplacefilledcircle ELEMENT:Earth $0 $1 $2 $3
+ON lemmingsstoptimer IF ($2 < 10) <TIMER 2 FRAMES lemmingsstoptimer $0 $1 $2> $0 $1 ($2 + 1)>
+
+REMOVETRIGGER lemmingsshovel
+ON lemmingsshovel DRAW ELEMENT:Lemmings FILLEDCIRCLE X1 Y1 0 0
+ON lemmingsshovel TIMER 4 FRAMES lemmingsshoveltimer X1 (Y1 + 1) 0
+
+REMOVETRIGGER lemmingsshoveltimer
+ON lemmingsshoveltimer EXEC isdestroyable $0 $1
+ON lemmingsshoveltimer IF ( destroyable && ($2 < 20) ) lemmingsshoveling $0 $1 $2
+
+REMOVETRIGGER lemmingsshoveling
+ON lemmingsshoveling EXEC lemmingsreplaceline ELEMENT:Clear ($0 - 4) $1 9 0
+ON lemmingsshoveling TIMER 10 FRAMES lemmingsshoveltimer $0 ($1 + 1) ($2 + 1)
+
+REMOVETRIGGER lemmingsshovelleft
+ON lemmingsshovelleft DRAW ELEMENT:Lemmings FILLEDCIRCLE X1 Y1 0 0
+ON lemmingsshovelleft TIMER 4 FRAMES lemmingsshoveltimerleft X1 (Y1 + 1) 0
+
+REMOVETRIGGER lemmingsshoveltimerleft
+ON lemmingsshoveltimerleft EXEC isdestroyable $0 $1
+ON lemmingsshoveltimerleft IF ( destroyable && ($2 < 20) ) lemmingsshovelingleft $0 $1 $2
+
+REMOVETRIGGER lemmingsshovelingleft
+ON lemmingsshovelingleft EXEC lemmingsreplaceline ELEMENT:Clear ($0 - 4) $1 9 0
+ON lemmingsshovelingleft TIMER 10 FRAMES lemmingsshoveltimerleft ($0 - 1) ($1 + 1) ($2 + 1)
+
+REMOVETRIGGER lemmingsshovelright
+ON lemmingsshovelright DRAW ELEMENT:Lemmings FILLEDCIRCLE X1 Y1 0 0
+ON lemmingsshovelright TIMER 4 FRAMES lemmingsshoveltimerright X1 (Y1 + 1) 0
+
+REMOVETRIGGER lemmingsshoveltimerright
+ON lemmingsshoveltimerleft EXEC isdestroyable $0 $1
+ON lemmingsshoveltimerright IF ( destroyable && ($2 < 20) ) lemmingsshovelingright $0 $1 $2
+
+REMOVETRIGGER lemmingsshovelingright
+ON lemmingsshovelingright EXEC lemmingsreplaceline ELEMENT:Clear ($0 - 4) $1 9 0
+ON lemmingsshovelingright TIMER 10 FRAMES lemmingsshoveltimerright ($0 + 1) ($1 + 1) ($2 + 1)
+
+REMOVETRIGGER rightlemmingsmenu
+ON rightlemmingsmenu MENU RIGHT CLEAR
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "Stopper" FILE stop.bmp <SET ELEMENT1 ELEMENT:Stop>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "" NUMBER stopcounter <>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "Digger" FILE shovel.bmp <SET ELEMENT1 ELEMENT:Shovel>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "" NUMBER shovelcounter <>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "Left digger" FILE shovel-left.bmp <SET ELEMENT1 ELEMENT:ShovelLeft>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "" NUMBER shovelleftcounter <>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "Right digger" FILE shovel-right.bmp <SET ELEMENT1 ELEMENT:ShovelRight>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "" NUMBER shovelrightcounter <>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "Exploder" FILE explosion.bmp <SET ELEMENT1 ELEMENT:Explosion>
+ON rightlemmingsmenu MENU RIGHT ADD TEXT "" NUMBER explosionscounter <>
+
+EXEC rightlemmingsmenu 
+
+REMOVETRIGGER niceterrain
+ON niceterrain InteractionTrigger Earth Clear niceterrainearth 1000
+ON niceterrain Interaction Earth Earth Earth2 Earth 200
+ON niceterrain Interaction Earth2 Earth Earth Earth 500
+ON niceterrain InteractionTrigger Grass Clear niceterraingrass 500
+ON niceterrain TIMER $0 FRAMES niceterrainend
+
+REMOVETRIGGER niceterrainend
+ON niceterrainend INTERACTIONCLEAR Earth
+ON niceterrainend INTERACTIONCLEAR Earth2
+ON niceterrainend INTERACTIONCLEAR Grass
+ON niceterrainend EXEC lemmingsstart
+
+REMOVETRIGGER niceterrainearth 
+ON niceterrainearth IF (Y1 <=  Y2) <DRAW ELEMENT:Earth FILLEDCIRCLE X2 Y2 0 0>
+ON niceterrainearth IF (Y1 > Y2) <DRAW ELEMENT:Grass FILLEDCIRCLE X2 Y2 0 0>
+ON niceterrainearth IF ((Y1 > Y2) && (0 RAND 5 > 3) ) <DRAW ELEMENT:Earth FILLEDCIRCLE X2 Y2 0 0>
+
+REMOVETRIGGER niceterraingrass 
+ON niceterraingrass IF (Y1 >= Y2) <DRAW ELEMENT:Grass FILLEDCIRCLE X2 Y2 0 0>

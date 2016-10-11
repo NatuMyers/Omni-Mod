@@ -1,0 +1,512 @@
+EXEC clearall
+INCLUDE sandbox.bs2 
+INCLUDE explosions.bs2 
+
+GROUP CLEARALL
+ELEMENTSCLEAR
+MENURIGHT = 64
+
+GROUP Misc 0 HEX 000000007FFFFFFE4000000240000002400000024000000240000002400000024000000240000002418D0002418C00024155330241554402412514024125630240000002400000024000000240000002400000024000000240000002400000024000000240000002400000024000000240000002400000027FFFFFFE00000000 255 255 255
+GROUP Blue 7 HEX 000000007FFFFFFE400000024000000240000002400000024000000240000002400000024000000240F20002408A000240F2A402408AAA02408AA80240F2660240000002400000024000000240000002400000024000000240000002400000024000000240000002400000024000000240000002400000027FFFFFFE00000000 0 0 255
+GROUP Red 10 HEX 000000007FFFFFFE400000024000000240000002400000024000000240000002400000024000000240F004024088040240891C0240F2A402408A240240899C0240000002400000024000000240000002400000024000000240000002400000024000000240000002400000024000000240000002400000027FFFFFFE00000000 255 0 0
+
+Message This was really one of the more humble, organized mods in the FSG community. It came from somebody that made over 8 mods, and helped out the community in numerous ways. He even helped out MY Omni mod... Respectfully by DarkSDL. (2008)
+
+
+// ###BLUE###
+
+// Civilian 
+Element Blue Civilian 0 120 255 0 1 1 1 1 Infantry 0 TEXT Civilian
+Interaction Civilian Clear Clear Civilian 17000
+Interaction Civilian Infantry Infantry Infantry 1000
+
+// Infantry
+Element Blue Infantry 0 0 255 0 1 1 1 0 Clear 0 TEXT Infantry
+Element None Blood 140 0 0 0 1 1 1 2000 Clear 0 TEXT Blood
+Element None InfantryBurn 255 120 120 0 1 1 1 1000 Fire 0 TEXT InfantryBurn
+Interaction Infantry Fire InfantryBurn Fire 6000
+Interaction InfantryBurn Clear Clear InfantryBurn 17000
+Interaction InfantryBurn Clear InfantryBurn Fire 6000
+Interaction Blood Clear Clear Blood 2000
+Interaction Infantry Clear Clear Infantry 15000
+Interaction Infantry InfantryR Infantry Die 5100
+Interaction Infantry Fired Die Fired 25100
+Interaction Infantry Firec Die Fired 25100
+Interaction Infantry Firee Die Fired 25100
+Interaction Infantry TankR Infantry Clear 60
+
+// Base
+Element Blue BBase 140 140 140 0 1 1 1 200 BBase2 0 TEXT BlueBase
+Element None BBase2 120 120 190 0 1 1 1 300 BBase 0 TEXT BBase2
+Interaction BBase Clear BBase Infantry 10
+Interaction BBase Clear BBase TankB 5
+Interaction BBase Infantry BBase Clear 600
+Interaction BBase2 Infantry BBase Clear 800
+Interaction BBase2 water BBase2 Navy 400
+
+// Tank
+Element Blue TankB 150 150 255 0 1 1 1 0 Clear 0 TEXT TankB
+Element None Shell 80 80 80 0 1 1 1 30000 Clear 0 TEXT Shell
+Interaction TankB Clear Clear TankB 10000
+Interaction TankB InfantryR TankB Die 32768
+Interaction TankB RBase TankB Clear 1000
+Interaction TankB Clear TankB Shell 100
+Interaction Shell Clear Clear Shell 27000
+
+InteractionTrigger Shell InfantryR bombed2 32768
+InteractionTrigger Shell VeteranR bombed2 32768
+InteractionTrigger Shell TankR bombed2 32768
+InteractionTrigger Shell TurretR bombed2 32768
+InteractionTrigger Shell GasEmittersR bombed2 32768
+InteractionTrigger Shell Nuke2R bombed2 32768
+
+// Rocketeers
+Element Blue Veteran 0 0 140 0 1 1 1 0 Clear 0 TEXT Veteran
+Element None Whiteout 255 255 255 0 1 1 1 15000 Clear 0 TEXT Whiteout
+Interaction Veteran Fire VeteranBurn Fire 6000
+Interaction Veteran Whiteout Veteran Veteran 1000
+Interaction Veteran Clear Clear Veteran 15000
+
+InteractionTrigger Veteran InfantryR rocket 16000
+InteractionTrigger Veteran TankR rocket 16000 
+InteractionTrigger Veteran VeteranR rocket 16000 
+InteractionTrigger Veteran Nuke2R rocket 36000 
+
+REMOVETRIGGER rocket
+ON rocket DRAW ELEMENT:Whiteout FILLEDCIRCLE X2 Y2 3 
+
+// Snipers
+Element Blue Sniper 0 0 120 0 1 1 1 20000 Sniper2 0 TEXT Sniper
+Element None Sniper2 0 0 0 0 1 1 1 20000 Sniper 0 TEXT Sniper2
+Element None SniperBullet 150 80 40 0 1 1 1 1000 Clear 0 TEXT SniperBullet
+Interaction Sniper Tree Tree Sniper 15000
+Interaction Sniper2 Tree Tree Sniper2 15000
+Interaction Sniper Clear Sniper SniperBullet 7200
+Interaction Sniper SniperR Sniper Tree 32000
+Interaction SniperBullet Clear Clear SniperBullet 26000
+
+InteractionTrigger SniperBullet VeteranR snipehit 26000
+InteractionTrigger SniperBullet InfantryR snipehit 26000
+InteractionTrigger SniperBullet GasEmittersR snipehit 26000
+InteractionTrigger SniperBullet Nuke2R snipehit 26000
+
+// Navy
+Element Blue Navy 120 120 255 0 1 1 1 0 Clear 0 TEXT BattleShip
+Element None explosion 210 0 0 0 1 1 1 2000 explosion2 0 TEXT explosion
+Element None explosion2 255 100 50 0 1 1 1 3000 explosion3 0 TEXT explosion2
+Element None explosion3 200 200 0 0 1 1 1 4000 water 0 TEXT explosion3 
+Interaction Navy water NavyTrail Navy 11000
+Interaction Navy NavyTrail NavyTrail Navy 11000
+Interaction Navy NavyR Navy NavyDie 3000
+
+InteractionTrigger Navy NavyR navyexplosion 1000
+
+REMOVETRIGGER navyexplosion
+ON navyexplosion DRAW ELEMENT:explosion FILLEDCIRCLE X2 Y2 (6 RAND RADIUS)
+
+// Airplanes
+Element Blue Airplane 0 255 255 0 1 1 1 0 Clear 0 TEXT Airplane
+Element None Gas 120 50 12 0 1 1 1 2000 Clear 0 TEXT Gas
+Interaction Airplane Clear Gas Airplane 25000
+Interaction Airplane RBase Gas Airplane 25000
+Interaction Airplane RBase2 Gas Airplane 20000
+
+InteractionTrigger Gas InfantryR airbomb 1000
+InteractionTrigger Gas TankR airbomb 1000
+InteractionTrigger Gas NavyR airbomb 1000
+InteractionTrigger Gas VeteranR airbomb 1000
+InteractionTrigger Gas AirplaneR airbomb 1000
+InteractionTrigger Gas RBase airbomb 1000
+InteractionTrigger Gas GasEmittersR airbomb 1000
+InteractionTrigger Gas Nuke2R airbomb 1000
+
+
+// Turret
+Element Blue Turret 120 120 255 0 1 1 1 0 Clear 0 TEXT Turret
+Element None clearb 150 80 40 0 1 1 1 1500 Clear 0 TEXT clearb
+Interaction InfantryR Turret Clear InfantryR 12000
+Interaction VeteranR Turret Clear VeteranR 12000
+Interaction Turret Clear Turret clearb 10000
+Interaction clearb Clear Clear clearb 16768
+
+InteractionTrigger clearb InfantryR turr 20000
+InteractionTrigger clearb VeteranR turr 20000
+InteractionTrigger clearb AirplaneR turr 20000
+InteractionTrigger clearb GeneralR turr 20000
+InteractionTrigger clearb GasEmittersR turr 20000
+InteractionTrigger clearb Nuke2R turr 20000
+
+// General
+Element Blue General 0 0 40 0 1 1 1 16000 Gen2 0 TEXT General
+Element None Gen2 0 0 100 0 1 1 1 16000 Gen3 0 TEXT Gen2
+Element None Gen3 0 0 255 0 1 1 1 16000 Gen4 0 TEXT Gen3
+Element None Gen4 0 150 150 0 1 1 1 32000 General 0 TEXT Gen4
+Interaction General InfantryR General Die 29000
+Interaction Gen2 InfantryR Gen2 Die 29000
+Interaction Gen3 TankR Gen3 Die 29000
+Interaction Gen4 TankR Gen4 Die 29000
+Interaction General GeneralR Die Die 29000
+Interaction Gen2 GeneralR Die Die 29000
+Interaction General GenR2 Die Die 29000
+Interaction General Clear Clear General 16000
+Interaction Gen2 Clear Clear Gen2 16000
+Interaction Gen3 Clear Clear Gen3 16000
+Interaction Gen4 Clear Clear Gen4 16000
+
+// Poison Gas Units
+Element Blue GasEmitters 0 0 255 0 1 1 1 20000 Gas2 0 TEXT GasEmitters
+Element None Gas2 0 0 0 0 1 1 1 20000 GasEmitters 0 TEXT Gas2
+Element None Gas3 0 255 0 0 1 1 1 32000 Gass 0 TEXT Gas3
+Element None Gass 0 120 0 0 1 1 1 1000 Clear 0 TEXT Gass
+Element None Sick 0 160 20 0 1 1 1 1000 Clear 0 TEXT Sick
+Interaction GasEmitters Clear Clear GasEmitters 12000
+Interaction Gas2 Clear Clear Gas2 14000
+Interaction Gas2 Clear Gas2 Gas3 1000
+Interaction Gas3 Clear Clear Gas3 14000
+Interaction Gass Clear Clear Gass 14000
+Interaction Gass InfantryR Gass Sick 20000
+Interaction Gass GeneralR Gass Sick 20000
+Interaction Gass NukeCarrierR Gass Sick 20000
+
+// Tactical Nuclear Explosive Carriers
+Element Blue NukeCarrier 0 150 255 0 1 1 1 32768 Nuke2 0 TEXT NukeCarrier
+Element None Nuke2 155 155 155 0 1 1 1 32768 NukeCarrier 0 TEXT Nuke2
+Element None Whit 255 255 255 0 1 1 1 22000 White2 0 TEXT Whit
+Element None White2 150 80 40 0 1 1 1 1000 red2 0 TEXT White2
+Element None red2 255 0 0 0 1 1 1 8000 red3 0 TEXT red2
+Element None red3 255 100 50 0 1 1 1 9000 red4 0 TEXT red3
+Element None red4 255 255 50 0 1 1 1 9000 Clear 0 TEXT red4
+Interaction Nuke2 Clear Clear Nuke2 17000
+Interaction NukeCarrier Clear Clear NukeCarrier 15000
+
+InteractionTrigger Nuke2 InfantryR nukeplode 32000
+InteractionTrigger Nuke2 TankR nukeplode 32000
+InteractionTrigger Nuke2 GeneralR nukeplode 32000
+InteractionTrigger Nuke2 VeteranR nukeplode 32000
+InteractionTrigger Nuke2 NukeCarrierR nukeplode 32000
+InteractionTrigger Nuke2 RBase2 nukeplode 32000
+InteractionTrigger Nuke2 Wall nukeplode 32000
+InteractionTrigger Nuke2 RBase nukeplode 32000
+
+REMOVETRIGGER nukeplode
+ON nukeplode DRAW ELEMENT:Whit FILL X2 Y2 6 6
+
+NOBIAS ELEMENT:NukeCarrier
+NOBIAS ELEMENT:Nuke2
+
+// ###RED###
+
+// Civilian 
+Element Red CivilianR 255 90 120 0 1 1 1 1 InfantryR 0 TEXT CivilianR
+Interaction CivilianR Clear Clear CivilianR 17000
+Interaction CivilianR InfantryR InfantryR InfantryR 1000
+
+Element Red InfantryR 255 0 0 0 1 1 1 0 Clear 0 TEXT InfantryR
+Element None Die 255 255 255 0 1 1 1 10000 Clear 0 TEXT Die
+Interaction InfantryR Fire InfantryBurn Fire 6000
+Interaction InfantryR Clear Clear InfantryR 15000
+Interaction InfantryR Infantry InfantryR Die 5000
+Interaction Die Clear Die Blood 2000
+Interaction InfantryR Fired Die Fired 25100
+Interaction InfantryR Firec Die Fired 25100
+Interaction InfantryR Firee Die Fired 25100
+Interaction InfantryR TankB InfantryR Clear 60
+
+// Base
+Element Red RBase 140 140 140 0 1 1 1 200 RBase2 0 TEXT RedBase
+Element None RBase2 190 120 120 0 1 1 1 300 RBase 0 TEXT RBase2
+Interaction RBase Clear RBase InfantryR 10
+Interaction RBase Clear RBase TankR 5
+Interaction RBase InfantryR RBase Clear 600
+Interaction RBase2 InfantryR RBase Clear 800
+Interaction RBase2 water RBase2 NavyR 400
+
+// Tank
+Element Red TankR 250 150 150 0 1 1 1 0 Clear 0 TEXT TankR
+Element None ShellR 80 80 80 0 1 1 1 30000 Clear 0 TEXT ShellR
+Interaction TankR Clear Clear TankR 10000
+Interaction TankR Infantry TankR Die 32768
+Interaction TankR BBase TankR Clear 1000
+Interaction TankR Clear TankR ShellR 100
+Interaction ShellR Clear Clear ShellR 27000
+
+InteractionTrigger ShellR Infantry bombed2 32768
+InteractionTrigger ShellR Veteran bombed2 32768
+InteractionTrigger ShellR TankB bombed2 32768
+InteractionTrigger ShellR Turret bombed2 32768
+InteractionTrigger ShellR GasEmitters bombed2 32768
+InteractionTrigger ShellR Nuke2 bombed2 32768
+
+// Rocketeers
+Element Red VeteranR 140 0 0 0 1 1 1 0 Clear 0 TEXT VeteranR
+Element None VeteranBurn 140 60 60 0 1 1 1 1000 Fire 0 TEXT VeteranBurn
+Interaction VeteranR Fire VeteranBurn Fire 6000
+Interaction VeteranBurn Clear VeteranBurn Fire 4000
+Interaction VeteranBurn Clear Clear VeteranBurn 17000
+Interaction VeteranR Whiteout VeteranR VeteranR 1000
+Interaction VeteranR Clear Clear VeteranR 15000
+
+InteractionTrigger VeteranR Infantry rocket 16000
+InteractionTrigger VeteranR TankB rocket 16000 
+InteractionTrigger VeteranR Veteran rocket 16000 
+InteractionTrigger VeteranR Nuke2 rocket 16000 
+
+// Snipers
+Element Red SniperR 120 0 0 0 1 1 1 20000 SniperR2 0 TEXT SniperR
+Element None SniperR2 0 0 0 0 1 1 1 20000 SniperR 0 TEXT SniperR2
+Element None SniperBulletR 150 80 40 0 1 1 1 1000 Clear 0 TEXT SniperBulletR
+Interaction SniperR Tree Tree SniperR 15000
+Interaction SniperR2 Tree Tree SniperR2 15000
+Interaction SniperR Clear SniperR SniperBulletR 7200
+Interaction SniperR Sniper SniperR Tree 32000
+Interaction SniperBulletR Clear Clear SniperBulletR 26000
+
+InteractionTrigger SniperBulletR Veteran snipehit 26000
+InteractionTrigger SniperBulletR Infantry snipehit 26000
+InteractionTrigger SniperBulletR GasEmitters snipehit 26000
+InteractionTrigger SniperBulletR Nuke2 snipehit 26000
+
+REMOVETRIGGER snipehit
+ON snipehit DRAW ELEMENT:Whitein FILLEDCIRCLE X2 Y2 2
+
+// Navy
+Element Red NavyR 255 120 120 0 1 1 1 0 Clear 0 TEXT BattleShipR
+Element None NavyTrail 10 40 190 0 1 1 1 4000 water 0 TEXT NavyTrail
+Element None NavyDie 255 255 255 0 1 1 1 18000 Die2 0 TEXT NavyDie
+Element None Die2 0 0 155 0 1 1 1 1000 water 0 TEXT Die2
+Interaction NavyR water NavyTrail NavyR 11000
+Interaction NavyR NavyTrail NavyTrail NavyR 11000
+Interaction NavyR Navy NavyR NavyDie 3000
+
+InteractionTrigger NavyR Navy navyexplosion 2000
+
+// Airplanes
+Element Red AirplaneR 255 0 255 0 1 1 1 0 Clear 0 TEXT Airplane
+Element None GasR 120 50 12 0 1 1 1 2000 Clear 0 TEXT GasR
+Interaction AirplaneR Clear GasR AirplaneR 20000
+Interaction AirplaneR BBase GasR AirplaneR 25000
+Interaction AirplaneR BBase2 GasR AirplaneR 10000
+
+InteractionTrigger GasR Infantry airbomb 1000
+InteractionTrigger GasR Tank airbomb 1000
+InteractionTrigger GasR Navy airbomb 1000
+InteractionTrigger GasR Veteran airbomb 1000
+InteractionTrigger GasR Airplane airbomb 1000
+InteractionTrigger GasR BBase airbomb 1000
+InteractionTrigger GasR GasEmitters airbomb 1000
+InteractionTrigger GasR Nuke2 airbomb 1000
+
+REMOVETRIGGER airbomb
+ON airbomb DRAW ELEMENT:Fired FILLEDCIRCLE X1 Y1 (10 RAND RADIUS)
+
+// Turret
+Element Red TurretR 255 120 120 0 1 1 1 0 Clear 0 TEXT TurretR
+Element None clearr 150 80 40 0 1 1 1 1500 Clear 0 TEXT clearr
+Element None Whitein 255 255 255 0 1 1 1 14000 Grayin 0 TEXT Whitein
+Element None Grayin 150 150 150 0 1 1 1 4000 Clear 0 TEXT Grayin
+Interaction Infantry TurretR Clear Infantry 12000
+Interaction Veteran TurretR Clear Veteran 12000
+Interaction TurretR Clear TurretR clearr 10000
+Interaction clearr Clear Clear clearr 16768
+
+InteractionTrigger clearr Infantry turr 20000
+InteractionTrigger clearr Veteran turr 20000
+InteractionTrigger clearr Airplane turr 20000
+InteractionTrigger clearr General turr 20000
+InteractionTrigger clearr GasEmitters turr 20000
+InteractionTrigger clearr Nuke2 turr 20000
+
+REMOVETRIGGER turr
+ON turr DRAW ELEMENT:Whitein FILLEDCIRCLE X1 Y1 (5 RAND RADIUS)
+
+// General
+Element Red GeneralR 40 0 0 0 1 1 1 16000 GenR2 0 TEXT GeneralR
+Element None GenR2 100 0 0 0 1 1 1 16000 GenR3 0 TEXT GenR2
+Element None GenR3 255 0 0 0 1 1 1 16000 GenR4 0 TEXT GenR3
+Element None GenR4 150 0 150 0 1 1 1 32000 GeneralR 0 TEXT GenR4
+Interaction GeneralR Infantry GeneralR Die 29000
+Interaction GenR2 Infantry GenR2 Die 29000
+Interaction GenR3 TankB GenR3 Die 29000
+Interaction GenR4 TankB GenR4 Die 29000
+Interaction GeneralR General Die Die 29000
+Interaction GenR2 General Die Die 29000
+Interaction GeneralR Gen2 Die Die 29000
+Interaction GeneralR Clear Clear GeneralR 16000
+Interaction GenR2 Clear Clear GenR2 16000
+Interaction GenR3 Clear Clear GenR3 16000
+Interaction GenR4 Clear Clear GenR4 16000
+
+// Poison Gas Units
+Element Red GasEmittersR 255 0 0 0 1 1 1 20000 GasR2 0 TEXT GasEmittersR
+Element None GasR2 0 0 0 0 1 1 1 20000 GasEmittersR 0 TEXT GasR2
+Element None GasR3 0 255 0 0 1 1 1 32000 GassR 0 TEXT GasR3
+Element None GassR 0 120 0 0 1 1 1 1000 Clear 0 TEXT GassR
+Interaction GasEmittersR Clear Clear GasEmittersR 12000
+Interaction GasR2 Clear Clear GasR2 14000
+Interaction Sick Clear Clear Sick 12000
+Interaction GasR2 Clear GasR2 GasR3 1000
+Interaction GasR3 Clear Clear GasR3 14000
+Interaction GassR Clear Clear GassR 14000
+Interaction GassR Infantry GassR Sick 20000
+Interaction GassR General GassR Sick 20000
+Interaction GassR Nuke2 GassR Sick 20000
+
+// Tactical Nuclear Explosive Carriers
+Element Red NukeCarrierR 255 150 0 0 1 1 1 32768 Nuke2R 0 TEXT NukeCarrierR
+Element None Nuke2R 155 155 155 0 1 1 1 32768 NukeCarrierR 0 TEXT Nuke2R
+Interaction Nuke2R Clear Clear Nuke2R 17000
+Interaction NukeCarrierR Clear Clear NukeCarrierR 15000
+
+InteractionTrigger Nuke2R Infantry nukeplode 32000
+InteractionTrigger Nuke2R TankB nukeplode 32000
+InteractionTrigger Nuke2R General nukeplode 32000
+InteractionTrigger Nuke2R Veteran nukeplode 32000
+InteractionTrigger Nuke2R Nuke2 nukeplode 32000
+InteractionTrigger Nuke2R BBase2 nukeplode 32000
+InteractionTrigger Nuke2R Wall nukeplode 32000
+InteractionTrigger Nuke2R BBase nukeplode 32000
+
+NOBIAS ELEMENT:NukeCarrierR
+NOBIAS ELEMENT:Nuke2R
+
+// ###MISC###
+
+// Bomb
+Element Misc Bomb 80 80 80 0 1 1 1 0 Clear 0 TEXT Bomb
+Element None Fired 255 0 0 0 1 1 1 5000 Firec 0 TEXT Fired
+Element None Firec 255 100 50 0 1 1 1 4000 Firee 0 TEXT Firec
+Element None Firee 255 255 0 0 1 1 1 2000 Crater 0 TEXT Firee
+Element None Crater 130 60 20 0 1 1 1 500 Clear 0 TEXT Crater
+Interaction Fired Clear Clear Fired 2000
+Interaction Firec Clear Clear Firec 4000
+Interaction Firee Clear Clear Firee 3000
+
+InteractionTrigger Bomb All bombed 2000
+InteractionTrigger Bomb Fired bombed 2000
+
+REMOVETRIGGER bombed
+ON bombed DRAW ELEMENT:Fired FILLEDCIRCLE X1 Y1 (15 RAND RADIUS)
+ON bombed TIMER 1 FRAMES bombed2
+
+REMOVETRIGGER bombed2
+ON bombed2 DRAW ELEMENT:Fired RANDOMFILLEDCIRCLE X1 Y1 9 25000
+
+// Mine
+Element Misc Mine 90 90 90 0 1 1 1 0 Clear 0 TEXT Mine
+
+InteractionTrigger Mine Fired bombed2 1000
+InteractionTrigger Mine GROUP:Red bombed2 6000 AirplaneR
+InteractionTrigger Mine GROUP:Blue bombed2 6000 Airplane
+
+// AtomBomb
+Element Misc AtomBomb 126 126 126 0 1 1 1 0 Clear 0 TEXT AtomBomb
+Element None reddd 255 0 0 1000 1 1 1 0 Clear 0 TEXT reddd
+Element None orggg 255 100 50 -32000 1 1 1 0 Clear 0 TEXT orgg
+Element None yello 255 255 0 0 1 1 1 2000 Clear 0 TEXT yello
+
+InteractionTrigger AtomBomb All atomic 25000
+InteractionTrigger reddd All atomic 1000
+InteractionTrigger reddd reddd atom2 3000
+InteractionTrigger orggg reddd atom2 3000
+InteractionTrigger orggg orggg atom3 7000
+InteractionTrigger yello orggg atom3 10000
+
+REMOVETRIGGER atomic
+ON atomic DRAW ELEMENT:reddd FILLEDCIRCLE X1 Y1 (20 RAND RADIUS)
+
+REMOVETRIGGER atom2
+ON atom2 DRAW ELEMENT:orggg FILLEDCIRCLE X1 Y1 (10 RAND RADIUS)
+
+REMOVETRIGGER atom3
+ON atom3 DRAW ELEMENT:yello FILLEDCIRCLE X1 Y1 (5 RAND RADIUS) 
+
+// WaveBomb
+Element Misc WaveBomb 0 255 255 -32000 0 1 1 0 Clear 0 TEXT WaveBomb
+Element None wavee 0 160 160 1 0 0 1 100 Clear 0 Text wavee
+Interaction WaveBomb WaveBomb WaveBomb Clear 32768
+Interaction WaveBomb Clear WaveBomb wavee 30000
+Interaction WaveBomb Water WaveBomb wavee 30000
+
+InteractionTrigger WaveBomb GROUP:Red WAVEE 32000 
+InteractionTrigger WaveBomb GROUP:Blue WAVEE 32000
+InteractionTrigger WaveBomb GROUP:None WAVEE 32000 wavee
+InteractionTrigger wavee GROUP:Red WAVEE 32000 
+InteractionTrigger wavee GROUP:Blue WAVEE 32000
+
+REMOVETRIGGER WAVEE
+ON WAVEE DRAW ELEMENT:Clear POINT X2 Y2
+
+// Nuclear Missile
+Element Misc Nuke 160 160 160 0 1 1 1 0 Clear 0 TEXT Nuke
+Element None initial 255 255 255 0 1 1 1 7000 Clear 0 TEXT initial
+Element None secondary 255 0 0 0 1 1 1 2000 third 0 TEXT secondary
+Element None third 255 100 50 0 1 1 1 1000 fourth 0 TEXT third
+Element None fourth 70 70 70 0 1 1 1 2000 fifth 0 TEXT fourth
+Element None fifth 120 120 120 0 1 1 1 1000 Clear 0 TEXT fifth
+Element None keyd 120 120 120 0 1 1 1 1000 Clear 0 TEXT keyd
+Element None stoped 150 80 40 0 1 1 1 300 stoped2 0 TEXT stoped
+Element None stoped2 150 255 40 0 1 1 1 300 stoped 0 TEXT stoped2
+Interaction secondary All secondary secondary 14000
+Interaction third All third third 17000
+Interaction fourth All fourth fourth 23000
+Interaction fifth All fifth fifth 29000 keyd
+Interaction fifth fifth keyd fifth 1
+Interaction keyd fifth keyd keyd 32768
+
+InteractionTrigger Nuke All nuked 4000
+
+REMOVETRIGGER nuked
+ON nuked DRAW ELEMENT:initial FILLEDCIRCLE X1 Y1 5
+ON nuked TIMER 50 FRAMES nuked2
+
+REMOVETRIGGER nuked2
+ON nuked2 DRAW ELEMENT:secondary FILLEDCIRCLE (X1 - 8) Y1 (15 RAND RADIUS)
+ON nuked2 DRAW ELEMENT:secondary FILLEDCIRCLE (X1 + 8) Y1 (15 RAND RADIUS)
+ON nuked2 DRAW ELEMENT:secondary FILLEDCIRCLE X1 (Y1 - 8) (15 RAND RADIUS)
+ON nuked2 DRAW ELEMENT:secondary FILLEDCIRCLE X1 (Y1 + 8) (15 RAND RADIUS)
+ 
+// Wall
+Element Misc Wall 128 128 128 0 1 1 1 0 Clear 0 TEXT Wall
+
+// Fire
+Element Misc Fire 255 90 90 0 1 1 1 2000 Clear 0 TEXT Fire
+Interaction Fire Clear Clear Fire 5000
+
+// Water
+Element Misc WaterG 10 70 255 0 1 1 1 0 Clear 0 TEXT Water
+Element None water 10 70 255 0 1 1 1 0 Clear 0 TEXT water
+Interaction WaterG Clear WaterG WaterG 9000
+Interaction WaterG WaterG water WaterG 1
+Interaction water WaterG water water 32768
+
+// Tree
+Element Misc Tree 0 190 0 0 1 1 1 0 Clear 0 TEXT Tree
+Element None Treeburn 255 60 60 0 1 1 1 2000 Fire 0 TEXT Treeburn
+Interaction Infantry SnipeR Clear Infantry 32000
+Interaction Veteran SnipeR2 Clear Veteran 32000
+Interaction InfantryR Snipe Clear InfantryR 32000
+Interaction VeteranR Snipe2 Clear VeteranR 32000
+Interaction Fire Tree Fire Treeburn 7000
+Interaction Treeburn Tree Treeburn Treeburn 4000
+Interaction Treeburn Clear Treeburn Fire 5000
+
+REMOVETRIGGER message
+ON message MESSAGE CLEAR
+ON message MESSAGE ADDTEXT "War Mod. Build v0.2"
+ON message MESSAGE ADDLINE
+ON message MESSAGE ADDNUMBER X
+ON message MESSAGE ADDTEXT "<-X Position of mouse"
+ON message MESSAGE ADDLINE
+ON message MESSAGE ADDNUMBER Y
+ON message MESSAGE ADDTEXT "<-Y Position of mouse"
+ON message MESSAGE ADDLINE
+ON message MESSAGE ADDTEXT "~By DarkSDL"
+ON message MESSAGE MESSAGEBOX
+ON message MESSAGE CLEAR
+
+SET ELEMENTR:Clear 150
+SET ELEMENTG:Clear 80
+SET ELEMENTB:Clear 40
+
+EXEC message
+EXEC listgroups

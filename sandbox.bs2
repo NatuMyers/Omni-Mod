@@ -1,0 +1,215 @@
+INCLUDE write.bs2
+EXEC menutop
+EXEC menubottom
+SET ELEMENT1 ELEMENT:Sand
+SET ELEMENT2 ELEMENT:Earth
+SET ELEMENT4 ELEMENT:Clear
+SET BRUSHSIZE 7
+EXEC usefilledcircle
+SET BORDER 0
+SET autowidth 1
+SET autoheight 1
+SET RANDOMDRAWRATE 100
+SET drawdoublecirclesteps 2
+
+SET sourceelement1 GROUP:Sources:1
+SET sourceelement2 GROUP:Sources:2
+SET sourceelement3 GROUP:Sources:3
+SET sourceelement4 GROUP:Sources:4
+SET sourceelement5 GROUP:Sources:5
+SET sourceelement6 GROUP:Sources:6
+SET sourceelement7 GROUP:Sources:7
+SET sourceelement8 GROUP:Sources:8
+SET sourceelement9 GROUP:Sources:9
+
+SET sourcesize1 0
+SET sourcesize2 0
+SET sourcesize3 0
+SET sourcesize4 0
+SET sourcesize5 0
+SET sourcesize6 0
+SET sourcesize7 0
+SET sourcesize8 0
+SET sourcesize9 0
+
+SET sourceactive1 0
+SET sourceactive2 0
+SET sourceactive3 0
+SET sourceactive4 0
+SET sourceactive5 0
+SET sourceactive6 0
+SET sourceactive7 0
+SET sourceactive8 0
+SET sourceactive9 0
+
+SET sourcelastactive1 0
+SET sourcelastactive2 1
+SET sourcelastactive3 0
+SET sourcelastactive4 1
+SET sourcelastactive5 0
+SET sourcelastactive6 1
+SET sourcelastactive7 0
+SET sourcelastactive8 1
+SET sourcelastactive9 0
+
+IF (OLDPC == 0) {
+	REMOVETRIGGER histoy_timer
+	ON histoy_timer IF (save_history) history_save
+	ON histoy_timer TIMER 30 FRAMES histoy_timer
+	SET save_history 1
+	EXEC histoy_timer
+}
+
+REMOVETRIGGER WINDOWRESIZED
+ON WINDOWRESIZED SET newwidth WIDTH
+ON WINDOWRESIZED IF (autowidth) <SET newwidth (WINDOWWIDTH / autowidth)>
+ON WINDOWRESIZED SET newheight HEIGHT
+ON WINDOWRESIZED IF (autoheight) <SET newheight (WINDOWHEIGHT / autoheight)>
+ON WINDOWRESIZED IF ( autowidth || autoheight ) <RESIZE newwidth newheight>
+
+REMOVETRIGGER source_timer
+ON source_timer IF (sourceactive1 + sourceactive2 + sourceactive3 + sourceactive4 + sourceactive5 + sourceactive6 + sourceactive7 + sourceactive8 + sourceactive9) drawsources 
+ON source_timer TIMER 1 FRAMES source_timer
+EXEC source_timer
+
+REMOVETRIGGER drawsources
+ON drawsources IF sourceactive1 <DRAW sourceelement1 LINE (WIDTH / 10 * 1 - (sourcesize1 / 2)) 1 sourcesize1 0>
+ON drawsources IF sourceactive2 <DRAW sourceelement2 LINE (WIDTH / 10 * 2 - (sourcesize2 / 2)) 1 sourcesize2 0>
+ON drawsources IF sourceactive3 <DRAW sourceelement3 LINE (WIDTH / 10 * 3 - (sourcesize3 / 2)) 1 sourcesize3 0>
+ON drawsources IF sourceactive4 <DRAW sourceelement4 LINE (WIDTH / 10 * 4 - (sourcesize4 / 2)) 1 sourcesize4 0>
+ON drawsources IF sourceactive5 <DRAW sourceelement5 LINE (WIDTH / 10 * 5 - (sourcesize5 / 2)) 1 sourcesize5 0>
+ON drawsources IF sourceactive6 <DRAW sourceelement6 LINE (WIDTH / 10 * 6 - (sourcesize6 / 2)) 1 sourcesize6 0>
+ON drawsources IF sourceactive7 <DRAW sourceelement7 LINE (WIDTH / 10 * 7 - (sourcesize7 / 2)) 1 sourcesize7 0>
+ON drawsources IF sourceactive8 <DRAW sourceelement8 LINE (WIDTH / 10 * 8 - (sourcesize8 / 2)) 1 sourcesize8 0>
+ON drawsources IF sourceactive9 <DRAW sourceelement9 LINE (WIDTH / 10 * 9 - (sourcesize9 / 2)) 1 sourcesize9 0>
+
+REMOVETRIGGER clearscreensandbox
+ON clearscreensandbox DRAW $0 FILLEDRECT 0 0 (WIDTH + 2) (HEIGHT + 2)
+ON clearscreensandbox TIMER CLEAR
+ON clearscreensandbox EXEC histoy_timer
+ON clearscreensandbox EXEC source_timer
+
+ON KEY_w IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Water>
+ON KEY_f IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Fire>
+ON KEY_s IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Sand>
+ON KEY_o IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Oil>
+ON KEY_g IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Gas>
+ON KEY_p IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Plant>
+ON KEY_c IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Clear>
+ON KEY_e IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Earth>
+ON KEY_r IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Replicator>
+ON KEY_b IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Burner>
+ON KEY_i IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Ice>
+ON KEY_a IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Acid>
+ON KEY_l IF (drawtext == 0) <SET ELEMENT1 ELEMENT:Lava>
+ON KEY_t IF (drawtext == 0) <SET ELEMENT1 ELEMENT:TNT>
+IF (PPC == 0) {
+	ON KEY_F1 EXEC listelements 1
+	ON KEY_F2 EXEC listelements 2
+	ON KEY_F3 EXEC listelements 3
+	ON KEY_F4 EXEC listelements 4
+	ON KEY_F5 EXEC listelements 5
+	ON KEY_F6 EXEC listelements 6
+	ON KEY_F7 EXEC listelements 7
+	ON KEY_F8 EXEC listelements 8
+	ON KEY_F9 EXEC listelements 9
+	ON KEY_F10 EXEC listelements 10
+	ON KEY_F11 EXEC listelements 11
+	ON KEY_F12 EXEC listelements 12
+}
+ON KEY_1 IF (drawtext == 0) <SET BRUSHSIZE 1>
+ON KEY_2 IF (drawtext == 0) <SET BRUSHSIZE 4>
+ON KEY_3 IF (drawtext == 0) <SET BRUSHSIZE 10>
+ON KEY_4 IF (drawtext == 0) <SET BRUSHSIZE 20>
+ON KEY_5 IF (drawtext == 0) <SET BRUSHSIZE 40>
+ON KEY_6 IF (drawtext == 0) <SET BRUSHSIZE 80>
+ON KEY_7 IF (drawtext == 0) <SET BRUSHSIZE 100>
+ON KEY_8 IF (drawtext == 0) <SET BRUSHSIZE 130>
+ON KEY_9 IF (drawtext == 0) <SET BRUSHSIZE 160>
+ON KEY_DEL EXEC clearscreensandbox 0
+ON KEY_PAUSE EXEC togglepause
+ON KEY_UP SET MENUTOP (DEFAULTMENUWIDTH - MENUTOP)
+ON KEY_DOWN SET MENUBOTTOM (DEFAULTMENUWIDTH - MENUBOTTOM)
+ON KEY_LEFT SET MENULEFT (DEFAULTMENUWIDTH - MENULEFT)
+ON KEY_RIGHT SET MENURIGHT (DEFAULTMENUWIDTH - MENURIGHT)
+ON KEY_PAGEDOWN SET STATUS (1 - STATUS)
+ON KEY_TAB SET SPEED (SPEED * 2 + 60)
+ON KEY_TAB EXEC menutop
+ON KEYUP_TAB SET SPEED ((SPEED - 60) / 2)
+ON KEYUP_TAB IF (SPEED < 0) <SET SPEED 0>
+ON KEYUP_TAB EXEC menutop
+ON KEY_SHIFT SET SHOWPREVIEW (1 - SHOWPREVIEW)
+ON KEYUP_SHIFT SET SHOWPREVIEW (1 - SHOWPREVIEW)
+ON KEY_CTRL SET SOLIDDRAW (1 - SOLIDDRAW)
+ON KEYUP_CTRL SET SOLIDDRAW (1 - SOLIDDRAW)
+ON KEY_BACKSPACE EXEC back_load
+ON KEY_[ IF (drawtext == 0) history_back
+ON KEY_] IF (drawtext == 0) history_foreward
+
+ON MOUSEWHEELUP IF (wheelfunction == 0) brushizeinc
+ON MOUSEWHEELUP IF (wheelfunction == 1) zoominc
+ON MOUSEWHEELUP IF (wheelfunction == 2) history_back
+ON MOUSEWHEELDOWN IF (wheelfunction == 0) brushizedec
+ON MOUSEWHEELDOWN IF (wheelfunction == 1) zoomdec
+ON MOUSEWHEELDOWN IF (wheelfunction == 2) history_foreward
+
+ON PREPHYSICS EXEC prephysicdirection
+ON POSTPHYSICS EXEC postphysicdirection
+
+REMOVETRIGGER brushizeinc
+ON brushizeinc SET BRUSHSIZE (BRUSHSIZE * 11 / 10 + 1)
+ON brushizeinc IF (BRUSHSIZE > 9999) <SET BRUSHSIZE 9999>
+ON brushizeinc IF (usesizeselector == 1) menubottom
+
+REMOVETRIGGER brushizedec
+ON brushizedec SET BRUSHSIZE (BRUSHSIZE * 10 / 11 - 1)
+ON brushizedec IF (BRUSHSIZE < 0) <SET BRUSHSIZE 0>
+ON brushizedec IF (usesizeselector == 1) menubottom
+
+REMOVETRIGGER zoominc
+ON zoominc SET ZOOM (ZOOM + 1)
+ON zoominc IF (ZOOM > 10) <SET ZOOM 10>
+ON zoominc SCROLL (X * ZOOM) (Y * ZOOM)
+
+REMOVETRIGGER zoomdec
+ON zoomdec SET ZOOM (ZOOM - 1)
+ON zoomdec IF (ZOOM < 1) <SET ZOOM 1>
+
+EXEC listelements GROUP:Stones
+EXEC listgroups
+
+LOAD STAMP stamp1.bmp 1
+LOAD STAMP stamp2.bmp 2
+LOAD STAMP stamp3.bmp 3
+LOAD STAMP stamp4.bmp 4
+LOAD STAMP stamp5.bmp 5
+LOAD STAMP stamp6.bmp 6
+LOAD STAMP stamp7.bmp 7
+LOAD STAMP stamp8.bmp 8
+LOAD STAMP stamp9.bmp 9
+LOAD STAMP stamp0.bmp 0
+LOAD SAND start.png
+
+REMOVETRIGGER KEY_ESC
+ON KEY_ESC EXEC quit
+
+REMOVETRIGGER QUIT
+ON QUIT EXEC quit
+
+REMOVETRIGGER quit
+ON quit EXEC quitsandbox
+ON quit EXIT
+
+REMOVETRIGGER quitsandbox
+ON quitsandbox SAVE STAMP stamp1.bmp 1
+ON quitsandbox SAVE STAMP stamp2.bmp 2
+ON quitsandbox SAVE STAMP stamp3.bmp 3
+ON quitsandbox SAVE STAMP stamp4.bmp 4
+ON quitsandbox SAVE STAMP stamp5.bmp 5
+ON quitsandbox SAVE STAMP stamp6.bmp 6
+ON quitsandbox SAVE STAMP stamp7.bmp 7
+ON quitsandbox SAVE STAMP stamp8.bmp 8
+ON quitsandbox SAVE STAMP stamp9.bmp 9
+ON quitsandbox SAVE STAMP stamp0.bmp 0
+ON quitsandbox SAVE SAND start.png
+ON quitsandbox INCLUDE start.bs2
